@@ -1,11 +1,11 @@
 <template>
   <header>
-    <div v-bind:class="['hamburger', {'close': !hideNav}]" 
+    <div v-bind:class="['hamburger', {'close': !hideNav}]"
          v-on:click="toggleNav">
     </div>
     <div class="logo">
       <img src="/img/logo.png">
-      Polly polling tool 
+      Polly polling tool
       <img src="../assets/logo.svg">
     </div>
   </header>
@@ -24,12 +24,19 @@
   <h1>{{ uiLabels["sales-pitch"] }}</h1>
   <h2>{{ uiLabels.subHeading }}</h2>
   <label>
-    Write poll id: 
+    Write poll id:
     <input type="text" v-model="newPollId">
   </label>
   <router-link v-bind:to="'/lobby/' + newPollId">
     {{ uiLabels.participatePoll }}
   </router-link>
+  <div class="rectangle"></div>
+  <div class="rectangle"></div>
+
+  <div class="grid-container-element">
+    <div class="grid-child-element purple">Grid Column 1</div>
+    <div class="grid-child-element green">Grid Column 2</div>
+  </div>
 </template>
 
 <script>
@@ -72,6 +79,40 @@ export default {
 }
 </script>
 <style scoped>
+  .grid-container-element {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    border: 1px solid black;
+    width: 50%;
+  }
+  .grid-child-element {
+    margin: 10%;
+    border: 1px solid red;
+  }
+
+  .rectangle {
+    width: 200px;
+    height: 100px;
+    background-color: #808080;
+    margin: 20px auto;
+  }
+
+  .grid-container {
+    display: flex;
+    width: 50%;
+  }
+
+  .smallRectangle1 {
+    flex: 1;
+    background-color: #808080;
+    margin: 10px;
+  }
+  .smallRectangle2 {
+    background-color: #808080;
+    margin-right: 20px;
+  }
+
   header {
     background-color: gray;
     width: 100%;
@@ -88,7 +129,7 @@ export default {
   .logo img {
     height:2.5rem;
     vertical-align: bottom;
-    margin-right: 0.5rem; 
+    margin-right: 0.5rem;
   }
   .hamburger {
     color:white;
