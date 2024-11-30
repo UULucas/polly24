@@ -21,21 +21,25 @@
     </a>
     <a href="">FAQ</a>
   </ResponsiveNav>
-  <h1>{{ uiLabels["sales-pitch"] }}</h1>
-  <h2>{{ uiLabels.subHeading }}</h2>
-  <label>
+
+  <!--h1>{{ uiLabels["sales-pitch"] }}</h1-->
+  <!--h2>{{ uiLabels.subHeading }}</h2-->
+  <!--label>
     Write poll id:
     <input type="text" v-model="newPollId">
   </label>
   <router-link v-bind:to="'/lobby/' + newPollId">
     {{ uiLabels.participatePoll }}
-  </router-link>
-  <div class="rectangle"></div>
-  <div class="rectangle"></div>
+  </router-link-->
 
-  <div class="grid-container-element">
-    <div class="grid-child-element purple">Grid Column 1</div>
-    <div class="grid-child-element green">Grid Column 2</div>
+  <div id="container">
+    <div class="rectangle"></div>
+    <div class="rectangle"></div>
+
+    <div id="pond">
+      <div class="rectangle2">Grid Column 1</div>
+      <div class="rectangle2">Grid Column 2</div>
+    </div>
   </div>
 </template>
 
@@ -86,31 +90,34 @@ export default {
     border: 1px solid black;
     width: 50%;
   }
-  .grid-child-element {
-    margin: 10%;
-    border: 1px solid red;
+  #container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  #pond {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
   }
 
   .rectangle {
-    width: 200px;
-    height: 100px;
+    width: calc(320px + 320px + 20px + 20px + 20px - 3px);
+    height: 150px;
     background-color: #808080;
-    margin: 20px auto;
+    margin: 0;
   }
 
-  .grid-container {
-    display: flex;
-    width: 50%;
-  }
-
-  .smallRectangle1 {
+  .rectangle2 {
     flex: 1;
+    width: 320px;
+    height: 150px;
     background-color: #808080;
-    margin: 10px;
-  }
-  .smallRectangle2 {
-    background-color: #808080;
-    margin-right: 20px;
+    padding: 10px;
+    display: inline-block;
+    margin: 0;
   }
 
   header {
