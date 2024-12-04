@@ -1,11 +1,11 @@
 <template>
   <header>
-    <div v-bind:class="['hamburger', {'close': !hideNav}]" 
+    <div v-bind:class="['hamburger', {'close': !hideNav}]"
          v-on:click="toggleNav">
     </div>
     <div class="logo">
       <img src="/img/logo.png">
-      Polly polling tool 
+      Polly polling tool
       <img src="../assets/logo.svg">
     </div>
   </header>
@@ -21,15 +21,26 @@
     </a>
     <a href="">FAQ</a>
   </ResponsiveNav>
-  <h1>{{ uiLabels["sales-pitch"] }}</h1>
-  <h2>{{ uiLabels.subHeading }}</h2>
-  <label>
-    Write poll id: 
+
+  <!--h1>{{ uiLabels["sales-pitch"] }}</h1-->
+  <!--h2>{{ uiLabels.subHeading }}</h2-->
+  <!--label>
+    Write poll id:
     <input type="text" v-model="newPollId">
   </label>
   <router-link v-bind:to="'/lobby/' + newPollId">
     {{ uiLabels.participatePoll }}
-  </router-link>
+  </router-link-->
+
+  <div id="container">
+    <div class="rectangle"></div>
+    <div class="rectangle"></div>
+
+    <div id="pond">
+      <div class="rectangle2">Grid Column 1</div>
+      <div class="rectangle2">Grid Column 2</div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -76,6 +87,43 @@ export default {
 }
 </script>
 <style scoped>
+  .grid-container-element {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    border: 1px solid black;
+    width: 50%;
+  }
+  #container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  #pond {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .rectangle {
+    width: calc(320px + 320px + 20px + 20px + 20px - 3px);
+    height: 150px;
+    background-color: #808080;
+    margin: 0;
+  }
+
+  .rectangle2 {
+    flex: 1;
+    width: 320px;
+    height: 150px;
+    background-color: #808080;
+    padding: 10px;
+    display: inline-block;
+    margin: 0;
+  }
+
   header {
     background-color: gray;
     width: 100%;
@@ -92,7 +140,7 @@ export default {
   .logo img {
     height:2.5rem;
     vertical-align: bottom;
-    margin-right: 0.5rem; 
+    margin-right: 0.5rem;
   }
   .hamburger {
     color:white;
