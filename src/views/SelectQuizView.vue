@@ -1,47 +1,23 @@
 <template>
+
   <head>
     <link rel="stylesheet" href="../assets/main.css">
+    <title></title>
   </head>
-  <div>
-    Poll link: 
-    <input type="text" v-model="pollId">
-    <button v-on:click="createPoll">
-      Create poll
-    </button>
-    <div>
-      {{ uiLabels.question }}:
-      <input type="text" v-model="question">
-      <div>
-        Answers:
-        <input v-for="(_, i) in answers" 
-               v-model="answers[i]" 
-               v-bind:key="'answer' + i">
-        <button v-on:click="addAnswer">
-          Add answer alternative
-        </button>
-      </div>
-    </div>
-    <button v-on:click="addQuestion">
-      Add question
-    </button>
-    <input type="number" v-model="questionNumber">
-    <button v-on:click="startPoll">
-      Start poll
-    </button>
-    <button v-on:click="runQuestion">
-      Run question
-    </button>
-    <router-link v-bind:to="'/result/' + pollId">Check result</router-link>
-    Data: {{ pollData }}
-  </div>
+
 </template>
+
+<style scoped>
+
+</style>
+
 
 <script>
 import io from 'socket.io-client';
 const socket = io("localhost:3000");
 
 export default {
-  name: 'CreateView',
+  name: 'SelectQuizView',
   data: function () {
     return {
       lang: localStorage.getItem("lang") || "en",
