@@ -34,12 +34,19 @@
   </router-link-->
 
   <div id="container">
-    <button class="rectangle nav-button" >{{ uiLabels.joinQuiz }}</button>
-    <button class="rectangle nav-button">{{ uiLabels.createQuiz }}</button>
+    <button class="rectangle nav-button" >
+      {{ uiLabels.joinQuiz }}</button>
+    <button class="rectangle nav-button">
+      <router-link to="/create/" class ="link-wrapper">
+      {{ uiLabels.createQuiz }}
+      </router-link>
+    </button>
 
     <div id="pond">
-      <button class="rectangle2 nav-button">{{ uiLabels.navigateQuiz }}</button>
-      <button class="rectangle2 nav-button">{{ uiLabels.createAccount }}</button>
+      <button class="rectangle2 nav-button">
+        {{ uiLabels.navigateQuiz }}</button>
+      <button class="rectangle2 nav-button">
+        {{ uiLabels.createAccount }}</button>
     </div>
   </div>
 </template>
