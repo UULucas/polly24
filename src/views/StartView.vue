@@ -1,5 +1,6 @@
 <template>
   <header>
+    <link rel="stylesheet" href="../assets/main.css">
     <div v-bind:class="['hamburger', {'close': !hideNav}]"
          v-on:click="toggleNav">
     </div>
@@ -33,12 +34,12 @@
   </router-link-->
 
   <div id="container">
-    <button class="rectangle">Gå med i quiz</button>
-    <button class="rectangle">Skapa quiz</button>
+    <button class="rectangle nav-button" >Gå med i quiz</button>
+    <button class="rectangle nav-button">Skapa quiz</button>
 
     <div id="pond">
-      <button class="rectangle2">Bläddra bland quiz</button>
-      <button class="rectangle2">Skapa konto</button>
+      <button class="rectangle2 nav-button">Bläddra bland quiz</button>
+      <button class="rectangle2 nav-button">Skapa konto</button>
     </div>
   </div>
 </template>
@@ -109,35 +110,11 @@ export default {
 .rectangle {
   width: 44rem;
   height: 10rem;
-  text-align: center;
-  padding: 20px;
-  background-color: gold;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 50px;
-  font-family: "Inter", sans-serif;
-  font-weight: 400;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .rectangle2 {
   width: 22rem;
   height: 10rem;
-  text-align: center;
-  padding: 20px;
-  background-color: gold;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 50px;
-  font-family: "Inter", sans-serif;
-  font-weight: 400;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-.rectangle:hover,
-.rectangle2:hover{
-  transform: scale(1.03);
-  background-color: darkgoldenrod;
-  transition: transform 0.2s;
 }
 
 
