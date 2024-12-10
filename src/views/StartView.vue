@@ -43,6 +43,7 @@
     </div>
   </div>
 =======
+  </router-link>
   <p> ass</p>
 
   <div class="wrapper">
