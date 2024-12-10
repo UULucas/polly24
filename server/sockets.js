@@ -11,12 +11,12 @@ function sockets(io, socket, data) {
 
   socket.on('addQuestion', function(d) {
     data.addQuestion(d.pollId, {q: d.q, a: d.a});
-    socket.emit('questionUpdate', data.getQuestion(d.pollId));
+    socket.emit('questionUpdate', data.activateQuestion(d.pollId));
   });
 
   socket.on('joinPoll', function(pollId) {
     socket.join(pollId);
-    socket.emit('questionUpdate', data.getQuestion(pollId))
+    socket.emit('questionUpdate', data.activateQuestion(pollId))
     socket.emit('submittedAnswersUpdate', data.getSubmittedAnswers(pollId));
   });
 
@@ -28,7 +28,7 @@ function sockets(io, socket, data) {
     io.to(pollId).emit('startPoll');
   })
   socket.on('runQuestion', function(d) {
-    let question = data.getQuestion(d.pollId, d.questionNumber);
+    let question = data.activateQuestion(d.pollId, d.questionNumber);
     io.to(d.pollId).emit('questionUpdate', question);
     io.to(d.pollId).emit('submittedAnswersUpdate', data.getSubmittedAnswers(d.pollId));
   });
