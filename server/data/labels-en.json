@@ -7,5 +7,9 @@
 	"question": "Question",
 	"changeLanguage": "Byt till svenska",
 	"about": "About",
-	"participateInPoll": "Participate in poll"
+	"participateInPoll": "Participate in poll",
+	"joinQuiz": "Join Quiz",
+	"createQuiz": "Create Quiz",
+	"navigateQuiz": "Search Quizzes",
+	"createAccount": "Create Account"
 }
