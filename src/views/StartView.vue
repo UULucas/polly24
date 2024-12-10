@@ -76,7 +76,11 @@ export default {
   },
   data: function () {
     return {
-      uiLabels: {},
+      uiLabels: {
+        changeLanguage: "Change language",
+        createPoll: "Create Poll",
+        about: "About Poll",
+      },
       newPollId: "",
       lang: localStorage.getItem( "lang") || "en",
       hideNav: true
