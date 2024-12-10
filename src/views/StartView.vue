@@ -30,6 +30,7 @@
   </label>
   <router-link v-bind:to="'/lobby/' + newPollId">
     {{ uiLabels.participatePoll }}
+<<<<<<< Updated upstream
   </router-link-->
 
   <div id="container">
@@ -41,6 +42,26 @@
       <button class="rectangle2">Skapa konto</button>
     </div>
   </div>
+=======
+  </router-link>
+  <p> ass</p>
+
+  <div class="wrapper">
+    <div class="box a">
+      <button class="startButton a"> Gå med i Quiz </button>
+    </div>
+    <div class="box b">
+      <button class="startButton b"> Skapa ett Quiz </button>
+    </div>
+    <div class="box c">
+      <button class="startButton c"> Bläddra </button>
+    </div>
+    <div class="box d">
+      <button class="startButton d"> Skapa  </button>
+    </div>
+  </div>
+
+>>>>>>> Stashed changes
 </template>
 
 <script>
@@ -87,6 +108,7 @@ export default {
 }
 </script>
 <style scoped>
+<<<<<<< Updated upstream
 
   #container {
     margin-top: 1rem;
@@ -141,6 +163,39 @@ export default {
   }
 
 
+=======
+.wrapper {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 100px 100px 100px;
+  background-color: #fff;
+  color: #444;
+}
+
+.box {
+  background-color: #444;
+  color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  font-size: 150%;
+}
+
+.a {
+  grid-column: 1 / span 2;
+}
+.b {
+  grid-column: 1 ;
+  grid-row: 2 / span 2;
+}
+.c {
+  grid-column: 1 ;
+  grid-row: 3 / span 2;
+}
+.d {
+  grid-column: 2 ;
+  grid-row: 3 /span 2;
+}
+>>>>>>> Stashed changes
 
 
   header {
