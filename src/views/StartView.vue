@@ -33,7 +33,7 @@
   </router-link-->
 
   <div id="container">
-    <button v-on:onclick="changeColor(this)" class="rectangle">Gå med i quiz</button>
+    <button class="rectangle">Gå med i quiz</button>
     <button class="rectangle">Skapa quiz</button>
 
     <div id="pond">
@@ -94,12 +94,16 @@ export default {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    width: 100%; /* Ensure it stretches to the container width */
   }
 
   #pond {
     display: flex;
-    justify-content: space-between;
-    gap: 1rem;
+    justify-content: space-between; /* Spread items horizontally */
+    align-items: center; /* Ensure vertical alignment */
+    gap: 1rem; /* Space between the smaller buttons */
+    width: 44rem; /* Match the width of the larger buttons */
+
   }
 
   .rectangle {
@@ -129,17 +133,14 @@ export default {
     font-weight: 400;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
-  .rectangle:hover {
+  .rectangle:hover,
+  .rectangle2:hover{
   transform: scale(1.03);
-    background-color: #d4d4d4;
+    background-color: darkgoldenrod;
     transition: transform 0.2s;
   }
 
-  .rectangle2:hover {
-    transform: scale(1.03);
-    background-color: #d4d4d4;
-    transition: transform 0.2s;
-  }
+
 
 
   header {
