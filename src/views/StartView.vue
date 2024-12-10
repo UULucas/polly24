@@ -33,12 +33,12 @@
   </router-link-->
 
   <div id="container">
-    <div class="rectangle"></div>
-    <div class="rectangle"></div>
+    <button v-on:onclick="changeColor(this)" class="rectangle">Gå med i quiz</button>
+    <button class="rectangle">Skapa quiz</button>
 
     <div id="pond">
-      <div class="rectangle2">Grid Column 1</div>
-      <div class="rectangle2">Grid Column 2</div>
+      <button class="rectangle2">Bläddra bland quiz</button>
+      <button class="rectangle2">Skapa konto</button>
     </div>
   </div>
 </template>
@@ -66,6 +66,10 @@ export default {
     socket.emit( "getUILabels", this.lang );
   },
   methods: {
+    changeColor: function(event){
+      var color = 'yellow';
+      event.target.style.backgroundColor = color;
+    },
     switchLanguage: function() {
       if (this.lang === "en") {
         this.lang = "sv"
@@ -83,13 +87,7 @@ export default {
 }
 </script>
 <style scoped>
-  .grid-container-element {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 20px;
-    border: 1px solid black;
-    width: 50%;
-  }
+
   #container {
     display: flex;
     flex-direction: column;
@@ -108,17 +106,27 @@ export default {
     height: 150px;
     background-color: #808080;
     margin: 0;
+    cursor: pointer;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    font-size: 50px;
   }
 
   .rectangle2 {
     flex: 1;
-    width: 320px;
+    width: 340px;
     height: 150px;
     background-color: #808080;
     padding: 10px;
     display: inline-block;
     margin: 0;
+    cursor: pointer;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    font-size: 25px;
   }
+
+
 
   header {
     background-color: gray;
