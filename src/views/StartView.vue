@@ -6,7 +6,7 @@
     </div>
     <div class="logo">
       <img src="/img/logo.png">
-      Polly polling tool
+      Fortnite 2
       <img src="../assets/logo.svg">
     </div>
   </header>
@@ -34,12 +34,12 @@
   </router-link-->
 
   <div id="container">
-    <button class="rectangle nav-button" >Gå med i quiz</button>
-    <button class="rectangle nav-button">Skapa quiz</button>
+    <button class="rectangle nav-button" >{{ uiLabels.joinQuiz }}</button>
+    <button class="rectangle nav-button">{{ uiLabels.createQuiz }}</button>
 
     <div id="pond">
-      <button class="rectangle2 nav-button">Bläddra bland quiz</button>
-      <button class="rectangle2 nav-button">Skapa konto</button>
+      <button class="rectangle2 nav-button">{{ uiLabels.navigateQuiz }}</button>
+      <button class="rectangle2 nav-button">{{ uiLabels.createAccount }}</button>
     </div>
   </div>
 </template>
