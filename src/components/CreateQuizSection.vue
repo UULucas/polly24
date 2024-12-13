@@ -81,13 +81,16 @@ export default {
   width: 80%;
 }
 
-.quiz-name,
-.start-quiz {
+.quiz-name {
   flex: 1;
   text-align: center;
   border: 1px solid #000;
   padding: 8px;
   background-color: #f5f5f5;
+}
+.start-quiz {
+  flex: 1;
+  padding: 8px;
 }
 
 .image-area {

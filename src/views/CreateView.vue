@@ -48,12 +48,9 @@
   <div id="quiz-container">
     <div id="header">
 
-      <input
-          class="quiz-name"
-          :value="text"
-          type="text"
-          placeholder="Quiz name"
-          @input="event => text = event.target.value">
+      <div class="quiz-name">
+        Quiz namn
+      </div>
 
       <div class="start-quiz">
         Starta quiz
