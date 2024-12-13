@@ -34,14 +34,17 @@
     <router-link v-bind:to="'/result/' + pollId">Check result</router-link>
     Data: {{ pollData }}
   </div>
+  <CreateQuizSection></CreateQuizSection>
 </template>
 
 <script>
 import io from 'socket.io-client';
+import CreateQuizSection from "@/components/CreateQuizSection.vue";
 const socket = io("localhost:3000");
 
 export default {
   name: 'CreateView',
+  components: {CreateQuizSection},
   data: function () {
     return {
       lang: localStorage.getItem("lang") || "en",
