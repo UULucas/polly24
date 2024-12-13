@@ -1,5 +1,16 @@
 @import './base.css';
 
+
+/********************* Colour reference chart****************
+*************************** comment ********* colour ********
+
+Hex Codes: #ffc09f // #ffee93 // #fcf5c7 // #a0ced9 // #adf7b6
+
+
+
+*/
+
+
 #app {
   font-family: Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -10,7 +21,7 @@
 .nav-button {
   text-align: center;
   padding: 20px;
-  background-color: gold;
+  background-color: #fcf5c7;
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 50px;
@@ -21,7 +32,7 @@
 
 .nav-button:hover {
   transform: scale(1.03);
-  background-color: darkgoldenrod;
+  background-color: #ffee93;
   transition: transform 0.2s;
   cursor: pointer;
 }
