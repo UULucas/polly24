@@ -14,6 +14,10 @@
       </div>
     </div>
   </div>
+
+  <div>
+    <CreateQuizSection></CreateQuizSection>
+  </div>
 </template>
 
 <script>
