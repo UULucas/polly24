@@ -11,6 +11,14 @@ Hex Codes: #ffc09f // #ffee93 // #fcf5c7 // #a0ced9 // #adf7b6
 */
 
 
+:root {
+  --p-red: #ffc09f;
+  --p-yellow: #ffee93;
+  --p-beige: #fcf5c7;
+  --p-blue: #a0ced9;
+  --p-green: #adf7b6;
+}
+
 #app {
   font-family: Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
