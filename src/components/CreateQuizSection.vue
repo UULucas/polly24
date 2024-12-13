@@ -2,6 +2,7 @@
 
     <div id="quiz-container">
       <div id="header">
+
         <div class="quiz-name">
           Quiz namn
         </div>
@@ -9,6 +10,7 @@
         <div class="start-quiz">
           Starta quiz
         </div>
+
       </div>
 
       <div class="image-area">
@@ -66,9 +68,9 @@ export default {
 
 #header {
   display: flex;
-  width: 100%;
-  justify-content: space-between;
-  padding: 8px;
+  justify-content: center;
+  gap: 16px;
+  width: 80%;
 }
 
 .quiz-name,
@@ -92,8 +94,10 @@ export default {
 
 .question-area {
   width: 80%;
-  padding: 16px;
+  height: 3%;
+  display: flex;
   text-align: center;
+  justify-content: center;
   border: 1px solid #000;
   background-color: #f5f5f5;
 }

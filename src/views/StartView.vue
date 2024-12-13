@@ -10,6 +10,7 @@
       <img src="../assets/logo.svg">
     </div>
   </header>
+  <body>
   <ResponsiveNav v-bind:hideNav="hideNav">
     <button v-on:click="switchLanguage">
       {{ uiLabels.changeLanguage }}
@@ -49,6 +50,7 @@
         {{ uiLabels.createAccount }}</button>
     </div>
   </div>
+  </body>
 </template>
 
 <script>
@@ -125,7 +127,10 @@ export default {
 }
 
 
-
+body{
+  background-color: #a0ced9;
+  height: 100%;
+}
 
 header {
   background-color: gray;
