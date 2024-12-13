@@ -13,9 +13,17 @@ export default {
   },
   data: function () {
     return {
+      quizId:"",
+      quizName:"",
     }
   },
   methods: {
+    saveQuiz: function () {
+
+    },
+    createQuizId: function (){
+
+    }
 
   },
 }

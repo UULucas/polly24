@@ -43,7 +43,9 @@
     <router-link v-bind:to="'/result/' + pollId">Check result</router-link>
     Data: {{ pollData }}
   </div>
-  <CreateQuizSection></CreateQuizSection>
+  <CreateQuizSection>
+
+  </CreateQuizSection>
 </template>
 
 <script>
@@ -73,6 +75,7 @@ export default {
   },
   methods: {
     createPoll: function () {
+      console.log("createPoll", {pollId: this.pollId, lang: this.lang })
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
       socket.emit("joinPoll", this.pollId);
     },
