@@ -28,6 +28,11 @@ const router = createRouter({
       path: '/result/:id',
       name: 'ResultView',
       component: () => import('../views/ResultView.vue')
+    },
+    {
+      path: '/result/',
+      name: 'ResultView',
+      component: () => import('../views/ResultView.vue')
     }
   ]
 })
