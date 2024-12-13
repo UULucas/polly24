@@ -45,16 +45,26 @@
   </div>
 
 
+
+
+
+
+
   <div id="quiz-container">
     <div id="header">
 
-      <div class="quiz-name">
-        Quiz namn
-      </div>
+      <input
+          class="quiz-name"
+          :value="text"
+          type="text"
+          placeholder="Quiz name"
+          @input="event => text = event.target.value">
 
-      <div class="start-quiz">
-        Starta quiz
-      </div>
+
+        <button class="start-quiz nav-button">
+          Starta quiz
+        </button>
+
 
     </div>
 
@@ -72,9 +82,9 @@
         SVAR
       </div>
 
-      <div class="add">
+      <button class="add nav-button">
         +
-      </div>
+      </button>
 
     </div>
   </div>
@@ -145,13 +155,19 @@ export default {
   width: 80%;
 }
 
-.quiz-name,
-.start-quiz {
+.quiz-name {
   flex: 1;
   text-align: center;
   border: 1px solid #000;
   padding: 8px;
   background-color: #f5f5f5;
+}
+
+.start-quiz {
+  flex: 1;
+  text-align: center;
+  padding: 8px;
+
 }
 
 .image-area {
@@ -181,8 +197,7 @@ export default {
   width: 80%;
 }
 
-.answer,
-.add {
+.answer{
   flex: 1;
   height: 100px;
   display: flex;
@@ -190,5 +205,13 @@ export default {
   justify-content: center;
   border: 1px solid #000;
   background-color: #f5f5f5;
+}
+
+
+.add {
+  flex: 1;
+  height: 100px;
+  display: flex;
+
 }
 </style>
