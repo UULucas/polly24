@@ -4,7 +4,7 @@
   </head>
 
   <div class="quiz-container">
-    Poll link: 
+    Poll link:
     <input type="text" v-model="pollId">
 
     <button v-on:click="createPoll">
@@ -13,14 +13,14 @@
 
     <div>
       <div>
-      {{ uiLabels.question }}:
-      <input type="text" v-model="question">
+        {{ uiLabels.question }}:
+        <input type="text" v-model="question">
       </div>
 
       <div>
         Answers:
-        <input v-for="(_, i) in answers" 
-               v-model="answers[i]" 
+        <input v-for="(_, i) in answers"
+               v-model="answers[i]"
                v-bind:key="'answer' + i">
         <button v-on:click="addAnswer">
           Add answer alternative
@@ -45,16 +45,26 @@
   </div>
 
 
+
+
+
+
+  <body>
   <div id="quiz-container">
     <div id="header">
 
-      <div class="quiz-name">
-        Quiz namn
-      </div>
+      <input
+          class="quiz-name"
+          :value="text"
+          type="text"
+          placeholder="Quiz name"
+          @input="event => text = event.target.value">
 
-      <div class="start-quiz">
+
+      <button class="start-quiz nav-button">
         Starta quiz
-      </div>
+      </button>
+
 
     </div>
 
@@ -62,9 +72,15 @@
       Lägg till bild
     </div>
 
-    <div class="question-area">
-      Lägg till fråga
-    </div>
+
+    <input
+        class="question-area"
+        :value="text"
+        type="text"
+        placeholder="Question"
+        @input="event => text = event.target.value">
+
+
 
     <div id="answer-container">
 
@@ -72,13 +88,13 @@
         SVAR
       </div>
 
-      <div class="add">
+      <button class="add nav-button">
         +
-      </div>
+      </button>
 
     </div>
   </div>
-
+  </body>
 
 </template>
 
@@ -139,19 +155,34 @@ export default {
 }
 
 #header {
+  margin-top: 1rem;
   display: flex;
   justify-content: center;
   gap: 16px;
   width: 80%;
 }
 
-.quiz-name,
+.quiz-name {
+  flex: 1;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  border: 1px solid #ddd;
+  background-color: var(--p-offWhite);
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-family: "Inter", sans-serif;
+}
+
+.quiz-name:hover{
+  transform: scale(1.01);
+  transition: transform 0.2s;
+
+}
+
 .start-quiz {
   flex: 1;
-  text-align: center;
-  border: 1px solid #000;
   padding: 8px;
-  background-color: #f5f5f5;
 }
 
 .image-area {
@@ -161,7 +192,7 @@ export default {
   align-items: center;
   justify-content: center;
   border: 1px solid #000;
-  background-color: #f5f5f5;
+  background-color: white;
 }
 
 .question-area {
@@ -170,9 +201,17 @@ export default {
   display: flex;
   text-align: center;
   justify-content: center;
-  border: 1px solid #000;
-  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  background-color: var(--p-offWhite);
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-family: "Inter", sans-serif;
 }
+.question-area:hover{
+  transform: scale(1.01);
+  transition: transform 0.2s;
+}
+
 
 #answer-container {
   display: flex;
@@ -181,8 +220,7 @@ export default {
   width: 80%;
 }
 
-.answer,
-.add {
+.answer{
   flex: 1;
   height: 100px;
   display: flex;
@@ -190,5 +228,17 @@ export default {
   justify-content: center;
   border: 1px solid #000;
   background-color: #f5f5f5;
+}
+
+
+.add {
+  flex: 1;
+  height: 100px;
+  display: flex;
+
+}
+
+body{
+  background-color: var(--p-blue);
 }
 </style>
