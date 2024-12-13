@@ -4,7 +4,7 @@
   </head>
 
   <div class="quiz-container">
-    Poll link: 
+    Poll link:
     <input type="text" v-model="pollId">
 
     <button v-on:click="createPoll">
@@ -13,14 +13,14 @@
 
     <div>
       <div>
-      {{ uiLabels.question }}:
-      <input type="text" v-model="question">
+        {{ uiLabels.question }}:
+        <input type="text" v-model="question">
       </div>
 
       <div>
         Answers:
-        <input v-for="(_, i) in answers" 
-               v-model="answers[i]" 
+        <input v-for="(_, i) in answers"
+               v-model="answers[i]"
                v-bind:key="'answer' + i">
         <button v-on:click="addAnswer">
           Add answer alternative
@@ -49,7 +49,7 @@
 
 
 
-<body>
+  <body>
   <div id="quiz-container">
     <div id="header">
 
@@ -61,9 +61,9 @@
           @input="event => text = event.target.value">
 
 
-        <button class="start-quiz nav-button">
-          Starta quiz
-        </button>
+      <button class="start-quiz nav-button">
+        Starta quiz
+      </button>
 
 
     </div>
@@ -94,7 +94,7 @@
 
     </div>
   </div>
-</body>
+  </body>
 
 </template>
 
