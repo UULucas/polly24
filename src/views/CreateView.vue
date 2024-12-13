@@ -2,15 +2,21 @@
   <head>
     <link rel="stylesheet" href="../assets/main.css">
   </head>
-  <div>
+
+  <div class="quiz-container">
     Poll link: 
     <input type="text" v-model="pollId">
-    <button v-on:click="createPoll">
+
+    <button v-on:click="createPoll" > 
       Create poll
     </button>
+
     <div>
+      <div>
       {{ uiLabels.question }}:
       <input type="text" v-model="question">
+      </div>
+
       <div>
         Answers:
         <input v-for="(_, i) in answers" 
@@ -20,14 +26,17 @@
           Add answer alternative
         </button>
       </div>
+
     </div>
     <button v-on:click="addQuestion">
       Add question
     </button>
     <input type="number" v-model="questionNumber">
+
     <button v-on:click="startPoll">
       Start poll
     </button>
+
     <button v-on:click="runQuestion">
       Run question
     </button>
@@ -79,3 +88,7 @@ export default {
   }
 }
 </script>
+<style>
+
+
+</style>
