@@ -17,6 +17,7 @@ Hex Codes: #ffc09f // #ffee93 // #fcf5c7 // #a0ced9 // #adf7b6
   --p-beige: #fcf5c7;
   --p-blue: #a0ced9;
   --p-green: #adf7b6;
+  --p-offWhite:#f2f2ed;
 }
 
 #app {

@@ -49,7 +49,7 @@
 
 
 
-
+<body>
   <div id="quiz-container">
     <div id="header">
 
@@ -72,9 +72,15 @@
       Lägg till bild
     </div>
 
-    <div class="question-area">
-      Lägg till fråga
-    </div>
+
+    <input
+        class="question-area"
+        :value="text"
+        type="text"
+        placeholder="Question"
+        @input="event => text = event.target.value">
+
+
 
     <div id="answer-container">
 
@@ -88,7 +94,7 @@
 
     </div>
   </div>
-
+</body>
 
 </template>
 
@@ -149,6 +155,7 @@ export default {
 }
 
 #header {
+  margin-top: 1rem;
   display: flex;
   justify-content: center;
   gap: 16px;
@@ -157,17 +164,25 @@ export default {
 
 .quiz-name {
   flex: 1;
+  display: flex;
   text-align: center;
-  border: 1px solid #000;
-  padding: 8px;
-  background-color: #f5f5f5;
+  justify-content: center;
+  border: 1px solid #ddd;
+  background-color: var(--p-offWhite);
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-family: "Inter", sans-serif;
+}
+
+.quiz-name:hover{
+  transform: scale(1.01);
+  transition: transform 0.2s;
+
 }
 
 .start-quiz {
   flex: 1;
-  text-align: center;
   padding: 8px;
-
 }
 
 .image-area {
@@ -177,7 +192,7 @@ export default {
   align-items: center;
   justify-content: center;
   border: 1px solid #000;
-  background-color: #f5f5f5;
+  background-color: white;
 }
 
 .question-area {
@@ -186,9 +201,17 @@ export default {
   display: flex;
   text-align: center;
   justify-content: center;
-  border: 1px solid #000;
-  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  background-color: var(--p-offWhite);
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-family: "Inter", sans-serif;
 }
+.question-area:hover{
+  transform: scale(1.01);
+  transition: transform 0.2s;
+}
+
 
 #answer-container {
   display: flex;
@@ -213,5 +236,9 @@ export default {
   height: 100px;
   display: flex;
 
+}
+
+body{
+  background-color: var(--p-blue);
 }
 </style>
