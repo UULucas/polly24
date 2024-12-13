@@ -4,7 +4,7 @@
 <p>{{question.q}}</p>
 </div>
 <div class="answerbox link-wrapper">
-<button class="rectangle nav-button" v-for="a in question.a" v-on:click="answer(a)" v-bind:key="a">
+<button class="rectangle nav-button" v-for="a in question.a" v-on:click="answer(a); changeToGreen(this)" v-bind:key="a">
   {{ a }}
 </button>
 </div>
@@ -19,30 +19,64 @@ export default {
   methods: {
     answer: function (answer) {
       this.$emit("answer", answer);
-    } 
+    },
+    changeToRed: function (el){
+      const element = el;
+      element.style.color = "red";
+    },
+    changeToGreen: function (el){
+      const element = el;
+      element.style.color = "green";
+    }
+ } 
   }
-}
+
 </script>
 <style>
 .textbox{
-font-size: 3vw;
 padding:20px;
 background-color: var(--p-blue);
-border:5px solid black;
+border: 1px solid #ddd;
+border-radius: 8px;
+font-size: 30px;
+font-family: "Inter", sans-serif;
+font-weight: 400;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 display:inline-block;
 width:auto;
 height:auto;
 }
+
 .answerbox {
   margin-top: 1rem;
   display: grid;
   grid-template-areas: "a b" "c d" "e f";
   align-items: center;
   gap: 1rem;
+  
 }
 .rectangle {
   width: 20rem;
   height: 10rem;
 }
+/* answerbox shake effect for blue shell cope
+.answerbox:hover{
+  animation: shake 0.4s;
+  animation-iteration-count: infinite;
+}
+@keyframes shake {
+  0% { transform: translate(4px, 4px) rotate(0deg); }
+  10% { transform: translate(-4px, -3px) rotate(-1deg); }
+  20% { transform: translate(-6px, 0px) rotate(-2deg); }
+  30% { transform: translate(9px, 6px) rotate(-3deg); }
+  40% { transform: translate(3px, -3px) rotate(-2deg); }
+  50% { transform: translate(-5px, 10px) rotate(-1deg); }
+  60% { transform: translate(-8px, 4px) rotate(0deg); }
+  70% { transform: translate(9px, 3px) rotate(1deg); }
+  80% { transform: translate(-5px, -5px) rotate(2deg); }
+  90% { transform: translate(2px, 4px) rotate(3deg); }
+  100% { transform: translate(5px, -10px) rotate(2deg); }
+}
+  */
 
 </style>

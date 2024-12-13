@@ -1,6 +1,5 @@
 <template>
   <div class="pollQuestion">
-    {{pollId}}
     <QuestionComponent v-bind:question="question"
               v-on:answer="submitAnswer($event)"/>
     <hr>
