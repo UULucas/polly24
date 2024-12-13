@@ -29,7 +29,7 @@ Hex Codes: #ffc09f // #ffee93 // #fcf5c7 // #a0ced9 // #adf7b6
 .nav-button {
   text-align: center;
   padding: 20px;
-  background-color: #fcf5c7;
+  background-color: var(--p-beige);
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 50px;
@@ -40,7 +40,7 @@ Hex Codes: #ffc09f // #ffee93 // #fcf5c7 // #a0ced9 // #adf7b6
 
 .nav-button:hover {
   transform: scale(1.03);
-  background-color: #ffee93;
+  background-color: var(--p-yellow);
   transition: transform 0.2s;
   cursor: pointer;
 }

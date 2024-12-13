@@ -128,7 +128,7 @@ export default {
 
 
 body{
-  background-color: #a0ced9;
+  background-color: var(--p-blue);
   height: 100%;
 }
 
