@@ -54,7 +54,7 @@
     <div id="header">
 
       <input
-          class="quiz-name"
+          class="quiz-name text-box"
           :value="text"
           type="text"
           placeholder="Quiz name"
@@ -74,7 +74,7 @@
 
 
     <input
-        class="question-area"
+        class="question-area text-box"
         :value="text"
         type="text"
         placeholder="Question"
@@ -84,9 +84,12 @@
 
     <div id="answer-container">
 
-      <div class="answer">
-        SVAR
-      </div>
+      <input
+          class="answer text-box"
+          :value="text"
+          type="text"
+          placeholder="Svar"
+          @input="event => text = event.target.value">
 
       <button class="add nav-button">
         +
@@ -165,20 +168,8 @@ export default {
 .quiz-name {
   flex: 1;
   display: flex;
-  text-align: center;
-  justify-content: center;
-  border: 1px solid #ddd;
-  background-color: var(--p-offWhite);
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  font-family: "Inter", sans-serif;
 }
 
-.quiz-name:hover{
-  transform: scale(1.01);
-  transition: transform 0.2s;
-
-}
 
 .start-quiz {
   flex: 1;
@@ -198,19 +189,8 @@ export default {
 .question-area {
   width: 80%;
   height: 3%;
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  border: 1px solid #ddd;
-  background-color: var(--p-offWhite);
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  font-family: "Inter", sans-serif;
 }
-.question-area:hover{
-  transform: scale(1.01);
-  transition: transform 0.2s;
-}
+
 
 
 #answer-container {
@@ -223,11 +203,7 @@ export default {
 .answer{
   flex: 1;
   height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #000;
-  background-color: #f5f5f5;
+
 }
 
 

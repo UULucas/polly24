@@ -27,6 +27,22 @@ Hex Codes: #ffc09f // #ffee93 // #fcf5c7 // #a0ced9 // #adf7b6
   text-align: center;
 }
 
+
+.text-box {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  border: 1px solid #ddd;
+  background-color: var(--p-offWhite);
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-family: "Inter", sans-serif;
+}
+.text-box:hover{
+  transform: scale(1.01);
+  transition: transform 0.2s;
+}
+
 .nav-button {
   text-align: center;
   padding: 20px;
