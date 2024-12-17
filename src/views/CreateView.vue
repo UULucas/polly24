@@ -235,7 +235,7 @@ export default {
 
 
 .add {
-  flex: 1;
+  flex: 1; //test
   height: 100px;
   display: flex;
 
