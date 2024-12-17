@@ -69,7 +69,7 @@
     </div>
 
     <div class="image-area">
-      Lägg till bild
+      <button class="action-button" @click="addImage" :style="getButtonStyle()">Lägg till bild</button>
     </div>
 
 
@@ -118,6 +118,7 @@ export default {
       questionNumber: 0,
       pollData: {},
       uiLabels: {},
+      imageUrl: "",
     }
   },
   created: function () {
@@ -142,7 +143,22 @@ export default {
     },
     runQuestion: function () {
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
-    }
+    },
+    addImage(){
+      const url = prompt("Ange bildens URL")
+      if (url) {
+        this.imageUrl = url;
+      }
+    },
+    getButtonStyle (){
+      return {
+        backgroundImage: this.imageUrl ? `url('${this.imageUrl}')` : "none",
+        backgroundSize: "cover",
+        backgroundPositionRepeat: "no-repeat",
+        backgroundPosition: "center",
+        color: this.imageUrl ? "transparent" : "black"
+      }
+}
   }
 }
 </script>
@@ -184,6 +200,17 @@ export default {
   justify-content: center;
   border: 1px solid #000;
   background-color: white;
+}
+
+.action-button {
+  width: 100%;
+  height: 100%;
+  border: none;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: transparent;
 }
 
 .question-area {
