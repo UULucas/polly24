@@ -57,8 +57,7 @@
           class="quiz-name text-box"
           :value="text"
           type="text"
-          placeholder="Quiz name"
-          @input="event => text = event.target.value">
+          placeholder="Quiz name">
 
 
       <button class="start-quiz nav-button">
@@ -82,8 +81,7 @@
         class="question-area text-box"
         :value="text"
         type="text"
-        placeholder="Question"
-        @input="event => text = event.target.value">
+        placeholder="Question">
 
 
 
