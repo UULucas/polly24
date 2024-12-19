@@ -1,15 +1,25 @@
 <template>
-  <div>
-    {{pollId}}
+  <div id="joinScreen">
     <div v-if="!joined">
-      <input type="text" v-model="userName">
-      <button v-on:click="participateInPoll">
-        {{ this.uiLabels.participateInPoll }}
+      <div><label for="idTextBox">Enter your name:</label></div>
+      <input id="idTextBox" type="text" maxlength="30" v-model="userName"><br>
+      <button id="participateButton" v-on:click="participateInPoll">
+        JOIN!
       </button>
     </div>
     <div v-if="joined">
-      <p>Waiting for host to start poll</p>
+      <div class="joinWrapper">
+      <h3>Game ID: </h3>{{pollId}}
+      <h1>Welcome to the game {{ userName }}!</h1>
+      <h4>Participants: </h4>
+      <ul>
+        <li v-for="participant in participants" :key="participant">
+          {{ participant }}
+        </li>
+      </ul>
+      <p>Waiting for host to start game...</p>
       {{ participants }}
+    </div>
   </div>
   </div>
 </template>
@@ -40,9 +50,79 @@ export default {
   },
   methods: {
     participateInPoll: function () {
-      socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} )
+      if (!this.userName) {
+        alert("Enter your name!");
+        return;
+      }
+      socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} );
+      this.participants.push(this.userName);
       this.joined = true;
     }
   }
 }
 </script>
+<style>
+
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background-color: var(--p-blue);
+}
+
+#joinScreen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+  height: 100vh;
+}
+
+
+label {
+  font-size: 30px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
+
+}
+
+input[type="text"] {
+  height: 40px;
+  width: 300px;
+  padding: 10px;
+  font-size: 40px;
+  text-align: center;
+}
+
+#participateButton {
+  margin: 10px;
+  height: 80px;
+  width: 150px;
+  font-size: 30px;
+  background-color: var(--p-yellow);
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: none;
+  border-radius: 5px;
+
+}
+
+#participateButton:hover {
+  transform: scale(1.1);
+}
+
+.joinWrapper {
+  height: 500px;
+  width: 500px;
+  border: 2px solid #000; 
+  border-radius: 10px; 
+  padding: 20px; 
+  background-color: #ffffff; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
+  margin: 20px auto; 
+  text-align: center; 
+}
+
+</style>
