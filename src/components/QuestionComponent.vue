@@ -4,7 +4,7 @@
 <p>{{question.q}}</p>
 </div>
 <div class="answerbox link-wrapper">
-<button id = "answer-buttons" class="answer-button" v-for="(a, index) in question.a" :key="index" :ref="'a-' + index" v-on:click="answer(a); changeToGreen(index)">
+<button id = "answer-buttons" class="answer-button" v-for="(a, index) in question.a" :key="index" :ref="'a-' + index" v-on:click="answer(a); changeColor(index); disableButtons(question.a)">
   {{ a }}
 </button>
 </div>
@@ -21,15 +21,26 @@ export default {
       this.$emit("answer", answer);
       console.log(answer)
     },
-    changeToRed: function (el){
-      const element = el;
-      element.style.color = "red";
-    },
-    changeToGreen: function (i){
-      const targetDiv = this.$refs['a-' + i][0]; // Access the ref
-      if (targetDiv) {
-        targetDiv.style.backgroundColor = 'green'; // Change the background color
+    disableButtons: function (len) {
+      for (let i = 0; i < len.length; i++) {
+        const targetDiv = this.$refs['a-' + i][0]; // Access the ref
+        targetDiv.disabled = true;
       }
+      const button = document.getElementsByClassName("answer-button");
+      // Disable the button
+      button.disabled = true;
+    },
+    changeColor: function (i){
+      const targetDiv = this.$refs['a-' + i][0]; // Access the ref
+      targetDiv.disabled = true;
+      if (targetDiv) {
+        targetDiv.style.backgroundColor = 'var(--p-green)'; 
+        targetDiv.style.border = '5px solid #ddd';
+
+        //add if statement to change to red green depending on right/wrong answer
+        //targetDiv.style.backgroundColor = 'var(--p-red)'; 
+      }
+      
       //const element = document.getElementById('answer-buttons');
       //element.classList.remove("answer-button"); // Remove mystyle class from DIV
       //element.classList.add("textbox"); // Add newone class to DIV
