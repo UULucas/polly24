@@ -70,10 +70,13 @@
 
     </div>
 
-    <div  v-if="previewImage" >
-      <img class="imageAdded" :src="previewImage"  alt="altImg"/>
+    <div  v-if="previewImage">
+      <img id="imageAdded" :src="previewImage"  alt="altImg"/>
     </div>
-    <input ref="fileInput" type="file" accept="image/*" @input="pickFile" class="nav-button">
+
+    <div id="question-img-wrapper" class="nav-button">
+      <input ref="fileInput" type="file" accept="image/*" @input="pickFile" id="question-img">
+    </div>
 
 
 
@@ -196,34 +199,10 @@ export default {
   padding: 8px;
 }
 
-
-.image-area {
-  padding: 0;
-  width: 100%;
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #000;
-}
-
-.action-button {
-  width: 100%;
-  height: 100%;
-  border: none;
-  cursor: pointer;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: transparent;
-}
-
 .question-area {
   width: calc(100% - 3px);
   height: 2em;
 }
-
-
 
 #answer-container {
   display: flex;
@@ -238,7 +217,6 @@ export default {
 
 }
 
-
 .add {
   flex: 1;
   display: flex;
@@ -252,14 +230,29 @@ body{
 
 input::file-selector-button {
   font-weight: bold;
-  color: dodgerblue;
   padding: 0.5em;
   border: thin solid grey;
   border-radius: 3px;
 
 }
 
-.imageAdded{
+#question-img-wrapper{
+  display: flex;
+  text-align: center;
+  width: 100%;
+  padding: 1rem 0;
+  align-items: center;
+  justify-content: center;
+}
+
+#question-img{
+  font-size: 20px;
+  margin: auto;
+}
+
+
+#imageAdded{
   height: 500px;
 }
+
 </style>
