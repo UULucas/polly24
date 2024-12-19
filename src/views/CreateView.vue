@@ -34,11 +34,14 @@
     <router-link v-bind:to="'/result/' + pollId">Check result</router-link>
     Data: {{ pollData }}
   </div>
+
+
 </template>
 
 <script>
 import io from 'socket.io-client';
 const socket = io("localhost:3000");
+
 
 export default {
   name: 'CreateView',
@@ -51,6 +54,7 @@ export default {
       questionNumber: 0,
       pollData: {},
       uiLabels: {},
+      
     }
   },
   created: function () {

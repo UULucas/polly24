@@ -5,6 +5,8 @@
     <title></title>
   </head>
 
+
+
 </template>
 
 <style scoped>
@@ -15,6 +17,7 @@
 <script>
 import io from 'socket.io-client';
 const socket = io("localhost:3000");
+import json from "../../server/data/quiz-data/quiz1.json";
 
 export default {
   name: 'SelectQuizView',
@@ -27,8 +30,10 @@ export default {
       questionNumber: 0,
       pollData: {},
       uiLabels: {},
+      item: json
     }
   },
+
   created: function () {
     socket.on( "uiLabels", labels => this.uiLabels = labels );
     socket.on( "pollData", data => this.pollData = data );
