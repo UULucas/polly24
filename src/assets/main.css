@@ -1,5 +1,25 @@
 @import './base.css';
 
+
+/********************* Colour reference chart****************
+*************************** comment ********* colour ********
+
+Hex Codes: #ffc09f // #ffee93 // #fcf5c7 // #a0ced9 // #adf7b6
+
+
+
+*/
+
+
+:root {
+  --p-red: #ffc09f;
+  --p-yellow: #ffee93;
+  --p-beige: #fcf5c7;
+  --p-blue: #a0ced9;
+  --p-green: #adf7b6;
+  --p-offWhite:#f2f2ed;
+}
+
 #app {
   font-family: Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -7,21 +27,49 @@
   text-align: center;
 }
 
+
+.text-box {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  border: 1px solid #ddd;
+  background-color: var(--p-offWhite);
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-family: "Inter", sans-serif;
+}
+.text-box:hover{
+  transform: scale(1.01);
+  transition: transform 0.2s;
+}
+
 .nav-button {
   text-align: center;
   padding: 20px;
-  background-color: gold;
+  background-color: var(--p-beige);
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 50px;
   font-family: "Inter", sans-serif;
   font-weight: 400;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
 }
 
 .nav-button:hover {
   transform: scale(1.03);
-  background-color: darkgoldenrod;
+  background-color: var(--p-yellow);
   transition: transform 0.2s;
   cursor: pointer;
+}
+
+.link-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Make the link fill the button */
+  height: 100%; /* Make the link fill the button */
+  text-decoration: none; /* Remove underline */
+  color: BLACK; /* Set text color */
+
 }

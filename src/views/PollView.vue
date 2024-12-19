@@ -1,10 +1,14 @@
 <template>
-  <div>
-    {{pollId}}
+  <div class="pollQuestion">
     <QuestionComponent v-bind:question="question"
               v-on:answer="submitAnswer($event)"/>
     <hr>
     <span>{{submittedAnswers}}</span>
+  </div>
+  <div class="pollAnswerWrapper">
+    <div v-for="answer in question[1]">
+        
+    </div>
   </div>
 </template>
 

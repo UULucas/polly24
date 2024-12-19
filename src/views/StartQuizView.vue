@@ -1,24 +1,45 @@
 <template>
-
   <head>
     <link rel="stylesheet" href="../assets/main.css">
-    <title></title>
   </head>
 
+  <body>
+  <div id="main-container">
+    <div class="row">
+      <div >Quiz 1</div>
+      <div >Nyckel</div>
+    </div>
 
+    <div>
+      <div >Dela nyckel</div>
+    </div>
+
+
+    <div class="participants-section">
+      <h2>Deltagare</h2>
+      <ul class="participants">
+        
+      </ul>
+
+    </div>
+    <div class="start-section">
+      <button class="start-button">Starta spel</button>
+    </div>
+
+
+  </div>
+
+
+  </body>
 </template>
-
-<style scoped>
-
-</style>
-
 
 <script>
 import io from 'socket.io-client';
 const socket = io("localhost:3000");
 
 export default {
-  name: 'SelectQuizView',
+  name: 'StartQuizView',
+
   data: function () {
     return {
       lang: localStorage.getItem("lang") || "en",
@@ -28,6 +49,7 @@ export default {
       questionNumber: 0,
       pollData: {},
       uiLabels: {},
+      imageUrl: "",
     }
   },
   created: function () {
@@ -36,23 +58,15 @@ export default {
     socket.on( "participantsUpdate", p => this.pollData.participants = p );
     socket.emit( "getUILabels", this.lang );
   },
-  methods: {
-    createPoll: function () {
-      socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
-      socket.emit("joinPoll", this.pollId);
-    },
-    startPoll: function () {
-      socket.emit("startPoll", this.pollId)
-    },
-    addQuestion: function () {
-      socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
-    },
-    addAnswer: function () {
-      this.answers.push("");
-    },
-    runQuestion: function () {
-      socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
-    }
-  }
 }
 </script>
+<style scoped>
+
+body{
+  background-color: var(--p-blue);
+}
+
+
+
+
+</style>

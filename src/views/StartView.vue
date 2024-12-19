@@ -10,6 +10,7 @@
       <img src="../assets/logo.svg">
     </div>
   </header>
+  <body>
   <ResponsiveNav v-bind:hideNav="hideNav">
     <button v-on:click="switchLanguage">
       {{ uiLabels.changeLanguage }}
@@ -34,14 +35,25 @@
   </router-link-->
 
   <div id="container">
-    <button class="rectangle nav-button" >{{ uiLabels.joinQuiz }}</button>
-    <button class="rectangle nav-button">{{ uiLabels.createQuiz }}</button>
+    <button class="rectangle nav-button" >
+      {{ uiLabels.joinQuiz }}
+    </button>
+
+
+    <button class="rectangle nav-button">
+      <router-link to="/create/" class ="link-wrapper">
+      {{ uiLabels.createQuiz }}
+      </router-link>
+    </button>
 
     <div id="pond">
-      <button class="rectangle2 nav-button">{{ uiLabels.navigateQuiz }}</button>
-      <button class="rectangle2 nav-button">{{ uiLabels.createAccount }}</button>
+      <button class="rectangle2 nav-button">
+        {{ uiLabels.navigateQuiz }}</button>
+      <button class="rectangle2 nav-button">
+        {{ uiLabels.createAccount }}</button>
     </div>
   </div>
+  </body>
 </template>
 
 <script>
@@ -96,6 +108,7 @@ export default {
   align-items: center;
   gap: 1rem;
   width: 100%; /* Ensure it stretches to the container width */
+
 }
 
 #pond {
@@ -104,6 +117,7 @@ export default {
   align-items: center; /* Ensure vertical alignment */
   gap: 1rem; /* Space between the smaller buttons */
   width: 44rem; /* Match the width of the larger buttons */
+
 
 }
 
@@ -118,7 +132,10 @@ export default {
 }
 
 
-
+body{
+  background-color: var(--p-blue);
+  height: 100%;
+}
 
 header {
   background-color: gray;
