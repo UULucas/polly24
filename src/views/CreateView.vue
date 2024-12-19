@@ -55,13 +55,12 @@
 
       <input
           class="quiz-name text-box"
-          :value="text"
-          type="text"
           placeholder="Quiz name"
-          @input="event => text = event.target.value">
+          v-model="quizName">
 
 
       <button class="start-quiz nav-button">
+
         <router-link to="/startquiz/" class ="link-wrapper">
          Starta quiz
         </router-link>
@@ -70,32 +69,32 @@
 
     </div>
 
-    <div  v-if="previewImage" >
-      <img class="imageAdded" :src="previewImage"  alt="altImg"/>
+    <div  v-if="previewImage">
+      <img id="imageAdded" :src="previewImage"  alt="altImg"/>
     </div>
-    <input ref="fileInput" type="file" accept="image/*" @input="pickFile" class="nav-button">
 
-
+    <div id="question-img-wrapper" class="nav-button">
+      <input ref="fileInput" type="file" accept="image/*" @input="pickFile" id="question-img">
+    </div>
 
     <input
         class="question-area text-box"
-        :value="text"
-        type="text"
-        placeholder="Question"
-        @input="event => text = event.target.value">
+        v-model="question"
+        placeholder="Question">
 
 
 
     <div id="answer-container">
 
       <input
+          v-for="(_, i) in answers"
+          v-model="answers[i]"
+          v-bind:key="'answer' + i"
           class="answer text-box"
-          :value="text"
           type="text"
-          placeholder="Svar"
-          @input="event => text = event.target.value">
+          placeholder="Svar">
 
-      <button class="add nav-button">
+      <button class="add nav-button" @click="addAnswer">
         +
       </button>
 
@@ -117,8 +116,9 @@ export default {
     return {
       lang: localStorage.getItem("lang") || "en",
       pollId: "",
+      quizName: "",
       question: "",
-      answers: ["", ""],
+      answers: [""],
       questionNumber: 0,
       pollData: {},
       uiLabels: {},
@@ -196,34 +196,10 @@ export default {
   padding: 8px;
 }
 
-
-.image-area {
-  padding: 0;
-  width: 100%;
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #000;
-}
-
-.action-button {
-  width: 100%;
-  height: 100%;
-  border: none;
-  cursor: pointer;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: transparent;
-}
-
 .question-area {
   width: calc(100% - 3px);
   height: 2em;
 }
-
-
 
 #answer-container {
   display: flex;
@@ -238,7 +214,6 @@ export default {
 
 }
 
-
 .add {
   flex: 1;
   display: flex;
@@ -252,14 +227,29 @@ body{
 
 input::file-selector-button {
   font-weight: bold;
-  color: dodgerblue;
   padding: 0.5em;
   border: thin solid grey;
   border-radius: 3px;
 
 }
 
-.imageAdded{
+#question-img-wrapper{
+  display: flex;
+  text-align: center;
+  width: 100%;
+  padding: 1rem 0;
+  align-items: center;
+  justify-content: center;
+}
+
+#question-img{
+  font-size: 20px;
+  margin: auto;
+}
+
+
+#imageAdded{
   height: 500px;
 }
+
 </style>

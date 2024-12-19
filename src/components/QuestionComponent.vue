@@ -34,7 +34,11 @@ export default {
       const targetDiv = this.$refs['a-' + i][0]; // Access the ref
       targetDiv.disabled = true;
       if (targetDiv) {
-        targetDiv.style.backgroundColor = 'var(--p-green)'; // Change the background color
+        targetDiv.style.backgroundColor = 'var(--p-green)'; 
+        targetDiv.style.border = '5px solid #ddd';
+
+        //add if statement to change to red green depending on right/wrong answer
+        //targetDiv.style.backgroundColor = 'var(--p-red)'; 
       }
       
       //const element = document.getElementById('answer-buttons');
