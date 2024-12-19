@@ -5,23 +5,29 @@
 
   <body>
   <div id="main-container">
-    <div class="row">
-      <div >Quiz 1</div>
-      <div >Nyckel</div>
-    </div>
+    <div class="head-container">
+      <div>
+        <div>
+          Quiz 1
+        </div>
+        <div >
+          Nyckel
+        </div>
+      </div>
 
-    <div>
-      <div >Dela nyckel</div>
+      <div>
+        <div >
+          Dela nyckel
+        </div>
+      </div>
     </div>
-
 
     <div class="participants-section">
       <h2>Deltagare</h2>
       <ul class="participants">
-
       </ul>
-
     </div>
+
     <div class="start-section">
       <button class="start-button">Starta spel</button>
     </div>
@@ -61,10 +67,6 @@ export default {
 }
 </script>
 <style scoped>
-
-body{
-  background-color: var(--p-blue);
-}
 
 
 
