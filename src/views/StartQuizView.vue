@@ -2,8 +2,33 @@
   <head>
     <link rel="stylesheet" href="../assets/main.css">
   </head>
+
   <body>
-  <p>dsad</p>
+  <div id="main-container">
+    <div class="row">
+      <div >Quiz 1</div>
+      <div >Nyckel</div>
+    </div>
+
+    <div>
+      <div >Dela nyckel</div>
+    </div>
+
+
+    <div class="participants-section">
+      <h2>Deltagare</h2>
+      <ul class="participants">
+        
+      </ul>
+
+    </div>
+    <div class="start-section">
+      <button class="start-button">Starta spel</button>
+    </div>
+
+
+  </div>
+
 
   </body>
 </template>
@@ -40,5 +65,8 @@ export default {
 body{
   background-color: var(--p-blue);
 }
+
+
+
 
 </style>
