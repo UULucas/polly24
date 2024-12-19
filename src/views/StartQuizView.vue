@@ -9,7 +9,7 @@
     <div class="head-container">
       <div class="name-and-key">
 
-        <div class="item">
+        <div class="quiz-name"> <!--  här ska quizens namn stå, som vi får hämta från där man skapar eller nått-->
           Quiz 1
         </div>
 
@@ -31,8 +31,11 @@
 
     <div class="participants-section">
       <h2>Deltagare</h2>
-      <ul class="participants">
-      </ul>
+
+        <div class="participants"> <!--  Denna diven är till för att ha våra participants i så vi kan
+                                          nog bara sätta en array här i med dom som går med spelet-->
+
+        </div>
     </div>
 
     <div class="start-section">
@@ -101,7 +104,7 @@ export default {
   width: 12rem;
 }
 
-.item{
+.quiz-name{
   height:3rem;
   border:solid;
   border-radius: 8px;
@@ -112,11 +115,15 @@ export default {
   border:solid;
   border-radius: 8px;
   border-width: 1px;
-
   width:51rem;
   height: 30rem;
 }
+.participants{
+  width:48rem;
+  height: 22rem;
+  margin:auto;
 
+}
 
 .quiz-key{
   height:6rem;
