@@ -1,20 +1,44 @@
 <template>
     <div id="joinScreen">
       <div v-if="!joined">
-        <div><label for="idTextBox">Enter Game ID:</label></div>
-        <input id="idTextBox" type="text" maxlength="30" v-model="pollId"><br>
-        <button id="idButton" v-on:click="participateInPoll">
+
+        <input
+            class="idTextBox text-box"
+            type="text"
+            maxlength="30"
+            placeholder="Enter Game ID"
+            v-model="pollId"><br>
+
+        <button class="idButton nav-button" v-on:click="participateInPoll">
           JOIN!
         </button>
+
       </div>
+
       <div v-if="joined">
-        <div class="nameAvatarWrapper">
-        <div><label for="idTextBox">Enter your name:</label></div>
-        <input id="idTextBox" type="text" maxlength="30" v-model="userName"><br>
-        <div><label for="avatarChoice">Choose an avatar:</label></div>
+        <div id="nameAvatarWrapper">
+          <input
+              class="idTextBox text-box"
+              type="text"
+              maxlength="30"
+              placeholder="Enter your name"
+              v-model="userName"><br>
+
+
+
+
+          <div>
+            <label for="avatarChoice">Choose an avatar:</label>
+          </div>
         <img :src="avatar" alt="avatar" class="avatar-preview"><br>
         <p>Choose avatar: lägg in knapp för att ta bild med kamera och ladda upp</p>
-        <button id="idButton" v-on:click="submitNameAndAvatar">
+
+
+
+
+
+
+          <button class="idButton nav-button" v-on:click="submitNameAndAvatar">
           Join game!
         </button>
       </div>
@@ -75,54 +99,44 @@
 
 <style>
 
-html, body {
-  height: 100%;
-  margin: 0;
-  background-color: var(--p-blue);
-}
+
 
 #joinScreen {
   display: flex;
-  justify-content: center;
   align-items: center;
-  text-align: center;
-  margin: auto;
+  justify-content: center;
   height: 100vh;
+  flex-direction: column;
+  width: 80%;
+  margin:auto;
+  gap:1rem;
+}
+
+#nameAvatarWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  flex-direction: column;
+  width: 80%;
+  margin:auto;
+  gap:1rem;
 }
 
 
-label {
-  font-size: 30px;
-  font-weight: bold;
-  display: block;
-  margin-bottom: 10px;
 
+.idTextBox{
+  width: 25rem;
+  height: 5rem;
+  font-size: 3rem;
 }
 
-input[type="text"] {
-  height: 40px;
-  width: 300px;
-  padding: 10px;
-  font-size: 40px;
-  text-align: center;
+
+.idButton {
+  width:25rem;
 }
 
-#idButton {
-  margin: 10px;
-  height: 80px;
-  width: 150px;
-  font-size: 30px;
-  background-color: var(--p-yellow);
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border: none;
-  border-radius: 5px;
 
-}
-
-#idButton:hover {
-  transform: scale(1.1);
-}
 
 .avatar-preview {
   width: 100px;
