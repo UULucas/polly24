@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="../assets/main.css">
   </head>
 
-  <div class="quiz-container">
+  <!--div class="quiz-container">
     Poll link:
     <input type="text" v-model="pollId">
 
@@ -41,7 +41,7 @@
     </button>
     <router-link v-bind:to="'/result/' + pollId">Check result</router-link>
     Data: {{ pollData }}
-  </div>
+  </div!-->
 
 
 

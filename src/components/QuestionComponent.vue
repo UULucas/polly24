@@ -4,7 +4,7 @@
 <p>{{question.q}}</p>
 </div>
 <div class="answerbox link-wrapper">
-<button class="rectangle nav-button" v-for="a in question.a" v-on:click="answer(a); changeToGreen(this)" v-bind:key="a">
+<button id = "answer-buttons" class="answer-button" v-for="(a, index) in question.a" :key="index" :ref="'a-' + index" v-on:click="answer(a); changeToGreen(index)">
   {{ a }}
 </button>
 </div>
@@ -19,14 +19,20 @@ export default {
   methods: {
     answer: function (answer) {
       this.$emit("answer", answer);
+      console.log(answer)
     },
     changeToRed: function (el){
       const element = el;
       element.style.color = "red";
     },
-    changeToGreen: function (el){
-      const element = el;
-      element.style.color = "green";
+    changeToGreen: function (i){
+      const targetDiv = this.$refs['a-' + i][0]; // Access the ref
+      if (targetDiv) {
+        targetDiv.style.backgroundColor = 'green'; // Change the background color
+      }
+      //const element = document.getElementById('answer-buttons');
+      //element.classList.remove("answer-button"); // Remove mystyle class from DIV
+      //element.classList.add("textbox"); // Add newone class to DIV
     }
  } 
   }
@@ -55,9 +61,30 @@ height:auto;
   gap: 1rem;
   
 }
-.rectangle {
+
+.answer-button {
+  text-align: center;
+  padding: 20px;
+  background-color: var(--p-beige);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 50px;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   width: 20rem;
   height: 10rem;
+
+}
+
+.answer-button:hover {
+  transform: scale(1.03);
+  background-color: var(--p-yellow);
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+.answer-button.green{
+  background-color: var(--p-green);
 }
 /* answerbox shake effect for blue shell cope
 .answerbox:hover{

@@ -1,13 +1,5 @@
 <template>
   <div id="joinScreen">
-    <div v-if="!joined">
-      <div><label for="idTextBox">Enter your name:</label></div>
-      <input id="idTextBox" type="text" maxlength="30" v-model="userName"><br>
-      <button id="participateButton" v-on:click="participateInPoll">
-        JOIN!
-      </button>
-    </div>
-    <div v-if="joined">
       <div class="joinWrapper">
       <h3>Game ID: </h3>{{pollId}}
       <h1>Welcome to the game {{ userName }}!</h1>
@@ -20,7 +12,6 @@
       <p>Waiting for host to start game...</p>
       {{ participants }}
     </div>
-  </div>
   </div>
 </template>
 
