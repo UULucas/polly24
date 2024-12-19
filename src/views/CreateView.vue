@@ -55,13 +55,12 @@
 
       <input
           class="quiz-name text-box"
-          :value="text"
-          type="text"
           placeholder="Quiz name"
-          @input="event => text = event.target.value">
+          v-model="quizName">
 
 
       <button class="start-quiz nav-button">
+
         <router-link to="/startquiz/" class ="link-wrapper">
          Starta quiz
         </router-link>
@@ -80,10 +79,8 @@
 
     <input
         class="question-area text-box"
-        :value="text"
-        type="text"
-        placeholder="Question"
-        @input="event => text = event.target.value">
+        v-model="question"
+        placeholder="Question">
 
 
 
@@ -119,6 +116,7 @@ export default {
     return {
       lang: localStorage.getItem("lang") || "en",
       pollId: "",
+      quizName: "",
       question: "",
       answers: [""],
       questionNumber: 0,
