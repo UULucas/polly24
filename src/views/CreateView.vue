@@ -71,7 +71,7 @@
     </div>
 
     <div class="image-area">
-      <button class="action-button" @click="addImage" :style="getButtonStyle()">Lägg till bild</button>
+      <button class="action-button nav-button" @click="addImage" :style="getButtonStyle()">Lägg till bild</button>
     </div>
 
 

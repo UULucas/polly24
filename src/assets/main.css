@@ -9,7 +9,9 @@ Hex Codes: #ffc09f // #ffee93 // #fcf5c7 // #a0ced9 // #adf7b6
 
 
 */
-
+html{
+  background-color: var(--p-blue);
+}
 
 :root {
   --p-red: #ffc09f;
