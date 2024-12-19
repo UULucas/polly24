@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="../assets/main.css">
   </head>
 
-  <div class="quiz-container">
+  <!--div class="quiz-container">
     Poll link:
     <input type="text" v-model="pollId">
 
@@ -41,7 +41,7 @@
     </button>
     <router-link v-bind:to="'/result/' + pollId">Check result</router-link>
     Data: {{ pollData }}
-  </div>
+  </div!-->
 
 
 
@@ -70,13 +70,11 @@
 
     </div>
 
-    <div class="nav-button image-area">
-      <input
-          name="file"
-          accept="image/*"
-          type="file">
-      <!--button class="action-button nav-button" @click="addImage" :style="getButtonStyle()">Lägg till bild</button!-->
+    <div  v-if="previewImage" >
+      <img class="imageAdded" :src="previewImage"  alt="altImg"/>
     </div>
+    <input ref="fileInput" type="file" accept="image/*" @input="pickFile" class="nav-button">
+
 
 
     <input
@@ -125,6 +123,8 @@ export default {
       pollData: {},
       uiLabels: {},
       imageUrl: "",
+      previewImage: null,
+      imgText: "Lägg till bild",
     }
   },
   created: function () {
@@ -150,21 +150,18 @@ export default {
     runQuestion: function () {
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
     },
-    addImage(){
-      const url = prompt("Ange bildens URL")
-      if (url) {
-        this.imageUrl = url;
+    pickFile () {
+      let input = this.$refs.fileInput
+      let file = input.files
+      if (file && file[0]) {
+        let reader = new FileReader
+        reader.onload = e => {
+          this.previewImage = e.target.result
+        }
+        reader.readAsDataURL(file[0])
+        this.$emit('input', file[0])
       }
-    },
-    getButtonStyle (){
-      return {
-        backgroundImage: this.imageUrl ? `url('${this.imageUrl}')` : "none",
-        backgroundSize: "cover",
-        backgroundPositionRepeat: "no-repeat",
-        backgroundPosition: "center",
-        color: this.imageUrl ? "transparent" : "black"
-      }
-}
+    }
   }
 }
 </script>
@@ -250,5 +247,19 @@ export default {
 
 body{
   background-color: var(--p-blue);
+}
+
+
+input::file-selector-button {
+  font-weight: bold;
+  color: dodgerblue;
+  padding: 0.5em;
+  border: thin solid grey;
+  border-radius: 3px;
+
+}
+
+.imageAdded{
+  height: 500px;
 }
 </style>
