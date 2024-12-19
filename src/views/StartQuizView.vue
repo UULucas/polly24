@@ -5,21 +5,28 @@
 
   <body>
   <div id="main-container">
+
     <div class="head-container">
-      <div>
-        <div>
+      <div class="name-and-key">
+
+        <div class="item">
           Quiz 1
         </div>
-        <div >
-          Nyckel
-        </div>
+
+        <input
+            class="quiz-key text-box"
+            :value="text"
+            type="text"
+            placeholder="Quiz key"
+            @input="event => text = event.target.value">
+
       </div>
 
-      <div>
-        <div >
-          Dela nyckel
+        <div class="share-key">
+          <button class="share-key-button nav-button">
+            Dela nyckel
+          </button>
         </div>
-      </div>
     </div>
 
     <div class="participants-section">
@@ -29,9 +36,9 @@
     </div>
 
     <div class="start-section">
-      <button class="start-button">Starta spel</button>
+      <button class="start-button nav-button">
+        Starta spel</button>
     </div>
-
 
   </div>
 
@@ -67,6 +74,49 @@ export default {
 }
 </script>
 <style scoped>
+
+#main-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  flex-direction: column;
+  width: 80%;
+  margin:auto;
+  gap:1rem;
+}
+
+.head-container{
+  display: flex;
+  gap:1rem;
+}
+
+.name-and-key{
+  gap:1rem;
+}
+
+
+.share-key-button{
+  height: 96%;
+  width: 12rem;
+}
+
+.item{
+  height:3rem;
+  border:solid;
+  border-radius: 8px;
+  border-width: 1px;
+}
+
+.quiz-key{
+  height:6rem;
+  width: 38rem;
+  font-size: 4rem;
+}
+.start-section{
+  margin-left: 30rem;
+}
+
 
 
 
