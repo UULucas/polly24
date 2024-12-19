@@ -26,7 +26,6 @@
           Add answer alternative
         </button>
       </div>
-
     </div>
     <button v-on:click="addQuestion">
       Add question
@@ -50,7 +49,8 @@
 
 
   <body>
-  <div id="quiz-container">
+
+  <section id="quiz-container">
     <div id="header">
 
       <input
@@ -70,8 +70,12 @@
 
     </div>
 
-    <div class="image-area">
-      <button class="action-button nav-button" @click="addImage" :style="getButtonStyle()">Lägg till bild</button>
+    <div class="nav-button image-area">
+      <input
+          name="file"
+          accept="image/*"
+          type="file">
+      <!--button class="action-button nav-button" @click="addImage" :style="getButtonStyle()">Lägg till bild</button!-->
     </div>
 
 
@@ -98,7 +102,7 @@
       </button>
 
     </div>
-  </div>
+  </section>
   </body>
 
 </template>
@@ -170,9 +174,10 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  width: 100%;
+  width: 80%;
   height: 100vh;
   gap: 16px;
+  margin: auto;
 }
 
 #header {
@@ -180,7 +185,7 @@ export default {
   display: flex;
   justify-content: center;
   gap: 16px;
-  width: 80%;
+  width: 100%;
 }
 
 .quiz-name {
@@ -194,14 +199,15 @@ export default {
   padding: 8px;
 }
 
+
 .image-area {
-  width: 80%;
+  padding: 0;
+  width: 100%;
   height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid #000;
-  background-color: white;
 }
 
 .action-button {
@@ -216,8 +222,8 @@ export default {
 }
 
 .question-area {
-  width: 80%;
-  height: 3%;
+  width: calc(100% - 3px);
+  height: 2em;
 }
 
 
@@ -226,7 +232,7 @@ export default {
   display: flex;
   justify-content: center;
   gap: 16px;
-  width: 80%;
+  width: 100%;
 }
 
 .answer{
