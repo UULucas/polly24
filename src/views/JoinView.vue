@@ -66,11 +66,24 @@
         avatar: this.avatar,
       });
 
+      console.log({
+    id: this.pollId,
+    userName: this.userName,
+    avatar: this.avatar,
+    });
+
       // Redirect to /lobby/:id
-      this.$router.push(`/lobby/${this.pollId}`);
-    },
+      this.$router.push({
+      name: "LobbyView",
+      params: {
+        id: this.pollId,
+        userName: this.userName,
+        avatar: this.avatar,
+      },
+    });
   },
-};
+},
+  }
   </script>
 
 <style>

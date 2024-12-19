@@ -2,14 +2,21 @@
   <div id="joinScreen">
       <div class="joinWrapper">
       <h3>Game ID: </h3>{{pollId}}
-      <h1>Welcome to the game {{ userName }}!</h1>
+      <h1>Welcome to the game!</h1>
+      <p>{{ userName }}</p>
+      <img :src="avatar" alt="miniavtr" class="mini-avatar">
       <h4>Participants: </h4>
       <ul>
         <li v-for="participant in participants" :key="participant">
           {{ participant }}
         </li>
       </ul>
-      <p>Waiting for host to start game...</p>
+      <p>Waiting for host to start game</p>
+      <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+      </div>
       {{ participants }}
     </div>
   </div>
@@ -24,6 +31,7 @@ export default {
   data: function () {
     return {
       userName: "",
+      avatar: "",
       pollId: "inactive poll",
       uiLabels: {},
       joined: false,
@@ -33,6 +41,8 @@ export default {
   },
   created: function () {
     this.pollId = this.$route.params.id;
+    this.userName = this.$route.params.userName || ""; 
+    this.avatar = this.$route.params.avatar || ""; 
     socket.on( "uiLabels", labels => this.uiLabels = labels );
     socket.on( "participantsUpdate", p => this.participants = p );
     socket.on( "startPoll", () => this.$router.push("/poll/" + this.pollId) );
@@ -40,17 +50,9 @@ export default {
     socket.emit( "getUILabels", this.lang );
   },
   methods: {
-    participateInPoll: function () {
-      if (!this.userName) {
-        alert("Enter your name!");
-        return;
-      }
-      socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} );
-      this.participants.push(this.userName);
-      this.joined = true;
+    
     }
   }
-}
 </script>
 <style>
 
@@ -114,6 +116,48 @@ input[type="text"] {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
   margin: 20px auto; 
   text-align: center; 
+}
+
+.spinner {
+  margin: 100px auto 0;
+  width: 70px;
+  text-align: center;
+}
+
+.spinner > div {
+  width: 18px;
+  height: 18px;
+  background-color: #333;
+
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+@-webkit-keyframes sk-bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bouncedelay {
+  0%, 80%, 100% { 
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  } 40% { 
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+  }
 }
 
 </style>
