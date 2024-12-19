@@ -4,7 +4,7 @@
 <p>{{question.q}}</p>
 </div>
 <div class="answerbox link-wrapper">
-<button id = "answer-buttons" class="answer-button" v-for="a in question.a" v-on:click="answer(a); changeToGreen(a)" v-bind:key="a">
+<button id = "answer-buttons" class="answer-button" v-for="(a, index) in question.a" :key="index" :ref="'a-' + index" v-on:click="answer(a); changeToGreen(index)">
   {{ a }}
 </button>
 </div>
@@ -19,15 +19,20 @@ export default {
   methods: {
     answer: function (answer) {
       this.$emit("answer", answer);
+      console.log(answer)
     },
     changeToRed: function (el){
       const element = el;
       element.style.color = "red";
     },
     changeToGreen: function (i){
-      const element = document.getElementById('answer-buttons');
-      element.classList.remove("answer-button"); // Remove mystyle class from DIV
-      element.classList.add("textbox"); // Add newone class to DIV
+      const targetDiv = this.$refs['a-' + i][0]; // Access the ref
+      if (targetDiv) {
+        targetDiv.style.backgroundColor = 'green'; // Change the background color
+      }
+      //const element = document.getElementById('answer-buttons');
+      //element.classList.remove("answer-button"); // Remove mystyle class from DIV
+      //element.classList.add("textbox"); // Add newone class to DIV
     }
  } 
   }
