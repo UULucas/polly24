@@ -108,13 +108,23 @@ export default {
   border-width: 1px;
 }
 
+.participants-section{
+  border:solid;
+  border-radius: 8px;
+  border-width: 1px;
+
+  width:51rem;
+  height: 30rem;
+}
+
+
 .quiz-key{
   height:6rem;
   width: 38rem;
   font-size: 4rem;
 }
 .start-section{
-  margin-left: 30rem;
+  margin-left: 25rem;
 }
 
 
