@@ -35,6 +35,8 @@ export default {
       targetDiv.disabled = true;
       if (targetDiv) {
         targetDiv.style.backgroundColor = 'var(--p-green)'; // Change the background color
+        //add if statement to change to red green depending on right/wrong answer
+        //targetDiv.style.backgroundColor = 'var(--p-red)'; 
       }
       
       //const element = document.getElementById('answer-buttons');
