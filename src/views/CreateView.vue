@@ -62,7 +62,9 @@
 
 
       <button class="start-quiz nav-button">
-        Starta quiz
+        <router-link to="/startquiz/" class ="link-wrapper">
+         Starta quiz
+        </router-link>
       </button>
 
 
@@ -236,7 +238,6 @@ export default {
 
 .add {
   flex: 1;
-  height: 100px;
   display: flex;
 
 }

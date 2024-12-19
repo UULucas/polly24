@@ -36,7 +36,10 @@
 
   <div id="container">
     <button class="rectangle nav-button" >
-      {{ uiLabels.joinQuiz }}</button>
+      {{ uiLabels.joinQuiz }}
+    </button>
+
+
     <button class="rectangle nav-button">
       <router-link to="/create/" class ="link-wrapper">
       {{ uiLabels.createQuiz }}
@@ -105,6 +108,7 @@ export default {
   align-items: center;
   gap: 1rem;
   width: 100%; /* Ensure it stretches to the container width */
+
 }
 
 #pond {
@@ -113,6 +117,7 @@ export default {
   align-items: center; /* Ensure vertical alignment */
   gap: 1rem; /* Space between the smaller buttons */
   width: 44rem; /* Match the width of the larger buttons */
+
 
 }
 
