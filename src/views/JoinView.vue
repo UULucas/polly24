@@ -24,7 +24,7 @@
   const socket = io("localhost:3000");
   
   export default {
-    name: 'LobbyView',
+    name: 'JoinView',
     data: function () {
       return {
         pollId: "",
@@ -62,3 +62,4 @@
     }
   }
 }
+  </script>

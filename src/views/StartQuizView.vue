@@ -18,7 +18,7 @@
     <div class="participants-section">
       <h2>Deltagare</h2>
       <ul class="participants">
-        
+
       </ul>
 
     </div>
