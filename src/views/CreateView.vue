@@ -78,8 +78,6 @@
       <input ref="fileInput" type="file" accept="image/*" @input="pickFile" id="question-img">
     </div>
 
-
-
     <input
         class="question-area text-box"
         :value="text"
@@ -92,13 +90,14 @@
     <div id="answer-container">
 
       <input
+          v-for="(_, i) in answers"
+          v-model="answers[i]"
+          v-bind:key="'answer' + i"
           class="answer text-box"
-          :value="text"
           type="text"
-          placeholder="Svar"
-          @input="event => text = event.target.value">
+          placeholder="Svar">
 
-      <button class="add nav-button">
+      <button class="add nav-button" @click="addAnswer">
         +
       </button>
 
@@ -121,7 +120,7 @@ export default {
       lang: localStorage.getItem("lang") || "en",
       pollId: "",
       question: "",
-      answers: ["", ""],
+      answers: [""],
       questionNumber: 0,
       pollData: {},
       uiLabels: {},
