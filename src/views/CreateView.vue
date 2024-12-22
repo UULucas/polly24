@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="../assets/main.css">
   </head>
 
-  <!--zdiv class="quiz-container">
+  <!--div class="quiz-container">
     Poll link:
     <input type="text" v-model="pollId">
 
@@ -47,10 +47,12 @@
 
   <header>
     <div class="header">
-      <button class="home nav-button">
-        <a @click="$router.go(-1)">Home</a>
+      <button class="header-button nav-button" @click="$router.go(-1)">
+        <a>
+          <img class="home-img" src="https://static.thenounproject.com/png/2137554-200.png" alt="HomeImg">
+        </a>
       </button>
-      <button class="save nav-button">Save</button>
+      <img class="logo-img" src="https://cdn-icons-png.flaticon.com/512/5705/5705144.png" alt="LogoImg">
     </div>
   </header>
 
@@ -118,9 +120,6 @@
 
     </div>
   </section>
-  <section id="question-tab">
-
-  </section>
   </body>
   <footer>
 
@@ -149,11 +148,7 @@ export default {
       imageUrl: "",
       previewImage: null,
       imgText: "Lägg till bild",
-      questionNames: [],
     }
-  },
-  loadQuestionName: function (){
-
   },
   created: function () {
     socket.on( "uiLabels", labels => this.uiLabels = labels );
@@ -255,16 +250,7 @@ export default {
 
 }
 
-.header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-}
 
-.home {
-
-}
 body{
   background-color: var(--p-blue);
 }
@@ -301,8 +287,33 @@ footer{
   height: 100px;
 }
 
-@media screen and (max-width: 800px) {
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
 
+.header-button {
+  position: absolute;
+  left: 16px;
+  top: 8px;
+
+}
+
+.home-img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 50px;
+  width: 50px;
+}
+
+.logo-img {
+  height: 70px;
+  margin: 0 auto;
+  margin-top: 16px;
 }
 
 </style>
