@@ -2,9 +2,9 @@
   <div>
     lang: {{ lang }}
     {{ question.q }}
+    <span> Sigma goon </span>
   </div>
   <BarsComponent v-bind:labels="question.a" v-bind:data="submittedAnswers"/>
-
   <span>{{ submittedAnswers }}</span>
 </template>
 
@@ -12,6 +12,7 @@
 // @ is an alias to /src
 import BarsComponent from '@/components/BarsComponent.vue';
 import io from 'socket.io-client';
+import BarsComponent from '../components/BarsComponent.vue';
 const socket = io("localhost:3000");
 
 export default {

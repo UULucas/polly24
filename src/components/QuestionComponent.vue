@@ -52,7 +52,7 @@ export default {
 <style>
 .textbox{
 padding:20px;
-background-color: var(--p-blue);
+background-color: white;
 border: 1px solid #ddd;
 border-radius: 8px;
 font-size: 30px;
