@@ -1,4 +1,14 @@
 <template>
+  <header>
+    <div class="header">
+      <router-link to="/" class="header-button nav-button">
+        <a>
+          <img class="home-img" src="https://static.thenounproject.com/png/2137554-200.png" alt="HomeImg">
+        </a>
+      </router-link>
+    </div>
+  </header>
+
   <div id="joinScreen">
 
       <div class="joinWrapper">
@@ -164,6 +174,28 @@ input[type="text"] {
     -webkit-transform: scale(1.0);
     transform: scale(1.0);
   }
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+.header-button {
+  position: absolute;
+  left: 16px;
+  top: 8px;
+}
+
+.home-img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 50px;
+  width: 50px;
 }
 
 </style>

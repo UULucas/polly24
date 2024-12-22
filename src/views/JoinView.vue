@@ -1,4 +1,16 @@
+
+
 <template>
+  <header>
+    <div class="header">
+      <router-link to="/" class="header-button nav-button">
+        <a>
+          <img class="home-img" src="https://static.thenounproject.com/png/2137554-200.png" alt="HomeImg">
+        </a>
+      </router-link>
+    </div>
+  </header>
+
     <div id="joinScreen">
       <div v-if="!joined">
 
@@ -24,12 +36,7 @@
               placeholder="Enter your name"
               v-model="userName"><br>
 
-
-
-
-          <div>
-            <label for="avatarChoice">Choose an avatar:</label>
-          </div>
+        <div><label for="avatarChoice">Choose an avatar:</label></div>
         <img :src="avatar" alt="avatar" class="avatar-preview"><br>
 
         <button id="drawButton" @click="openDrawModal">Draw avatar</button>
@@ -39,7 +46,8 @@
           <div class="drawModal-content">
             <h2>Draw your avatar!</h2>
             <span class="closeModal" @click="closeModal">&times;</span>
-            <canvas ref="drawingCanvas" width="500" height="500"></canvas>
+            <canvas ref="drawingCanvas" width="500" height="500"></canvas><br>
+            <button id="submitDrawingButton" @click="submitDrawing">Submit avatar</button>
           </div>
         </div>
 
@@ -49,13 +57,14 @@
           <div class="camModal-content">
             <h2>Take a photo!</h2>
             <span class="closeModal" @click="closeModal">&times;</span>
-            <video ref="camVideo" autoplay playsinline width="400" height="400"></video>
+            <video ref="camVideo" autoplay playsinline width="400" height="400"></video><br>
+            <button id="submitPhotoButton" @click="submitPhoto">Submit photo</button>
 
           </div>
         </div>
 
 
-          <button class="idButton nav-button" v-on:click="submitNameAndAvatar">
+        <button class="idButton nav-button" v-on:click="submitNameAndAvatar">
           Join game!
         </button>
       </div>
@@ -78,8 +87,6 @@
         isDrawModalOpen: false,
         isCamModalOpen: false,
         camStream: null,
-
-
 
       }
     },
@@ -124,6 +131,8 @@
     openCanvas: function() {
       const canvas = this.$refs.drawingCanvas;
       const ctx = canvas.getContext('2d');
+      ctx.fillStyle = "white";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
       let drawing = false;
 
       canvas.addEventListener('mousedown', (e) => {
@@ -143,6 +152,14 @@
         drawing = false;
         ctx.closePath();
       });
+
+    },
+
+    submitDrawing: function() {
+      const canvas = this.$refs.drawingCanvas;
+      const drawAvatar = canvas.toDataURL("image/png");
+      this.avatar = drawAvatar;
+      this.closeModal();
 
     },
 
@@ -167,6 +184,18 @@
       this.camStream.getTracks().forEach((track) => track.stop());
       this.camStream = null; 
       }
+    },
+
+    submitPhoto: function() {
+      const video = this.$refs.camVideo;
+      const canvas = document.createElement("canvas");
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+      this.avatar = canvas.toDataURL("image/png");
+      this.closeModal();
+
     },
 
     submitNameAndAvatar: function() {
@@ -200,8 +229,6 @@
 
 <style>
 
-
-
 #joinScreen {
   display: flex;
   align-items: center;
@@ -224,24 +251,21 @@
   gap:1rem;
 }
 
-
-
 .idTextBox{
   width: 25rem;
   height: 5rem;
   font-size: 3rem;
 }
 
-
 .idButton {
   width:25rem;
 }
 
-
-
 .avatar-preview {
   width: 7rem;
   height: 7rem;
+  border: none;
+  border-radius: 1rem;
 }
 
 .modal {
@@ -288,5 +312,27 @@ canvas {
 
 video {
   border-radius: 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+.header-button {
+  position: absolute;
+  left: 16px;
+  top: 8px;
+}
+
+.home-img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 50px;
+  width: 50px;
 }
 </style>
