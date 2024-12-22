@@ -87,18 +87,27 @@
     <div id="answer-container">
 
       <input
-          v-for="(_, i) in answers"
+          v-for="(text, i) in answers"
           v-model="answers[i]"
           v-bind:key="'answer' + i"
           class="answer text-box"
           type="text"
-          placeholder="Svar">
+          placeholder="Svar"
+          @input="answers[i]=text">
 
-      <button v-if="answers.length<6" class="add nav-button answer" @click="addAnswer">
-        <div style="margin: auto">
-          +
-        </div>
-      </button>
+      <div class="answer">
+        <button v-if="answers.length>1" class="add nav-button" @click="removeAnswer">
+          <div style="margin: auto">
+            -
+          </div>
+        </button>
+        <button v-if="answers.length<6" class="add nav-button" @click="addAnswer">
+          <div style="margin: auto">
+            +
+          </div>
+        </button>
+      </div>
+
 
     </div>
   </section>
@@ -148,6 +157,9 @@ export default {
     },
     addQuestion: function () {
       socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
+    },
+    removeAnswer: function (){
+      this.answers.pop();
     },
     addAnswer: function () {
       this.answers.push("");
@@ -215,9 +227,12 @@ export default {
 }
 
 .answer{
+  gap: 16px;
+  display: flex;
   flex: 1;
-  height: 100px;
+  min-height: 100px;
   min-width: calc(50% - 16px);
+  max-width: 50%;
 }
 
 .add {
