@@ -1,22 +1,28 @@
 <template>
   <div id="joinScreen">
+
       <div class="joinWrapper">
       <h3>Game ID: </h3>{{pollId}}
       <h1>Welcome to the game!</h1>
       <p>{{ userName }}</p>
+      
       <img :src="avatar" alt="miniavtr" class="mini-avatar">
+      
       <h4>Participants: </h4>
       <ul>
         <li v-for="participant in participants" :key="participant">
           {{ participant }}
         </li>
       </ul>
+
       <p>Waiting for host to start game</p>
+
       <div class="spinner">
         <div class="bounce1"></div>
         <div class="bounce2"></div>
         <div class="bounce3"></div>
       </div>
+      
       {{ participants }}
     </div>
   </div>
@@ -109,7 +115,7 @@ input[type="text"] {
 .joinWrapper {
   height: 500px;
   width: 500px;
-  border: 2px solid #000; 
+  border: none; 
   border-radius: 10px; 
   padding: 20px; 
   background-color: #ffffff; 
@@ -125,24 +131,24 @@ input[type="text"] {
 }
 
 .spinner > div {
-  width: 18px;
-  height: 18px;
-  background-color: #333;
+  width: 15px;
+  height: 15px;
+  background-color: #000000;
 
   border-radius: 100%;
   display: inline-block;
-  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  -webkit-animation: sk-bouncedelay 1.8s infinite ease-in-out both;
+  animation: sk-bouncedelay 1.8s infinite ease-in-out both;
 }
 
 .spinner .bounce1 {
-  -webkit-animation-delay: -0.32s;
-  animation-delay: -0.32s;
+  -webkit-animation-delay: -0.40s;
+  animation-delay: -0.40s;
 }
 
 .spinner .bounce2 {
-  -webkit-animation-delay: -0.16s;
-  animation-delay: -0.16s;
+  -webkit-animation-delay: -0.20s;
+  animation-delay: -0.20s;
 }
 
 @-webkit-keyframes sk-bouncedelay {
