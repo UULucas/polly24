@@ -46,21 +46,18 @@
 
 
   <header>
-    <div class="header">
-      <button class="header-button nav-button" @click="$router.go(-1)">
-        <a>
-          <img class="home-img" src="https://static.thenounproject.com/png/2137554-200.png" alt="HomeImg">
-        </a>
-      </button>
-      <img class="logo-img" src="https://cdn-icons-png.flaticon.com/512/5705/5705144.png" alt="LogoImg">
-    </div>
+    <button class="header-button nav-button" @click="$router.go(-1)">
+      <a>
+        <img class="home-img" src="https://static.thenounproject.com/png/2137554-200.png" alt="HomeImg">
+      </a>
+    </button>
+    <img class="logo-img" src="https://cdn-icons-png.flaticon.com/512/5705/5705144.png" alt="LogoImg"> <!--Inga fucking läkar i våran kod!!!! !-->
   </header>
 
 
   <body>
-
   <section id="quiz-container">
-    <div id="header">
+    <!--div id="header">
 
       <input
           class="quiz-name text-box"
@@ -76,7 +73,7 @@
       </button>
 
 
-    </div>
+    </div!-->
 
     <div  v-if="previewImage">
       <img id="imageAdded" :src="previewImage"  alt="altImg"/>
@@ -88,36 +85,59 @@
 
     <input
         class="question-area text-box"
-        v-model="question"
+        v-model="questions[questionNumber].question"
         placeholder="Question">
 
 
 
     <div id="answer-container">
-
       <input
-          v-for="(text, i) in answers"
-          v-model="answers[i]"
+          v-for="(text, i) in questions[questionNumber].answers"
+          v-model="questions[questionNumber].answers[i].text"
           v-bind:key="'answer' + i"
           class="answer text-box"
           type="text"
           placeholder="Svar"
-          @input="answers[i]=text">
+          @input="questions[questionNumber].answers[i]=text">
 
       <div class="answer">
-        <button v-if="answers.length>1" class="add nav-button" @click="removeAnswer">
-          <div style="margin: auto">
+        <button v-if="questions[questionNumber].answers.length>1" class="add nav-button" @click="removeAnswer">
+          <label style="margin: auto">
             -
-          </div>
+          </label>
         </button>
-        <button v-if="answers.length<6" class="add nav-button" @click="addAnswer">
-          <div style="margin: auto">
+        <button v-if="questions[questionNumber].answers.length<6" class="add nav-button" @click="addAnswer">
+          <label style="margin: auto">
             +
-          </div>
+          </label>
         </button>
       </div>
+    </div>
+    <label class="text-box" style="width: 100%; height: 3em; place-items: center"> Chose the correct answer(s)</label>
+    <div v-for="answer in questions[questionNumber].answers" v-bind:key="answer" class="text-box">
+      <input
+          v-if="answer.text.length>0"
+          type="checkbox"
+          v-model="answer.correct"/>
+      {{answer.text}}
+    </div>
 
+  </section>
 
+  <section id="side-table-wrapper">
+    <div style="display: flex;">
+      <input
+          class="text-box"
+          v-model="quizName"
+          placeholder="Quiz Name">
+      <button class="text-box" @click="saveQuiz" style="height: 3rem; width:3rem;">
+        <img src="../assets/save_icon.png" alt="test" >
+      </button>
+
+    </div>
+
+    <div v-for="(question,i) in questions" class="nav-button" key="question">
+      <label>{{question.question}}</label>
     </div>
   </section>
   </body>
@@ -129,25 +149,30 @@
 
 <script>
 import io from 'socket.io-client';
-import CreateQuizSection from "@/components/CreateQuizSection.vue";
 const socket = io("localhost:3000");
+
+
+class Question {
+  constructor(question, answers = [{text:"", correct:false}]) {
+    this.question = question;
+    this.answers = answers
+  }
+}
 
 export default {
   name: 'CreateView',
-  components: {CreateQuizSection},
   data: function () {
     return {
       lang: localStorage.getItem("lang") || "en",
       pollId: "",
       quizName: "",
-      question: "",
-      answers: [""],
       questionNumber: 0,
       pollData: {},
       uiLabels: {},
       imageUrl: "",
       previewImage: null,
       imgText: "Lägg till bild",
+      questions: [new Question("")]
     }
   },
   created: function () {
@@ -168,10 +193,11 @@ export default {
       socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
     },
     removeAnswer: function (){
-      this.answers.pop();
+      this.questions[this.questionNumber].answers.pop();
     },
     addAnswer: function () {
-      this.answers.push("");
+      this.questions[this.questionNumber].answers.push({text:"", correct: false});
+      console.log(this.questions);
     },
     runQuestion: function () {
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
@@ -187,7 +213,7 @@ export default {
         reader.readAsDataURL(file[0])
         this.$emit('input', file[0])
       }
-    }
+    },
   }
 }
 </script>
@@ -197,7 +223,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  width: 80%;
+  width: 60%;
   height: 100vh;
   gap: 16px;
   margin: auto;
@@ -247,14 +273,8 @@ export default {
 .add {
   flex: 1;
   display: flex;
-
+  min-width: calc(50% - 16px);
 }
-
-
-body{
-  background-color: var(--p-blue);
-}
-
 
 input::file-selector-button {
   font-weight: bold;
@@ -287,18 +307,22 @@ footer{
   height: 100px;
 }
 
-.header {
+header {
+  height: 7em;
+  background-color: var(--p-beige);
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   position: relative;
+  margin-bottom: 2em;
 }
 
 .header-button {
   position: absolute;
   left: 16px;
   top: 8px;
+  outline: solid black 1px;
 
 }
 
@@ -314,6 +338,34 @@ footer{
   height: 70px;
   margin: 0 auto;
   margin-top: 16px;
+}
+
+#side-table{
+  width: 30%;
+  height: 400px;
+  margin-right:10px;
+}
+
+body{
+  display: flex;
+}
+
+#side-table-wrapper{
+  width: 30%;
+  height: 400px;
+  margin-right:10px;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 20px;
+  border: solid black 1px;
+  background-color: var(--p-offWhite);
+}
+
+#side-table-wrapper input{
+  width: 80%;
+  height: 2em;
+  margin-bottom: 1em;
+  font-size: 20px;
 }
 
 </style>
