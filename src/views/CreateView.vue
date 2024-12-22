@@ -45,7 +45,14 @@
 
 
 
-
+  <header>
+    <div class="header">
+      <button class="home nav-button">
+        <a @click="$router.go(-1)">Home</a>
+      </button>
+      <button class="save nav-button">Save</button>
+    </div>
+  </header>
 
 
   <body>
@@ -220,6 +227,16 @@ export default {
 
 }
 
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.home {
+
+}
 body{
   background-color: var(--p-blue);
 }
