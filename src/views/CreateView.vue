@@ -48,7 +48,7 @@
   <header>
     <button class="header-button nav-button" @click="$router.go(-1)">
       <a>
-        <img class="home-img" src="https://static.thenounproject.com/png/2137554-200.png" alt="HomeImg">
+        <img class="home-img" src="https://static.thenounproject.com/png/2137554-200.png" alt="HomeImg"><!--Inga fucking läkar i våran kod!!!! !-->
       </a>
     </button>
     <img class="logo-img" src="https://cdn-icons-png.flaticon.com/512/5705/5705144.png" alt="LogoImg"> <!--Inga fucking läkar i våran kod!!!! !-->
@@ -130,15 +130,23 @@
           class="text-box"
           v-model="quizName"
           placeholder="Quiz Name">
-      <button class="text-box" @click="saveQuiz" style="height: 3rem; width:3rem;">
-        <img src="../assets/save_icon.png" alt="test" >
+      <button class="text-box" id="save-button" @click="saveQuiz">
+        <img src="../assets/save_icon.png" alt="test" style="width: 110%">
       </button>
 
     </div>
 
-    <div v-for="(question,i) in questions" class="nav-button" key="question">
-      <label>{{question.question}}</label>
+    <div v-for="(question, i) in questions" class="" style="display: flex; gap:10px;" key="question">
+      <button class="nav-button" style="font-size: 35px; width: 80% " :style="{ backgroundColor: i===questionNumber ? '#ffee93' : '#fcf5c7' }" @click="questionNumber = i">
+        <label>Q{{i+1}} {{question.question}}</label>
+      </button>
+      <button class="nav-button" @click="removeQuestion(i)" style="width: 5rem; background-color: var(--p-red)">
+        <img src="../assets/trash_can.png" alt="test" style="height:70%">
+      </button>
     </div>
+    <button class="nav-button" style="font-size: 35px; margin-top: 1rem;" @click="addQuestion">
+      <label>Add question</label>
+    </button>
   </section>
   </body>
   <footer>
@@ -190,7 +198,18 @@ export default {
       socket.emit("startPoll", this.pollId)
     },
     addQuestion: function () {
+      this.questions.push(new Question(""));
+      this.questionNumber = this.questions.length-1;
       socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
+    },
+    removeQuestion: function (i) {
+      if(i===this.questionNumber){
+        this.questionNumber = 0;
+      }
+      this.questions.splice(i, 1);
+      if(this.questions.length===0){
+        this.addQuestion();
+      }
     },
     removeAnswer: function (){
       this.questions[this.questionNumber].answers.pop();
@@ -366,6 +385,16 @@ body{
   height: 2em;
   margin-bottom: 1em;
   font-size: 20px;
+}
+
+#save-button{
+  height: calc(3rem - 4px);
+  width:3rem;
+  margin-left:1rem;
+}
+
+#save-button:hover{
+  background-color: var(--p-blue);
 }
 
 </style>
