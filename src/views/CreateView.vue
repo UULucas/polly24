@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="../assets/main.css">
   </head>
 
-  <!--div class="quiz-container">
+  <!--zdiv class="quiz-container">
     Poll link:
     <input type="text" v-model="pollId">
 
@@ -118,6 +118,9 @@
 
     </div>
   </section>
+  <section id="question-tab">
+
+  </section>
   </body>
   <footer>
 
@@ -146,7 +149,11 @@ export default {
       imageUrl: "",
       previewImage: null,
       imgText: "Lägg till bild",
+      questionNames: [],
     }
+  },
+  loadQuestionName: function (){
+
   },
   created: function () {
     socket.on( "uiLabels", labels => this.uiLabels = labels );
@@ -292,6 +299,10 @@ input::file-selector-button {
 
 footer{
   height: 100px;
+}
+
+@media screen and (max-width: 800px) {
+
 }
 
 </style>
