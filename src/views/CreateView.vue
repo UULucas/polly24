@@ -94,13 +94,18 @@
           type="text"
           placeholder="Svar">
 
-      <button class="add nav-button" @click="addAnswer">
-        +
+      <button v-if="answers.length<6" class="add nav-button answer" @click="addAnswer">
+        <div style="margin: auto">
+          +
+        </div>
       </button>
 
     </div>
   </section>
   </body>
+  <footer>
+
+  </footer>
 
 </template>
 
@@ -203,6 +208,7 @@ export default {
 
 #answer-container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 16px;
   width: 100%;
@@ -211,7 +217,7 @@ export default {
 .answer{
   flex: 1;
   height: 100px;
-
+  min-width: calc(50% - 16px);
 }
 
 .add {
@@ -250,6 +256,10 @@ input::file-selector-button {
 
 #imageAdded{
   height: 500px;
+}
+
+footer{
+  height: 100px;
 }
 
 </style>
