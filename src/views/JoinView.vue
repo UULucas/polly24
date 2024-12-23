@@ -21,7 +21,7 @@
             placeholder="Enter Game ID"
             v-model="pollId"><br>
 
-        <button class="idButton nav-button" v-on:click="participateInPoll">
+        <button class="idButton nav-button" v-on:click="checkID">
           JOIN!
         </button>
 
@@ -100,12 +100,20 @@
   },
   methods: {
     participateInPoll: function () {
+      socket.emit( "participateInPoll", {
+        pollId: this.pollId,
+        name: this.userName,
+        //avatar: this.avatar,
+      } );
+    },
+    checkID(){
       if (!this.pollId) {
         alert("Enter your name!");
         return;
       }
-      socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} );
-      this.joined = true;
+      else{
+        this.joined = true;
+      }
     },
 
     openDrawModal: function() {
@@ -203,16 +211,17 @@
         alert("You have to choose a name!");
         return;
       }
-      socket.emit("submitNameAndAvatar", {
+      /*socket.emit("submitNameAndAvatar", {
         userName: this.userName,
         avatar: this.avatar,
-      });
+      });*/
+      this.participateInPoll()
 
-      console.log({
+      /*console.log({
     id: this.pollId,
     userName: this.userName,
     avatar: this.avatar,
-    });
+    });*/
 
       this.$router.push({
       name: "LobbyView",

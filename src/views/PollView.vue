@@ -4,10 +4,10 @@
               v-on:answer="submitAnswer($event)"/>
     <hr>
   </div>
-  <div class="pollAnswerWrapper">
+  <!--div class="pollAnswerWrapper">
     <div v-for="answer in question[1]">
     </div>
-  </div>
+  </div!-->
 </template>
 
 <script>
@@ -41,6 +41,7 @@ export default {
   },
   methods: {
     submitAnswer: function (answer) {
+      console.log(answer)
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
     }
   }

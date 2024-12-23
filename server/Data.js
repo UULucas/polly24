@@ -59,10 +59,11 @@ Data.prototype.getPoll = function(pollId) {
   return {};
 }
 
-Data.prototype.participateInPoll = function(pollId, name) {
-  console.log("participant will be added to", pollId, name);
+Data.prototype.participateInPoll = function(pollId, name, avatar) {
+  avatar = "test avatar"
+  console.log("participant will be added to", pollId, name, avatar);
   if (this.pollExists(pollId)) {
-    this.polls[pollId].participants.push({name: name, answers: []})
+    this.polls[pollId].participants.push({name: name, answers: [], avatar: avatar});
   }
 }
 
@@ -122,10 +123,6 @@ Data.prototype.submitAnswer = function(pollId, answer) {
       answers[answer] += 1
     console.log("answers looks like ", answers, typeof answers);
   }
-}
-
-Data.prototype.saveToJson = function (pollId){
-
 }
 
 export { Data };

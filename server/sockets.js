@@ -21,7 +21,7 @@ function sockets(io, socket, data) {
   });
 
   socket.on('participateInPoll', function(d) {
-    data.participateInPoll(d.pollId, d.name);
+    data.participateInPoll(d.pollId, d.name, d.avatar);
     io.to(d.pollId).emit('participantsUpdate', data.getParticipants(d.pollId));
   });
   socket.on('startPoll', function(pollId) {

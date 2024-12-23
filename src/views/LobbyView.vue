@@ -21,7 +21,8 @@
       <h4>Participants: </h4>
       <ul>
         <li v-for="participant in participants" :key="participant">
-          {{ participant }}
+          {{ participant}}
+          {{console.log(participant)}}
         </li>
       </ul>
 
@@ -56,9 +57,9 @@ export default {
     }
   },
   created: function () {
-    this.pollId = this.$route.params.id;
-    this.userName = this.$route.params.userName || ""; 
-    this.avatar = this.$route.params.avatar || ""; 
+    this.pollId = this.$route.params.id; //Hämtas fårn webbadressen
+    this.userName = this.$route.params.userName || "";  //Hämtar från webbadressen så går inte att hämta
+    this.avatar = this.$route.params.avatar || "";  //Hämtar från webbadressen så kommer inte att funka
     socket.on( "uiLabels", labels => this.uiLabels = labels );
     socket.on( "participantsUpdate", p => this.participants = p );
     socket.on( "startPoll", () => this.$router.push("/poll/" + this.pollId) );
@@ -196,6 +197,13 @@ input[type="text"] {
   margin-right: auto;
   height: 50px;
   width: 50px;
+}
+
+.mini-avatar{
+  width: 7rem;
+  height: 7rem;
+  border: none;
+  border-radius: 1rem;
 }
 
 </style>
