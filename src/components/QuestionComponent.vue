@@ -4,8 +4,8 @@
 <p>{{question.q}}</p>
 </div>
 <div class="answerbox link-wrapper">
-<button id = "answer-buttons" class="answer-button" v-for="(a, index) in question.a" :key="index" :ref="'a-' + index" v-on:click="answer(a); changeColor(index); disableButtons(question.a)">
-  {{ a }}
+<button id = "answer-buttons" class="answer-button" v-for="(a, index) in question.a" :key="index" :ref="'a-' + index" v-on:click="answer(a.text); changeColor(index, a.correct); disableButtons(question.a)">
+  {{ a.text }}
 </button>
 </div>
 </template>
@@ -30,11 +30,17 @@ export default {
       // Disable the button
       button.disabled = true;
     },
-    changeColor: function (i){
+    changeColor: function (i, correct){
       const targetDiv = this.$refs['a-' + i][0]; // Access the ref
       targetDiv.disabled = true;
       if (targetDiv) {
-        targetDiv.style.backgroundColor = 'var(--p-green)'; 
+        if(correct){
+          targetDiv.style.backgroundColor = 'var(--p-green)';
+        }
+        else{
+          targetDiv.style.backgroundColor = 'var(--p-red)';
+        }
+
         targetDiv.style.border = '5px solid #ddd';
 
         //add if statement to change to red green depending on right/wrong answer

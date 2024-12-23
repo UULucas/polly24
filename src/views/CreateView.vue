@@ -11,13 +11,13 @@
       Create poll
     </button>
 
-    <div>
+    <!--div>
       <div>
         {{ uiLabels.question }}:
         <input type="text" v-model="question">
       </div>
 
-      <!--div>
+      <div>
         Answers:
         <input v-for="(_, i) in answers"
                v-model="answers[i]"
@@ -25,8 +25,8 @@
         <button v-on:click="addAnswer">
           Add answer alternative
         </button>
-      </div!-->
-    </div>
+      </div>
+    </div!-->
     <!--button v-on:click="addQuestion">
       Add question
     </button!-->
@@ -251,6 +251,9 @@ export default {
         this.$emit('input', file[0])
       }
     },
+    generateGameId: function (){
+      return Math.floor(1000 + Math.random() * 9000);
+    }
   }
 }
 </script>
