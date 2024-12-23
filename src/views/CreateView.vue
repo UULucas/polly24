@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="../assets/main.css">
   </head>
 
-  <!--div class="quiz-container">
+  <div class="quiz-container">
     Poll link:
     <input type="text" v-model="pollId">
 
@@ -17,7 +17,7 @@
         <input type="text" v-model="question">
       </div>
 
-      <div>
+      <!--div>
         Answers:
         <input v-for="(_, i) in answers"
                v-model="answers[i]"
@@ -25,11 +25,11 @@
         <button v-on:click="addAnswer">
           Add answer alternative
         </button>
-      </div>
+      </div!-->
     </div>
-    <button v-on:click="addQuestion">
+    <!--button v-on:click="addQuestion">
       Add question
-    </button>
+    </button!-->
     <input type="number" v-model="questionNumber">
 
     <button v-on:click="startPoll">
@@ -41,7 +41,7 @@
     </button>
     <router-link v-bind:to="'/result/' + pollId">Check result</router-link>
     Data: {{ pollData }}
-  </div!-->
+  </div>
 
 
 
@@ -52,6 +52,11 @@
       </a>
     </button>
     <img class="logo-img" src="https://cdn-icons-png.flaticon.com/512/5705/5705144.png" alt="LogoImg"> <!--Inga fucking läkar i våran kod!!!! !-->
+    <button class="start-quiz nav-button">
+      <router-link to="/startquiz/" class ="link-wrapper">
+        Starta quiz
+      </router-link>
+    </button>
   </header>
 
 
@@ -157,6 +162,7 @@
 
 <script>
 import io from 'socket.io-client';
+import fs from "fs"
 const socket = io("localhost:3000");
 
 
@@ -164,6 +170,13 @@ class Question {
   constructor(question, answers = [{text:"", correct:false}]) {
     this.question = question;
     this.answers = answers
+  }
+  getAnswers(){
+    let a = [];
+    for(let i = 0; i < this.answers.length; i++){
+      a.push(this.answers[i].text);
+    }
+    return a;
   }
 }
 
@@ -190,6 +203,11 @@ export default {
     socket.emit( "getUILabels", this.lang );
   },
   methods: {
+    saveQuiz: function () {
+      for(let i = 0;i<this.questions.length;i++) {
+        socket.emit("addQuestion", {pollId: this.pollId, q: this.questions[i].question, a: this.questions[i].answers} )
+      }
+    },
     createPoll: function () {
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
       socket.emit("joinPoll", this.pollId);
@@ -200,7 +218,7 @@ export default {
     addQuestion: function () {
       this.questions.push(new Question(""));
       this.questionNumber = this.questions.length-1;
-      socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
+      //socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
     },
     removeQuestion: function (i) {
       if(i===this.questionNumber){
@@ -263,8 +281,7 @@ export default {
 
 
 .start-quiz {
-  flex: 1;
-  padding: 8px;
+  margin: 1rem 3rem;
 }
 
 .question-area {

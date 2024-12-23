@@ -124,6 +124,10 @@ Data.prototype.submitAnswer = function(pollId, answer) {
   }
 }
 
+Data.prototype.saveToJson = function (pollId){
+
+}
+
 export { Data };
 
 

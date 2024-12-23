@@ -104,7 +104,7 @@
         alert("Enter your name!");
         return;
       }
-      socket.emit( "participateInPoll", {pollId: this.pollId} );
+      socket.emit( "participateInPoll", {pollId: this.pollId, name: this.userName} );
       this.joined = true;
     },
 
