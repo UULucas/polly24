@@ -60,8 +60,7 @@ Data.prototype.getPoll = function(pollId) {
 }
 
 Data.prototype.participateInPoll = function(pollId, name, avatar) {
-  avatar = "test avatar"
-  console.log("participant will be added to", pollId, name, avatar);
+  console.log("participant will be added to", pollId, name);
   if (this.pollExists(pollId)) {
     this.polls[pollId].participants.push({name: name, answers: [], avatar: avatar});
   }

@@ -141,7 +141,7 @@
 
     </div>
 
-    <div v-for="(question, i) in questions" class="" style="display: flex; gap:10px;" key="question">
+    <div v-for="(question, i) in questions" class="" style="display: flex; gap:10px;" v-bind:key="question">
       <button class="nav-button" style="font-size: 35px; width: 80% " :style="{ backgroundColor: i===questionNumber ? '#ffee93' : '#fcf5c7' }" @click="questionNumber = i">
         <label>Q{{i+1}} {{question.question}}</label>
       </button>
@@ -162,7 +162,6 @@
 
 <script>
 import io from 'socket.io-client';
-import fs from "fs"
 const socket = io("localhost:3000");
 
 

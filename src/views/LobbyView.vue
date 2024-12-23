@@ -21,8 +21,11 @@
       <h4>Participants: </h4>
       <ul>
         <li v-for="participant in participants" :key="participant">
-          {{ participant}}
-          {{console.log(participant)}}
+          <div style="display: flex" class="text-box">
+            <label>{{participant.name}}</label>
+            <img :src="participant.avatar" alt="miniavtr" class="mini-avatar">
+          </div>
+
         </li>
       </ul>
 

@@ -103,7 +103,7 @@
       socket.emit( "participateInPoll", {
         pollId: this.pollId,
         name: this.userName,
-        //avatar: this.avatar,
+        avatar: this.avatar,
       } );
     },
     checkID(){
