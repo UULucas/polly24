@@ -10,7 +10,7 @@
       <div class="name-and-key">
 
         <div class="quiz-name"> <!--  här ska quizens namn stå, som vi får hämta från där man skapar eller nått-->
-          {{pollId}}
+          {{pollData.quizName}}
         </div>
 
         <input

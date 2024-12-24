@@ -197,23 +197,17 @@ export default {
     socket.on( "uiLabels", labels => this.uiLabels = labels );
     socket.on( "pollData", data => this.pollData = data );
     socket.on( "participantsUpdate", p => this.pollData.participants = p );
+    socket.on( "newID", p => this.pollId = p ); //Save the new game id
     socket.emit( "getUILabels", this.lang );
+    socket.emit("generateNewID");//Ask the server for a game id
   },
   methods: {
     startQuiz: function (){
-      socket.emit("generateNewID"); //Ask the server for a game id
-      socket.on( "newID", p => this.pollId = p ); //Save the new game id
       console.log("testtesttest" + this.pollId);
       if(this.pollId !== null){
         this.createPoll();
         this.saveQuiz();
       }
-      this.$router.push({
-        name: "StartQuizView",
-        params: {
-          id: this.pollId,
-        },
-      });
     },
     saveQuiz: function () {
       for(let i = 0;i<this.questions.length;i++) {
@@ -264,11 +258,12 @@ export default {
       }
     },
     test: function (){
-      socket.emit("generateNewID"); //Ask the server for a game id
-      setTimeout(1000)
-
-      socket.on( "newID", p => this.pollId = p ); //Save the new game id
-      console.log("new id" + this.pollId)
+      this.$router.push({
+        name: "StartQuizView",
+        params: {
+          id: this.pollId,
+        },
+      });
     }
   }
 }
