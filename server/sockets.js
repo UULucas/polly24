@@ -49,6 +49,9 @@ function sockets(io, socket, data) {
     io.to(d.pollId).emit('timeUpdate', data.getTimeLeft(d.pollId))
   }
   );
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 }
 

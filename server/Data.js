@@ -154,6 +154,9 @@ Data.prototype.generateGameId= function(){
 =======
 Data.prototype.saveToJson = function (pollId){
 //shout out saveToJson, gotta be one of my favourite functions
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 }
 

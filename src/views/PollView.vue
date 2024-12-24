@@ -12,8 +12,11 @@
     <hr>
   </div>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   <!--div class="pollAnswerWrapper">
 =======
+=======
+>>>>>>> Stashed changes
   <div v-if="timerValue=0" > 
     {{ disableButtonsInChild() }}
   </div>
