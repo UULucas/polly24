@@ -124,7 +124,24 @@ Data.prototype.submitAnswer = function(pollId, answer) {
     console.log("answers looks like ", answers, typeof answers);
   }
 }
+Data.prototype.timeLeft = function(pollId, time) {
+  if (this.pollExists(pollId)) {
+    const poll = this.polls[pollId];
+    let newTime = time;
+    poll.time.push(newTime);
+    //sjukt om det bara funkar såhär
+  }
+}
+Data.prototype.getNewTime = function(pollId) {
+  if (this.pollExists(pollId)) {
+    const poll = this.polls[pollId];
+    const time = poll.time;
+    return time;
+  }
+  return {}
+}
 
+<<<<<<< Updated upstream
 Data.prototype.generateGameId= function(){
   if(this.polls.length>1000){ //In case we have 1000 quizes we can not generate new once
     return null;
@@ -134,6 +151,10 @@ Data.prototype.generateGameId= function(){
     newId = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
   }
   return newId;
+=======
+Data.prototype.saveToJson = function (pollId){
+//shout out saveToJson, gotta be one of my favourite functions
+>>>>>>> Stashed changes
 }
 
 export { Data };

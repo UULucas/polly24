@@ -73,9 +73,8 @@
         setTimeLeft: function () {
             document.documentElement.style.setProperty('--duration', this.timerValue);
             console.log(this.timerValue)
-            socket.emit(("timeLeft", {pollId: this.pollId, time: this.timerValue}))
+            socket.emit("timeLeft", {pollId: this.pollId, time: this.timerValue})
         }
-      
     }
   }
   </script>
