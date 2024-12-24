@@ -203,10 +203,15 @@ export default {
   },
   methods: {
     startQuiz: function (){
-      console.log("testtesttest" + this.pollId);
       if(this.pollId !== null){
         this.createPoll();
         this.saveQuiz();
+        this.$router.push({
+          name: "StartQuizView",
+          params: {
+            id: this.pollId,
+          },
+        });
       }
     },
     saveQuiz: function () {
@@ -258,12 +263,6 @@ export default {
       }
     },
     test: function (){
-      this.$router.push({
-        name: "StartQuizView",
-        params: {
-          id: this.pollId,
-        },
-      });
     }
   }
 }
