@@ -51,8 +51,11 @@
         </div>
     </div>
 
+    <label class="text-box" style="font-size: 35px">Current question: {{questionNumber+1}}</label>
     <div class="start-section">
-      <button class="start-button nav-button">
+      <button class="start-button nav-button" @click="previousQuestion">Previous question</button>
+      <button class="start-button nav-button" @click="nextQuestion">Next question</button>
+      <button class="start-button nav-button" @click="startQuiz">
         Starta spel</button>
     </div>
 
@@ -91,6 +94,23 @@ export default {
     socket.emit( "joinPoll", this.pollId );
 
   },
+  methods: {
+    previousQuestion: function () {
+      if(this.questionNumber>0){
+        this.questionNumber--;
+        socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber});
+      }
+    },
+    nextQuestion: function () {
+      this.questionNumber++;
+      console.log(this.questionNumber);
+      socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber});
+    },
+    startQuiz: function (){
+      socket.emit("startPoll", this.pollId)
+    },
+
+  }
 }
 </script>
 <style scoped>
@@ -148,7 +168,7 @@ export default {
   font-size: 4rem;
 }
 .start-section{
-  margin-left: 25rem;
+
 }
 
 </style>
