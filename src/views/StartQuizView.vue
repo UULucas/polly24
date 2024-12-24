@@ -10,7 +10,7 @@
       <div class="name-and-key">
 
         <div class="quiz-name"> <!--  här ska quizens namn stå, som vi får hämta från där man skapar eller nått-->
-          Quiz 1
+          {{pollId}}
         </div>
 
         <input
@@ -69,10 +69,13 @@ export default {
     }
   },
   created: function () {
+    this.pollId = this.$route.params.id;
     socket.on( "uiLabels", labels => this.uiLabels = labels );
     socket.on( "pollData", data => this.pollData = data );
     socket.on( "participantsUpdate", p => this.pollData.participants = p );
     socket.emit( "getUILabels", this.lang );
+    console.log("data");
+    console.log(this.pollData);
   },
 }
 </script>

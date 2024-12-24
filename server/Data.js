@@ -38,14 +38,15 @@ Data.prototype.getUILabels = function (lang) {
   return JSON.parse(labels);
 }
 
-Data.prototype.createPoll = function(pollId, lang="en") {
+Data.prototype.createPoll = function(pollId, lang="en", quizName) {
   if (!this.pollExists(pollId)) {
     let poll = {};
     poll.lang = lang;  
     poll.questions = [];
     poll.answers = [];
     poll.participants = [];
-    poll.currentQuestion = 0;              
+    poll.currentQuestion = 0;
+    poll.quizName = quizName;
     this.polls[pollId] = poll;
     console.log("poll created", pollId, poll);
   }
@@ -122,6 +123,17 @@ Data.prototype.submitAnswer = function(pollId, answer) {
       answers[answer] += 1
     console.log("answers looks like ", answers, typeof answers);
   }
+}
+
+Data.prototype.generateGameId= function(){
+  if(this.polls.length>1000){ //In case we have 1000 quizes we can not generate new once
+    return null;
+  }
+  let newId = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
+  while (newId in this.polls){
+    newId = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
+  }
+  return newId;
 }
 
 export { Data };

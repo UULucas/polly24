@@ -5,7 +5,7 @@ function sockets(io, socket, data) {
   });
 
   socket.on('createPoll', function(d) {
-    data.createPoll(d.pollId, d.lang)
+    data.createPoll(d.pollId, d.lang, d.quizName)
     socket.emit('pollData', data.getPoll(d.pollId));
   });
 
@@ -36,7 +36,11 @@ function sockets(io, socket, data) {
   socket.on('submitAnswer', function(d) {
     data.submitAnswer(d.pollId, d.answer);
     io.to(d.pollId).emit('submittedAnswersUpdate', data.getSubmittedAnswers(d.pollId));
-  }); 
+  });
+
+  socket.on('generateNewID', function (){
+    socket.emit('newID', data.generateGameId())
+  });
 }
 
 export { sockets };

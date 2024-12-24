@@ -52,10 +52,8 @@
       </a>
     </button>
     <img class="logo-img" src="https://cdn-icons-png.flaticon.com/512/5705/5705144.png" alt="LogoImg"> <!--Inga fucking läkar i våran kod!!!! !-->
-    <button class="start-quiz nav-button">
-      <router-link to="/startquiz/" class ="link-wrapper">
+    <button class="start-quiz nav-button" @click="startQuiz">
         Starta quiz
-      </router-link>
     </button>
   </header>
 
@@ -135,8 +133,8 @@
           class="text-box"
           v-model="quizName"
           placeholder="Quiz Name">
-      <button class="text-box" id="save-button" @click="saveQuiz">
-        <img src="../assets/save_icon.png" alt="test" style="width: 110%">
+      <button class="text-box" id="save-button">
+        <img src="../assets/save_icon.png" alt="test" style="width: 110%" @click="test">
       </button>
 
     </div>
@@ -202,13 +200,28 @@ export default {
     socket.emit( "getUILabels", this.lang );
   },
   methods: {
+    startQuiz: function (){
+      socket.emit("generateNewID"); //Ask the server for a game id
+      socket.on( "newID", p => this.pollId = p ); //Save the new game id
+      console.log("testtesttest" + this.pollId);
+      if(this.pollId !== null){
+        this.createPoll();
+        this.saveQuiz();
+      }
+      this.$router.push({
+        name: "StartQuizView",
+        params: {
+          id: this.pollId,
+        },
+      });
+    },
     saveQuiz: function () {
       for(let i = 0;i<this.questions.length;i++) {
         socket.emit("addQuestion", {pollId: this.pollId, q: this.questions[i].question, a: this.questions[i].answers} )
       }
     },
     createPoll: function () {
-      socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
+      socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, quizName: this.quizName })
       socket.emit("joinPoll", this.pollId);
     },
     startPoll: function () {
@@ -250,8 +263,12 @@ export default {
         this.$emit('input', file[0])
       }
     },
-    generateGameId: function (){
-      return Math.floor(1000 + Math.random() * 9000);
+    test: function (){
+      socket.emit("generateNewID"); //Ask the server for a game id
+      setTimeout(1000)
+
+      socket.on( "newID", p => this.pollId = p ); //Save the new game id
+      console.log("new id" + this.pollId)
     }
   }
 }
