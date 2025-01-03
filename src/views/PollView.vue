@@ -36,7 +36,7 @@ export default {
   },
   created: function () {
     this.pollId = this.$route.params.id;
-    socket.on( "questionUpdate", q => this.question = q, this.resetTime() );
+    socket.on( "questionUpdate", q => this.question = q, this.reset() );
     socket.on( "submittedAnswersUpdate", answers => this.submittedAnswers = answers );
     socket.on( "uiLabels", labels => this.uiLabels = labels );
     socket.on("timeUpdate", time => this.question.timerValue = time, this.setTimeLeft());
@@ -54,9 +54,12 @@ export default {
             document.documentElement.style.setProperty('--duration', this.question.timerValue);
             console.log(this.question.timerValue);
       },
-      resetTime: function () {
+      reset: function () {
         this.question.timerValue = 15;
+        this.setTimeLeft();
         this.countDownTime();
+        let element = document.getElementById('round-time-bar div');
+        document.body.append(element);
       },
       countDownTime: function() {
         setTimeout(this.setZero, this.question.timerValue * 1000)

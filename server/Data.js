@@ -12,7 +12,7 @@ function Data() {
        a: [{text:"0-13", correct: false}, {text:"14-18",correct: false} , {text:"19-25", correct: true}, {text:"26-35", correct: false}, {text:"36-45", correct: false},{text: "45-", correct: false}]
       },
       {q: "How much do you enjoy coding?", 
-       a: ["1", "2", "3", "4", "5"]
+       a: [{text:"1", correct : false}, {text:"2", correct : false}, {text:"3", correct : false}, {text:"4", correct : false}, {text:"5", correct : false}]
       }
     ],
     answers: [{text:"0-13", correct: false}, {text:"0-13", correct: false}],
