@@ -141,7 +141,7 @@ Data.prototype.getNewTime = function(pollId) {
   return {}
 }
 
-<<<<<<< Updated upstream
+
 Data.prototype.generateGameId= function(){
   if(this.polls.length>1000){ //In case we have 1000 quizes we can not generate new once
     return null;
@@ -151,19 +151,10 @@ Data.prototype.generateGameId= function(){
     newId = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
   }
   return newId;
-=======
+}
 Data.prototype.saveToJson = function (pollId){
 //shout out saveToJson, gotta be one of my favourite functions
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 }
 
 export { Data };
-
-
 

@@ -36,26 +36,17 @@ function sockets(io, socket, data) {
   socket.on('submitAnswer', function(d) {
     data.submitAnswer(d.pollId, d.answer);
     io.to(d.pollId).emit('submittedAnswersUpdate', data.getSubmittedAnswers(d.pollId));
-<<<<<<< Updated upstream
   });
 
   socket.on('generateNewID', function (){
     socket.emit('newID', data.generateGameId())
   });
-=======
-  }); 
+
   socket.on('timeLeft', function(d) {
     data.timeLeft(d.pollId, d.newTime);
     io.to(d.pollId).emit('timeUpdate', data.getTimeLeft(d.pollId))
-  }
-  );
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+  });
+
 }
 
 export { sockets };
