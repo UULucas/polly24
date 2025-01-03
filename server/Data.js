@@ -153,6 +153,7 @@ Data.prototype.generateGameId= function(){
   }
   return newId;
 }
+
 Data.prototype.saveToJson = function (pollId){
 //shout out saveToJson, gotta be one of my favourite functions
 }

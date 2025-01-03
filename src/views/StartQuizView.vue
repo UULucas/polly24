@@ -38,11 +38,14 @@
         <div class="participants"> <!--  Denna diven är till för att ha våra participants i så vi kan
                                           nog bara sätta en array här i med dom som går med spelet-->
           <div v-for="participant in pollData.participants" v-bind:key="player"  class="text-box" >
+            <div class="participants-name">
             {{participant.name}}
+            </div>
             <img :src="participant.avatar"
                  alt="miniavtr"
                  style="
                  width: 4rem;
+                 margin-left: 10rem;
                  height: 4rem;
                  border: none;
                  border-radius: 1rem;">
@@ -105,6 +108,7 @@ export default {
       this.questionNumber++;
       console.log(this.questionNumber);
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber});
+
     },
     startQuiz: function (){
       socket.emit("startPoll", this.pollId)
@@ -154,12 +158,21 @@ export default {
   border-width: 1px;
   width:51rem;
   height: 30rem;
+  overflow-y: scroll;
 }
 .participants{
   width:48rem;
   height: 22rem;
   margin:auto;
+  gap: 1rem;
+}
 
+.participants-name{
+  width: 10rem;
+  display:flex;
+  align-items: center;
+  padding:1rem;
+  text-overflow: ellipsis;
 }
 
 .quiz-key{
