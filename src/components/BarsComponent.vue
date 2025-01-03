@@ -1,11 +1,11 @@
 <template>
 <div class="wrapper">
   <div class="bar" v-for="(item, index) in labels" v-bind:key="'a' + index">
-    <div v-bind:style="{height: (data?.[item]||0) + 'px'}">
-      <span> {{ data?.[item]||0 }} </span>
+    <div v-bind:style="{height: (data?.[item.text]||0) + 'px'}">
+      <span> {{ data?.[item.text]||0 }} </span>
     </div>
     <div class="label">
-      {{ item }}
+      {{ item.text }}
     </div>
   </div>
 </div>
