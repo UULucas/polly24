@@ -43,7 +43,6 @@ function sockets(io, socket, data) {
   });
 
   socket.on('timeLeft', function(d) {
-    console.log("time left", d.pollId, d.time);
     data.setTime(d.pollId, d.time);
     io.to(d.pollId).emit('timeUpdate', data.getTime(d.pollId))
   });
