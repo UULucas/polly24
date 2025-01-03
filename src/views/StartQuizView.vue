@@ -19,14 +19,14 @@
             type="text"
             placeholder="Quiz key"
             @input="event => text = event.target.value"!-->
-        <label class="quiz-key text-box">
+        <label class="quiz-key text-box" id="pollId">
           {{pollId}}
         </label>
 
       </div>
 
       <div class="share-key">
-        <button class="share-key-button nav-button">
+        <button @click="copyText" class="share-key-button nav-button">
           Dela nyckel
         </button>
       </div>
@@ -105,7 +105,10 @@ export default {
       }
     },
     nextQuestion: function () {
-      this.questionNumber++;
+      if(this.questionNumber<this.pollData.questions.length-1){
+        this.questionNumber++;
+      }
+      console.log();
       console.log(this.questionNumber);
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber});
 
@@ -113,7 +116,10 @@ export default {
     startQuiz: function (){
       socket.emit("startPoll", this.pollId)
     },
-
+    copyText: function () {
+      var copyText = document.getElementById("pollId").innerText;
+      navigator.clipboard.writeText(copyText); //kod tagen från W3schools
+    },
   }
 }
 </script>
