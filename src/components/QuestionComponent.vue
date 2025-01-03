@@ -9,7 +9,7 @@
 </button>
 </div>
 <div v-if="question.timerValue === 0">
-  {{ disableButtons(question.a) }}
+  {{ resetButtons(question.a) }}
 </div>
 </template>
 <script>
@@ -33,6 +33,14 @@ export default {
       // Disable the button
       button.disabled = true;
     },
+    resetButtons: function (len) {
+      for (let i = 0; i < len.length; i++) {
+        const targetDiv = this.$refs['a-' + i][0]; // Access the ref
+        targetDiv.disabled = !targetDiv.disabled;
+        targetDiv.style.backgroundColor = 'var(--p-beige)';
+      }
+    },
+
     changeColor: function (i, correct){
       const targetDiv = this.$refs['a-' + i][0]; // Access the ref
       targetDiv.disabled = true;
