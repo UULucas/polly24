@@ -3,11 +3,14 @@
 <template>
   <header>
     <div class="header">
-      <router-link to="/" class="header-button nav-button">
+      <router-link to="/" class= "nav-button">
         <a>
           <img class="home-img" src="https://static.thenounproject.com/png/2137554-200.png" alt="HomeImg">
         </a>
       </router-link>
+      <button class=" nav-button" v-on:click="switchLanguage">
+        {{ uiLabels.changeLanguage }}
+      </button>
     </div>
   </header>
 
@@ -80,6 +83,7 @@
     name: 'JoinView',
     data: function () {
       return {
+        uiLabels:{},
         pollId: "",
         userName: "",
         joined: false,
@@ -206,6 +210,18 @@
 
     },
 
+    switchLanguage: function() {
+      if (this.lang === "en") {
+        this.lang = "sv"
+      }
+      else {
+        this.lang = "en"
+      }
+      localStorage.setItem( "lang", this.lang );
+      socket.emit( "getUILabels", this.lang );
+    },
+
+
     submitNameAndAvatar: function() {
       if (!this.userName) {
         alert("You have to choose a name!");
@@ -242,7 +258,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 70vh;
   flex-direction: column;
   width: 80%;
   margin:auto;
@@ -325,16 +341,11 @@ video {
 
 .header {
   display: flex;
-  justify-content: center;
   align-items: center;
-  width: 100%;
+  padding-top: 1rem;
   position: relative;
-}
-
-.header-button {
-  position: absolute;
-  left: 16px;
-  top: 8px;
+  padding-left: 1rem;
+  gap: 1rem ;
 }
 
 .home-img {
