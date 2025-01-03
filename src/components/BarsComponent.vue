@@ -4,7 +4,7 @@
     <div v-bind:style="{height: (data?.[item]||0) + 'px'}">
       <span> {{ data?.[item]||0 }} </span>
     </div>
-    <div class="label"> 
+    <div class="label">
       {{ item }}
     </div>
   </div>
