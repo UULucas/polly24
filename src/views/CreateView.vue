@@ -3,48 +3,6 @@
     <link rel="stylesheet" href="../assets/main.css">
   </head>
 
-  <div class="quiz-container">
-    Poll link:
-    <input type="text" v-model="pollId">
-
-    <button v-on:click="createPoll">
-      Create poll
-    </button>
-
-    <!--div>
-      <div>
-        {{ uiLabels.question }}:
-        <input type="text" v-model="question">
-      </div>
-
-      <div>
-        Answers:
-        <input v-for="(_, i) in answers"
-               v-model="answers[i]"
-               v-bind:key="'answer' + i">
-        <button v-on:click="addAnswer">
-          Add answer alternative
-        </button>
-      </div>
-    </div!-->
-    <!--button v-on:click="addQuestion">
-      Add question
-    </button!-->
-    <input type="number" v-model="questionNumber">
-
-    <button v-on:click="startPoll">
-      Start poll
-    </button>
-
-    <button v-on:click="runQuestion">
-      Run question
-    </button>
-    <router-link v-bind:to="'/result/' + pollId">Check result</router-link>
-    Data: {{ pollData }}
-  </div>
-
-
-
   <header>
     <button class="header-button nav-button" @click="$router.go(-1)">
       <a>
@@ -60,23 +18,6 @@
 
   <body>
   <section id="quiz-container">
-    <!--div id="header">
-
-      <input
-          class="quiz-name text-box"
-          placeholder="Quiz name"
-          v-model="quizName">
-
-
-      <button class="start-quiz nav-button">
-
-        <router-link to="/startquiz/" class ="link-wrapper">
-         Starta quiz
-        </router-link>
-      </button>
-
-
-    </div!-->
 
     <div  v-if="previewImage">
       <img id="imageAdded" :src="previewImage"  alt="altImg"/>
@@ -93,23 +34,21 @@
 
 
     <div id="answer-container" style="overflow-wrap: break-word" >
-      <div class="answer text-box"
+      <div v-bind:style="{ backgroundColor: text.correct ? '#adf7b6' : '#ffc09f' }"
+           class="answer text-box"
            v-for="(text, i) in questions[questionNumber].answers"
            v-bind:key="'answer' + i">
-
-
-          <input
-              type="checkbox"
-              v-model="text.correct"
-              />
-
-
         <input
             v-model="questions[questionNumber].answers[i].text"
             class="text-box"
             type="text"
             placeholder="Svar"
-            @input="questions[questionNumber].answers[i]=text">
+            @input="questions[questionNumber].answers[i]=text"
+            style="background-color: transparent; border: none; box-shadow: none; outline: none;">
+        <input
+            type="checkbox"
+            v-model="text.correct"
+        />
       </div>
       <div class="answer" >
         <button v-if="questions[questionNumber].answers.length>1" class="add nav-button" @click="removeAnswer">
@@ -249,6 +188,9 @@ export default {
       if(this.questions.length===0){
         this.addQuestion();
       }
+      if(this.questionNumber>this.questions.length-1){
+        this.questionNumber--;
+      }
     },
     removeAnswer: function (){
       this.questions[this.questionNumber].answers.pop();
@@ -295,21 +237,6 @@ export default {
 
 
 }
-
-#header {
-  margin-top: 1rem;
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  width: 100%;
-}
-
-.quiz-name {
-  flex: 1;
-  display: flex;
-}
-
-
 .start-quiz {
   margin: 1rem 3rem;
   background-color: var(--p-green);
@@ -408,12 +335,6 @@ header {
   height: 70px;
   margin: 0 auto;
   margin-top: 16px;
-}
-
-#side-table{
-  width: 30%;
-  height: 400px;
-  margin-right:10px;
 }
 
 body{
