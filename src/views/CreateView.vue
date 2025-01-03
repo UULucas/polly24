@@ -92,18 +92,25 @@
         placeholder="Question">
 
 
+    <div id="answer-container" style="overflow-wrap: break-word" >
+      <div class="answer text-box"
+           v-for="(text, i) in questions[questionNumber].answers"
+           v-bind:key="'answer' + i">
 
-    <div id="answer-container" >
-      <input
 
-          v-for="(text, i) in questions[questionNumber].answers"
-          v-model="questions[questionNumber].answers[i].text"
-          v-bind:key="'answer' + i"
-          class="answer text-box"
-          type="text"
-          placeholder="Svar"
-          @input="questions[questionNumber].answers[i]=text">
+          <input
+              type="checkbox"
+              v-model="text.correct"
+              />
 
+
+        <input
+            v-model="questions[questionNumber].answers[i].text"
+            class="text-box"
+            type="text"
+            placeholder="Svar"
+            @input="questions[questionNumber].answers[i]=text">
+      </div>
       <div class="answer" >
         <button v-if="questions[questionNumber].answers.length>1" class="add nav-button" @click="removeAnswer">
           <label style="margin: auto">
@@ -125,7 +132,6 @@
             v-if="answer.text.length>0"
             type="checkbox"
             v-model="answer.correct"/>
-        {{answer.text}}
       </div>
     </div>
   </section>
