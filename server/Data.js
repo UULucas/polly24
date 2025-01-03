@@ -6,9 +6,10 @@ function Data() {
   this.polls = {};
   this.polls['test'] = {
     lang: "en",
+    //  constructor(question, answers = [{text:"", correct:false}]) {
     questions: [
       {q: "How old are you?", 
-       a: ["0-13", "14-18", "19-25", "26-35", "36-45","45-"]
+       a: [{text:"0-13", correct: false}, {text:"14-18",correct: false} , {text:"19-25", correct: true}, {text:"26-35", correct: false}, {text:"36-45", correct: false},{text: "45-", correct: false}]
       },
       {q: "How much do you enjoy coding?", 
        a: ["1", "2", "3", "4", "5"]
