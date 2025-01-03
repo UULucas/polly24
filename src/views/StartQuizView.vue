@@ -34,10 +34,8 @@
 
     <div class="participants-section">
       <h2>Deltagare</h2>
-
         <div class="participants"> <!--  Denna diven är till för att ha våra participants i så vi kan
                                           nog bara sätta en array här i med dom som går med spelet-->
-          <div v-for="participant in pollData.participants" v-bind:key="player"  class="text-box" >
             <div class="participants-name">
             {{participant.name}}
             </div>
@@ -51,7 +49,6 @@
                  border-radius: 1rem;">
           </div>
 
-        </div>
     </div>
 
     <label class="text-box" style="font-size: 35px">Current question: {{questionNumber+1}}</label>

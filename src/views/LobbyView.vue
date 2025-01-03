@@ -10,34 +10,37 @@
   </header>
 
   <div id="joinScreen">
-
       <div class="joinWrapper">
       <h3>Game ID: </h3>{{pollId}}
       <h1>Welcome to the game!</h1>
       <p>{{ userName }}</p>
       
       <img :src="avatar" alt="miniavtr" class="mini-avatar">
-      
-      <h4>Participants: </h4>
-      <ul>
-        <li v-for="participant in participants" :key="participant">
-          <div style="display: flex" class="text-box">
-            <label>{{participant.name}}</label>
-            <img :src="participant.avatar" alt="miniavtr" class="mini-avatar">
+
+        <p>Waiting for host to start game</p>
+
+        <div class="spinner">
+          <div class="bounce1"></div>
+          <div class="bounce2"></div>
+          <div class="bounce3"></div>
+        </div>
+
+        <h4>Participants: </h4>
+        <div class="participant-list">
+          <div v-for="participant in participants" :key="participant" class="text-box">
+            <div class="participants-name">{{participant.name}}</div>
+            <img :src="participant.avatar"
+                 style="
+                  height: 4rem;
+                  width: 4rem;"
+                 alt="miniavatar"
+                 class="mini-avatar">
           </div>
+        </div>
 
-        </li>
-      </ul>
 
-      <p>Waiting for host to start game</p>
-
-      <div class="spinner">
-        <div class="bounce1"></div>
-        <div class="bounce2"></div>
-        <div class="bounce3"></div>
-      </div>
       
-      {{ participants }}
+
     </div>
   </div>
 </template>
@@ -127,7 +130,7 @@ input[type="text"] {
 }
 
 .joinWrapper {
-  height: 500px;
+  height: 90%;
   width: 500px;
   border: none; 
   border-radius: 10px; 
@@ -135,11 +138,12 @@ input[type="text"] {
   background-color: #ffffff; 
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
   margin: 20px auto; 
-  text-align: center; 
+  text-align: center;
+
 }
 
 .spinner {
-  margin: 100px auto 0;
+  margin: 10px auto 0;
   width: 70px;
   text-align: center;
 }
@@ -207,6 +211,32 @@ input[type="text"] {
   height: 7rem;
   border: none;
   border-radius: 1rem;
+}
+
+.participant-list{
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 0;
+  height: 15rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  gap: 1rem;
+}
+
+.participants-name{
+  width: 10rem;
+  display:flex;
+  align-items: center;
+  padding:1rem;
+  text-overflow: ellipsis;
+}
+
+.text-box {
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 </style>
