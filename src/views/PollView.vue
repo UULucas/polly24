@@ -11,8 +11,10 @@
               v-on:answer="submitAnswer($event)"/>
     <hr>
   </div>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+  <div v-if="timerValue=0" > 
+    {{ disableButtonsInChild() }}
+  </div>
+
   <!--div class="pollAnswerWrapper">
 =======
 =======
