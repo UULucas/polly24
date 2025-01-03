@@ -157,13 +157,16 @@ export default {
   border-radius: 8px;
   border-width: 1px;
   width:51rem;
-  height: 30rem;
+  height: 20rem;
   overflow-y: scroll;
 }
+
 .participants{
   width:48rem;
   height: 22rem;
   margin:auto;
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
 }
 
