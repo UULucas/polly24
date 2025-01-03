@@ -44,13 +44,12 @@
   </div>
 
 
-
   <header>
-    <button class="header-button nav-button" @click="$router.go(-1)">
+    <router-link to="/" class="header-button nav-button">
       <a>
-        <img class="home-img" src="https://static.thenounproject.com/png/2137554-200.png" alt="HomeImg"><!--Inga fucking läkar i våran kod!!!! !-->
+        <img class="home-img" src="../assets/home_icon.png" alt="HomeImg">
       </a>
-    </button>
+    </router-link>
     <img class="logo-img" src="https://cdn-icons-png.flaticon.com/512/5705/5705144.png" alt="LogoImg"> <!--Inga fucking läkar i våran kod!!!! !-->
     <button class="start-quiz nav-button" @click="startQuiz">
         Starta quiz

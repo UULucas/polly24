@@ -25,30 +25,33 @@
 
       </div>
 
-        <div class="share-key">
-          <button class="share-key-button nav-button">
-            Dela nyckel
-          </button>
-        </div>
+      <div class="share-key">
+        <button class="share-key-button nav-button">
+          Dela nyckel
+        </button>
+      </div>
     </div>
 
     <div class="participants-section">
       <h2>Deltagare</h2>
-        <div class="participants"> <!--  Denna diven är till för att ha våra participants i så vi kan
+
+      <div class="participants"> <!--  Denna diven är till för att ha våra participants i så vi kan
                                           nog bara sätta en array här i med dom som går med spelet-->
-            <div class="participants-name">
+        <div v-for="participant in pollData.participants" v-bind:key="player"  class="text-box" >
+          <div class="participants-name">
             {{participant.name}}
-            </div>
-            <img :src="participant.avatar"
-                 alt="miniavtr"
-                 style="
+          </div>
+          <img :src="participant.avatar"
+               alt="miniavtr"
+               style="
                  width: 4rem;
                  margin-left: 10rem;
                  height: 4rem;
                  border: none;
                  border-radius: 1rem;">
-          </div>
+        </div>
 
+      </div>
     </div>
 
     <label class="text-box" style="font-size: 35px">Current question: {{questionNumber+1}}</label>
@@ -176,6 +179,8 @@ export default {
 }
 
 .quiz-key{
+  display: flex;
+  align-items: center;
   height:6rem;
   width: 38rem;
   font-size: 4rem;
@@ -183,5 +188,6 @@ export default {
 .start-section{
 
 }
+
 
 </style>

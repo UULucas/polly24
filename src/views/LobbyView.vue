@@ -3,7 +3,7 @@
     <div class="header">
       <router-link to="/" class="header-button nav-button">
         <a>
-          <img class="home-img" src="https://static.thenounproject.com/png/2137554-200.png" alt="HomeImg">
+          <img class="home-img" src="../assets/home_icon.png" alt="HomeImg">
         </a>
       </router-link>
     </div>
