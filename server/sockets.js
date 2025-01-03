@@ -43,8 +43,9 @@ function sockets(io, socket, data) {
   });
 
   socket.on('timeLeft', function(d) {
-    data.timeLeft(d.pollId, d.newTime);
-    io.to(d.pollId).emit('timeUpdate', data.getTimeLeft(d.pollId))
+    console.log("time left", d.pollId, d.time);
+    data.setTime(d.pollId, d.time);
+    io.to(d.pollId).emit('timeUpdate', data.getTime(d.pollId))
   });
 
 }
