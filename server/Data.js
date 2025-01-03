@@ -48,6 +48,7 @@ Data.prototype.createPoll = function(pollId, lang="en", quizName) {
     poll.participants = [];
     poll.currentQuestion = 0;
     poll.quizName = quizName;
+    poll.time = 0;
     this.polls[pollId] = poll;
     console.log("poll created", pollId, poll);
   }
@@ -125,19 +126,18 @@ Data.prototype.submitAnswer = function(pollId, answer) {
     console.log("answers looks like ", answers, typeof answers);
   }
 }
-Data.prototype.timeLeft = function(pollId, time) {
+Data.prototype.setTime = function(pollId, time) {
   if (this.pollExists(pollId)) {
+    //console.log(time);
     const poll = this.polls[pollId];
-    let newTime = time;
-    poll.time.push(newTime);
+    poll.time = time;
     //sjukt om det bara funkar såhär
   }
 }
-Data.prototype.getNewTime = function(pollId) {
+Data.prototype.getTime = function(pollId) {
   if (this.pollExists(pollId)) {
     const poll = this.polls[pollId];
-    const time = poll.time;
-    return time;
+    return poll.time;
   }
   return {}
 }
