@@ -6,9 +6,10 @@ function Data() {
   this.polls = {};
   this.polls['test'] = {
     lang: "en",
+    //  constructor(question, answers = [{text:"", correct:false}]) {
     questions: [
       {q: "How old are you?", 
-       a: ["0-13", "14-18", "19-25", "26-35", "36-45","45-"]
+       a: [{text:"0-13", correct: false}, {text:"14-18",correct: false} , {text:"19-25", correct: true}, {text:"26-35", correct: false}, {text:"36-45", correct: false},{text: "45-", correct: false}]
       },
       {q: "How much do you enjoy coding?", 
        a: ["1", "2", "3", "4", "5"]
@@ -47,6 +48,7 @@ Data.prototype.createPoll = function(pollId, lang="en", quizName) {
     poll.participants = [];
     poll.currentQuestion = 0;
     poll.quizName = quizName;
+    poll.time = 0;
     this.polls[pollId] = poll;
     console.log("poll created", pollId, poll);
   }
@@ -124,19 +126,18 @@ Data.prototype.submitAnswer = function(pollId, answer) {
     console.log("answers looks like ", answers, typeof answers);
   }
 }
-Data.prototype.timeLeft = function(pollId, time) {
+Data.prototype.setTime = function(pollId, time) {
   if (this.pollExists(pollId)) {
+    //console.log(time);
     const poll = this.polls[pollId];
-    let newTime = time;
-    poll.time.push(newTime);
+    poll.time = time;
     //sjukt om det bara funkar såhär
   }
 }
-Data.prototype.getNewTime = function(pollId) {
+Data.prototype.getTime = function(pollId) {
   if (this.pollExists(pollId)) {
     const poll = this.polls[pollId];
-    const time = poll.time;
-    return time;
+    return poll.time;
   }
   return {}
 }
@@ -152,6 +153,7 @@ Data.prototype.generateGameId= function(){
   }
   return newId;
 }
+
 Data.prototype.saveToJson = function (pollId){
 //shout out saveToJson, gotta be one of my favourite functions
 }
