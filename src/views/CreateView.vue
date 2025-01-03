@@ -93,9 +93,8 @@
 
 
 
-    <div id="answer-container" >
+    <div id="answer-container" style="overflow-wrap: break-word" >
       <input
-
           v-for="(text, i) in questions[questionNumber].answers"
           v-model="questions[questionNumber].answers[i].text"
           v-bind:key="'answer' + i"
