@@ -15,7 +15,7 @@ function Data() {
        a: ["1", "2", "3", "4", "5"]
       }
     ],
-    answers: [],
+    answers: [{text:"0-13", correct: false}, {text:"0-13", correct: false}],
     currentQuestion: 0,
     participants: []
   }
