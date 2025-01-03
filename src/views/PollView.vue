@@ -1,8 +1,5 @@
 <template>
-  <div v-if="unstarted">
-
-  </div>
-  <div v-else class="round-time-bar">
+  <div v-if="!answered" class="round-time-bar">
             <div>
             </div>
         </div>
@@ -10,9 +7,6 @@
     <QuestionComponent v-bind:question="question" 
               v-on:answer="submitAnswer($event)"/>
     <hr>
-  </div>
-  <div v-if="timerValue=0" > 
-    {{ disableButtonsInChild() }}
   </div>
 </template>
 
@@ -31,46 +25,45 @@ export default {
     return {
       question: {
         q: "",
-        a: []
+        a: [],
+        timerValue : 15,
       },
       pollId: "inactive poll",
       submittedAnswers: {},
-      timerValue : "",
-      unstarted: true
+      unstarted: false,
+      answered : false
     }
   },
   created: function () {
     this.pollId = this.$route.params.id;
-    socket.on( "questionUpdate", q => this.question = q );
+    socket.on( "questionUpdate", q => this.question = q, this.resetTime() );
     socket.on( "submittedAnswersUpdate", answers => this.submittedAnswers = answers );
     socket.on( "uiLabels", labels => this.uiLabels = labels );
-    socket.on("timeUpdate", time => this.timerValue = time, this.setTimeLeft());
+    socket.on("timeUpdate", time => this.question.timerValue = time, this.setTimeLeft());
     socket.emit( "getUILabels", this.lang );
     socket.emit( "joinPoll", this.pollId );
+    this.countDownTime();
   },
   methods: {
     submitAnswer: function (answer) {
       console.log(answer)
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
+      this.answered = true;
     },
-    disableButtonsInChild: function() {
-				const childComponent = 
-				this.$refs.QuestionComponent;
-				if (childComponent) {
-					childComponent.disableButtons(question.a);
-				} else {
-					console.error
-					('Child component reference is undefined.');
-				}
-			},
       setTimeLeft: function () {
-            document.documentElement.style.setProperty('--duration', this.timerValue);
-            console.log(this.timerValue);
-            this.unstarted = false;
-            this.countDownTime();
+            document.documentElement.style.setProperty('--duration', this.question.timerValue);
+            console.log(this.question.timerValue);
+      },
+      resetTime: function () {
+        this.question.timerValue = 15;
+        this.countDownTime();
       },
       countDownTime: function() {
-        setTimeout(this.timerValue * 1000);
+        setTimeout(this.setZero, this.question.timerValue * 1000)
+      },
+      setZero: function() {
+        this.question.timerValue = 0;
+        console.log("out of time")
       }
   }
 }

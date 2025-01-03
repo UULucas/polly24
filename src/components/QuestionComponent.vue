@@ -8,6 +8,9 @@
   {{ a.text }}
 </button>
 </div>
+<div v-if="question.timerValue === 0">
+  {{ disableButtons(question.a) }}
+</div>
 </template>
 <script>
 export default {
