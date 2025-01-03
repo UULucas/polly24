@@ -239,6 +239,9 @@ export default {
       if(this.questions.length===0){
         this.addQuestion();
       }
+      if(this.questionNumber>this.questions.length-1){
+        this.questionNumber--;
+      }
     },
     removeAnswer: function (){
       this.questions[this.questionNumber].answers.pop();
