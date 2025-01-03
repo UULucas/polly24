@@ -3,13 +3,13 @@
     <link rel="stylesheet" href="../assets/main.css">
   </head>
 
-  <div class="quiz-container">
+  <!--div class="quiz-container">
     Poll link:
     <input type="text" v-model="pollId">
 
     <button v-on:click="createPoll">
       Create poll
-    </button>
+    </button!-->
 
     <!--div>
       <div>
@@ -30,7 +30,7 @@
     <!--button v-on:click="addQuestion">
       Add question
     </button!-->
-    <input type="number" v-model="questionNumber">
+    <!--input type="number" v-model="questionNumber">
 
     <button v-on:click="startPoll">
       Start poll
@@ -41,7 +41,7 @@
     </button>
     <router-link v-bind:to="'/result/' + pollId">Check result</router-link>
     Data: {{ pollData }}
-  </div>
+  </div!-->
 
 
 
