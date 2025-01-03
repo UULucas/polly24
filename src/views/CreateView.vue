@@ -3,13 +3,13 @@
     <link rel="stylesheet" href="../assets/main.css">
   </head>
 
-  <!--div class="quiz-container">
+  <div class="quiz-container">
     Poll link:
     <input type="text" v-model="pollId">
 
     <button v-on:click="createPoll">
       Create poll
-    </button!-->
+    </button>
 
     <!--div>
       <div>
@@ -30,7 +30,7 @@
     <!--button v-on:click="addQuestion">
       Add question
     </button!-->
-    <!--input type="number" v-model="questionNumber">
+    <input type="number" v-model="questionNumber">
 
     <button v-on:click="startPoll">
       Start poll
@@ -41,7 +41,7 @@
     </button>
     <router-link v-bind:to="'/result/' + pollId">Check result</router-link>
     Data: {{ pollData }}
-  </div!-->
+  </div>
 
 
 
@@ -93,8 +93,9 @@
 
 
 
-    <div id="answer-container">
+    <div id="answer-container" >
       <input
+
           v-for="(text, i) in questions[questionNumber].answers"
           v-model="questions[questionNumber].answers[i].text"
           v-bind:key="'answer' + i"
@@ -103,7 +104,7 @@
           placeholder="Svar"
           @input="questions[questionNumber].answers[i]=text">
 
-      <div class="answer">
+      <div class="answer" >
         <button v-if="questions[questionNumber].answers.length>1" class="add nav-button" @click="removeAnswer">
           <label style="margin: auto">
             -
@@ -116,18 +117,21 @@
         </button>
       </div>
     </div>
-    <label class="text-box" style="width: 100%; height: 3em; place-items: center"> Chose the correct answer(s)</label>
-    <div v-for="answer in questions[questionNumber].answers" v-bind:key="answer" class="text-box">
-      <input
-          v-if="answer.text.length>0"
-          type="checkbox"
-          v-model="answer.correct"/>
-      {{answer.text}}
-    </div>
 
+    <label class="text-box" style="width: 100%; height: 3em; place-items: center"> Choose the correct answer(s)</label>
+    <div class="correct-answer-container">
+      <div v-for="answer in questions[questionNumber].answers" v-bind:key="answer" class="text-box">
+        <input
+            v-if="answer.text.length>0"
+            type="checkbox"
+            v-model="answer.correct"/>
+        {{answer.text}}
+      </div>
+    </div>
   </section>
 
   <section id="side-table-wrapper">
+
     <div style="display: flex;">
       <input
           class="text-box"
@@ -141,7 +145,7 @@
 
     <div v-for="(question, i) in questions" class="" style="display: flex; gap:10px;" v-bind:key="question">
       <button class="nav-button" style="font-size: 35px; width: 80% " :style="{ backgroundColor: i===questionNumber ? '#ffee93' : '#fcf5c7' }" @click="questionNumber = i">
-        <label style="overflow-wrap: break-word;">Q{{i+1}} {{question.question}}</label>
+        <label style="overflow-wrap:break-word" >Q{{i+1}} {{question.question}}</label>
       </button>
       <button class="nav-button" @click="removeQuestion(i)" style="width: 5rem; background-color: var(--p-red)">
         <img src="../assets/trash_can.png" alt="test" style="height:70%">
@@ -239,9 +243,6 @@ export default {
       if(this.questions.length===0){
         this.addQuestion();
       }
-      if(this.questionNumber>this.questions.length-1){
-        this.questionNumber--;
-      }
     },
     removeAnswer: function (){
       this.questions[this.questionNumber].answers.pop();
@@ -282,6 +283,13 @@ export default {
   margin: auto;
 }
 
+.correct-answer-container{
+  display: flex;
+  flex-direction: row;
+
+
+}
+
 #header {
   margin-top: 1rem;
   display: flex;
@@ -298,6 +306,7 @@ export default {
 
 .start-quiz {
   margin: 1rem 3rem;
+  background-color: var(--p-green);
 }
 
 .question-area {
@@ -314,12 +323,13 @@ export default {
 }
 
 .answer{
-  gap: 16px;
+  gap: 1rem;
   display: flex;
   flex: 1;
   min-height: 100px;
   min-width: calc(50% - 16px);
   max-width: 50%;
+
 }
 
 .add {
@@ -378,6 +388,8 @@ header {
 
 }
 
+
+
 .home-img {
   display: block;
   margin-left: auto;
@@ -392,19 +404,26 @@ header {
   margin-top: 16px;
 }
 
+#side-table{
+  width: 30%;
+  height: 400px;
+  margin-right:10px;
+}
+
 body{
   display: flex;
 }
 
 #side-table-wrapper{
   width: 30%;
-  height: 400px;
-  margin-right:10px;
-  border-radius: 8px;
-  padding: 10px;
-  font-size: 20px;
+  height: 40rem;
+  margin-right:1rem;
+  border-radius: 1rem;
+  padding: 1rem;
+  font-size: 1rem;
   border: solid black 1px;
   background-color: var(--p-offWhite);
+  overflow-y: scroll;
 }
 
 #side-table-wrapper input{
