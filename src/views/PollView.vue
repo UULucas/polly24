@@ -14,19 +14,6 @@
   <div v-if="timerValue=0" > 
     {{ disableButtonsInChild() }}
   </div>
-
-  <!--div class="pollAnswerWrapper">
-=======
-=======
->>>>>>> Stashed changes
-  <div v-if="timerValue=0" > 
-    {{ disableButtonsInChild() }}
-  </div>
-  <div class="pollAnswerWrapper">
->>>>>>> Stashed changes
-    <div v-for="answer in question[1]">
-    </div>
-  </div!-->
 </template>
 
 <script>
