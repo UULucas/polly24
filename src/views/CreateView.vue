@@ -19,8 +19,8 @@
   <body>
   <section id="quiz-container">
 
-    <div  v-if="previewImage">
-      <img id="imageAdded" :src="previewImage"  alt="altImg"/>
+    <div  v-if="this.questions[this.questionNumber].img">
+      <img id="imageAdded" :src="this.questions[this.questionNumber].img"  alt="altImg"/>
     </div>
 
     <div id="question-img-wrapper" class="nav-button">
@@ -138,7 +138,6 @@ export default {
       pollData: {},
       uiLabels: {},
       imageUrl: "",
-      previewImage: null,
       imgText: "Lägg till bild",
       questions: [new Question("")]
     }
@@ -209,11 +208,12 @@ export default {
       if (file && file[0]) {
         let reader = new FileReader
         reader.onload = e => {
-          this.previewImage = e.target.result
-          console.log(e.target.result)
+          this.questions[this.questionNumber].img = e.target.result
+          //console.log(typeof this.questions[this.questionNumber].img)
+          //console.log(this.questions[this.questionNumber].img)
         }
-        reader.readAsDataURL(file[0])
-        this.$emit('input', file[0])
+        reader.readAsDataURL(file[0]);
+        //this.$emit('input', file[0])
 
       }
     },

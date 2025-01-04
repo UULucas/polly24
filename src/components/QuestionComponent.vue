@@ -1,7 +1,6 @@
 @import 'src/assets/main.css'
 <template>
-
-<div v-if="question.img != null" class="imgContainer"> 
+<div v-if="question.img != null" class="imgContainer">
   <img :src="question.img" class="image">
 </div>
 <p></p>
