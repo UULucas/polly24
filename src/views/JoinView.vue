@@ -84,7 +84,7 @@
         uiLabels:{},
         pollId: "",
         userName: "",
-        joined: true,
+        joined: false,
         avatar: "https://i.pinimg.com/474x/25/6b/9d/256b9d21d02a82e9d60deded024e4fe9.jpg",
         isDrawModalOpen: false,
         isCamModalOpen: false,
@@ -95,8 +95,6 @@
     created: function () {
     this.pollId = this.$route.params.id;
     socket.on( "uiLabels", labels => this.uiLabels = labels );
-    socket.on( "participantsUpdate", p => this.participants = p );
-    socket.on( "startPoll", () => this.$router.push("/poll/" + this.pollId) );
     socket.emit( "joinPoll", this.pollId );
     socket.emit( "getUILabels", this.lang );
   },

@@ -75,6 +75,7 @@ export default {
     socket.on( "startPoll", () => this.$router.push("/poll/" + this.pollId + "/"+this.userName+"/") );
     socket.emit( "joinPoll", this.pollId );
     socket.emit( "getUILabels", this.lang );
+    socket.emit("getParticipants", this.pollId);
   },
   methods: {
     
