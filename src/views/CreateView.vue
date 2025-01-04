@@ -4,15 +4,17 @@
   </head>
 
   <header>
+
     <button class="header-button nav-button" @click="$router.go(-1)">
       <a>
         <img class="home-img" src="https://static.thenounproject.com/png/2137554-200.png" alt="HomeImg"><!--Inga fucking läkar i våran kod!!!! !-->
       </a>
     </button>
-    <img class="logo-img" src="https://cdn-icons-png.flaticon.com/512/5705/5705144.png" alt="LogoImg"> <!--Inga fucking läkar i våran kod!!!! !-->
+    <img class="logo-img" src="../assets/logo_icon.png" alt="LogoImg"> <!--Inga fucking läkar i våran kod!!!! !-->
     <button class="start-quiz nav-button" @click="startQuiz">
         Starta quiz
     </button>
+
   </header>
 
 
@@ -306,7 +308,7 @@ header {
   height: 7em;
   background-color: var(--p-beige);
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   position: relative;
@@ -335,6 +337,8 @@ header {
   height: 70px;
   margin: 0 auto;
   margin-top: 16px;
+  padding-bottom: 1rem;
+  padding-left: 20%;
 }
 
 body{
@@ -369,5 +373,6 @@ body{
 #save-button:hover{
   background-color: var(--p-blue);
 }
+
 
 </style>
