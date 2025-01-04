@@ -54,11 +54,14 @@
       </div>
     </div>
 
-    <label class="text-box" style="font-size: 35px">Current question: {{questionNumber+1}}</label>
+    <label v-if="gameStarted" class="text-box" style="font-size: 35px">Current question: {{questionNumber+1}}</label>
     <div class="start-section">
-      <button class="start-button nav-button" @click="previousQuestion">Previous question</button>
-      <button class="start-button nav-button" @click="nextQuestion">Next question</button>
-      <button class="start-button nav-button" @click="startQuiz">
+      <div v-if="gameStarted">
+        <button class="start-button nav-button" @click="previousQuestion">Previous question</button>
+        <button class="start-button nav-button" @click="nextQuestion">Next question</button>
+      </div>
+
+      <button v-if="!gameStarted" class="start-button nav-button" @click="startQuiz">
         Starta spel</button>
     </div>
 
@@ -81,10 +84,11 @@ export default {
       pollId: "",
       question: "",
       answers: ["", ""],
-      questionNumber: 0,
+      questionNumber: -1,
       pollData: {},
       uiLabels: {},
       imageUrl: "",
+      gameStarted: false,
     }
   },
   created: function () {
@@ -92,29 +96,36 @@ export default {
     socket.on( "uiLabels", labels => this.uiLabels = labels );
     socket.on( "pollData", data => this.pollData = data );
     socket.on( "participantsUpdate", p => this.pollData.participants = p );
+    socket.on('currentQuestion',p => this.questionNumber = p );
+    socket.on('gameRunning', p => this.gameStarted = p );
     socket.emit( "getUILabels", this.lang );
     socket.emit("createPoll", {pollId: this.pollId})
     socket.emit( "joinPoll", this.pollId );
-
+    socket.emit("getCurrentQuestion", this.pollId);
+    socket.emit("isGameRunning", this.pollId);
   },
   methods: {
+    runQuestion: function (questionNumber) {
+      socket.emit("runQuestion", {pollId: this.pollId, questionNumber: questionNumber});
+    },
     previousQuestion: function () {
       if(this.questionNumber>0){
         this.questionNumber--;
-        socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber});
+        this.runQuestion(this.questionNumber)
       }
     },
     nextQuestion: function () {
       if(this.questionNumber<this.pollData.questions.length-1){
         this.questionNumber++;
       }
-      console.log();
-      console.log(this.questionNumber);
-      socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber});
+      this.runQuestion(this.questionNumber);
 
     },
     startQuiz: function (){
+      this.gameStarted = true;
+      this.questionNumber = 0;
       socket.emit("startPoll", this.pollId)
+      this.runQuestion(this.questionNumber)
     },
     copyText: function () {
       var copyText = document.getElementById("pollId").innerText;
