@@ -109,7 +109,6 @@ height: 300px;
   grid-template-areas: "a b" "c d" "e f";
   align-items: center;
   gap: 1rem;
-  
 }
 
 .answer-button {
@@ -136,8 +135,8 @@ height: 300px;
 .answer-button.green{
   background-color: var(--p-green);
 }
-/* answerbox shake effect for blue shell cope
-.answerbox:hover{
+/*answerbox shake effect for blue shell cope */
+.blueshellAnswerBox:hover{
   animation: shake 0.4s;
   animation-iteration-count: infinite;
 }
@@ -154,6 +153,6 @@ height: 300px;
   90% { transform: translate(2px, 4px) rotate(3deg); }
   100% { transform: translate(5px, -10px) rotate(2deg); }
 }
-  */
+
 
 </style>

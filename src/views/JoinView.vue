@@ -7,7 +7,7 @@
         </a>
       </router-link>
       <button class=" nav-button" v-on:click="switchLanguage">
-        {{ uiLabels.changeLanguage }}
+        <img :src="uiLabels.changeLanguage" alt="" class="lang-img">
       </button>
     </div>
   </header>
@@ -45,8 +45,24 @@
         <div v-if="isDrawModalOpen" class="modal" @click.self="closeModal">
 
           <div class="drawModal-content">
-            <h2>Draw your avatar!</h2>
+            <h2>Draw your avatar!</h2><br>
             <span class="closeModal" @click="closeModal">&times;</span>
+            
+            <div id="toolbar">
+              <h3>Toolbar</h3>
+
+              <label for="strokeColor">Color</label>
+              <input id="strokeColor" name="strokeColor" type="color">
+
+              <label for="bgColor">Background color</label>
+              <input id="bgColor" name="bgColor" type="color" value="white">
+
+              <label for="lineWidth">Width</label>
+              <input id="lineWidth" name="lineWidth" type="number" value="5">
+
+              <button id="clear" @click="clearCanvas">Clear</button>
+
+            </div>
             <canvas ref="drawingCanvas" width="500" height="500"></canvas><br>
             <button id="submitDrawingButton" @click="submitDrawing">Submit avatar</button>
           </div>
@@ -143,8 +159,22 @@
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       let drawing = false;
 
+      const updateBrush = () => {
+        const colorInput = document.getElementById('strokeColor');
+        const widthInput = document.getElementById('lineWidth');
+        ctx.strokeStyle = colorInput.value;
+        ctx.lineWidth = widthInput.value; 
+      };
+
+      const colorInput = document.getElementById('strokeColor');
+      const widthInput = document.getElementById('lineWidth');
+
+      colorInput.addEventListener('input', updateBrush);
+      widthInput.addEventListener('input', updateBrush);
+
       canvas.addEventListener('mousedown', (e) => {
         drawing = true;
+        updateBrush();
         ctx.beginPath();
         ctx.moveTo(e.offsetX, e.offsetY);
       });
@@ -272,6 +302,28 @@
   gap:1rem;
 }
 
+#toolbar {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  width: 70px;
+  background-color: var(--p-beige);
+}
+
+#toolbar * {
+  margin-bottom: 6px;
+}
+
+#toolbar input {
+  width: 100%;
+}
+
+#toolbar button {
+  border: none;
+  border-radius: 4px;
+  color: white;
+}
+
 .idTextBox{
   width: 25rem;
   height: 5rem;
@@ -307,6 +359,15 @@
   border-radius: 1rem;
   text-align: center;
   position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+
+#submitDrawingButton {
+  align-self: center; /* Center the button horizontally */
+  margin-top: auto; /* Push to the bottom */
+  padding: 0.5rem 2rem;
+  font-size: 1.2rem;
 }
 
 .camModal-content {
@@ -327,8 +388,7 @@
 
 canvas {
   cursor: crosshair;
-  border: 0.2rem solid black;
-  border-radius: 1rem;
+  border: 0.1rem solid black;
 }
 
 video {

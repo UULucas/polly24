@@ -10,6 +10,9 @@
           <img class="home-img" src="../assets/home_icon.png" alt="HomeImg">
         </a>
       </router-link>
+      <button class= " nav-button" v-on:click="switchLanguage">
+        <img :src="uiLabels.changeLanguage" alt="" class="lang-img">
+      </button>
     </div>
   </header>
 
@@ -78,7 +81,16 @@ export default {
     socket.emit("getParticipants", this.pollId);
   },
   methods: {
-    
+    switchLanguage: function() {
+      if (this.lang === "en") {
+        this.lang = "sv"
+      }
+      else {
+        this.lang = "en"
+      }
+      localStorage.setItem( "lang", this.lang );
+      socket.emit( "getUILabels", this.lang );
+    },
     }
   }
 </script>
@@ -191,16 +203,16 @@ input[type="text"] {
 
 .header {
   display: flex;
-  justify-content: center;
   align-items: center;
-  width: 100%;
-  position: relative;
+  padding-top: 1rem;
+  padding-left: 1rem;
+  gap: 1rem ;
 }
 
 .header-button {
-  position: absolute;
-  left: 16px;
-  top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .home-img {

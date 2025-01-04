@@ -78,3 +78,13 @@ html{
   color: BLACK; /* Set text color */
 
 }
+
+.lang-img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 50px;
+  width: 50px;
+  border: none;
+  border-radius: 1rem;
+}
