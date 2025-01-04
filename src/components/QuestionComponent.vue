@@ -86,10 +86,10 @@ width:auto;
 height:auto;
 }
 .imgContainer{
-display: inline-block;
-justify-content: center;
+display: flex;
 align-items: center;
-position: relative;
+justify-content: center;
+margin: auto;
 background-color: var(--p-beige);
 width: 500px;
 height: 300px;

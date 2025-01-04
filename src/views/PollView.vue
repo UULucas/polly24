@@ -84,4 +84,10 @@ export default {
     transform: scaleX(0);
   }
 }
+
+.pollQuestion {
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+}
 </style>
