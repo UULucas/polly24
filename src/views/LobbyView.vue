@@ -1,4 +1,8 @@
 <template>
+  <head>
+    <link rel="stylesheet" href="../assets/main.css">
+  </head>
+
   <header>
     <div class="header">
       <router-link to="/" class="header-button nav-button">
@@ -77,7 +81,7 @@ export default {
     }
   }
 </script>
-<style>
+<style scoped>
 
 
 html, body {

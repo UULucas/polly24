@@ -36,8 +36,8 @@
 
   <div id="container">
     <button class="rectangle nav-button" >
-      <router-link to="/join/" class ="link-wrapper">
-      {{ uiLabels.joinQuiz }}
+      <router-link to="/join" class ="link-wrapper">
+      {{ uiLabels.joinQuiz}}
       </router-link>
     </button>
 

@@ -50,25 +50,25 @@ export default {
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
       this.answered = true;
     },
-      setTimeLeft: function () {
-            document.documentElement.style.setProperty('--duration', this.question.timerValue);
-            console.log(this.question.timerValue);
-      },
-      reset: function () {
-        this.question.timerValue = 15;
-        this.setTimeLeft();
-        this.countDownTime();
-        let element = document.getElementById('round-time-bar div');
-        document.body.append(element);
-      },
-      countDownTime: function() {
-        setTimeout(this.setZero, this.question.timerValue * 1000)
-      },
-      setZero: function() {
-        this.question.timerValue = 0;
-        console.log("out of time")
-      }
-  }
+    setTimeLeft: function () {
+          document.documentElement.style.setProperty('--duration', this.question.timerValue);
+          console.log(this.question.timerValue);
+    },
+    reset: function () {
+      this.question.timerValue = 15;
+      this.setTimeLeft();
+      this.countDownTime();
+      let element = document.getElementById('round-time-bar div');
+      document.body.append(element);
+    },
+    countDownTime: function() {
+      setTimeout(this.setZero, this.question.timerValue * 1000)
+    },
+    setZero: function() {
+      this.question.timerValue = 0;
+      console.log("out of time")
+    }
+}
 }
 </script>
 <style>

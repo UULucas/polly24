@@ -1,6 +1,8 @@
-
-
 <template>
+  <head>
+    <link rel="stylesheet" href="../assets/main.css">
+  </head>
+
   <header>
     <div class="header">
       <router-link to="/" class="header-button nav-button">
@@ -13,7 +15,6 @@
 
     <div id="joinScreen">
       <div v-if="!joined">
-
         <input
             class="idTextBox text-box"
             type="text"
@@ -72,158 +73,168 @@
   </div>
   </template>
   
-  <script>
-  import io from 'socket.io-client';
-  const socket = io("localhost:3000");
-  
-  export default {
-    name: 'JoinView',
-    data: function () {
-      return {
-        pollId: "",
-        userName: "",
-        joined: false,
-        avatar: "https://i.pinimg.com/474x/25/6b/9d/256b9d21d02a82e9d60deded024e4fe9.jpg",
-        isDrawModalOpen: false,
-        isCamModalOpen: false,
-        camStream: null,
+<script>
+import io from 'socket.io-client';
+const socket = io("localhost:3000");
 
-      }
-    },
-    created: function () {
+export default {
+  name: 'JoinView',
+  data: function () {
+    return {
+      pollId: "",
+      userName: "",
+      joined: true,
+      avatar: "https://i.pinimg.com/474x/25/6b/9d/256b9d21d02a82e9d60deded024e4fe9.jpg", // inga jävla extärna länkar tack!!
+      isDrawModalOpen: false,
+      isCamModalOpen: false,
+      camStream: null,
+
+    }
+  },
+  created: function () {
     this.pollId = this.$route.params.id;
+    console.log("joinWith id: "+this.pollId);
     socket.on( "uiLabels", labels => this.uiLabels = labels );
     socket.on( "participantsUpdate", p => this.participants = p );
     socket.on( "startPoll", () => this.$router.push("/poll/" + this.pollId) );
     socket.emit( "joinPoll", this.pollId );
     socket.emit( "getUILabels", this.lang );
+    socket.emit("getParticipants", this.pollId);
+
   },
-  methods: {
-    participateInPoll: function () {
-      socket.emit( "participateInPoll", {
-        pollId: this.pollId,
-        name: this.userName,
-        avatar: this.avatar,
-      } );
-    },
-    checkID(){
-      if (!this.pollId) {
-        alert("Enter your name!");
-        return;
-      }
-      else{
-        this.joined = true;
-      }
-    },
-
-    openDrawModal: function() {
-      this.isDrawModalOpen = true;
-      this.$nextTick(() => {
-        this.openCanvas()});
-    },
-
-    openCamModal: function() {
-      this.isCamModalOpen = true;
-      this.$nextTick(() => {
-        this.startCam()});
-
-    },
-
-    closeModal: function() {
-      this.isDrawModalOpen = false;
-      this.isCamModalOpen = false;
-      this.stopCam();
-
-    },
-
-    openCanvas: function() {
-      const canvas = this.$refs.drawingCanvas;
-      const ctx = canvas.getContext('2d');
-      ctx.fillStyle = "white";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      let drawing = false;
-
-      canvas.addEventListener('mousedown', (e) => {
-        drawing = true;
-        ctx.beginPath();
-        ctx.moveTo(e.offsetX, e.offsetY);
-      });
-
-      canvas.addEventListener('mousemove', (e) => {
-        if (drawing) {
-          ctx.lineTo(e.offsetX, e.offsetY);
-          ctx.stroke();
-        }
-      });
-
-      canvas.addEventListener('mouseup', () => {
-        drawing = false;
-        ctx.closePath();
-      });
-
-    },
-
-    submitDrawing: function() {
-      const canvas = this.$refs.drawingCanvas;
-      const drawAvatar = canvas.toDataURL("image/png");
-      this.avatar = drawAvatar;
-      this.closeModal();
-
-    },
-
-    startCam: function() {
-      const video = this.$refs.camVideo;
-      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia({video: true}).then((stream) => {
-        video.srcObject = stream;
-        this.camStream = stream;
-
-        })
-        .catch((err) => {
-          console.error("Error accessing camera", err);
-        });
-      } else {
-        alert("Camera not supported in this browser")
-      }
-    },
-
-    stopCam: function() {
-      if (this.camStream) {
-      this.camStream.getTracks().forEach((track) => track.stop());
-      this.camStream = null; 
-      }
-    },
-
-    submitPhoto: function() {
-      const video = this.$refs.camVideo;
-      const canvas = document.createElement("canvas");
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      const ctx = canvas.getContext("2d");
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
-      this.avatar = canvas.toDataURL("image/png");
-      this.closeModal();
-
-    },
-
-    submitNameAndAvatar: function() {
-      if (!this.userName) {
-        alert("You have to choose a name!");
-        return;
-      }
-      /*socket.emit("submitNameAndAvatar", {
-        userName: this.userName,
-        avatar: this.avatar,
-      });*/
-      this.participateInPoll()
-
-      /*console.log({
-    id: this.pollId,
-    userName: this.userName,
-    avatar: this.avatar,
-    });*/
-
+methods: {
+  participateInPoll: function () {
+    socket.emit( "participateInPoll", {
+      pollId: this.pollId,
+      name: this.userName,
+      avatar: this.avatar,
+    } );
+  },
+  checkID(){
+    console.log(this.pollId);
+    if (!this.pollId) {
+      alert("Enter a game id!");
+      return;
+    }
+    else{
       this.$router.push({
+        name: "JoinView",
+        params: {
+          id: this.pollId,
+        },
+      });
+
+    }
+  },
+
+  openDrawModal: function() {
+    this.isDrawModalOpen = true;
+    this.$nextTick(() => {
+      this.openCanvas()});
+  },
+
+  openCamModal: function() {
+    this.isCamModalOpen = true;
+    this.$nextTick(() => {
+      this.startCam()});
+
+  },
+
+  closeModal: function() {
+    this.isDrawModalOpen = false;
+    this.isCamModalOpen = false;
+    this.stopCam();
+
+  },
+
+  openCanvas: function() {
+    const canvas = this.$refs.drawingCanvas;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    let drawing = false;
+
+    canvas.addEventListener('mousedown', (e) => {
+      drawing = true;
+      ctx.beginPath();
+      ctx.moveTo(e.offsetX, e.offsetY);
+    });
+
+    canvas.addEventListener('mousemove', (e) => {
+      if (drawing) {
+        ctx.lineTo(e.offsetX, e.offsetY);
+        ctx.stroke();
+      }
+    });
+
+    canvas.addEventListener('mouseup', () => {
+      drawing = false;
+      ctx.closePath();
+    });
+
+  },
+
+  submitDrawing: function() {
+    const canvas = this.$refs.drawingCanvas;
+    const drawAvatar = canvas.toDataURL("image/png");
+    this.avatar = drawAvatar;
+    this.closeModal();
+
+  },
+
+  startCam: function() {
+    const video = this.$refs.camVideo;
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({video: true}).then((stream) => {
+      video.srcObject = stream;
+      this.camStream = stream;
+
+      })
+      .catch((err) => {
+        console.error("Error accessing camera", err);
+      });
+    } else {
+      alert("Camera not supported in this browser")
+    }
+  },
+
+  stopCam: function() {
+    if (this.camStream) {
+    this.camStream.getTracks().forEach((track) => track.stop());
+    this.camStream = null;
+    }
+  },
+
+  submitPhoto: function() {
+    const video = this.$refs.camVideo;
+    const canvas = document.createElement("canvas");
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+    this.avatar = canvas.toDataURL("image/png");
+    this.closeModal();
+
+  },
+
+  submitNameAndAvatar: function() {
+    if (!this.userName) {
+      alert("You have to choose a name!");
+      return;
+    }
+    /*socket.emit("submitNameAndAvatar", {
+      userName: this.userName,
+      avatar: this.avatar,
+    });*/
+    this.participateInPoll()
+
+    /*console.log({
+  id: this.pollId,
+  userName: this.userName,
+  avatar: this.avatar,
+  });*/
+
+    this.$router.push({
       name: "LobbyView",
       params: {
         id: this.pollId,
@@ -233,10 +244,10 @@
     });
   },
 },
-  }
-  </script>
+}
+</script>
 
-<style>
+<style scoped>
 
 #joinScreen {
   display: flex;
