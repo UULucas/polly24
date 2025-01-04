@@ -17,7 +17,7 @@ function Data() {
       }
     ],
     answers: [{"0-13": 4}, {name:"fredrik",}],
-    currentQuestion: 0,
+    currentQuestion: -1,
     participants: [{name: "tester", answers: [], avatar: "avatar"}]
   }
 }
@@ -47,7 +47,7 @@ Data.prototype.createPoll = function(pollId, lang="en", quizName) {
     poll.questions = [];
     poll.answers = [];
     poll.participants = [];
-    poll.currentQuestion = 0;
+    poll.currentQuestion = -1;
     poll.quizName = quizName;
     poll.time = 0;
     this.polls[pollId] = poll;
@@ -141,6 +141,24 @@ Data.prototype.getTime = function(pollId) {
     return poll.time;
   }
   return {}
+}
+
+Data.prototype.getCurrentQuestion = function(pollId){
+    if (this.pollExists(pollId)){
+        const poll = this.polls[pollId];
+        return poll.currentQuestion;
+    }
+    return null;
+}
+
+Data.prototype.isGameRunning = function(pollId){
+    if (this.pollExists(pollId)){
+        const poll = this.polls[pollId];
+        if(poll.currentQuestion>-1){
+            return true;
+        }
+    }
+    return false;
 }
 
 
