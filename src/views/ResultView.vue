@@ -1,5 +1,6 @@
 <template>
-  <p>test</p>
+  <div></div>
+
   <div>
     lang: {{ lang }}
     {{ question.q }}

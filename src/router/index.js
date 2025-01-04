@@ -10,7 +10,7 @@ const router = createRouter({
       component: StartView
     },
       {
-      path: '/poll/:id',
+      path: '/poll/:id/:name/',
       name: 'PollView',
       component: () => import('../views/PollView.vue')
     },

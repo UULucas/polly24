@@ -31,21 +31,21 @@
 
     <input
         class="question-area text-box"
-        v-model="questions[questionNumber].question"
+        v-model="questions[questionNumber].q"
         placeholder="Question">
 
 
     <div id="answer-container" style="overflow-wrap: break-word" >
       <div v-bind:style="{ backgroundColor: text.correct ? '#adf7b6' : '#ffc09f' }"
            class="answer text-box"
-           v-for="(text, i) in questions[questionNumber].answers"
+           v-for="(text, i) in questions[questionNumber].a"
            v-bind:key="'answer' + i">
         <input
-            v-model="questions[questionNumber].answers[i].text"
+            v-model="questions[questionNumber].a[i].text"
             class="text-box"
             type="text"
             placeholder="Svar"
-            @input="questions[questionNumber].answers[i]=text"
+            @input="questions[questionNumber].a[i]=text"
             style="background-color: transparent; border: none; box-shadow: none; outline: none;">
         <input
             type="checkbox"
@@ -53,12 +53,12 @@
         />
       </div>
       <div class="answer" >
-        <button v-if="questions[questionNumber].answers.length>1" class="add nav-button" @click="removeAnswer">
+        <button v-if="questions[questionNumber].a.length>1" class="add nav-button" @click="removeAnswer">
           <label style="margin: auto">
             -
           </label>
         </button>
-        <button v-if="questions[questionNumber].answers.length<6" class="add nav-button" @click="addAnswer">
+        <button v-if="questions[questionNumber].a.length<6" class="add nav-button" @click="addAnswer">
           <label style="margin: auto">
             +
           </label>
@@ -68,7 +68,7 @@
 
     <label class="text-box" style="width: 100%; height: 3em; place-items: center"> Choose the correct answer(s)</label>
     <div class="correct-answer-container">
-      <div v-for="answer in questions[questionNumber].answers" v-bind:key="answer" class="text-box">
+      <div v-for="answer in questions[questionNumber].a" v-bind:key="answer" class="text-box">
         <input
             v-if="answer.text.length>0"
             type="checkbox"
@@ -115,14 +115,15 @@ const socket = io("localhost:3000");
 
 
 class Question {
-  constructor(question, answers = [{text:"", correct:false}]) {
-    this.question = question;
-    this.answers = answers
+  constructor(question, answers = [{text:"", correct:false}], img = null) {
+    this.q = question;
+    this.a = answers
+    this.img = img
   }
   getAnswers(){
     let a = [];
-    for(let i = 0; i < this.answers.length; i++){
-      a.push(this.answers[i].text);
+    for(let i = 0; i < this.a.length; i++){
+      a.push(this.a[i].text);
     }
     return a;
   }
@@ -167,16 +168,16 @@ export default {
     },
     saveQuiz: function () {
       for(let i = 0;i<this.questions.length;i++) {
-        socket.emit("addQuestion", {pollId: this.pollId, q: this.questions[i].question, a: this.questions[i].answers} )
+        socket.emit("addQuestion", {pollId: this.pollId, data: this.questions[i]})
       }
     },
     createPoll: function () {
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, quizName: this.quizName })
       socket.emit("joinPoll", this.pollId);
     },
-    startPoll: function () {
+    /**startPoll: function () {
       socket.emit("startPoll", this.pollId)
-    },
+    },*/
     addQuestion: function () {
       this.questions.push(new Question(""));
       this.questionNumber = this.questions.length-1;
@@ -195,15 +196,15 @@ export default {
       }
     },
     removeAnswer: function (){
-      this.questions[this.questionNumber].answers.pop();
+      this.questions[this.questionNumber].a.pop();
     },
     addAnswer: function () {
-      this.questions[this.questionNumber].answers.push({text:"", correct: false});
+      this.questions[this.questionNumber].a.push({text:"", correct: false});
       console.log(this.questions);
     },
-    runQuestion: function () {
+    /**runQuestion: function () {
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
-    },
+    },*/
     pickFile () {
       let input = this.$refs.fileInput
       let file = input.files

@@ -68,7 +68,7 @@ export default {
     this.avatar = this.$route.params.avatar || "";  //Hämtar från webbadressen så kommer inte att funka
     socket.on( "uiLabels", labels => this.uiLabels = labels );
     socket.on( "participantsUpdate", p => this.participants = p );
-    socket.on( "startPoll", () => this.$router.push("/poll/" + this.pollId) );
+    socket.on( "startPoll", () => this.$router.push("/poll/" + this.pollId + "/"+this.userName+"/") );
     socket.emit( "joinPoll", this.pollId );
     socket.emit( "getUILabels", this.lang );
   },
