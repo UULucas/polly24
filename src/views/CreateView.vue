@@ -90,7 +90,7 @@
 
     <div v-for="(question, i) in questions" class="" style="display: flex; gap:10px;" v-bind:key="question">
       <button class="nav-button" style="font-size: 35px; width: 80% " :style="{ backgroundColor: i===questionNumber ? '#ffee93' : '#fcf5c7' }" @click="questionNumber = i">
-        <label style="overflow-wrap:break-word" >Q{{i+1}} {{question.question}}</label>
+        <label style="overflow-wrap:break-word" >Q{{i+1}} {{question.q}}</label>
       </button>
       <button class="nav-button" @click="removeQuestion(i)" style="width: 5rem; background-color: var(--p-red)">
         <img src="../assets/trash_can.png" alt="test" style="height:70%">
@@ -214,6 +214,7 @@ export default {
         }
         reader.readAsDataURL(file[0])
         this.$emit('input', file[0])
+
       }
     },
     test: function (){
