@@ -7,7 +7,7 @@
         </a>
       </router-link>
       <button class=" nav-button" v-on:click="switchLanguage">
-        {{ uiLabels.changeLanguage }}
+        <img :src="uiLabels.changeLanguage" alt="" class="lang-img">
       </button>
     </div>
   </header>
@@ -45,7 +45,7 @@
         <div v-if="isDrawModalOpen" class="modal" @click.self="closeModal">
 
           <div class="drawModal-content">
-            <h2>Draw your avatar!</h2>
+            <h2>Draw your avatar!</h2><br>
             <span class="closeModal" @click="closeModal">&times;</span>
             
             <div id="toolbar">
@@ -55,7 +55,7 @@
               <input id="strokeColor" name="strokeColor" type="color">
 
               <label for="bgColor">Background color</label>
-              <input id="bgColor" name="bgColor" type="color">
+              <input id="bgColor" name="bgColor" type="color" value="white">
 
               <label for="lineWidth">Width</label>
               <input id="lineWidth" name="lineWidth" type="number" value="5">
@@ -360,7 +360,14 @@
   text-align: center;
   position: relative;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
+}
+
+#submitDrawingButton {
+  align-self: center; /* Center the button horizontally */
+  margin-top: auto; /* Push to the bottom */
+  padding: 0.5rem 2rem;
+  font-size: 1.2rem;
 }
 
 .camModal-content {

@@ -13,7 +13,7 @@
   <body>
   <ResponsiveNav v-bind:hideNav="hideNav">
     <button v-on:click="switchLanguage">
-      {{ uiLabels.changeLanguage }}
+      <img :src="uiLabels.changeLanguage" alt="" class="lang-img">
     </button>
     <router-link to="/create/">
       {{ uiLabels.createPoll }}
