@@ -90,7 +90,11 @@ display: flex;
 align-items: center;
 justify-content: center;
 margin: auto;
-background-color: var(--p-beige);
+padding:5px;
+background-color: white;
+border: 1px solid #ddd;
+border-radius: 8px;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 width: 500px;
 height: 300px;
 }
