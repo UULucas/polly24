@@ -5,8 +5,8 @@
 
   <body>
   <div id="main-container">
-
     <div class="head-container">
+
       <div class="name-and-key">
 
         <div class="quiz-name"> <!--  här ska quizens namn stå, som vi får hämta från där man skapar eller nått-->
@@ -37,7 +37,7 @@
 
       <div class="participants"> <!--  Denna diven är till för att ha våra participants i så vi kan
                                           nog bara sätta en array här i med dom som går med spelet-->
-        <div v-for="participant in pollData.participants" v-bind:key="player"  class="text-box" >
+        <div v-for="participant in pollData.participants" :key="participant.id"  class="text-box" >
           <div class="participants-name">
             {{participant.name}}
           </div>
@@ -54,6 +54,22 @@
       </div>
     </div>
 
+    <form action= "" onsubmit="event.preventDefault();">
+      <p>
+        <label for="Time">Choose time of the question (seconds)</label>
+        <select id="Time" v-model="setTime">
+          <option selected="selected">30</option>
+          <option>20</option>
+          <option>15</option>
+          <option>10</option>
+        </select>
+      </p>
+      <!--button v-on:click="setGameTime(setTime);" type="submit">
+        <label> Start timer </label>
+      </button!-->
+      <br>
+    </form>
+    <label v-if="gameStarted">Time left:{{timeLeft}}</label>
     <label v-if="gameStarted" class="text-box" style="font-size: 35px">Current question: {{questionNumber+1}}</label>
     <div class="start-section">
       <div v-if="gameStarted">
@@ -89,6 +105,10 @@ export default {
       uiLabels: {},
       imageUrl: "",
       gameStarted: false,
+      setTime: 0,
+      timeLeft: 0,
+      timeOutID: null,
+
     }
   },
   created: function () {
@@ -104,33 +124,57 @@ export default {
     socket.emit("getCurrentQuestion", this.pollId);
     socket.emit("isGameRunning", this.pollId);
   },
+  watch: {
+    timeLeft: {
+      handler(time){
+        if(time>0){
+          this.timeOutID=setTimeout(() => {
+            this.timeLeft--;
+          }, 1000);
+        }
+      },
+      immediate: true,
+    }
+  },
   methods: {
     runQuestion: function (questionNumber) {
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: questionNumber});
     },
     previousQuestion: function () {
-      if(this.questionNumber>0){
+      if(this.setGameTime()&&this.questionNumber>0){
         this.questionNumber--;
         this.runQuestion(this.questionNumber)
       }
     },
     nextQuestion: function () {
-      if(this.questionNumber<this.pollData.questions.length-1){
+      if(this.setGameTime()&&this.questionNumber<this.pollData.questions.length-1){
         this.questionNumber++;
+        this.runQuestion(this.questionNumber);
       }
-      this.runQuestion(this.questionNumber);
-
     },
     startQuiz: function (){
-      this.gameStarted = true;
-      this.questionNumber = 0;
-      socket.emit("startPoll", this.pollId)
-      this.runQuestion(this.questionNumber)
+      if(this.setGameTime()){
+        this.gameStarted = true;
+        this.questionNumber = 0;
+        socket.emit("startPoll", this.pollId)
+        this.runQuestion(this.questionNumber)
+      }
     },
     copyText: function () {
       var copyText = document.getElementById("pollId").innerText;
       navigator.clipboard.writeText(copyText); //kod tagen från W3
       alert("Copied the text: " + copyText);
+    },
+    setGameTime: function (){
+      clearTimeout(this.timeOutID);
+      if(this.setTime>0){
+        this.timeLeft = this.setTime;
+        return true;
+      }
+      else{
+        alert("no time chosen");
+        return false;
+      }
     },
   }
 }

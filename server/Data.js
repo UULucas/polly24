@@ -129,7 +129,6 @@ Data.prototype.submitAnswer = function(pollId, answer) {
 }
 Data.prototype.setTime = function(pollId, time) {
   if (this.pollExists(pollId)) {
-    //console.log(time);
     const poll = this.polls[pollId];
     poll.time = time;
     //sjukt om det bara funkar såhär
