@@ -4,7 +4,6 @@
   </head>
 
   <header>
-
     <button class="header-button nav-button" @click="$router.go(-1)">
       <a>
         <img class="home-img" src="https://static.thenounproject.com/png/2137554-200.png" alt="HomeImg"><!--Inga fucking läkar i våran kod!!!! !-->
@@ -14,7 +13,6 @@
     <button class="start-quiz nav-button" @click="startQuiz">
         Starta quiz
     </button>
-
   </header>
 
 
@@ -323,10 +321,7 @@ header {
   left: 16px;
   top: 8px;
   outline: solid black 1px;
-
 }
-
-
 
 .home-img {
   display: block;

@@ -1,10 +1,12 @@
 @import 'src/assets/main.css'
 <template>
-  <div class="textbox">
-<p>{{question.q}}</p>
-<div v-if="question.img != null"> 
-  {{ question.img }}
+
+<div v-if="question.img != null" class="imgContainer"> 
+  <img :src="question.img" class="image">
 </div>
+<p></p>
+<div class="textbox">
+  <p>{{question.q}}</p>
 </div>
 <div class="answerbox link-wrapper">
 <button id = "answer-buttons" class="answer-button" v-for="(a, index) in question.a" :key="index" :ref="'a-' + index" v-on:click="answer(a.text); changeColor(index, a.correct); disableButtons(question.a)">
@@ -83,7 +85,21 @@ display:inline-block;
 width:auto;
 height:auto;
 }
+.imgContainer{
+display: flex;
+align-items: center;
+justify-content: center;
+margin: auto;
+background-color: var(--p-beige);
+width: 500px;
+height: 300px;
+}
 
+.image {
+   max-width: 100%;
+   max-height: 100%;
+   height:auto;
+}
 .answerbox {
   margin-top: 1rem;
   display: grid;
