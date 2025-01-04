@@ -15,9 +15,9 @@ function Data() {
        a: [{text:"1", correct : false}, {text:"2", correct : false}, {text:"3", correct : false}, {text:"4", correct : false}, {text:"5", correct : false}]
       }
     ],
-    answers: [{"0-13": 4}],
+    answers: [{"0-13": 4}, {name:"fredrik",}],
     currentQuestion: 0,
-    participants: []
+    participants: [{name: "tester", answers: [], avatar: "avatar"}]
   }
 }
 
@@ -72,7 +72,7 @@ Data.prototype.participateInPoll = function(pollId, name, avatar) {
 Data.prototype.getParticipants = function(pollId) {
   const poll = this.polls[pollId];
   console.log("participants requested for", pollId);
-  if (this.pollExists(pollId)) { 
+  if (this.pollExists(pollId)) {
     return this.polls[pollId].participants
   }
   return [];

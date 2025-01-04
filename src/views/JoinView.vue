@@ -170,6 +170,7 @@
       const drawAvatar = canvas.toDataURL("image/png");
       this.avatar = drawAvatar;
       this.closeModal();
+
     },
 
     startCam: function() {
