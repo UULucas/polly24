@@ -119,6 +119,7 @@ export default {
     copyText: function () {
       var copyText = document.getElementById("pollId").innerText;
       navigator.clipboard.writeText(copyText); //kod tagen från W3
+      alert("Copied the text: " + copyText);
     },
   }
 }

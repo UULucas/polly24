@@ -1,5 +1,3 @@
-
-
 <template>
   <header>
     <div class="header">
@@ -252,7 +250,7 @@
   }
   </script>
 
-<style>
+<style scoped>
 
 #joinScreen {
   display: flex;
