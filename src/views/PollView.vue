@@ -27,6 +27,7 @@ export default {
         q: "",
         a: [],
         timerValue : 15,
+        img : null
       },
       pollId: "inactive poll",
       submittedAnswers: {},
