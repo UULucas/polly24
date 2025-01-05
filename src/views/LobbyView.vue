@@ -16,13 +16,13 @@
 
   <div id="joinScreen">
       <div class="joinWrapper">
-      <h3>Game ID: </h3>{{pollId}}
-      <h1>Welcome to the game!</h1>
+      <h3>{{uiLabels.gameId}}: </h3>{{pollId}}
+      <h1>{{uiLabels.welcomeGreeting}}</h1>
       <p>{{ userName }}</p>
       
       <img :src="avatar" alt="miniavtr" class="mini-avatar">
 
-        <p>Waiting for host to start game</p>
+        <p>{{uiLabels.waitMessage}}</p>
 
         <div class="spinner">
           <div class="bounce1"></div>
@@ -30,7 +30,7 @@
           <div class="bounce3"></div>
         </div>
 
-        <h4>Participants: </h4>
+        <h4>{{ uiLabels.participants }}: </h4>
         <div class="participant-list">
           <div v-for="participant in participants" :key="participant" class="text-box">
             <div class="participants-name">{{participant.name}}</div>

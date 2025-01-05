@@ -39,13 +39,13 @@
 
       <div class="share-key">
         <button @click="copyText" class="share-key-button nav-button">
-          Dela nyckel
+          {{uiLabels.shareKey}}
         </button>
       </div>
     </div>
 
     <div class="participants-section">
-      <h2>Deltagare</h2>
+      <h2>{{uiLabels.participants}}</h2>
 
       <div class="participants"> <!--  Denna diven är till för att ha våra participants i så vi kan
                                           nog bara sätta en array här i med dom som går med spelet-->
@@ -81,12 +81,12 @@
       </button>
       <br>
     </form!-->
-    <label v-if="gameStarted">Time left:{{timeLeft}}</label>
-    <label v-if="gameStarted" class="text-box" style="font-size: 35px">Current question: {{pollData.currentQuestion+1}}</label>
+    <label v-if="gameStarted">{{uiLabels.timeLeft}}:{{timeLeft}}</label>
+    <label v-if="gameStarted" class="text-box" style="font-size: 35px">{{uiLabels.currentQuestion}}: {{pollData.currentQuestion+1}}</label>
     <div class="start-section">
       <div v-if="gameStarted">
-        <button class="start-button nav-button" @click="previousQuestion">Previous question</button>
-        <button class="start-button nav-button" @click="nextQuestion">Next question</button>
+        <button class="start-button nav-button" @click="previousQuestion">{{uiLabels.prevQuestion}}</button>
+        <button class="start-button nav-button" @click="nextQuestion">{{uiLabels.nextQuestion}}</button>
       </div>
 
       <button v-if="!gameStarted" class="start-button nav-button" @click="startQuiz">

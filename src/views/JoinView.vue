@@ -1,15 +1,13 @@
 <template>
   <header>
-    <div class="header">
-      <router-link to="/" class= "nav-button">
-        <a>
-          <img class="home-img" src="../assets/home_icon.png" alt="HomeImg">
-        </a>
-      </router-link>
-      <button class=" nav-button" v-on:click="switchLanguage">
-        <img :src="uiLabels.changeLanguage" alt="" class="lang-img">
-      </button>
-    </div>
+    <router-link to="/" class= "nav-button">
+      <a>
+        <img class="home-img" src="../assets/home_icon.png" alt="HomeImg">
+      </a>
+    </router-link>
+    <button class=" nav-button" v-on:click="switchLanguage">
+      <img :src="uiLabels.changeLanguage" alt="" class="lang-img">
+    </button>
   </header>
 
     <div id="joinScreen">
@@ -19,11 +17,11 @@
             class="idTextBox text-box"
             type="text"
             maxlength="30"
-            placeholder="Enter Game ID"
+            placeholder= "Game ID"
             v-model="pollId"><br>
 
         <button class="idButton nav-button" v-on:click="checkID">
-          JOIN!
+          {{ uiLabels.joinButton }}
         </button>
 
       </div>
@@ -34,44 +32,46 @@
               class="idTextBox text-box"
               type="text"
               maxlength="30"
-              placeholder="Enter your name"
+              placeholder= "Your Name Here"
               v-model="userName"><br>
 
         <div><label for="avatarChoice">Choose an avatar:</label></div>
         <img :src="avatar" alt="avatar" class="avatar-preview"><br>
 
-        <button id="drawButton" @click="openDrawModal">Draw avatar</button>
+        <div class="avatarButtonWrapper">
+        <button class="nav-button" @click="openDrawModal">
+          <img class="home-img" src="https://www.freeiconspng.com/uploads/paint-brush-icon-10.png" alt="Draw avatar" name="draw">
+        </button>
 
         <div v-if="isDrawModalOpen" class="modal" @click.self="closeModal">
 
           <div class="drawModal-content">
-            <h2>Draw your avatar!</h2><br>
             <span class="closeModal" @click="closeModal">&times;</span>
-            
+
             <div id="toolbar">
 
             <div class="toolbar-item">
               <label for="strokeColor">Color</label>
               <input id="strokeColor" name="strokeColor" type="color">
             </div>
-            
-            <div class="toolbar-item"> 
+
+            <div class="toolbar-item">
               <label for="bgColor">Background color</label>
               <input id="bgColor" name="bgColor" type="color" value="white">
-            </div> 
+            </div>
 
-            <div class="toolbar-item"> 
+            <div class="toolbar-item">
               <label for="lineWidth">Width</label>
               <input id="lineWidth" name="lineWidth" type="number" value="5">
-            </div> 
+            </div>
 
             <div class="toolbar-item">
               <button id="undo" @click="undoLastStroke">Undo</button>
             </div>
 
-            <div class="toolbar-item"> 
+            <div class="toolbar-item">
               <button id="clear" @click="clearCanvas">Clear</button>
-            </div> 
+            </div>
 
             </div>
             <canvas ref="drawingCanvas" width="500" height="500"></canvas><br>
@@ -79,7 +79,9 @@
           </div>
         </div>
 
-        <button id="camButton" @click="openCamModal">Take photo</button>
+        <button class="nav-button" @click="openCamModal">
+          <img class="home-img" src="https://www.freeiconspng.com/uploads/camera-icon-21.png" alt="Take photo" name="photo">
+        </button>
 
         <div v-if="isCamModalOpen" class="modal" @click.self="closeModal">
           <div class="camModal-content">
@@ -90,20 +92,24 @@
 
           </div>
         </div>
-
+        <button class="nav-button" @click="uploadAvatar">
+          <img class="home-img" src="https://www.freeiconspng.com/thumbs/upload-icon/upload-icon-22.png" alt="Upload avatar" name="upload">
+        </button>
+        <input type="file" ref="fileInput" accept="image/*" style="display: none;" @change="handleFileUpload">
+        </div>
 
         <button class="idButton nav-button" v-on:click="submitNameAndAvatar">
-          Join game!
+          {{ uiLabels.joinButton }}
         </button>
       </div>
     </div>
   </div>
   </template>
-  
+
   <script>
   import io from 'socket.io-client';
   const socket = io("localhost:3000");
-  
+
   export default {
     name: 'JoinView',
     data: function () {
@@ -133,9 +139,10 @@
         avatar: this.avatar,
       } );
     },
+    
     checkID(){
       if (!this.pollId) {
-        alert("Enter your name!");
+        alert("Enter your Game ID!");
         return;
       }
       else{
@@ -174,7 +181,7 @@
         const colorInput = document.getElementById('strokeColor');
         const widthInput = document.getElementById('lineWidth');
         ctx.strokeStyle = colorInput.value;
-        ctx.lineWidth = widthInput.value; 
+        ctx.lineWidth = widthInput.value;
       };
 
       const colorInput = document.getElementById('strokeColor');
@@ -239,7 +246,7 @@
     stopCam: function() {
       if (this.camStream) {
       this.camStream.getTracks().forEach((track) => track.stop());
-      this.camStream = null; 
+      this.camStream = null;
       }
     },
 
@@ -252,6 +259,15 @@
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
       this.avatar = canvas.toDataURL("image/png");
       this.closeModal();
+
+    },
+
+    uploadAvatar() {
+      this.$refs.fileInput.click();
+    },
+
+    handleFileUpload(event) {
+      const file = event.target.files[0];
 
     },
 
@@ -281,6 +297,7 @@
       /*console.log({
     id: this.pollId,
     userName: this.userName,
+    testing
     avatar: this.avatar,
     });*/
 
@@ -321,20 +338,30 @@
   gap:1rem;
 }
 
+.avatarButtonWrapper {
+  display: flex;
+  align-items: center;
+}
+
 #toolbar {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   width: auto;
-  background-color: var(--p-beige);
+  background-color: var(--p-blue);
   align-items: center;
+  margin-top: 2rem;
+  border: none;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
 }
 
 #toolbar * {
-  margin-bottom: 6px;
+  margin-bottom: 0.2rem;
 }
 
 #toolbar input {
   width: 3rem;
+  height: 2rem;
 }
 
 #toolbar button {
@@ -395,10 +422,11 @@
 }
 
 #submitDrawingButton {
-  align-self: center; 
-  margin-top: auto; 
+  align-self: center;
+  margin-top: auto;
   padding: 0.5rem 2rem;
   font-size: 1rem;
+  margin-top: 0.5rem;
 }
 
 .camModal-content {
@@ -426,7 +454,7 @@ video {
   border-radius: 1rem;
 }
 
-.header {
+header {
   display: flex;
   align-items: center;
   padding-top: 1rem;
@@ -441,5 +469,10 @@ video {
   margin-right: auto;
   height: 50px;
   width: 50px;
+}
+
+.nav-button {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 </style>
