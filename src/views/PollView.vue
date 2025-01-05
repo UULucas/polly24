@@ -4,7 +4,7 @@
             </div>
 
   </div>
-  <body style="display: grid; margin-top: 1rem">
+  <body style="display: inline-block; margin-top: 1rem">
     <label style="font-size: 50px; color:red">{{timeLeft}}</label>
     <div class="pollQuestion">
       <QuestionComponent v-bind:question="question"
