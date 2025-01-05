@@ -51,7 +51,7 @@ function sockets(io, socket, data) {
     data.setTime(d.pollId, d.time);
     io.to(d.pollId).emit('timeUpdate', data.getTime(d.pollId))
   });
-
+  
 }
 
 export { sockets };

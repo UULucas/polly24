@@ -23,7 +23,7 @@
             v-model="pollId"><br>
 
         <button class="idButton nav-button" v-on:click="checkID">
-          JOIN!
+          {{ uiLabels.joinButton }}
         </button>
 
       </div>
@@ -45,22 +45,32 @@
         <div v-if="isDrawModalOpen" class="modal" @click.self="closeModal">
 
           <div class="drawModal-content">
-            <h2>Draw your avatar!</h2><br>
             <span class="closeModal" @click="closeModal">&times;</span>
             
             <div id="toolbar">
-              <h3>Toolbar</h3>
 
+            <div class="toolbar-item">
               <label for="strokeColor">Color</label>
               <input id="strokeColor" name="strokeColor" type="color">
-
+            </div>
+            
+            <div class="toolbar-item"> 
               <label for="bgColor">Background color</label>
               <input id="bgColor" name="bgColor" type="color" value="white">
+            </div> 
 
+            <div class="toolbar-item"> 
               <label for="lineWidth">Width</label>
               <input id="lineWidth" name="lineWidth" type="number" value="5">
+            </div> 
 
+            <div class="toolbar-item">
+              <button id="undo" @click="undoLastStroke">Undo</button>
+            </div>
+
+            <div class="toolbar-item"> 
               <button id="clear" @click="clearCanvas">Clear</button>
+            </div> 
 
             </div>
             <canvas ref="drawingCanvas" width="500" height="500"></canvas><br>
@@ -82,7 +92,7 @@
 
 
         <button class="idButton nav-button" v-on:click="submitNameAndAvatar">
-          Join game!
+          {{ uiLabels.joinButton }}
         </button>
       </div>
     </div>
@@ -191,6 +201,14 @@
         ctx.closePath();
       });
 
+    },
+
+    clearCanvas: function() {
+      const canvas = this.$refs.drawingCanvas;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = "white";
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillRe(0, 0, canvas.width, canvas.height);
     },
 
     submitDrawing: function() {
@@ -303,25 +321,41 @@
 }
 
 #toolbar {
-  display: flex;
-  flex-direction: column;
-  padding: 5px;
-  width: 70px;
-  background-color: var(--p-beige);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  width: auto;
+  background-color: var(--p-blue);
+  align-items: center;
+  margin-top: 2rem;
+  border: none;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
 }
 
 #toolbar * {
-  margin-bottom: 6px;
+  margin-bottom: 0.2rem;
 }
 
 #toolbar input {
-  width: 100%;
+  width: 3rem;
+  height: 2rem;
 }
 
 #toolbar button {
   border: none;
   border-radius: 4px;
   color: white;
+}
+
+#toolbar label {
+  font-size: 0.8rem;
+  padding-top: 5px;
+}
+
+.toolbar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .idTextBox{
@@ -361,13 +395,14 @@
   position: relative;
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
 }
 
 #submitDrawingButton {
-  align-self: center; /* Center the button horizontally */
-  margin-top: auto; /* Push to the bottom */
+  align-self: center; 
+  margin-top: auto; 
   padding: 0.5rem 2rem;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .camModal-content {

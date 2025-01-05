@@ -11,5 +11,14 @@
 	"joinQuiz": "Join Quiz",
 	"createQuiz": "Create Quiz",
 	"navigateQuiz": "Search Quizzes",
-	"createAccount": "Create Account"
+	"createAccount": "Create Account",
+	"enterGameId": "Enter Game ID",
+	"joinButton": "Join!",
+	"nextQuestion": "Next Question",
+	"prevQuestion": "Previous Question",
+	"shareKey": "Share Key",
+	"participants": "Participants",
+	"timeLeft": "Time Left",
+	"startQuiz": "Start Quiz",
+	"currentQuestion": "Current Question"
 }

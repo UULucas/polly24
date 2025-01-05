@@ -12,7 +12,7 @@
   {{ a.text }}
 </button>
 </div>
-<div v-if="question.timerValue === 0">
+<div v-if="question.time < 1">
   {{ resetButtons(question.a) }}
 </div>
 </template>
