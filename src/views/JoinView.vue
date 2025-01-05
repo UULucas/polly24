@@ -299,6 +299,7 @@
       /*console.log({
     id: this.pollId,
     userName: this.userName,
+    testing
     avatar: this.avatar,
     });*/
 
