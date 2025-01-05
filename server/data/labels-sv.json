@@ -7,10 +7,10 @@
 	"about": "Om oss",
 	"participateInPoll": "Delta i enkäten",
 	"joinQuiz": "Gå med quiz",
-	"createQuiz": "Skapa Quiz",
-	"navigateQuiz": "Sök andras Quiz",
+	"createQuiz": "Skapa ny Quiz",
+	"navigateQuiz": "Sök bland Quizar",
 	"createAccount": "Skapa konto",
-	"enterGameId": "Ange Spel ID",
+	"enterGameId": "Ange nyckel",
 	"joinButton": "Gå med!",
 	"nextQuestion": "Nästa Fråga",
 	"prevQuestion": "Föregående Fråga",
@@ -18,5 +18,11 @@
 	"participants": "Deltagare",
 	"timeLeft": "Återstående Tid",
 	"startQuiz": "Starta Quiz",
-	"currentQuestion": "Nuvarande Fråga"
+	"currentQuestion": "Nuvarande Fråga",
+	"welcomeGreeting": "Välkommen till spelet!",
+	"gameId": "Nyckel",
+	"waitMessage": "Väntar på spelledare...",
+	"timeChoiceMessage": "Välj svarstid (sekunder)",
+	"addQuestion": "Lägg till fråga",
+	"enterPlayerName": "Ange spelarnamn"
 }
