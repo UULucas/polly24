@@ -5,11 +5,11 @@
 
   </div>
   <body style="display: grid; margin-top: 1rem">
-    <label style="font-size: 50px; color:red">{{timeLeft}}</label>
-    {{question.questionTime}}
+    <!--label style="font-size: 50px; color:red">{{timeLeft}}</label!-->
     <div class="pollQuestion">
       <QuestionComponent v-bind:question="question"
                          v-bind:timeLeft="timeLeft"
+                         v-bind:answered="answered"
                          v-on:answer="submitAnswer($event)"/>
       <hr>
     </div>
@@ -61,6 +61,9 @@ export default {
             this.timeLeft--;
           }, 1000);
         }
+        if(this.timeLeft<=0){
+          this.answered = true;
+        }
       },
       immediate: true,
     }
@@ -69,14 +72,19 @@ export default {
     loadQuestion: function (data){
       console.log("loaded question")
       this.question = data;
+      this.answered = false;
       this.startTimer();
       this.resetAnimation();
+      if(this.timeLeft<=0){
+        this.answered = true;
+      }
     },
     submitAnswer: function (answer) {
-      if(!answer){
+      if(!this.answered){
         console.log(this.playerName)
+        console.log("testtest")
         //läg till poäng och sånt skit
-        socket.emit("submitAnswer", {pollId: this.pollId,playerName: this.playerName, answer: answer, socre:this.calculateScore})
+        socket.emit("submitAnswer", {pollId: this.pollId, playerName: this.playerName, answer: answer, score:this.calculateScore})
         this.answered = true;
       }
     },
@@ -98,7 +106,14 @@ export default {
     startTimer: function (){
       clearTimeout(this.timeOutID);
       this.timeLeft = this.question.timeRemaining;
-    }
+    },
+    countDownTime: function() {
+      setTimeout(this.setZero, this.question.timerValue * 1000)
+    },
+    setZero: function() {
+      this.question.time = 0;
+      console.log("out of time")
+    },
 }
 }
 </script>

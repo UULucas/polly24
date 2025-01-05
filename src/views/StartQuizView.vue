@@ -85,7 +85,7 @@
     <label v-if="gameStarted" class="text-box" style="font-size: 35px">{{uiLabels.currentQuestion}}: {{pollData.currentQuestion+1}}</label>
     <div class="start-section">
       <div v-if="gameStarted">
-        <button class="start-button nav-button" @click="previousQuestion">{{uiLabels.prevQuestion}}</button>
+        <!--button class="start-button nav-button" @click="previousQuestion">{{uiLabels.prevQuestion}}</button!-->
         <button class="start-button nav-button" @click="nextQuestion">{{uiLabels.nextQuestion}}</button>
       </div>
 
@@ -156,6 +156,7 @@ export default {
       if(this.pollData.currentQuestion>0){
         this.pollData.currentQuestion--;
         this.runQuestion(this.pollData.currentQuestion);
+        socket.emit("updateTime", {pollId: this.pollId, time: this.pollData.questions[this.pollData.currentQuestion].questionTime});
         this.setGameTime();
       }
     },
