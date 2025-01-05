@@ -20,5 +20,10 @@
 	"participants": "Participants",
 	"timeLeft": "Time Left",
 	"startQuiz": "Start Quiz",
-	"currentQuestion": "Current Question"
+	"currentQuestion": "Current Question",
+	"welcomeGreeting": "Welcome to the game!",
+	"gameId": "Game ID",
+	"waitMessage": "Waiting for host...",
+	"timeChoiceMessage": "Choose answer time (seconds)",
+	"addQuestion": "Add Question"
 }
