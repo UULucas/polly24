@@ -10,8 +10,6 @@ function sockets(io, socket, data) {
   });
 
   socket.on('addQuestion', function(d) {
-    //console.log("test"+typeof d.data.img);
-    console.log("tttttttttttttttteeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeesssssssssssssssssssssttttttttttttttttttttt");
     data.addQuestion(d.pollId, d.data);
 
     socket.emit('questionUpdate', data.activateQuestion(d.pollId));
