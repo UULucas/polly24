@@ -54,7 +54,7 @@
       </div>
     </div>
 
-    <form action= "" onsubmit="event.preventDefault();">
+    <!--form action= "" onsubmit="event.preventDefault();">
       <p>
         <label for="Time">Choose time of the question (seconds)</label>
         <select id="Time" v-model="setTime">
@@ -64,11 +64,11 @@
           <option>10</option>
         </select>
       </p>
-      <!--button v-on:click="setGameTime(setTime);" type="submit">
+      <button v-on:click="setGameTime(setTime);" type="submit">
         <label> Start timer </label>
-      </button!-->
+      </button>
       <br>
-    </form>
+    </form!-->
     <label v-if="gameStarted">Time left:{{timeLeft}}</label>
     <label v-if="gameStarted" class="text-box" style="font-size: 35px">Current question: {{pollData.currentQuestion+1}}</label>
     <div class="start-section">
@@ -100,12 +100,11 @@ export default {
       pollId: "",
       question: "",
       answers: ["", ""],
-      //questionNumber: -1,
       pollData: {currentQuestion: 0},
       uiLabels: {},
       imageUrl: "",
       gameStarted: false,
-      setTime: 0,
+      //setTime: 0,
       timeLeft: 0,
       timeOutID: null,
 
@@ -138,39 +137,35 @@ export default {
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: questionNumber});
     },
     previousQuestion: function () {
-      if(this.setGameTime()&&this.pollData.currentQuestion>0){
+      if(this.pollData.currentQuestion>0){
         this.pollData.currentQuestion--;
-        this.runQuestion(this.pollData.currentQuestion)
+        this.runQuestion(this.pollData.currentQuestion);
+        this.setGameTime();
       }
     },
     nextQuestion: function () {
-      if(this.setGameTime()&&this.pollData.currentQuestion<this.pollData.questions.length-1){
+      if(this.pollData.currentQuestion<this.pollData.questions.length-1){
         this.pollData.currentQuestion++;
         this.runQuestion(this.pollData.currentQuestion);
+        this.setGameTime();
       }
     },
     startQuiz: function (){
-      if(this.setGameTime()){
-        this.gameStarted = true;
-        this.pollData.currentQuestion = 0;
-        socket.emit("startPoll", this.pollId)
-        this.runQuestion(this.pollData.currentQuestion)
-      }
+      this.gameStarted = true;
+      this.pollData.currentQuestion = 0;
+      socket.emit("startPoll", this.pollId);
+      this.runQuestion(this.pollData.currentQuestion);
+      this.setGameTime();
     },
     copyText: function () {
       var copyText = document.getElementById("pollId").innerText;
       navigator.clipboard.writeText(copyText); //kod tagen från W3
       alert("Copied the text: " + copyText);
     },
-    setGameTime: function (time = this.setTime){
-      clearTimeout(this.timeOutID);
-      if(time>0){
-        this.timeLeft = time;
-        return true;
-      }
-      else{
-        alert("no time chosen");
-        return false;
+    setGameTime: function (){
+      if(this.timeLeft!==this.pollData.questions[this.pollData.currentQuestion].time){
+        clearTimeout(this.timeOutID);
+        this.timeLeft = this.pollData.questions[this.pollData.currentQuestion].time;
       }
     },
     loadQuiz: function (data){

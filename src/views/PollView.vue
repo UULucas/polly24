@@ -37,7 +37,7 @@ export default {
   },
   created: function () {
     this.pollId = this.$route.params.id;
-    socket.on( "questionUpdate", q => this.question = q, this.reset() );
+    socket.on( "questionUpdate", q => this.reset(this.question = q) );
     socket.on( "submittedAnswersUpdate", answers => this.submittedAnswers = answers );
     socket.on( "uiLabels", labels => this.uiLabels = labels );
     socket.on("timeUpdate", time => this.question.timerValue = time, this.setTimeLeft());

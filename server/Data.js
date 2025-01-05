@@ -49,7 +49,7 @@ Data.prototype.createPoll = function(pollId, lang="en", quizName) {
     poll.participants = [];
     poll.currentQuestion = -1;
     poll.quizName = quizName;
-    poll.time = 0;
+    //poll.time = 0;
     this.polls[pollId] = poll;
     console.log("poll created", pollId, poll);
   }

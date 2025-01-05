@@ -63,8 +63,23 @@
         </button>
       </div>
     </div>
+    <form action= "" class="text-box">
+      <p>
+        <label for="Time">Choose time of the question (seconds)</label>
+        <select id="Time" v-model="questions[questionNumber].time">
+          <option selected="selected">30</option>
+          <option>20</option>
+          <option>15</option>
+          <option>10</option>
+        </select>
+      </p>
+      <!--button v-on:click="setGameTime(setTime);" type="submit">
+        <label> Start timer </label>
+      </button!-->
+      <br>
+    </form>
 
-    <label class="text-box" style="width: 100%; height: 3em; place-items: center"> Choose the correct answer(s)</label>
+    <!--label class="text-box" style="width: 100%; height: 3em; place-items: center"> Choose the correct answer(s)</label>
     <div class="correct-answer-container">
       <div v-for="answer in questions[questionNumber].a" v-bind:key="answer" class="text-box">
         <input
@@ -72,7 +87,7 @@
             type="checkbox"
             v-model="answer.correct"/>
       </div>
-    </div>
+    </div!-->
   </section>
 
   <section id="side-table-wrapper">
@@ -114,10 +129,11 @@ const socket = io("localhost:3000");
 
 
 class Question {
-  constructor(question, answers = [{text:"", correct:false}], img = null) {
+  constructor(question, answers = [{text:"", correct:false}], img = null, time = 20) {
     this.q = question;
-    this.a = answers
-    this.img = img
+    this.a = answers;
+    this.img = img;
+    this.time = time;
   }
   getAnswers(){
     let a = [];
