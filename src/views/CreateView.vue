@@ -15,7 +15,7 @@
       </button>
 
     <button class="start-quiz nav-button" @click="startQuiz">
-        Starta quiz
+        {{uiLabels.startQuiz}}
     </button>
     </div>
   </header>
@@ -70,7 +70,7 @@
     </div>
     <form action= "" class="text-box">
       <p>
-        <label for="Time">Choose time of the question (seconds)</label>
+        <label for="Time">{{uiLabels.timeChoiceMessage}}</label>
         <select id="Time" v-model="questions[questionNumber].time">
           <option selected="selected">30</option>
           <option>20</option>
@@ -117,7 +117,7 @@
       </button>
     </div>
     <button class="nav-button" style="font-size: 35px; margin-top: 1rem;" @click="addQuestion">
-      <label>Add question</label>
+      <label>{{uiLabels.addQuestion}}</label>
     </button>
   </section>
   </body>
