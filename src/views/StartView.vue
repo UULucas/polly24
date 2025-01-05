@@ -6,26 +6,17 @@
     </button>
     </div>
   </header>
-  <body>
-  <!--h1>{{ uiLabels["sales-pitch"] }}</h1-->
-  <!--h2>{{ uiLabels.subHeading }}</h2-->
-  <!--label>
-    Write poll id:
-    <input type="text" v-model="newPollId">
-  </label>
-  <router-link v-bind:to="'/lobby/' + newPollId">
-    {{ uiLabels.participatePoll }}
-  </router-link-->
 
+  <body>
   <div id="container">
-    <button class="rectangle nav-button" >
+    <button class="start-button nav-button" >
       <router-link to="/join/" class ="link-wrapper">
       {{ uiLabels.joinQuiz}}
       </router-link>
     </button>
 
 
-    <button class="rectangle nav-button">
+    <button class="start-button nav-button">
       <router-link to="/create/" class ="link-wrapper">
       {{ uiLabels.createQuiz }}
       </router-link>
@@ -87,30 +78,13 @@ export default {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  width: 100%; /* Ensure it stretches to the container width */
-
+  width: 100%;
 }
 
-#pond {
-  display: flex;
-  justify-content: space-between; /* Spread items horizontally */
-  align-items: center; /* Ensure vertical alignment */
-  gap: 1rem; /* Space between the smaller buttons */
-  width: 44rem; /* Match the width of the larger buttons */
-
-
-}
-
-.rectangle {
+.start-button {
   width: 44rem;
   height: 10rem;
 }
-
-.rectangle2 {
-  width: 22rem;
-  height: 10rem;
-}
-
 
 body{
   background-color: var(--p-blue);

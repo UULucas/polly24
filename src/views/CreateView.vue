@@ -196,13 +196,9 @@ export default {
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, quizName: this.quizName })
       socket.emit("joinPoll", this.pollId);
     },
-    /**startPoll: function () {
-      socket.emit("startPoll", this.pollId)
-    },*/
     addQuestion: function () {
       this.questions.push(new Question(""));
       this.questionNumber = this.questions.length-1;
-      //socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
     },
     removeQuestion: function (i) {
       if(i===this.questionNumber){
@@ -223,9 +219,6 @@ export default {
       this.questions[this.questionNumber].a.push({text:"", correct: false});
       console.log(this.questions);
     },
-    /**runQuestion: function () {
-      socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
-    },*/
     async pickFile() {
       const input = this.$refs.fileInput;
       const file = input.files[0];
@@ -275,6 +268,7 @@ export default {
   }
 }
 </script>
+
 <style scoped>
 #quiz-container {
   display: flex;
@@ -287,12 +281,6 @@ export default {
   margin: auto;
 }
 
-.correct-answer-container{
-  display: flex;
-  flex-direction: row;
-
-
-}
 .start-quiz {
   margin: 1rem 3rem;
   background-color: var(--p-green);
@@ -380,14 +368,6 @@ footer{
   margin-right: auto;
   height: 50px;
   width: 50px;
-}
-
-.logo-img {
-  height: 70px;
-  margin: 0 auto;
-  margin-top: 16px;
-  padding-bottom: 1rem;
-  padding-left: 20%;
 }
 
 body{

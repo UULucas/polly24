@@ -134,7 +134,7 @@
     },
     checkID(){
       if (!this.pollId) {
-        alert("Enter your name!");
+        alert("Enter your Game ID!");
         return;
       }
       else{
