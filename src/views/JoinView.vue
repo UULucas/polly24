@@ -34,7 +34,7 @@
               class="idTextBox text-box"
               type="text"
               maxlength="30"
-              placeholder={{ enterPlayername }}
+              placeholder={{ uiLabels.enterPlayername }}
               v-model="userName"><br>
 
         <div><label for="avatarChoice">Choose an avatar:</label></div>
