@@ -25,5 +25,6 @@
 	"gameId": "Game ID",
 	"waitMessage": "Waiting for host...",
 	"timeChoiceMessage": "Choose answer time (seconds)",
-	"addQuestion": "Add Question"
+	"addQuestion": "Add Question",
+	"enterPlayerName": "Enter player name"
 }
