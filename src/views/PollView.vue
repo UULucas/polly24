@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!answered" class="round-time-bar" id="timer-bar">
+  <div class="round-time-bar" id="timer-bar">
             <div>
             </div>
 
@@ -20,6 +20,7 @@
 // @ is an alias to /src
 import QuestionComponent from '@/components/QuestionComponent.vue';
 import io from 'socket.io-client';
+
 const socket = io("localhost:3000");
 
 export default {
@@ -38,12 +39,14 @@ export default {
       submittedAnswers: {},
       unstarted: false,
       answered : false,
+      playerName: "",
 
       timeLeft: 0,
     }
   },
   created: function () {
     this.pollId = this.$route.params.id;
+    this.playerName = this.$route.params.name;
     socket.on( "questionUpdate", q => this.loadQuestion(q))
     socket.on( "submittedAnswersUpdate", answers => this.submittedAnswers = answers );
     socket.on( "uiLabels", labels => this.uiLabels = labels );
@@ -70,10 +73,16 @@ export default {
       this.resetAnimation();
     },
     submitAnswer: function (answer) {
-      console.log(answer)
-      //läg till poäng och sånt skit
-      socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
-      this.answered = true;
+      if(!answer){
+        console.log(this.playerName)
+        //läg till poäng och sånt skit
+        socket.emit("submitAnswer", {pollId: this.pollId,playerName: this.playerName, answer: answer, socre:this.calculateScore})
+        this.answered = true;
+      }
+    },
+    calculateScore: function () {
+      const maxScore = 1000;
+      return maxScore*(this.timeLeft / this.question.questionTime);
     },
     setTimeLeft: function () {
       document.documentElement.style.setProperty('--duration', this.timeLeft);
@@ -85,13 +94,6 @@ export default {
       element.style.animation = 'none';
       element.offsetHeight; /* trigger reflow */
       element.style.animation = null;
-    },
-    countDownTime: function() {
-      setTimeout(this.setZero, this.question.timerValue * 1000)
-    },
-    setZero: function() {
-      this.question.time = 0;
-      console.log("out of time")
     },
     startTimer: function (){
       clearTimeout(this.timeOutID);

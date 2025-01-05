@@ -8,10 +8,17 @@
   <p>{{question.q}}</p>
 </div>
 <div class="answerbox link-wrapper">
-<button id = "answer-buttons" class="answer-button" v-for="(a, index) in question.a" :key="index" :ref="'a-' + index" v-on:click="answer(a.text); changeColor(index, a.correct); disableButtons(question.a)">
+<button id = "answer-buttons" class="answer-button"
+        v-for="(a, index) in question.a"
+        :key="index"
+        :ref="'a-' + index"
+        v-on:click="answer(a.text); changeColor(index, a.correct); disableButtons(question.a)">
   {{ a.text }}
 </button>
 </div>
+<!--div v-if="timeLeft < 1">
+  {{ resetButtons(question.a) }}
+</div!-->
 
 </template>
 <script>
@@ -19,9 +26,17 @@ export default {
   name: 'QuestionComponent',
   props: {
     question: Object,
-    timeLeft: Object,
+    timeLeft: Number,
   },
   emits: ["answer"],
+  watch: {
+    timeLeft() {
+      if(this.timeLeft <= 0) {
+        
+        this.disableButtons();
+      }
+    },
+  },
   methods: {
     answer: function (answer) {
       this.$emit("answer", answer);
