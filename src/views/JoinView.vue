@@ -453,7 +453,7 @@ video {
   border-radius: 1rem;
 }
 
-.header {
+header {
   display: flex;
   align-items: center;
   padding-top: 1rem;
