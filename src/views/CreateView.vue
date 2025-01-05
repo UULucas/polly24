@@ -208,6 +208,14 @@ export default {
     async pickFile() {
       const input = this.$refs.fileInput;
       const file = input.files[0];
+      // Maximal filstorlek i Socket.IO är 1MB, vi sätter en gräns under det på 500kB
+      const maxFileSize = 0.5 * 1024 * 1024;
+
+      if (file && file.size > maxFileSize) {
+        alert("The selected file is too large. Please choose a file smaller than 500 kB.");
+        input.value = "";
+        return;
+      }
 
       if (file) {
         const options = {
