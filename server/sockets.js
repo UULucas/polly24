@@ -35,6 +35,7 @@ function sockets(io, socket, data) {
     let question = data.activateQuestion(d.pollId, d.questionNumber);
     io.to(d.pollId).emit('questionUpdate', question);
     io.to(d.pollId).emit('submittedAnswersUpdate', data.getSubmittedAnswers(d.pollId));
+    io.to(d.pollId).emit('timeUpdate', question.time);
   });
 
   socket.on('submitAnswer', function(d) {
