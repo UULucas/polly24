@@ -4,15 +4,20 @@
   </head>
 
   <header>
-    <button class="header-button nav-button" @click="$router.go(-1)">
-      <a>
-        <img class="home-img" src="https://static.thenounproject.com/png/2137554-200.png" alt="HomeImg"><!--Inga fucking läkar i våran kod!!!! !-->
-      </a>
-    </button>
-    <img class="logo-img" src="../assets/logo_icon.png" alt="LogoImg"> <!--Inga fucking läkar i våran kod!!!! !-->
+    <div class="header">
+      <router-link to="/" class= "nav-button">
+        <a>
+          <img class="home-img" src="../assets/home_icon.png" alt="HomeImg">
+        </a>
+      </router-link>
+      <button class=" nav-button" v-on:click="switchLanguage">
+        <img :src="uiLabels.changeLanguage" alt="" class="lang-img">
+      </button>
+
     <button class="start-quiz nav-button" @click="startQuiz">
         Starta quiz
     </button>
+    </div>
   </header>
 
 
@@ -239,6 +244,16 @@ export default {
         reader.readAsDataURL(compressedFile);
       }
     },
+    switchLanguage: function() {
+      if (this.lang === "en") {
+        this.lang = "sv"
+      }
+      else {
+        this.lang = "en"
+      }
+      localStorage.setItem( "lang", this.lang );
+      socket.emit( "getUILabels", this.lang );
+    },
     test: function (){
     }
   }
@@ -265,6 +280,7 @@ export default {
 .start-quiz {
   margin: 1rem 3rem;
   background-color: var(--p-green);
+  margin-left: 62%;
 }
 
 .question-area {
@@ -327,15 +343,12 @@ footer{
   height: 100px;
 }
 
-header {
-  height: 7em;
-  background-color: var(--p-beige);
+.header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  width: 100%;
   position: relative;
-  margin-bottom: 2em;
+  padding-left: 1rem;
+  gap: 1rem ;
 }
 
 .header-button {

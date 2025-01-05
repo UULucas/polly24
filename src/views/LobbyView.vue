@@ -4,7 +4,6 @@
   </head>
 
   <header>
-    <div class="header">
       <router-link to="/" class="header-button nav-button">
         <a>
           <img class="home-img" src="../assets/home_icon.png" alt="HomeImg">
@@ -13,7 +12,6 @@
       <button class= " nav-button" v-on:click="switchLanguage">
         <img :src="uiLabels.changeLanguage" alt="" class="lang-img">
       </button>
-    </div>
   </header>
 
   <div id="joinScreen">
@@ -201,7 +199,7 @@ input[type="text"] {
   }
 }
 
-.header {
+header {
   display: flex;
   align-items: center;
   padding-top: 1rem;
