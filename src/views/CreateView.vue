@@ -109,6 +109,7 @@
 
 <script>
 import io from 'socket.io-client';
+import imageCompression from 'browser-image-compression';
 const socket = io("localhost:3000");
 
 
@@ -139,7 +140,9 @@ export default {
       uiLabels: {},
       imageUrl: "",
       imgText: "Lägg till bild",
-      questions: [new Question("")]
+      questions: [new Question("")],
+      previewImage: null,
+      compressedImage: null,
     }
   },
   created: function () {
@@ -202,19 +205,30 @@ export default {
     /**runQuestion: function () {
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
     },*/
-    pickFile () {
-      let input = this.$refs.fileInput
-      let file = input.files
-      if (file && file[0]) {
-        let reader = new FileReader
-        reader.onload = e => {
-          this.questions[this.questionNumber].img = e.target.result
-          //console.log(typeof this.questions[this.questionNumber].img)
-          //console.log(this.questions[this.questionNumber].img)
-        }
-        reader.readAsDataURL(file[0]);
-        //this.$emit('input', file[0])
+    async pickFile() {
+      const input = this.$refs.fileInput;
+      const file = input.files[0];
 
+      if (file) {
+        const options = {
+          maxSizeMB: 0.0007,
+          maxWidthOrHeight: 1200,
+          useWebWorker: true,    // Ökar prestandan
+        };
+        const compressedFile = await imageCompression(file, options);
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          // Sätter Base64 resultatet questions listan
+          this.questions[this.questionNumber].img = e.target.result;
+
+          // Låter oss previewa bilden
+          this.previewImage = e.target.result;
+
+          // Debug-utskrifter om behövs
+          console.log("Image added to question:", this.questions[this.questionNumber].img);
+        };
+        reader.readAsDataURL(compressedFile);
       }
     },
     test: function (){
