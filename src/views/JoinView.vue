@@ -39,8 +39,11 @@
 
         <div><label for="avatarChoice">Choose an avatar:</label></div>
         <img :src="avatar" alt="avatar" class="avatar-preview"><br>
-
-        <button id="drawButton" @click="openDrawModal">Draw avatar</button>
+        
+        <div class="avatarButtonWrapper">
+        <button class="nav-button" @click="openDrawModal">
+          <img class="home-img" src="https://www.freeiconspng.com/uploads/paint-brush-icon-10.png" alt="Draw avatar" name="draw">
+        </button>
 
         <div v-if="isDrawModalOpen" class="modal" @click.self="closeModal">
 
@@ -78,7 +81,9 @@
           </div>
         </div>
 
-        <button id="camButton" @click="openCamModal">Take photo</button>
+        <button class="nav-button" @click="openCamModal">
+          <img class="home-img" src="https://www.freeiconspng.com/uploads/camera-icon-21.png" alt="Take photo" name="photo">
+        </button>
 
         <div v-if="isCamModalOpen" class="modal" @click.self="closeModal">
           <div class="camModal-content">
@@ -88,6 +93,10 @@
             <button id="submitPhotoButton" @click="submitPhoto">Submit photo</button>
 
           </div>
+        </div>
+        <button class="nav-button" @click="uploadAvatar">
+          <img class="home-img" src="https://www.freeiconspng.com/thumbs/upload-icon/upload-icon-22.png" alt="Upload avatar" name="upload">
+        </button>
         </div>
 
 
@@ -320,6 +329,11 @@
   gap:1rem;
 }
 
+.avatarButtonWrapper {
+  display: flex;
+  align-items: center;
+}
+
 #toolbar {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -403,6 +417,7 @@
   margin-top: auto; 
   padding: 0.5rem 2rem;
   font-size: 1rem;
+  margin-top: 0.5rem;
 }
 
 .camModal-content {
@@ -445,5 +460,10 @@ video {
   margin-right: auto;
   height: 50px;
   width: 50px;
+}
+
+.nav-button {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 </style>
