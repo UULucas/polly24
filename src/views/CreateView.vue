@@ -68,16 +68,14 @@
         </button>
       </div>
     </div>
-    <form action= "" class="timer-box text-box">
+    <form action="" class="timer-box text-box">
       <p>
-        <label for="Time">{{uiLabels.timeChoiceMessage}}</label>
-        <select class="select-box" id="Time" v-model="questions[questionNumber].time">
-        <label for="Time">{{uiLabels.timeChoiceMessage}}</label>
-        <select id="Time" v-model="questions[questionNumber].time">
-          <option selected="selected">30</option>
-          <option>20</option>
-          <option>15</option>
-          <option>10</option>
+        <label for="Time">Choose time of the question (seconds)</label>
+        <select id="Time" v-model="questions[questionNumber].time" class="select-box">
+          <option value="30">30</option>
+          <option value="20">20</option>
+          <option value="15">15</option>
+          <option value="10">10</option>
         </select>
       </p>
       <!--button v-on:click="setGameTime(setTime);" type="submit">
@@ -198,13 +196,9 @@ export default {
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, quizName: this.quizName })
       socket.emit("joinPoll", this.pollId);
     },
-    /**startPoll: function () {
-      socket.emit("startPoll", this.pollId)
-    },*/
     addQuestion: function () {
       this.questions.push(new Question(""));
       this.questionNumber = this.questions.length-1;
-      //socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
     },
     removeQuestion: function (i) {
       if(i===this.questionNumber){
@@ -225,9 +219,6 @@ export default {
       this.questions[this.questionNumber].a.push({text:"", correct: false});
       console.log(this.questions);
     },
-    /**runQuestion: function () {
-      socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
-    },*/
     async pickFile() {
       const input = this.$refs.fileInput;
       const file = input.files[0];
@@ -277,6 +268,7 @@ export default {
   }
 }
 </script>
+
 <style scoped>
 #quiz-container {
   display: flex;
@@ -289,12 +281,6 @@ export default {
   margin: auto;
 }
 
-.correct-answer-container{
-  display: flex;
-  flex-direction: row;
-
-
-}
 .start-quiz {
   margin: 1rem 3rem;
   background-color: var(--p-green);
@@ -382,14 +368,6 @@ footer{
   margin-right: auto;
   height: 50px;
   width: 50px;
-}
-
-.logo-img {
-  height: 70px;
-  margin: 0 auto;
-  margin-top: 16px;
-  padding-bottom: 1rem;
-  padding-left: 20%;
 }
 
 body{
