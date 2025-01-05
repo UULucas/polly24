@@ -70,7 +70,7 @@
       <br>
     </form>
     <label v-if="gameStarted">Time left:{{timeLeft}}</label>
-    <label v-if="gameStarted" class="text-box" style="font-size: 35px">Current question: {{questionNumber+1}}</label>
+    <label v-if="gameStarted" class="text-box" style="font-size: 35px">Current question: {{pollData.currentQuestion+1}}</label>
     <div class="start-section">
       <div v-if="gameStarted">
         <button class="start-button nav-button" @click="previousQuestion">Previous question</button>
@@ -100,8 +100,8 @@ export default {
       pollId: "",
       question: "",
       answers: ["", ""],
-      questionNumber: -1,
-      pollData: {},
+      //questionNumber: -1,
+      pollData: {currentQuestion: 0},
       uiLabels: {},
       imageUrl: "",
       gameStarted: false,
@@ -114,15 +114,12 @@ export default {
   created: function () {
     this.pollId = this.$route.params.id;
     socket.on( "uiLabels", labels => this.uiLabels = labels );
-    socket.on( "pollData", data => this.pollData = data );
+    socket.on( "pollData", data => this.loadQuiz(data) );
     socket.on( "participantsUpdate", p => this.pollData.participants = p );
-    socket.on('currentQuestion',p => this.questionNumber = p );
-    socket.on('gameRunning', p => this.gameStarted = p );
     socket.emit( "getUILabels", this.lang );
-    socket.emit("createPoll", {pollId: this.pollId})
+    socket.emit("createPoll", {pollId: this.pollId}) //Hämtar all data redan
     socket.emit( "joinPoll", this.pollId );
-    socket.emit("getCurrentQuestion", this.pollId);
-    socket.emit("isGameRunning", this.pollId);
+    socket.emit("loadQuiz", this.pollId);
   },
   watch: {
     timeLeft: {
@@ -141,23 +138,23 @@ export default {
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: questionNumber});
     },
     previousQuestion: function () {
-      if(this.setGameTime()&&this.questionNumber>0){
-        this.questionNumber--;
-        this.runQuestion(this.questionNumber)
+      if(this.setGameTime()&&this.pollData.currentQuestion>0){
+        this.pollData.currentQuestion--;
+        this.runQuestion(this.pollData.currentQuestion)
       }
     },
     nextQuestion: function () {
-      if(this.setGameTime()&&this.questionNumber<this.pollData.questions.length-1){
-        this.questionNumber++;
-        this.runQuestion(this.questionNumber);
+      if(this.setGameTime()&&this.pollData.currentQuestion<this.pollData.questions.length-1){
+        this.pollData.currentQuestion++;
+        this.runQuestion(this.pollData.currentQuestion);
       }
     },
     startQuiz: function (){
       if(this.setGameTime()){
         this.gameStarted = true;
-        this.questionNumber = 0;
+        this.pollData.currentQuestion = 0;
         socket.emit("startPoll", this.pollId)
-        this.runQuestion(this.questionNumber)
+        this.runQuestion(this.pollData.currentQuestion)
       }
     },
     copyText: function () {
@@ -165,10 +162,10 @@ export default {
       navigator.clipboard.writeText(copyText); //kod tagen från W3
       alert("Copied the text: " + copyText);
     },
-    setGameTime: function (){
+    setGameTime: function (time = this.setTime){
       clearTimeout(this.timeOutID);
-      if(this.setTime>0){
-        this.timeLeft = this.setTime;
+      if(time>0){
+        this.timeLeft = time;
         return true;
       }
       else{
@@ -176,6 +173,10 @@ export default {
         return false;
       }
     },
+    loadQuiz: function (data){
+      this.pollData = data;
+      this.gameStarted = data.currentQuestion > -1;
+    }
   }
 }
 </script>

@@ -10,8 +10,6 @@ function sockets(io, socket, data) {
   });
 
   socket.on('addQuestion', function(d) {
-    //console.log("test"+typeof d.data.img);
-    console.log("tttttttttttttttteeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeesssssssssssssssssssssttttttttttttttttttttt");
     data.addQuestion(d.pollId, d.data);
 
     socket.emit('questionUpdate', data.activateQuestion(d.pollId));
@@ -52,15 +50,6 @@ function sockets(io, socket, data) {
     data.setTime(d.pollId, d.time);
     io.to(d.pollId).emit('timeUpdate', data.getTime(d.pollId))
   });
-
-  socket.on('getCurrentQuestion', function(pollId) {
-    socket.emit('currentQuestion', data.getCurrentQuestion(pollId));
-  });
-
-  socket.on('isGameRunning', function (pollId){
-    socket.emit('gameRunning', data.isGameRunning(pollId))
-  });
-
 
 }
 

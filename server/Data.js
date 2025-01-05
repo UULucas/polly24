@@ -142,25 +142,6 @@ Data.prototype.getTime = function(pollId) {
   return {}
 }
 
-Data.prototype.getCurrentQuestion = function(pollId){
-    if (this.pollExists(pollId)){
-        const poll = this.polls[pollId];
-        return poll.currentQuestion;
-    }
-    return null;
-}
-
-Data.prototype.isGameRunning = function(pollId){
-    if (this.pollExists(pollId)){
-        const poll = this.polls[pollId];
-        if(poll.currentQuestion>-1){
-            return true;
-        }
-    }
-    return false;
-}
-
-
 Data.prototype.generateGameId= function(){
   if(this.polls.length>1000){ //In case we have 1000 quizes we can not generate new once
     return null;
