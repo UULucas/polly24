@@ -17,11 +17,7 @@
             class="idTextBox text-box"
             type="text"
             maxlength="30"
-<<<<<<< Updated upstream
             placeholder= "Game ID"
-=======
-            placeholder="uiLabels.enterGameId"
->>>>>>> Stashed changes
             v-model="pollId"><br>
 
         <button class="idButton nav-button" v-on:click="checkID">
@@ -458,7 +454,7 @@ video {
   border-radius: 1rem;
 }
 
-.header {
+header {
   display: flex;
   align-items: center;
   padding-top: 1rem;
