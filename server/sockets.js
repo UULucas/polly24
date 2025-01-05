@@ -38,8 +38,13 @@ function sockets(io, socket, data) {
   });
 
   socket.on('submitAnswer', function(d) {
-    data.submitAnswer(d.pollId, d.answer, d.playerName, d.score);
+    data.submitAnswer(d.pollId, d.answer);
     io.to(d.pollId).emit('submittedAnswersUpdate', data.getSubmittedAnswers(d.pollId));
+  });
+
+  socket.on('submitPlayerAnswer', function(d) {
+    console.log("Player answer reseved: "+d.answer+" score: "+d.score)
+    data.submitPlayerAnswer(d.pollId, d.answer, d.playerName, d.score);
   });
 
   socket.on('generateNewID', function (){

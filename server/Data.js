@@ -105,12 +105,8 @@ Data.prototype.getSubmittedAnswers = function(pollId) {
   return {}
 }
 
-Data.prototype.submitAnswer = function(pollId, answer, playerName, score) {
-  if(this.pollExists(pollId)) {
-    const poll = this.polls[pollId];
-
-  }
-  /**if (this.pollExists(pollId)) {
+Data.prototype.submitAnswer = function(pollId, answer) {
+  if (this.pollExists(pollId)) {
     const poll = this.polls[pollId];
     let answers = poll.answers[poll.currentQuestion];
     // create answers object if no answers have yet been submitted
@@ -127,8 +123,34 @@ Data.prototype.submitAnswer = function(pollId, answer, playerName, score) {
     else
       answers[answer] += 1
     console.log("answers looks like ", answers, typeof answers);
-  }*/
+  }
 }
+
+Data.prototype.submitPlayerAnswer = function(pollId, answer, playerName, score) {
+  console.log("testering")
+  if (this.pollExists(pollId)) {
+    const poll = this.polls[pollId];
+    const players = poll.participants;
+    const inGame = players.find(obj => obj.name === playerName);
+    if(inGame) {
+      //Lägg bara till svaret om man inte har svarat tidigare på den frågan
+      if(inGame.answers[poll.currentQuestion]===undefined){
+        inGame.answers.push(answer);
+        if(inGame.score === undefined){
+          inGame.score = score;
+        }
+        else{
+          inGame.score += score;
+        }
+      }
+    }
+    else{
+      console.log("No player found with name: "+playerName)
+    }
+    console.log(inGame);
+  }
+}
+
 Data.prototype.setTime = function(pollId, time) {
   if (this.pollExists(pollId)) {
     const poll = this.polls[pollId];

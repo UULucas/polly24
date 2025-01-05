@@ -84,13 +84,18 @@ export default {
         console.log(this.playerName)
         console.log("testtest")
         //läg till poäng och sånt skit
-        socket.emit("submitAnswer", {pollId: this.pollId, playerName: this.playerName, answer: answer, score:this.calculateScore})
+        const score = this.calculateScore();
+        console.log("answer sent: "+answer+" score: "+score);
+        socket.emit("submitPlayerAnswer", {pollId: this.pollId, playerName: this.playerName, answer: answer, score:score})
         this.answered = true;
       }
     },
     calculateScore: function () {
       const maxScore = 1000;
-      return maxScore*(this.timeLeft / this.question.questionTime);
+      const score = maxScore*(this.timeLeft / this.question.questionTime);
+      return score||0;
+
+
     },
     setTimeLeft: function () {
       document.documentElement.style.setProperty('--duration', this.timeLeft);
