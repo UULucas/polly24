@@ -53,15 +53,6 @@ function sockets(io, socket, data) {
     io.to(d.pollId).emit('timeUpdate', data.getTime(d.pollId))
   });
 
-  socket.on('getCurrentQuestion', function(pollId) {
-    socket.emit('currentQuestion', data.getCurrentQuestion(pollId));
-  });
-
-  socket.on('isGameRunning', function (pollId){
-    socket.emit('gameRunning', data.isGameRunning(pollId))
-  });
-
-
 }
 
 export { sockets };
