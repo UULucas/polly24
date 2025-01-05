@@ -97,8 +97,8 @@
         <button class="nav-button" @click="uploadAvatar">
           <img class="home-img" src="https://www.freeiconspng.com/thumbs/upload-icon/upload-icon-22.png" alt="Upload avatar" name="upload">
         </button>
+        <input type="file" ref="fileInput" accept="image/*" style="display: none;" @change="handleFileUpload">
         </div>
-
 
         <button class="idButton nav-button" v-on:click="submitNameAndAvatar">
           {{ uiLabels.joinButton }}
@@ -141,6 +141,7 @@
         avatar: this.avatar,
       } );
     },
+    
     checkID(){
       if (!this.pollId) {
         alert("Enter your name!");
@@ -260,6 +261,15 @@
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
       this.avatar = canvas.toDataURL("image/png");
       this.closeModal();
+
+    },
+
+    uploadAvatar() {
+      this.$refs.fileInput.click();
+    },
+
+    handleFileUpload(event) {
+      const file = event.target.files[0];
 
     },
 
