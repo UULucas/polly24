@@ -15,6 +15,7 @@
 
         <input
             class="idTextBox text-box"
+            id= "firstJoinBox"
             type="text"
             maxlength="30"
             placeholder= "Game ID"
@@ -96,6 +97,7 @@
           <img class="home-img" src="https://www.freeiconspng.com/thumbs/upload-icon/upload-icon-22.png" alt="Upload avatar" name="upload">
         </button>
         <input type="file" ref="fileInput" accept="image/*" style="display: none;" @change="handleFileUpload">
+        <canvas ref="uploadCanvas" style="display:none;"></canvas>
         </div>
 
         <button class="idButton nav-button" v-on:click="submitNameAndAvatar">
@@ -268,6 +270,29 @@
 
     handleFileUpload(event) {
       const file = event.target.files[0];
+      const maxFileSize = 6.8 * 1024 * 1024;
+
+      if (file && file.size > maxFileSize) {
+        alert("The selected file is too large. Try another file.");
+        this.$refs.fileInput.value = "";
+        return;
+      }
+
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = this.$refs.uploadCanvas;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            this.avatar = canvas.toDataURL("image/png");
+            console.log("Avatar updated successfully:", this.avatar);
+          };
+          img.src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+      }
 
     },
 
@@ -474,5 +499,9 @@ header {
 .nav-button {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
+}
+
+#firstJoinBox {
+  margin: auto;
 }
 </style>
