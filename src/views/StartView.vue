@@ -1,29 +1,12 @@
 <template>
   <header>
-    <link rel="stylesheet" href="../assets/main.css">
-    <div v-bind:class="['hamburger', {'close': !hideNav}]"
-         v-on:click="toggleNav">
-    </div>
-    <div class="logo">
-      <img src="/img/logo.png">
-      Fortnite 2
-      <img src="../assets/logo.svg">
+    <div class="fix">
+    <button class="nav-button" v-on:click="switchLanguage">
+      <img :src="uiLabels.changeLanguage" alt="" class="lang-img">
+    </button>
     </div>
   </header>
   <body>
-  <ResponsiveNav v-bind:hideNav="hideNav">
-    <button v-on:click="switchLanguage">
-      <img :src="uiLabels.changeLanguage" alt="" class="lang-img">
-    </button>
-    <router-link to="/create/">
-      {{ uiLabels.createPoll }}
-    </router-link>
-    <a href="">
-      {{ uiLabels.about }}
-    </a>
-    <a href="">FAQ</a>
-  </ResponsiveNav>
-
   <!--h1>{{ uiLabels["sales-pitch"] }}</h1-->
   <!--h2>{{ uiLabels.subHeading }}</h2-->
   <!--label>
@@ -103,6 +86,8 @@ export default {
 </script>
 <style scoped>
 
+
+
 #container {
   margin-top: 1rem;
   display: flex;
@@ -140,36 +125,18 @@ body{
 }
 
 header {
-  background-color: gray;
+  background-color: var(--p-blue);
   width: 100%;
   display: grid;
   grid-template-columns: 2em auto;
 }
-.logo {
-  text-transform: uppercase;
-  letter-spacing: 0.25em;
-  font-size: 2.5rem;
-  color: white;
-  padding-top:0.2em;
-}
+
 .logo img {
   height:2.5rem;
   vertical-align: bottom;
   margin-right: 0.5rem;
 }
-.hamburger {
-  color:white;
-  width:1em;
-  display: flex;
-  align-items: center;
-  justify-content: left;
-  padding:0.5rem;
-  top:0;
-  left:0;
-  height: 2rem;
-  cursor: pointer;
-  font-size: 1.5rem;
-}
+
 
 @media screen and (max-width:50em) {
   .logo {
@@ -187,5 +154,9 @@ header {
   .hide {
     left:-12em;
   }
+}
+
+.fix {
+  margin: 1rem;
 }
 </style>
