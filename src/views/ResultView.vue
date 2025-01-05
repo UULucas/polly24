@@ -1,5 +1,14 @@
 <template>
-  <div></div>
+  <header>
+    <router-link to="/" class = "nav-button">
+      <a>
+        <img class="home-img" src="../assets/home_icon.png" alt="HomeImg">
+      </a>
+    </router-link>
+    <button class=" nav-button" v-on:click="switchLanguage">
+      <img :src="uiLabels.changeLanguage" alt="" class="lang-img">
+    </button>
+  </header>
 
   <div>
     lang: {{ lang }}
@@ -41,6 +50,39 @@ export default {
     socket.emit("getUILabels", this.lang);
     socket.emit("joinPoll", this.pollId);
     socket.emit("getParticipants", this.pollId);
+  },
+  methods: {
+    switchLanguage: function() {
+      if (this.lang === "en") {
+        this.lang = "sv"
+      }
+      else {
+        this.lang = "en"
+      }
+      localStorage.setItem( "lang", this.lang );
+      socket.emit( "getUILabels", this.lang );
+    },
   }
 }
 </script>
+<style scoped>
+header {
+  display: flex;
+  align-items: center;
+  padding-top: 1rem;
+  position: relative;
+  padding-left: 1rem;
+  gap: 1rem ;
+}
+
+.home-img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 50px;
+  width: 50px;
+}
+
+
+
+</style>
