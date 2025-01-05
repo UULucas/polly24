@@ -19,7 +19,7 @@
             class="idTextBox text-box"
             type="text"
             maxlength="30"
-            placeholder={{ uiLabels.enterGameId }}
+            placeholder= "Game ID"
             v-model="pollId"><br>
 
         <button class="idButton nav-button" v-on:click="checkID">
@@ -34,7 +34,7 @@
               class="idTextBox text-box"
               type="text"
               maxlength="30"
-              placeholder={{ uiLabels.enterPlayername }}
+              placeholder= "Your Name Here"
               v-model="userName"><br>
 
         <div><label for="avatarChoice">Choose an avatar:</label></div>
