@@ -12,15 +12,14 @@
   {{ a.text }}
 </button>
 </div>
-<div v-if="question.time < 1">
-  {{ resetButtons(question.a) }}
-</div>
+
 </template>
 <script>
 export default {
   name: 'QuestionComponent',
   props: {
-    question: Object
+    question: Object,
+    timeLeft: Object,
   },
   emits: ["answer"],
   methods: {

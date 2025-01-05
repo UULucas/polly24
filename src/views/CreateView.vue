@@ -71,7 +71,7 @@
     <form action= "" class="text-box">
       <p>
         <label for="Time">Choose time of the question (seconds)</label>
-        <select id="Time" v-model="questions[questionNumber].time">
+        <select id="Time" v-model="questions[questionNumber].questionTime">
           <option selected="selected">30</option>
           <option>20</option>
           <option>15</option>
@@ -138,7 +138,8 @@ class Question {
     this.q = question;
     this.a = answers;
     this.img = img;
-    this.time = time;
+    this.questionTime = time;
+    this.timeRemaining = time;
   }
   getAnswers(){
     let a = [];
