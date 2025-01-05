@@ -1,15 +1,13 @@
 <template>
   <header>
-    <div class="header">
-      <router-link to="/" class= "nav-button">
-        <a>
-          <img class="home-img" src="../assets/home_icon.png" alt="HomeImg">
-        </a>
-      </router-link>
-      <button class=" nav-button" v-on:click="switchLanguage">
-        <img :src="uiLabels.changeLanguage" alt="" class="lang-img">
-      </button>
-    </div>
+    <router-link to="/" class= "nav-button">
+      <a>
+        <img class="home-img" src="../assets/home_icon.png" alt="HomeImg">
+      </a>
+    </router-link>
+    <button class=" nav-button" v-on:click="switchLanguage">
+      <img :src="uiLabels.changeLanguage" alt="" class="lang-img">
+    </button>
   </header>
 
     <div id="joinScreen">
@@ -19,7 +17,11 @@
             class="idTextBox text-box"
             type="text"
             maxlength="30"
+<<<<<<< Updated upstream
             placeholder= "Game ID"
+=======
+            placeholder="uiLabels.enterGameId"
+>>>>>>> Stashed changes
             v-model="pollId"><br>
 
         <button class="idButton nav-button" v-on:click="checkID">
@@ -39,7 +41,7 @@
 
         <div><label for="avatarChoice">Choose an avatar:</label></div>
         <img :src="avatar" alt="avatar" class="avatar-preview"><br>
-        
+
         <div class="avatarButtonWrapper">
         <button class="nav-button" @click="openDrawModal">
           <img class="home-img" src="https://www.freeiconspng.com/uploads/paint-brush-icon-10.png" alt="Draw avatar" name="draw">
@@ -49,31 +51,31 @@
 
           <div class="drawModal-content">
             <span class="closeModal" @click="closeModal">&times;</span>
-            
+
             <div id="toolbar">
 
             <div class="toolbar-item">
               <label for="strokeColor">Color</label>
               <input id="strokeColor" name="strokeColor" type="color">
             </div>
-            
-            <div class="toolbar-item"> 
+
+            <div class="toolbar-item">
               <label for="bgColor">Background color</label>
               <input id="bgColor" name="bgColor" type="color" value="white">
-            </div> 
+            </div>
 
-            <div class="toolbar-item"> 
+            <div class="toolbar-item">
               <label for="lineWidth">Width</label>
               <input id="lineWidth" name="lineWidth" type="number" value="5">
-            </div> 
+            </div>
 
             <div class="toolbar-item">
               <button id="undo" @click="undoLastStroke">Undo</button>
             </div>
 
-            <div class="toolbar-item"> 
+            <div class="toolbar-item">
               <button id="clear" @click="clearCanvas">Clear</button>
-            </div> 
+            </div>
 
             </div>
             <canvas ref="drawingCanvas" width="500" height="500"></canvas><br>
@@ -107,11 +109,11 @@
     </div>
   </div>
   </template>
-  
+
   <script>
   import io from 'socket.io-client';
   const socket = io("localhost:3000");
-  
+
   export default {
     name: 'JoinView',
     data: function () {
@@ -183,7 +185,7 @@
         const colorInput = document.getElementById('strokeColor');
         const widthInput = document.getElementById('lineWidth');
         ctx.strokeStyle = colorInput.value;
-        ctx.lineWidth = widthInput.value; 
+        ctx.lineWidth = widthInput.value;
       };
 
       const colorInput = document.getElementById('strokeColor');
@@ -248,7 +250,7 @@
     stopCam: function() {
       if (this.camStream) {
       this.camStream.getTracks().forEach((track) => track.stop());
-      this.camStream = null; 
+      this.camStream = null;
       }
     },
 
@@ -423,8 +425,8 @@
 }
 
 #submitDrawingButton {
-  align-self: center; 
-  margin-top: auto; 
+  align-self: center;
+  margin-top: auto;
   padding: 0.5rem 2rem;
   font-size: 1rem;
   margin-top: 0.5rem;
