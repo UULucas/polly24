@@ -68,16 +68,14 @@
         </button>
       </div>
     </div>
-    <form action= "" class="timer-box text-box">
+    <form action="" class="timer-box text-box">
       <p>
-        <label for="Time">{{uiLabels.timeChoiceMessage}}</label>
-        <select class="select-box" id="Time" v-model="questions[questionNumber].time">
-        <label for="Time">{{uiLabels.timeChoiceMessage}}</label>
-        <select id="Time" v-model="questions[questionNumber].time">
-          <option selected="selected">30</option>
-          <option>20</option>
-          <option>15</option>
-          <option>10</option>
+        <label for="Time">Choose time of the question (seconds)</label>
+        <select id="Time" v-model="questions[questionNumber].time" class="select-box">
+          <option value="30">30</option>
+          <option value="20">20</option>
+          <option value="15">15</option>
+          <option value="10">10</option>
         </select>
       </p>
       <!--button v-on:click="setGameTime(setTime);" type="submit">
