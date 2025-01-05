@@ -30,13 +30,6 @@
       {{ uiLabels.createQuiz }}
       </router-link>
     </button>
-
-    <div id="pond">
-      <button class="rectangle2 nav-button">
-        {{ uiLabels.navigateQuiz }}</button>
-      <button class="rectangle2 nav-button">
-        {{ uiLabels.createAccount }}</button>
-    </div>
   </div>
   </body>
 </template>
