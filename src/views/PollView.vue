@@ -15,7 +15,7 @@
 </template>
 
 <script>
-// @ is an alias to /src
+
 import QuestionComponent from '@/components/QuestionComponent.vue';
 import io from 'socket.io-client';
 const socket = io("localhost:3000");
@@ -45,13 +45,11 @@ export default {
   },
   created: function () {
     this.pollId = this.$route.params.id;
-    socket.on( "questionUpdate", q => this.loadQuestion(q));//this.question = q, this.reset(), this.startTimer());
+    socket.on( "questionUpdate", q => this.loadQuestion(q));
     socket.on( "submittedAnswersUpdate", answers => this.submittedAnswers = answers );
     socket.on( "uiLabels", labels => this.uiLabels = labels );
-    //socket.on("timeUpdate", time => this.question.timerValue = time, this.setTimeLeft());
     socket.emit( "getUILabels", this.lang );
     socket.emit( "joinPoll", this.pollId );
-    //this.countDownTime();
   },
   watch: {
     timeLeft: {
