@@ -88,6 +88,7 @@ Data.prototype.addQuestion = function(pollId, q) {
 Data.prototype.activateQuestion = function(pollId, qId = null) {
   if (this.pollExists(pollId)) {
     const poll = this.polls[pollId];
+    //poll.questions[poll.currentQuestion].timeRemaining = poll.questions[poll.currentQuestion].questionTime;
     if (qId !== null) {
       poll.currentQuestion = qId;
     }
@@ -130,7 +131,7 @@ Data.prototype.submitAnswer = function(pollId, answer) {
 Data.prototype.setTime = function(pollId, time) {
   if (this.pollExists(pollId)) {
     const poll = this.polls[pollId];
-    poll.time = time;
+    poll.questions[poll.currentQuestion].timeRemaining = time
     //sjukt om det bara funkar såhär
   }
 }

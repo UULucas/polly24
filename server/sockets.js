@@ -35,7 +35,6 @@ function sockets(io, socket, data) {
     let question = data.activateQuestion(d.pollId, d.questionNumber);
     io.to(d.pollId).emit('questionUpdate', question);
     io.to(d.pollId).emit('submittedAnswersUpdate', data.getSubmittedAnswers(d.pollId));
-    io.to(d.pollId).emit('timeUpdate', question.time);
   });
 
   socket.on('submitAnswer', function(d) {
@@ -47,11 +46,10 @@ function sockets(io, socket, data) {
     socket.emit('newID', data.generateGameId())
   });
 
-  socket.on('timeLeft', function(d) {
+  socket.on('updateTime', function(d) {
     data.setTime(d.pollId, d.time);
-    io.to(d.pollId).emit('timeUpdate', data.getTime(d.pollId))
+    //io.to(d.pollId).emit('timeUpdate', d.time)
   });
-  
 }
 
 export { sockets };

@@ -15,7 +15,7 @@
       </button>
 
     <button class="start-quiz nav-button" @click="startQuiz">
-        {{uiLabels.startQuiz}}
+        Starta quiz
     </button>
     </div>
   </header>
@@ -45,7 +45,7 @@
            v-bind:key="'answer' + i">
         <input
             v-model="questions[questionNumber].a[i].text"
-            class="answerTextBox text-box"
+            class="text-box"
             type="text"
             placeholder="Svar"
             @input="questions[questionNumber].a[i]=text"
@@ -68,14 +68,14 @@
         </button>
       </div>
     </div>
-    <form action="" class="timer-box text-box">
+    <form action= "" class="text-box">
       <p>
         <label for="Time">Choose time of the question (seconds)</label>
-        <select id="Time" v-model="questions[questionNumber].time" class="select-box">
-          <option value="30">30</option>
-          <option value="20">20</option>
-          <option value="15">15</option>
-          <option value="10">10</option>
+        <select id="Time" v-model="questions[questionNumber].questionTime">
+          <option selected="selected">30</option>
+          <option>20</option>
+          <option>15</option>
+          <option>10</option>
         </select>
       </p>
       <!--button v-on:click="setGameTime(setTime);" type="submit">
@@ -117,7 +117,7 @@
       </button>
     </div>
     <button class="nav-button" style="font-size: 35px; margin-top: 1rem;" @click="addQuestion">
-      <label>{{uiLabels.addQuestion}}</label>
+      <label>Add question</label>
     </button>
   </section>
   </body>
@@ -138,7 +138,8 @@ class Question {
     this.q = question;
     this.a = answers;
     this.img = img;
-    this.time = time;
+    this.questionTime = time;
+    this.timeRemaining = time;
   }
   getAnswers(){
     let a = [];
@@ -196,9 +197,13 @@ export default {
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, quizName: this.quizName })
       socket.emit("joinPoll", this.pollId);
     },
+    /**startPoll: function () {
+      socket.emit("startPoll", this.pollId)
+    },*/
     addQuestion: function () {
       this.questions.push(new Question(""));
       this.questionNumber = this.questions.length-1;
+      //socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
     },
     removeQuestion: function (i) {
       if(i===this.questionNumber){
@@ -219,21 +224,24 @@ export default {
       this.questions[this.questionNumber].a.push({text:"", correct: false});
       console.log(this.questions);
     },
+    /**runQuestion: function () {
+      socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
+    },*/
     async pickFile() {
       const input = this.$refs.fileInput;
       const file = input.files[0];
       // Maximal filstorlek i Socket.IO är 1MB, vi sätter en gräns under det på 500kB
-      const maxFileSize = 6.8 * 1024 * 1024;
+      const maxFileSize = 0.5 * 1024 * 1024;
 
       if (file && file.size > maxFileSize) {
-        alert("The selected file is too large. Try another file.");
+        alert("The selected file is too large. Please choose a file smaller than 500 kB.");
         input.value = "";
         return;
       }
 
       if (file) {
         const options = {
-          maxSizeMB: 1,
+          maxSizeMB: 0.0007,
           maxWidthOrHeight: 1200,
           useWebWorker: true,    // Ökar prestandan
         };
@@ -268,7 +276,6 @@ export default {
   }
 }
 </script>
-
 <style scoped>
 #quiz-container {
   display: flex;
@@ -281,6 +288,12 @@ export default {
   margin: auto;
 }
 
+.correct-answer-container{
+  display: flex;
+  flex-direction: row;
+
+
+}
 .start-quiz {
   margin: 1rem 3rem;
   background-color: var(--p-green);
@@ -370,6 +383,14 @@ footer{
   width: 50px;
 }
 
+.logo-img {
+  height: 70px;
+  margin: 0 auto;
+  margin-top: 16px;
+  padding-bottom: 1rem;
+  padding-left: 20%;
+}
+
 body{
   display: flex;
 }
@@ -403,15 +424,5 @@ body{
   background-color: var(--p-blue);
 }
 
-.answerTextBox {
-  width: 17rem;
-}
 
-.timer-box {
-  width: 22rem;
-}
-
-.select-box {
-  margin: 0.5rem;
-}
 </style>

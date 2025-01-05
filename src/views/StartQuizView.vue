@@ -119,6 +119,7 @@ export default {
       //setTime: 0,
       timeLeft: 0,
       timeOutID: null,
+      timerOn: true,
 
     }
   },
@@ -134,12 +135,15 @@ export default {
   },
   watch: {
     timeLeft: {
-      handler(time){
-        if(time>0){
+      handler(){
+        console.log("updated time: "+this.timeLeft)
+        socket.emit("updateTime", {pollId: this.pollId, time: this.timeLeft});
+        if(this.timeLeft>0&&this.timerOn){
           this.timeOutID=setTimeout(() => {
             this.timeLeft--;
           }, 1000);
         }
+
       },
       immediate: true,
     }
@@ -175,9 +179,10 @@ export default {
       alert("Copied the text: " + copyText);
     },
     setGameTime: function (){
-      if(this.timeLeft!==this.pollData.questions[this.pollData.currentQuestion].time){
+      if(this.timeLeft!==this.pollData.questions[this.pollData.currentQuestion].questionTime){
         clearTimeout(this.timeOutID);
-        this.timeLeft = this.pollData.questions[this.pollData.currentQuestion].time;
+        this.timeLeft = this.pollData.questions[this.pollData.currentQuestion].questionTime;
+        this.timerOn = true;
       }
     },
     loadQuiz: function (data){
