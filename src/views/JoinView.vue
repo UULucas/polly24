@@ -23,7 +23,7 @@
             v-model="pollId"><br>
 
         <button class="idButton nav-button" v-on:click="checkID">
-          JOIN!
+          {{ uiLabels.joinButton }}
         </button>
 
       </div>
@@ -45,7 +45,6 @@
         <div v-if="isDrawModalOpen" class="modal" @click.self="closeModal">
 
           <div class="drawModal-content">
-            <h2>Draw your avatar!</h2><br>
             <span class="closeModal" @click="closeModal">&times;</span>
             
             <div id="toolbar">
@@ -93,7 +92,7 @@
 
 
         <button class="idButton nav-button" v-on:click="submitNameAndAvatar">
-          Join game!
+          {{ uiLabels.joinButton }}
         </button>
       </div>
     </div>
@@ -325,16 +324,21 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   width: auto;
-  background-color: var(--p-beige);
+  background-color: var(--p-blue);
   align-items: center;
+  margin-top: 2rem;
+  border: none;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
 }
 
 #toolbar * {
-  margin-bottom: 6px;
+  margin-bottom: 0.2rem;
 }
 
 #toolbar input {
   width: 3rem;
+  height: 2rem;
 }
 
 #toolbar button {

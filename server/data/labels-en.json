@@ -11,5 +11,7 @@
 	"joinQuiz": "Join Quiz",
 	"createQuiz": "Create Quiz",
 	"navigateQuiz": "Search Quizzes",
-	"createAccount": "Create Account"
+	"createAccount": "Create Account",
+	"enterGameId": "Enter Game ID",
+	"joinButton": "Join!"
 }

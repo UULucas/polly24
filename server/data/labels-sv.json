@@ -11,5 +11,7 @@
 	"joinQuiz": "Gå med quiz",
 	"createQuiz": "Skapa Quiz",
 	"navigateQuiz": "Sök andras Quiz",
-	"createAccount": "Skapa konto"
+	"createAccount": "Skapa konto",
+	"enterGameId": "Ange Spel ID",
+	"joinButton": "Gå med!"
 }
