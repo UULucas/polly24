@@ -45,7 +45,7 @@
            v-bind:key="'answer' + i">
         <input
             v-model="questions[questionNumber].a[i].text"
-            class="text-box"
+            class="answerTextBox text-box"
             type="text"
             placeholder="Svar"
             @input="questions[questionNumber].a[i]=text"
@@ -68,8 +68,10 @@
         </button>
       </div>
     </div>
-    <form action= "" class="text-box">
+    <form action= "" class="timer-box text-box">
       <p>
+        <label for="Time">{{uiLabels.timeChoiceMessage}}</label>
+        <select class="select-box" id="Time" v-model="questions[questionNumber].time">
         <label for="Time">{{uiLabels.timeChoiceMessage}}</label>
         <select id="Time" v-model="questions[questionNumber].time">
           <option selected="selected">30</option>
@@ -230,17 +232,17 @@ export default {
       const input = this.$refs.fileInput;
       const file = input.files[0];
       // Maximal filstorlek i Socket.IO är 1MB, vi sätter en gräns under det på 500kB
-      const maxFileSize = 0.5 * 1024 * 1024;
+      const maxFileSize = 6.8 * 1024 * 1024;
 
       if (file && file.size > maxFileSize) {
-        alert("The selected file is too large. Please choose a file smaller than 500 kB.");
+        alert("The selected file is too large. Try another file.");
         input.value = "";
         return;
       }
 
       if (file) {
         const options = {
-          maxSizeMB: 0.0007,
+          maxSizeMB: 1,
           maxWidthOrHeight: 1200,
           useWebWorker: true,    // Ökar prestandan
         };
@@ -423,5 +425,15 @@ body{
   background-color: var(--p-blue);
 }
 
+.answerTextBox {
+  width: 17rem;
+}
 
+.timer-box {
+  width: 22rem;
+}
+
+.select-box {
+  margin: 0.5rem;
+}
 </style>

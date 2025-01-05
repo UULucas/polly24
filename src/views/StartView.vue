@@ -30,13 +30,6 @@
       {{ uiLabels.createQuiz }}
       </router-link>
     </button>
-
-    <div id="pond">
-      <button class="rectangle2 nav-button">
-        {{ uiLabels.navigateQuiz }}</button>
-      <button class="rectangle2 nav-button">
-        {{ uiLabels.createAccount }}</button>
-    </div>
   </div>
   </body>
 </template>
@@ -135,25 +128,6 @@ header {
   height:2.5rem;
   vertical-align: bottom;
   margin-right: 0.5rem;
-}
-
-
-@media screen and (max-width:50em) {
-  .logo {
-    font-size: 5vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .hamburger::before {
-    content: "☰";
-  }
-  .close::before {
-    content: "✕";
-  }
-  .hide {
-    left:-12em;
-  }
 }
 
 .fix {
