@@ -137,25 +137,6 @@ header {
   margin-right: 0.5rem;
 }
 
-
-@media screen and (max-width:50em) {
-  .logo {
-    font-size: 5vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .hamburger::before {
-    content: "☰";
-  }
-  .close::before {
-    content: "✕";
-  }
-  .hide {
-    left:-12em;
-  }
-}
-
 .fix {
   margin: 1rem;
 }
