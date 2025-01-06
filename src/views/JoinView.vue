@@ -124,7 +124,7 @@
         isDrawModalOpen: false,
         isCamModalOpen: false,
         camStream: null,
-        playerId: "",
+        lang: localStorage.getItem("lang") || "en",
 
       }
     },

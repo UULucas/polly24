@@ -58,10 +58,18 @@
             placeholder="Svar"
             @input="questions[questionNumber].a[i]=text"
             style="background-color: transparent; border: none; box-shadow: none; outline: none;">
-        <input
-            type="checkbox"
-            v-model="text.correct"
-        />
+
+        <div class="checkbox-container">
+
+          <input
+                id="'checkbox-correct-' + i"
+                type="checkbox"
+                v-model="text.correct"
+          />
+          <label :for="'checkbox-correct-' + i">&nbsp;&nbsp;&nbsp;&nbsp; Check if correct</label>
+
+        </div>
+
       </div>
       <div class="answer" >
         <button v-if="questions[questionNumber].a.length>1" class="add nav-button" @click="removeAnswer">
@@ -308,6 +316,69 @@ export default {
   background-color: var(--p-green);
   margin-left: 62%;
 }
+
+
+
+
+[type="checkbox"]{
+  position: relative;
+ opacity: 0;
+  transform:scale(3);
+  z-index: 2;
+  left: 1.6rem;
+  cursor:pointer;
+}
+
+[type="checkbox"] + label{
+  position: relative;
+  padding-left: 1rem;
+  
+  display: inline-block;
+  color:#666;
+  line-height: 2rem;
+  z-index: 1;
+}
+
+[type="checkbox"] + label::before{
+  content:"";
+  position: absolute;
+  left:0;
+  top:0;
+  width: 2rem;
+  height: 2rem;
+  outline: 2px solid #aaa;
+  background: var(--p-offWhite);
+  border-radius: 8px;
+  z-index: 1;
+}
+
+[type="checkbox"]:checked + label::before{
+  content:"";
+  position: absolute;
+  left:0;
+  top:0;
+  width: 2rem;
+  height: 2rem;
+  outline: 3px solid #008000;
+  background: var(--p-offWhite);
+  border-radius: 8px;
+  z-index: 1;
+}
+[type="checkbox"]:checked + label::after{
+  content:"";
+  position: absolute;
+  left:0;
+  top:0;
+  width: 2rem;
+  height: 2rem;
+  outline: 3px solid #008000;
+  background-image: url("../assets/pngegg.png");
+  background-size: contain;
+  border-radius: 8px;
+  z-index: 1;
+}
+
+
 
 .question-area {
   width: calc(100% - 3px);

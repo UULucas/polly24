@@ -66,6 +66,7 @@
           <div class="participants-name">
             {{"Score: " + participant.score}}
           </div>
+          <img v-if="participant.answers.length===this.pollData.currentQuestion+1&&this.gameStarted" :src="participant.avatar" alt="Checkmark">
         </div>
 
       </div>
@@ -141,7 +142,7 @@ export default {
   watch: {
     timeLeft: {
       handler(){
-        console.log("updated time: "+this.timeLeft)
+        //console.log("updated time: "+this.timeLeft)
         socket.emit("updateTime", {pollId: this.pollId, time: this.timeLeft});
         if(this.timeLeft>0&&this.timerOn){
           this.timeOutID=setTimeout(() => {
