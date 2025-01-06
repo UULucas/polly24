@@ -53,7 +53,7 @@
            v-bind:key="'answer' + i">
         <input
             v-model="questions[questionNumber].a[i].text"
-            class="text-box"
+            class="text-box answer-box"
             type="text"
             :placeholder="uiLabels.answerPlaceholder"
             @input="questions[questionNumber].a[i]=text"
@@ -66,7 +66,7 @@
                 type="checkbox"
                 v-model="text.correct"
           />
-          <label :for="'checkbox-correct-' + i">&nbsp;&nbsp;&nbsp;&nbsp; Check if correct</label>
+          <label :for="'checkbox-correct-' + i">&nbsp; </label>
 
         </div>
 
@@ -137,10 +137,6 @@
     </button>
   </section>
   </body>
-  <footer>
-
-  </footer>
-
 </template>
 
 <script>
@@ -300,7 +296,7 @@ export default {
   align-items: center;
   justify-content: flex-start;
   width: 60%;
-  height: 100vh;
+  height: 80vh;
   gap: 16px;
   margin: auto;
 }
@@ -318,10 +314,16 @@ export default {
 }
 
 
+.answer-box{
+  display: flex;
+  width: 70%;
+}
+
 .checkbox-container{
   display:flex;
   align-items: center;
-  justify-content: center;
+
+
 }
 
 [type="checkbox"]{
@@ -354,6 +356,8 @@ export default {
   background: var(--p-offWhite);
   border-radius: 8px;
   z-index: 1;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
 }
 
 [type="checkbox"]:checked + label::before{
@@ -367,6 +371,8 @@ export default {
   background: var(--p-offWhite);
   border-radius: 8px;
   z-index: 1;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
 }
 [type="checkbox"]:checked + label::after{
   content:"";
@@ -380,6 +386,8 @@ export default {
   background-size: contain;
   border-radius: 8px;
   z-index: 1;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
 }
 
 
@@ -439,11 +447,6 @@ input::file-selector-button {
 #imageAdded{
   height: 500px;
 }
-
-footer{
-  height: 100px;
-}
-
 .header {
   display: flex;
   align-items: center;
@@ -481,7 +484,7 @@ body{
 
 #side-table-wrapper{
   width: 30%;
-  height: 40rem;
+  height: 78vh;
   margin-right:1rem;
   border-radius: 1rem;
   padding: 1rem;
