@@ -104,7 +104,7 @@
       </div>
 
       <button v-if="!gameStarted" class="start-button nav-button" @click="startQuiz">
-        Starta spel</button>
+        {{ uiLabels.startGame }}</button>
     </div>
 
   </div>
@@ -191,7 +191,7 @@ export default {
     copyText: function () {
       var copyText = document.getElementById("pollId").innerText;
       navigator.clipboard.writeText(copyText); //kod tagen från W3
-      alert("Copied the text: " + copyText);
+      alert(this.uiLabels.copiedTextAlert + copyText);
     },
     setGameTime: function (){
       if(this.timeLeft!==this.pollData.questions[this.pollData.currentQuestion].questionTime){

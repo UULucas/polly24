@@ -37,5 +37,7 @@
 	"startQuizButton": "Starta quiz",
 	"chooseQuestionTime": "Välj svarstid (sekunder)",
 	"quizName": "Quiz namn",
-	"addQuestionQuiz": "Lägg till fråga"
+	"addQuestionQuiz": "Lägg till fråga",
+	"startGame": "Starta spel",
+	"copiedTextAlert": "Kopierade texten: "
 }

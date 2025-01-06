@@ -39,5 +39,7 @@
 	"startQuizButton": "Start quiz",
 	"chooseQuestionTime": "Choose time of the question (seconds)",
 	"quizName": "Quiz name",
-	"addQuestionQuiz": "Add question"
+	"addQuestionQuiz": "Add question",
+	"startGame": "Start game",
+	"copiedTextAlert": "Copied the text: "
 }
