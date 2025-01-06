@@ -320,13 +320,13 @@ export default {
 
 .answer-box{
   display: flex;
-  width: 22rem;
+  width: 70%;
 }
 
 .checkbox-container{
   display:flex;
   align-items: center;
-  justify-content: flex-end;
+  
 
 }
 
