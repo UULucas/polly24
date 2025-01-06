@@ -53,7 +53,7 @@
            v-bind:key="'answer' + i">
         <input
             v-model="questions[questionNumber].a[i].text"
-            class="text-box"
+            class="text-box answer-box"
             type="text"
             placeholder="Svar"
             @input="questions[questionNumber].a[i]=text"
@@ -66,7 +66,7 @@
                 type="checkbox"
                 v-model="text.correct"
           />
-          <label :for="'checkbox-correct-' + i">&nbsp;&nbsp;&nbsp;&nbsp; Check if correct</label>
+          <label :for="'checkbox-correct-' + i">&nbsp; </label>
 
         </div>
 
@@ -318,10 +318,16 @@ export default {
 }
 
 
+.answer-box{
+  display: flex;
+  width: 22rem;
+}
+
 .checkbox-container{
   display:flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+
 }
 
 [type="checkbox"]{
