@@ -62,9 +62,6 @@ export default {
       localStorage.setItem( "lang", this.lang );
       socket.emit( "getUILabels", this.lang );
     },
-    toggleNav: function () {
-      this.hideNav = ! this.hideNav;
-    }
   }
 }
 </script>

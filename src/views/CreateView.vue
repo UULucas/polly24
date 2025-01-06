@@ -28,8 +28,16 @@
       <img id="imageAdded" :src="this.questions[this.questionNumber].img"  alt="altImg"/>
     </div>
 
-    <div id="question-img-wrapper" class="nav-button">
-      <input ref="fileInput" type="file" accept="image/*" @input="pickFile" id="question-img">
+    <div id="question-img-wrapper" class="abc-button">
+      <input ref="fileInput" type="file" accept="image/*" @input="pickFile" id="question-img" style="display: none;">
+      <button @click="$refs.fileInput.click()" class="upload-button">
+        Upload Image
+      </button>
+      <div v-if="questions[questionNumber].fileName" class="file-name-display">
+        <div class="question-filename">
+        <p>{{ questions[questionNumber].fileName }}</p>
+        </div>
+      </div>
     </div>
 
     <input
@@ -134,12 +142,14 @@ const socket = io("localhost:3000");
 
 
 class Question {
-  constructor(question, answers = [{text:"", correct:false}], img = null, time = 20) {
+  constructor(question, answers = [{text:"", correct:false}], img = null, time = 20, fileName = "") {
     this.q = question;
     this.a = answers;
     this.img = img;
     this.questionTime = time;
     this.timeRemaining = time;
+    // nytest
+    this.fileName = fileName;
   }
   getAnswers(){
     let a = [];
@@ -203,6 +213,8 @@ export default {
     addQuestion: function () {
       this.questions.push(new Question(""));
       this.questionNumber = this.questions.length-1;
+      const input = this.$refs.fileInput;
+      input.value = "";
       //socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
     },
     removeQuestion: function (i) {
@@ -231,17 +243,17 @@ export default {
       const input = this.$refs.fileInput;
       const file = input.files[0];
       // Maximal filstorlek i Socket.IO är 1MB, vi sätter en gräns under det på 500kB
-      const maxFileSize = 0.5 * 1024 * 1024;
+      const maxFileSize = 5.8 * 1024 * 1024;
 
       if (file && file.size > maxFileSize) {
-        alert("The selected file is too large. Please choose a file smaller than 500 kB.");
+        alert("The selected file is too large. Please choose another file.");
         input.value = "";
         return;
       }
 
       if (file) {
         const options = {
-          maxSizeMB: 0.0007,
+          maxSizeMB: 1,
           maxWidthOrHeight: 1200,
           useWebWorker: true,    // Ökar prestandan
         };
@@ -251,12 +263,9 @@ export default {
         reader.onload = (e) => {
           // Sätter Base64 resultatet questions listan
           this.questions[this.questionNumber].img = e.target.result;
-
+          this.questions[this.questionNumber].fileName = file.name;
           // Låter oss previewa bilden
           this.previewImage = e.target.result;
-
-          // Debug-utskrifter om behövs
-          console.log("Image added to question:", this.questions[this.questionNumber].img);
         };
         reader.readAsDataURL(compressedFile);
       }
@@ -424,5 +433,35 @@ body{
   background-color: var(--p-blue);
 }
 
+.file-name-display {
+  font-size: 14px;
+  color: #555;
+}
 
+.upload-button {
+  background-color: var(--p-blue);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.question-filename {
+  margin-left: 1rem;
+  font-size: 16px;
+}
+
+.abc-button {
+  text-align: center;
+  padding: 20px;
+  background-color: var(--p-beige);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 50px;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 </style>
