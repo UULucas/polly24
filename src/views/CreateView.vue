@@ -137,10 +137,6 @@
     </button>
   </section>
   </body>
-  <footer>
-
-  </footer>
-
 </template>
 
 <script>
@@ -445,11 +441,6 @@ input::file-selector-button {
 #imageAdded{
   height: 500px;
 }
-
-footer{
-  height: 100px;
-}
-
 .header {
   display: flex;
   align-items: center;
