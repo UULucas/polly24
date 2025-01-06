@@ -8,10 +8,11 @@
   <p>{{question.q}}</p>
 </div>
 <div class="answerbox link-wrapper">
-<button id = "answer-buttons" class="answer-button"
+<button class="answer-button"
         v-for="(a, index) in question.a"
         :key="index"
         :ref="'a-' + index"
+        :id="'a-'+ index"
         v-on:click="answer(a); changeColor(index, a.correct); disableButtons(question.a)">
   {{ a.text }}
 </button>
@@ -22,21 +23,14 @@
 
 </template>
 <script>
+
 export default {
   name: 'QuestionComponent',
   props: {
     question: Object,
-    answered: Boolean,
     timeLeft: Number,
   },
   emits: ["answer"],
-  watch: {
-    timeLeft() {
-      if(this.timeLeft <= 0) {
-        this.disableButtons(this.question.a);
-      }
-    },
-  },
   methods: {
     answer: function (answer) {
       this.$emit("answer", answer);
@@ -44,23 +38,30 @@ export default {
     },
     disableButtons: function (len) {
       for (let i = 0; i < len.length; i++) {
-        const targetDiv = this.$refs['a-' + i][0]; // Access the ref
-        targetDiv.disabled = true;
+        //const targetDiv = this.$refs['a-' + i][0]; // Access the ref
+        const targetDiv = document.getElementById('a-' + i); // Access the ref
+        //targetDiv.disabled = true;
+        targetDiv.setAttribute('disabled', true);
       }
-      const button = document.getElementsByClassName("answer-button");
+      /**const button = document.getElementsByClassName("answer-button");
       // Disable the button
-      button.disabled = true;
+      button.disabled = true;*/
     },
     resetButtons: function (len) {
       for (let i = 0; i < len.length; i++) {
-        const targetDiv = this.$refs['a-' + i][0]; // Access the ref
-        targetDiv.disabled = !targetDiv.disabled;
-        targetDiv.style.backgroundColor = 'var(--p-beige)';
+        const targetDiv = document.getElementById('a-' + i); // Access the ref
+        if(targetDiv){
+          if(targetDiv.hasAttribute('disabled')){
+            console.log("button reset")
+            targetDiv.disabled = false;
+            targetDiv.style.backgroundColor = 'var(--p-beige)';
+          }
+        }
       }
     },
 
     changeColor: function (i, correct){
-      const targetDiv = this.$refs['a-' + i][0]; // Access the ref
+      const targetDiv = document.getElementById('a-' + i); // Access the ref
       targetDiv.disabled = true;
       if (targetDiv) {
         if(correct){
@@ -70,7 +71,8 @@ export default {
           targetDiv.style.backgroundColor = 'var(--p-red)';
         }
 
-        targetDiv.style.border = '5px solid #ddd';
+        //Tog bort border
+        //targetDiv.style.border = '5px solid #ddd';
 
         //add if statement to change to red green depending on right/wrong answer
         //targetDiv.style.backgroundColor = 'var(--p-red)'; 
