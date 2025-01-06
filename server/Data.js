@@ -60,10 +60,10 @@ Data.prototype.getPoll = function(pollId) {
   return {};
 }
 
-Data.prototype.participateInPoll = function(pollId, name, avatar) {
-  console.log("participant will be added to", pollId, name);
+Data.prototype.participateInPoll = function(pollId, name, avatar, id) {
+  console.log("participant will be added to", pollId, "name: ",name," id: " ,id);
   if (this.pollExists(pollId)) {
-    this.polls[pollId].participants.push({name: name, answers: [], avatar: avatar, score: 0});
+    this.polls[pollId].participants.push({name: name, answers: [], avatar: avatar, score: 0, id:id});
   }
 }
 
@@ -126,12 +126,12 @@ Data.prototype.submitAnswer = function(pollId, answer) {
   }
 }
 
-Data.prototype.submitPlayerAnswer = function(pollId, answer, playerName, score) {
+Data.prototype.submitPlayerAnswer = function(pollId, answer, playerId, score) {
   console.log("testering")
   if (this.pollExists(pollId)) {
     const poll = this.polls[pollId];
     const players = poll.participants;
-    const inGame = players.find(obj => obj.name === playerName);
+    const inGame = players.find(obj => obj.id === playerId);
     if(inGame) {
       //Lägg bara till svaret om man inte har svarat tidigare på den frågan
       if(inGame.answers[poll.currentQuestion]===undefined){
@@ -145,7 +145,7 @@ Data.prototype.submitPlayerAnswer = function(pollId, answer, playerName, score) 
       }
     }
     else{
-      console.log("No player found with name: "+playerName)
+      console.log("No player found with name: "+playerId)
     }
     console.log(inGame);
   }

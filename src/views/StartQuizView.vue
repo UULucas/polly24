@@ -49,7 +49,9 @@
 
       <div class="participants"> <!--  Denna diven är till för att ha våra participants i så vi kan
                                           nog bara sätta en array här i med dom som går med spelet-->
-        <div v-for="participant in pollData.participants" :key="participant.id"  class="text-box" >
+        <div v-for="participant in pollData.participants"
+             :key="participant.id"
+             class="text-box">
           <div class="participants-name">
             {{participant.name}}
           </div>
@@ -61,6 +63,9 @@
                  height: 4rem;
                  border: none;
                  border-radius: 1rem;">
+          <div class="participants-name">
+            {{"Score: " + participant.score}}
+          </div>
         </div>
 
       </div>

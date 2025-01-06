@@ -124,6 +124,7 @@
         isDrawModalOpen: false,
         isCamModalOpen: false,
         camStream: null,
+        playerId: "",
 
       }
     },
@@ -135,14 +136,33 @@
   },
   methods: {
     participateInPoll: function () {
+      this.generatePlayerId();
+
       socket.emit( "participateInPoll", {
         pollId: this.pollId,
         name: this.userName,
         avatar: this.avatar,
+        id:this.playerId,
       } );
+
+      this.$router.push({
+        name: "LobbyView",
+        params: {
+          id: this.pollId,
+          userName: this.userName,
+          avatar: this.avatar,
+          playerId: this.playerId,
+        },
+      });
     },
-    
+    generatePlayerId: function (){
+      const now = new Date().getTime(); // Hämta aktuell tid i millisekunder
+      const random = Math.random().toString(36).substring(2); // Generera en slumpmässig sträng
+      this.playerId = btoa(`${now}-${random}`); // Kombinera tid och slumpsträng och Base64-koda
+      console.log(this.playerId);
+    },
     checkID(){
+      console.log("test",this.playerId)
       if (!this.pollId) {
         alert("Enter your Game ID!");
         return;
@@ -150,6 +170,14 @@
       else{
         this.joined = true;
       }
+    },
+    submitNameAndAvatar: function() {
+      if (!this.userName) {
+        alert("You have to choose a name!");
+        return;
+      }
+
+      this.participateInPoll()
     },
 
     openDrawModal: function() {
@@ -306,35 +334,6 @@
       localStorage.setItem( "lang", this.lang );
       socket.emit( "getUILabels", this.lang );
     },
-
-
-    submitNameAndAvatar: function() {
-      if (!this.userName) {
-        alert("You have to choose a name!");
-        return;
-      }
-      /*socket.emit("submitNameAndAvatar", {
-        userName: this.userName,
-        avatar: this.avatar,
-      });*/
-      this.participateInPoll()
-
-      /*console.log({
-    id: this.pollId,
-    userName: this.userName,
-    testing
-    avatar: this.avatar,
-    });*/
-
-      this.$router.push({
-      name: "LobbyView",
-      params: {
-        id: this.pollId,
-        userName: this.userName,
-        avatar: this.avatar,
-      },
-    });
-  },
 },
   }
   </script>

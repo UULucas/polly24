@@ -12,7 +12,7 @@
         v-for="(a, index) in question.a"
         :key="index"
         :ref="'a-' + index"
-        v-on:click="answer(a.text); changeColor(index, a.correct); disableButtons(question.a)">
+        v-on:click="answer(a); changeColor(index, a.correct); disableButtons(question.a)">
   {{ a.text }}
 </button>
 </div>

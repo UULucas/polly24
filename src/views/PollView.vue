@@ -39,14 +39,14 @@ export default {
       submittedAnswers: {},
       unstarted: false,
       answered : false,
-      playerName: "",
+      playerId: "",
 
       timeLeft: 0,
     }
   },
   created: function () {
     this.pollId = this.$route.params.id;
-    this.playerName = this.$route.params.name;
+    this.playerId = this.$route.params.playerId;
     socket.on( "questionUpdate", q => this.loadQuestion(q))
     socket.on( "submittedAnswersUpdate", answers => this.submittedAnswers = answers );
     socket.on( "uiLabels", labels => this.uiLabels = labels );
@@ -81,21 +81,22 @@ export default {
     },
     submitAnswer: function (answer) {
       if(!this.answered){
-        console.log(this.playerName)
+        console.log(this.playerId)
         console.log("testtest")
         //läg till poäng och sånt skit
-        const score = this.calculateScore();
-        console.log("answer sent: "+answer+" score: "+score);
-        socket.emit("submitPlayerAnswer", {pollId: this.pollId, playerName: this.playerName, answer: answer, score:score})
+        const score = this.calculateScore(answer);
+        console.log("answer sent: "+answer.correct+" score: "+score);
+        socket.emit("submitPlayerAnswer", {pollId: this.pollId, playerId: this.playerId, answer: answer.text, score:score})
         this.answered = true;
       }
     },
-    calculateScore: function () {
-      const maxScore = 1000;
-      const score = maxScore*(this.timeLeft / this.question.questionTime);
-      return score||0;
-
-
+    calculateScore: function (answer) {
+      if(answer.correct){
+        const maxScore = 1000;
+        const score = maxScore*(this.timeLeft / this.question.questionTime);
+        return score||0;
+      }
+      return 0;
     },
     setTimeLeft: function () {
       document.documentElement.style.setProperty('--duration', this.timeLeft);
