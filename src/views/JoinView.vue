@@ -124,6 +124,7 @@
         isDrawModalOpen: false,
         isCamModalOpen: false,
         camStream: null,
+        lang: localStorage.getItem( "lang") || "en",
 
       }
     },
