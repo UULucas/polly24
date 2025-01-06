@@ -86,8 +86,8 @@
     </div>
     <form action= "" class="text-box">
       <p>
-        <label for="Time">Choose time of the question (seconds)</label>
-        <select id="Time" v-model="questions[questionNumber].questionTime">
+        <label class="choose-time-label" for="Time">Choose time of the question (seconds)</label>
+        <select class="time-selector" id="Time" v-model="questions[questionNumber].questionTime">
           <option selected="selected">30</option>
           <option>20</option>
           <option>15</option>
@@ -538,5 +538,14 @@ body{
   font-family: "Inter", sans-serif;
   font-weight: 400;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.time-selector {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.choose-time-label {
+  margin-left: 1rem;
 }
 </style>
