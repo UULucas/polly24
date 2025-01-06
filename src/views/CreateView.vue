@@ -318,7 +318,11 @@ export default {
 }
 
 
-
+.checkbox-container{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
 
 [type="checkbox"]{
   position: relative;
