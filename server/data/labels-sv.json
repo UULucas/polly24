@@ -24,5 +24,18 @@
 	"waitMessage": "Väntar på spelledare...",
 	"timeChoiceMessage": "Välj svarstid (sekunder)",
 	"addQuestion": "Lägg till fråga",
-	"enterPlayerName": "Ange spelarnamn"
+	"enterPlayerName": "Ange spelarnamn",
+	"chooseAvatar": "Välj en avatar:",
+	"namePlaceholder": "Ditt namn här",
+	"gameIdAlert": "Ange ditt Spel ID",
+	"nameAlert": "Du måste ange ett namn",
+	"fileTooBigAlert": "Filen du valt är för stor. Välj en annan fil.",
+	"uploadImage": "Ladda upp en bild",
+	"gameIDPlaceholder": "Spel ID",
+	"questionPlaceholder": "Fråga",
+	"answerPlaceholder": "Svar",
+	"startQuizButton": "Starta quiz",
+	"chooseQuestionTime": "Välj svarstid (sekunder)",
+	"quizName": "Quiz namn",
+	"addQuestionQuiz": "Lägg till fråga"
 }

@@ -18,7 +18,7 @@
             id= "firstJoinBox"
             type="text"
             maxlength="30"
-            placeholder= "Game ID"
+            :placeholder= "uiLabels.gameIDPlaceholder"
             v-model="pollId"><br>
 
         <button class="idButton nav-button" v-on:click="checkID">
@@ -33,10 +33,10 @@
               class="idTextBox text-box"
               type="text"
               maxlength="30"
-              placeholder= "Your Name Here"
+              :placeholder= "uiLabels.namePlaceholder"
               v-model="userName"><br>
 
-        <div><label for="avatarChoice">Choose an avatar:</label></div>
+        <div><label for="avatarChoice">{{ uiLabels.chooseAvatar }}</label></div>
         <img :src="avatar" alt="avatar" class="avatar-preview"><br>
 
         <div class="avatarButtonWrapper">
@@ -164,7 +164,7 @@
     checkID(){
       console.log("test",this.playerId)
       if (!this.pollId) {
-        alert("Enter your Game ID!");
+        alert(this.uiLabels.gameIdAlert);
         return;
       }
       else{
@@ -173,7 +173,7 @@
     },
     submitNameAndAvatar: function() {
       if (!this.userName) {
-        alert("You have to choose a name!");
+        alert(this.uiLabels.nameAlert);
         return;
       }
 
