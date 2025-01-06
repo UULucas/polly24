@@ -326,7 +326,7 @@ export default {
 .checkbox-container{
   display:flex;
   align-items: center;
-  
+
 
 }
 
@@ -360,6 +360,8 @@ export default {
   background: var(--p-offWhite);
   border-radius: 8px;
   z-index: 1;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
 }
 
 [type="checkbox"]:checked + label::before{
@@ -373,6 +375,8 @@ export default {
   background: var(--p-offWhite);
   border-radius: 8px;
   z-index: 1;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
 }
 [type="checkbox"]:checked + label::after{
   content:"";
@@ -386,6 +390,8 @@ export default {
   background-size: contain;
   border-radius: 8px;
   z-index: 1;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
 }
 
 
