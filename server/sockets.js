@@ -22,7 +22,7 @@ function sockets(io, socket, data) {
   });
 
   socket.on('participateInPoll', function(d) {
-    data.participateInPoll(d.pollId, d.name, d.avatar);
+    data.participateInPoll(d.pollId, d.name, d.avatar, d.id);
     io.to(d.pollId).emit('participantsUpdate', data.getParticipants(d.pollId));
   });
   socket.on('startPoll', function(pollId) {
@@ -40,6 +40,12 @@ function sockets(io, socket, data) {
   socket.on('submitAnswer', function(d) {
     data.submitAnswer(d.pollId, d.answer);
     io.to(d.pollId).emit('submittedAnswersUpdate', data.getSubmittedAnswers(d.pollId));
+  });
+
+  socket.on('submitPlayerAnswer', function(d) {
+    console.log("Player answer reseved: "+d.answer+" score: "+d.score)
+    data.submitPlayerAnswer(d.pollId, d.answer, d.playerId, d.score);
+    io.to(d.pollId).emit('participantsUpdate', data.getParticipants(d.pollId));
   });
 
   socket.on('generateNewID', function (){

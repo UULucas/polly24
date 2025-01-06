@@ -5,11 +5,11 @@
 
   </div>
   <body style="display: grid; margin-top: 1rem">
-    <label style="font-size: 50px; color:red">{{timeLeft}}</label>
-    {{question.questionTime}}
+    <!--label style="font-size: 50px; color:red">{{timeLeft}}</label!-->
     <div class="pollQuestion">
       <QuestionComponent v-bind:question="question"
                          v-bind:timeLeft="timeLeft"
+                         v-bind:answered="answered"
                          v-on:answer="submitAnswer($event)"/>
       <hr>
     </div>
@@ -39,14 +39,14 @@ export default {
       submittedAnswers: {},
       unstarted: false,
       answered : false,
-      playerName: "",
+      playerId: "",
 
       timeLeft: 0,
     }
   },
   created: function () {
     this.pollId = this.$route.params.id;
-    this.playerName = this.$route.params.name;
+    this.playerId = this.$route.params.playerId;
     socket.on( "questionUpdate", q => this.loadQuestion(q))
     socket.on( "submittedAnswersUpdate", answers => this.submittedAnswers = answers );
     socket.on( "uiLabels", labels => this.uiLabels = labels );
@@ -61,6 +61,9 @@ export default {
             this.timeLeft--;
           }, 1000);
         }
+        if(this.timeLeft<=0){
+          this.answered = true;
+        }
       },
       immediate: true,
     }
@@ -69,20 +72,31 @@ export default {
     loadQuestion: function (data){
       console.log("loaded question")
       this.question = data;
+      this.answered = false;
       this.startTimer();
       this.resetAnimation();
-    },
-    submitAnswer: function (answer) {
-      if(!answer){
-        console.log(this.playerName)
-        //läg till poäng och sånt skit
-        socket.emit("submitAnswer", {pollId: this.pollId,playerName: this.playerName, answer: answer, socre:this.calculateScore})
+      if(this.timeLeft<=0){
         this.answered = true;
       }
     },
-    calculateScore: function () {
-      const maxScore = 1000;
-      return maxScore*(this.timeLeft / this.question.questionTime);
+    submitAnswer: function (answer) {
+      if(!this.answered){
+        console.log(this.playerId)
+        console.log("testtest")
+        //läg till poäng och sånt skit
+        const score = this.calculateScore(answer);
+        console.log("answer sent: "+answer.correct+" score: "+score);
+        socket.emit("submitPlayerAnswer", {pollId: this.pollId, playerId: this.playerId, answer: answer.text, score:score})
+        this.answered = true;
+      }
+    },
+    calculateScore: function (answer) {
+      if(answer.correct){
+        const maxScore = 1000;
+        const score = maxScore*(this.timeLeft / this.question.questionTime);
+        return score||0;
+      }
+      return 0;
     },
     setTimeLeft: function () {
       document.documentElement.style.setProperty('--duration', this.timeLeft);
@@ -98,7 +112,14 @@ export default {
     startTimer: function (){
       clearTimeout(this.timeOutID);
       this.timeLeft = this.question.timeRemaining;
-    }
+    },
+    countDownTime: function() {
+      setTimeout(this.setZero, this.question.timerValue * 1000)
+    },
+    setZero: function() {
+      this.question.time = 0;
+      console.log("out of time")
+    },
 }
 }
 </script>

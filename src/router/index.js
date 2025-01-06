@@ -10,7 +10,7 @@ const router = createRouter({
       component: StartView
     },
       {
-      path: '/poll/:id/:name/',
+      path: '/poll/:id/:playerId/',
       name: 'PollView',
       component: () => import('../views/PollView.vue')
     },
@@ -20,7 +20,7 @@ const router = createRouter({
       component: () => import('../views/PollHostView.vue')
     },
     {
-      path: '/lobby/:id/:userName/:avatar',
+      path: '/lobby/:id/:userName/:avatar/:playerId',
       name: 'LobbyView',
       component: () => import('../views/LobbyView.vue'),
       props: true

@@ -12,7 +12,7 @@
         v-for="(a, index) in question.a"
         :key="index"
         :ref="'a-' + index"
-        v-on:click="answer(a.text); changeColor(index, a.correct); disableButtons(question.a)">
+        v-on:click="answer(a); changeColor(index, a.correct); disableButtons(question.a)">
   {{ a.text }}
 </button>
 </div>
@@ -26,21 +26,21 @@ export default {
   name: 'QuestionComponent',
   props: {
     question: Object,
+    answered: Boolean,
     timeLeft: Number,
   },
   emits: ["answer"],
   watch: {
     timeLeft() {
       if(this.timeLeft <= 0) {
-        
-        this.disableButtons();
+        this.disableButtons(this.question.a);
       }
     },
   },
   methods: {
     answer: function (answer) {
       this.$emit("answer", answer);
-      console.log(answer)
+      //console.log(answer)
     },
     disableButtons: function (len) {
       for (let i = 0; i < len.length; i++) {

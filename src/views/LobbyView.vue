@@ -61,6 +61,7 @@ export default {
       userName: "",
       avatar: "",
       pollId: "inactive poll",
+      playerId: "",
       uiLabels: {},
       joined: false,
       lang: localStorage.getItem("lang") || "en",
@@ -71,9 +72,10 @@ export default {
     this.pollId = this.$route.params.id; //Hämtas fårn webbadressen
     this.userName = this.$route.params.userName || "";  //Hämtar från webbadressen så går inte att hämta
     this.avatar = this.$route.params.avatar || "";  //Hämtar från webbadressen så kommer inte att funka
+    this.playerId = this.$route.params.playerId || "";
     socket.on( "uiLabels", labels => this.uiLabels = labels );
     socket.on( "participantsUpdate", p => this.participants = p );
-    socket.on( "startPoll", () => this.$router.push("/poll/" + this.pollId + "/"+this.userName+"/") );
+    socket.on( "startPoll", () => this.$router.push("/poll/" + this.pollId + "/"+this.playerId+"/") );
     socket.emit( "joinPoll", this.pollId );
     socket.emit( "getUILabels", this.lang );
     socket.emit("getParticipants", this.pollId);

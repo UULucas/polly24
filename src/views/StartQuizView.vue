@@ -49,7 +49,9 @@
 
       <div class="participants"> <!--  Denna diven är till för att ha våra participants i så vi kan
                                           nog bara sätta en array här i med dom som går med spelet-->
-        <div v-for="participant in pollData.participants" :key="participant.id"  class="text-box" >
+        <div v-for="participant in pollData.participants"
+             :key="participant.id"
+             class="text-box">
           <div class="participants-name">
             {{participant.name}}
           </div>
@@ -61,6 +63,9 @@
                  height: 4rem;
                  border: none;
                  border-radius: 1rem;">
+          <div class="participants-name">
+            {{"Score: " + participant.score}}
+          </div>
         </div>
 
       </div>
@@ -85,7 +90,7 @@
     <label v-if="gameStarted" class="text-box" style="font-size: 35px">{{uiLabels.currentQuestion}}: {{pollData.currentQuestion+1}}</label>
     <div class="start-section">
       <div v-if="gameStarted">
-        <button class="start-button nav-button" @click="previousQuestion">{{uiLabels.prevQuestion}}</button>
+        <!--button class="start-button nav-button" @click="previousQuestion">{{uiLabels.prevQuestion}}</button!-->
         <button class="start-button nav-button" @click="nextQuestion">{{uiLabels.nextQuestion}}</button>
       </div>
 
@@ -156,6 +161,7 @@ export default {
       if(this.pollData.currentQuestion>0){
         this.pollData.currentQuestion--;
         this.runQuestion(this.pollData.currentQuestion);
+        socket.emit("updateTime", {pollId: this.pollId, time: this.pollData.questions[this.pollData.currentQuestion].questionTime});
         this.setGameTime();
       }
     },
