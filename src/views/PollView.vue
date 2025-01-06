@@ -57,16 +57,6 @@ export default {
     socket.emit( "joinPoll", this.pollId );
   },
   watch: {
-    /*timeLeft: {
-      handler(){
-        if(this.timeLeft>0){
-          this.timeOutID=setTimeout(() => {
-            this.timeLeft--;
-          }, 1000);
-        }
-      },
-      immediate: true,
-    }*/
     answerTime: {
       handler: function () {
         if(!this.answered){
