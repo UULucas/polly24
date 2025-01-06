@@ -28,7 +28,7 @@
       <img id="imageAdded" :src="this.questions[this.questionNumber].img"  alt="altImg"/>
     </div>
 
-    <div id="question-img-wrapper" class="abc-button">
+    <div id="question-img-wrapper" class="img-button-div">
       <input ref="fileInput" type="file" accept="image/*" @input="pickFile" id="question-img" style="display: none;">
       <button @click="$refs.fileInput.click()" class="upload-button">
         Upload Image
@@ -318,7 +318,11 @@ export default {
 }
 
 
-
+.checkbox-container{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
 
 [type="checkbox"]{
   position: relative;
@@ -524,7 +528,7 @@ body{
   font-size: 16px;
 }
 
-.abc-button {
+.img-button-div {
   text-align: center;
   padding: 20px;
   background-color: var(--p-beige);
