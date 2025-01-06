@@ -45,8 +45,6 @@ Data.prototype.createPoll = function(pollId, lang="en", quizName) {
     poll.participants = [];
     poll.currentQuestion = -1;
     poll.quizName = quizName;
-    poll.timerID = null;
-    //poll.time = 0;
     this.polls[pollId] = poll;
     console.log("poll created", pollId, poll);
   }
@@ -79,6 +77,7 @@ Data.prototype.getParticipants = function(pollId) {
 Data.prototype.addQuestion = function(pollId, q) {
   if (this.pollExists(pollId)) {
     this.polls[pollId].questions.push(q);
+    console.log("Added question:", q);
   }
 }
 

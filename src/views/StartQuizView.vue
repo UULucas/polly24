@@ -130,7 +130,6 @@ export default {
       uiLabels: {},
       imageUrl: "",
       gameStarted: false,
-      //setTime: 0,
       timeLeft: 0,
       timeOutID: null,
       timerOn: true,
@@ -139,18 +138,18 @@ export default {
   },
   created: function () {
     this.pollId = this.$route.params.id;
+    socket.removeAllListeners();
     socket.on( "uiLabels", labels => this.uiLabels = labels );
     socket.on( "pollData", data => this.loadQuiz(data) );
     socket.on( "participantsUpdate", p => this.pollData.participants = p );
     socket.emit( "getUILabels", this.lang );
-    socket.emit("createPoll", {pollId: this.pollId}) //Hämtar all data redan
+    socket.emit("getQuizData", {pollId: this.pollId}); //Hämtar all data redan, problemet är att det är för mycket data, gör en egen funktion som bara skrickar relevant data
     socket.emit( "joinPoll", this.pollId );
-    socket.emit("loadQuiz", this.pollId);
   },
   watch: {
     timeLeft: {
       handler(){
-        //console.log("updated time: "+this.timeLeft)
+        console.log("updated time: "+this.timeLeft)
         socket.emit("updateTime", {pollId: this.pollId, time: this.timeLeft});
         if(this.timeLeft>0&&this.timerOn){
           this.timeOutID=setTimeout(() => {
@@ -202,6 +201,7 @@ export default {
     },
     loadQuiz: function (data){
       this.pollData = data;
+      console.log(this.pollData);
       this.gameStarted = data.currentQuestion > -1;
     },
     switchLanguage: function() {
