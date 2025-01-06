@@ -296,7 +296,7 @@ export default {
   align-items: center;
   justify-content: flex-start;
   width: 60%;
-  height: 100vh;
+  height: 80vh;
   gap: 16px;
   margin: auto;
 }
@@ -484,7 +484,7 @@ body{
 
 #side-table-wrapper{
   width: 30%;
-  height: 40rem;
+  height: 78vh;
   margin-right:1rem;
   border-radius: 1rem;
   padding: 1rem;
