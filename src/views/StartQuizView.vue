@@ -66,7 +66,15 @@
           <div class="participants-name">
             {{"Score: " + participant.score}}
           </div>
-          <img v-if="participant.answers.length===this.pollData.currentQuestion+1&&this.gameStarted" :src="participant.avatar" alt="Checkmark">
+          <img v-if="participant.answers.length===this.pollData.currentQuestion+1&&this.gameStarted"
+               src="../assets/pngegg.png"
+               alt="Checkmark"
+               style="
+                 width: 4rem;
+                 margin-left: 10rem;
+                 height: 4rem;
+                 border: none;
+                 border-radius: 1rem;">
         </div>
 
       </div>
