@@ -7,9 +7,9 @@
   <body style="display: grid; margin-top: 1rem">
     <!--label style="font-size: 50px; color:red">{{timeLeft}}</label!-->
     <div class="pollQuestion">
-      <QuestionComponent v-bind:question="question"
+      <QuestionComponent ref="questionComponent"
+                         v-bind:question="question"
                          v-bind:timeLeft="timeLeft"
-                         v-bind:answered="answered"
                          v-on:answer="submitAnswer($event)"/>
       <hr>
     </div>
@@ -18,6 +18,7 @@
 
 <script>
 // @ is an alias to /src
+import { ref } from 'vue';
 import QuestionComponent from '@/components/QuestionComponent.vue';
 import io from 'socket.io-client';
 
@@ -42,6 +43,8 @@ export default {
       playerId: "",
 
       timeLeft: 0,
+      answerTime:-1,
+      questionComponent: ref(QuestionComponent),
     }
   },
   created: function () {
@@ -54,28 +57,26 @@ export default {
     socket.emit( "joinPoll", this.pollId );
   },
   watch: {
-    timeLeft: {
-      handler(){
-        if(this.timeLeft>0){
+    answerTime: {
+      handler: function () {
+        if(!this.answered){
           this.timeOutID=setTimeout(() => {
-            this.timeLeft--;
+            this.answerTime++;
           }, 1000);
         }
-        if(this.timeLeft<=0){
-          this.answered = true;
-        }
-      },
-      immediate: true,
+      }
     }
   },
   methods: {
     loadQuestion: function (data){
       console.log("loaded question")
       this.question = data;
+      this.questionComponent.methods.resetButtons(this.question.a);
       this.answered = false;
       this.startTimer();
       this.resetAnimation();
-      if(this.timeLeft<=0){
+      //Om tiden är slut när man laddar sidan
+      if(this.question.timeRemaining<=0){
         this.answered = true;
       }
     },
@@ -93,14 +94,14 @@ export default {
     calculateScore: function (answer) {
       if(answer.correct){
         const maxScore = 1000;
-        const score = maxScore*(this.timeLeft / this.question.questionTime);
+        console.log("time to answer: "+this.answerTime);
+        const score = -1*maxScore*((this.answerTime-this.question.questionTime) / this.question.questionTime);
         return score||0;
       }
       return 0;
     },
     setTimeLeft: function () {
-      document.documentElement.style.setProperty('--duration', this.timeLeft);
-      console.log(this.question.timeRemaining);
+      document.documentElement.style.setProperty('--duration', (this.question.timeRemaining));
     },
     resetAnimation: function () {
       this.setTimeLeft();
@@ -110,14 +111,18 @@ export default {
       element.style.animation = null;
     },
     startTimer: function (){
+      this.countDownTime();
       clearTimeout(this.timeOutID);
       this.timeLeft = this.question.timeRemaining;
+      this.answerTime = this.question.questionTime-this.question.timeRemaining;
     },
     countDownTime: function() {
-      setTimeout(this.setZero, this.question.timerValue * 1000)
+      setTimeout(this.setZero, this.question.timeRemaining * 1000)
     },
     setZero: function() {
-      this.question.time = 0;
+      this.timeLeft = 0;
+      this.answered = true;
+      this.questionComponent.methods.disableButtons(this.question.a);
       console.log("out of time")
     },
 }
