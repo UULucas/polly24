@@ -60,7 +60,7 @@
              :placeholder="uiLabels.answerPlaceholder"
              maxlength="4500"
              @input="questions[questionNumber].a[i]=text"
-             style="background-color: transparent; border: none; box-shadow: none; outline: none; resize: none;"
+             style=""
          ></textarea>
 
 
@@ -327,11 +327,6 @@ export default {
 
 
 
-.answer-box{
-  display: flex;
-  width: 70%;
-}
-
 .checkbox-container{
   display:flex;
   align-items: center;
@@ -350,6 +345,22 @@ export default {
   text-align: center;
   vertical-align: middle;
   overflow: hidden;
+}
+
+.answer-box{
+  display: flex;
+  width: 70%;
+  background-color: transparent;
+  border: none;
+  font-family: "Inter", sans-serif;
+  box-shadow: none;
+  outline: none;
+  resize: none;
+  text-align: center;
+  vertical-align: middle;
+  align-items: center;
+  padding-top: 2.7rem;
+  padding-bottom: 1.5rem;
 }
 
 

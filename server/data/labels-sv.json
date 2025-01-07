@@ -40,5 +40,12 @@
 	"addQuestionQuiz": "Lägg till fråga",
 	"startGame": "Starta spel",
 	"copiedTextAlert": "Kopierade texten: ",
-	"newQuiz": "Ny Quiz"
+	"newQuiz": "Ny Quiz",
+	"canvasColor": "Färg",
+	"canvasBackgroundColor": "Backgrundsfärg",
+	"canvasWidth": "Bredd",
+	"canvasUndo": "Ångra",
+	"canvasClear": "Rensa",
+	"photo": "Ta en bild!",
+	"submitPhoto": "Skicka in bild"
 }
