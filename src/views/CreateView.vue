@@ -88,10 +88,12 @@
       <p>
         <label class="choose-time-label" for="Time">{{ uiLabels.chooseQuestionTime }}</label>
         <select class="time-selector" id="Time" v-model="questions[questionNumber].questionTime">
+
           <option selected="selected">30</option>
           <option>20</option>
           <option>15</option>
           <option>10</option>
+
         </select>
       </p>
       <!--button v-on:click="setGameTime(setTime);" type="submit">
@@ -357,6 +359,9 @@ export default {
   height: 2rem;
   outline: 2px solid #aaa;
   background: var(--p-offWhite);
+  background-image: url("../assets/gray-cross.png");
+  background-size: contain;
+  background-size:108%;
   border-radius: 8px;
   z-index: 1;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -504,7 +509,7 @@ body{
 
 
 body{
-  overflow: auto;
+  overflow-y: scroll;
 }
 #side-table-wrapper input{
   width: 80%;
@@ -558,9 +563,22 @@ body{
 .time-selector {
   margin-left: 1rem;
   margin-right: 1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 0.5em 1.2em;
+  font-size: 1.3rem;
+  background: var(--p-beige);
+  border-radius: 8px;
 }
+.time-selector:hover {
+  background: var(--p-yellow);
+}
+
+
+
 
 .choose-time-label {
   margin-left: 1rem;
+
 }
 </style>
