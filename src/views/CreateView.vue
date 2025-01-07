@@ -42,6 +42,7 @@
 
     <input
         class="question-area text-box"
+        maxlength="140"
         v-model="questions[questionNumber].q"
         :placeholder="uiLabels.questionPlaceholder">
 
