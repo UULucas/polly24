@@ -36,7 +36,7 @@
 	"answerPlaceholder": "Svar",
 	"startQuizButton": "Starta quiz",
 	"chooseQuestionTime": "Välj svarstid (sekunder)",
-	"quizName": "Quiznamn",
+	"quizName": "Quiz Namn",
 	"addQuestionQuiz": "Lägg till fråga",
 	"startGame": "Starta spel",
 	"copiedTextAlert": "Kopierade texten: ",
@@ -47,5 +47,6 @@
 	"canvasUndo": "Ångra",
 	"canvasClear": "Rensa",
 	"photo": "Ta en bild!",
-	"submitPhoto": "Skicka in bild"
+	"submitPhoto": "Skicka in bild",
+	"changeImage": "Byt bild"
 }

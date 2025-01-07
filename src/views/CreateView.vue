@@ -31,7 +31,13 @@
     <div id="question-img-wrapper" class="img-button-div">
       <input ref="fileInput" type="file" accept="image/*" @input="pickFile" id="question-img" style="display: none;">
       <button @click="$refs.fileInput.click()" class="upload-button">
-        {{ uiLabels.uploadImage }}
+        <div v-if = "this.questions[this.questionNumber].img">
+          {{ uiLabels.changeImage }}
+        </div>
+        <div v-else>
+          {{ uiLabels.uploadImage }}
+        </div>
+        <img class="home-img" src="https://www.freeiconspng.com/thumbs/upload-icon/upload-icon-22.png" alt="Upload avatar" name="upload">
       </button>
       <div v-if="questions[questionNumber].fileName" class="file-name-display">
         <div class="question-filename">
@@ -40,12 +46,14 @@
       </div>
     </div>
 
-    <input
+    <textarea
         class="question-area text-box"
-        maxlength="140"
-        contenteditable="true"
+        maxlength="14000"
         v-model="questions[questionNumber].q"
-        :placeholder="uiLabels.questionPlaceholder">
+        :placeholder="uiLabels.questionPlaceholder"
+
+    ></textarea>
+
 
 
     <div id="answer-container" style="overflow-wrap: break-word" >
@@ -362,7 +370,20 @@ export default {
   padding-top: 2.7rem;
   padding-bottom: 1.5rem;
 }
-
+.question-area {
+  height: 2em;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  resize: none;
+  padding-top: 2em;
+  padding-right: 6rem;
+  padding-left: 6rem;
+  width: 20%;
+  height: 3em;
+  vertical-align: middle;
+  text-align: center;
+}
 
 
 [type="checkbox"]{
@@ -433,10 +454,7 @@ export default {
 
 
 
-.question-area {
-  width: calc(100% - 3px);
-  height: 2em;
-}
+
 
 #answer-container {
   display: flex;
@@ -526,7 +544,6 @@ body{
   display: flex;
 }
 
-
 #side-table-wrapper{
   width: 30%;
   height: 76.5vh;
@@ -567,11 +584,11 @@ body{
 
 .upload-button {
   background-color: var(--p-cadetBlue);
-  color: white;
+  color: black;
   border: none;
-  padding: 0.5rem 1rem;
+  padding: 8px 8px;
   font-size: 16px;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
 }
 

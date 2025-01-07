@@ -10,8 +10,9 @@ Hex Codes: #ffc09f // #ffee93 // #fcf5c7 // #a0ced9 // #adf7b6
 
 */
 html{
-  background-color: var(--p-blue);
+  background: linear-gradient(180deg,var(--p-blue),var(--p-cadetBlue));
 }
+
 
 :root {
   --p-red: #ffc09f;
@@ -20,7 +21,7 @@ html{
   --p-blue: #a0ced9;
   --p-green: #adf7b6;
   --p-offWhite:#f2f2ed;
-  --p-cadetBlue:cadetblue;
+  --p-cadetBlue:#5F9EA0;
 }
 
 #app {
