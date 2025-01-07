@@ -23,8 +23,7 @@ function sockets(io, socket, data) {
     socket.emit('questionUpdate', data.activateQuestion(pollId))
     socket.emit('submittedAnswersUpdate', data.getSubmittedAnswers(pollId));
     socket.emit('currentQuestion', data.getQuestionNumber(pollId));
-
-
+    socket.emit('timeUpdated', data.getTimeLeft(pollId));
   });
 
   socket.on('participateInPoll', function(d) {
@@ -54,38 +53,10 @@ function sockets(io, socket, data) {
     socket.emit('newID', data.generateGameId())
   });
 
-  socket.on('updateTime', function(d) {
-    data.setTime(d.pollId, d.time);
-    //io.to(d.pollId).emit('timeUpdate', d.time)
-  });
-
   socket.on('runQuestion', function(d) {
-    //let question = data.activateQuestion(d.pollId, d.questionNumber);
-    //io.to(d.pollId).emit('questionUpdate', question);
-    //io.to(d.pollId).emit('submittedAnswersUpdate', data.getSubmittedAnswers(d.pollId));
-
-    if(data.pollExists(d.pollId)) {
-      const poll = data.polls[d.pollId];
-      let question = data.activateQuestion(d.pollId, d.questionNumber);
-
-      io.to(d.pollId).emit('questionUpdate', question);
-      io.to(d.pollId).emit('submittedAnswersUpdate', data.getSubmittedAnswers(d.pollId));
-      //io.to(pollId).emit('currentQuestion', poll.currentQuestion);
-
-      poll.timeLeft = question ? question.questionTime : 1;
-      io.to(d.pollId).emit('timeUpdated', poll.timeLeft);
-      if(poll.timer){
-        clearInterval(poll.timer);
-      }
-      poll.timer = setInterval(() => {
-        poll.timeLeft--;
-        io.to(d.pollId).emit('timeUpdated', poll.timeLeft);
-        //console.log("Time updated for",pollId,"new time:",poll.timeLeft);
-        if (poll.timeLeft <= 0) {
-          clearInterval(poll.timer); // Stoppa timern när tiden tar slut
-        }
-      }, 1000);
-    }
+    let question = data.activateQuestion(d.pollId, d.questionNumber);
+    io.to(d.pollId).emit('questionUpdate', question);
+    io.to(d.pollId).emit('submittedAnswersUpdate', data.getSubmittedAnswers(d.pollId));
   });
 
   //egengjort, kanske funkar, vi får se

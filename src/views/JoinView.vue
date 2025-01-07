@@ -80,7 +80,7 @@
           </div>
         </div>
 
-        <button class="nav-button" @click="openCamModal">
+        <button class="nav-button" @click="openCamModal" style="background-color: var(--p-cadetBlue); border:0px;">
           <img class="home-img" src="https://www.freeiconspng.com/uploads/camera-icon-21.png" alt="Take photo" name="photo">
         </button>
 
@@ -93,7 +93,7 @@
 
           </div>
         </div>
-        <button class="nav-button" @click="uploadAvatar">
+        <button class="nav-button" @click="uploadAvatar" style="background-color: var(--p-cadetBlue); border:0px;">
           <img class="home-img" src="https://www.freeiconspng.com/thumbs/upload-icon/upload-icon-22.png" alt="Upload avatar" name="upload">
         </button>
         <input type="file" ref="fileInput" accept="image/*" style="display: none;" @change="handleFileUpload">
