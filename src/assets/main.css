@@ -20,6 +20,7 @@ html{
   --p-blue: #a0ced9;
   --p-green: #adf7b6;
   --p-offWhite:#f2f2ed;
+  --p-cadetBlue:cadetblue;
 }
 
 #app {

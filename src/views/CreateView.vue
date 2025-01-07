@@ -53,14 +53,15 @@
            class="answer text-box"
            v-for="(text, i) in questions[questionNumber].a"
            v-bind:key="'answer' + i">
-        <input
-            v-model="questions[questionNumber].a[i].text"
-            class="text-box answer-box"
-            type="text"
-            :placeholder="uiLabels.answerPlaceholder"
-            maxlength="45"
-            @input="questions[questionNumber].a[i]=text"
-            style="background-color: transparent; border: none; box-shadow: none; outline: none;">
+
+         <textarea
+             v-model="questions[questionNumber].a[i].text"
+             class="text-box answer-box"
+             :placeholder="uiLabels.answerPlaceholder"
+             maxlength="4500"
+             @input="questions[questionNumber].a[i]=text"
+             style="background-color: transparent; border: none; box-shadow: none; outline: none; resize: none;"
+         ></textarea>
 
 
         <div class="checkbox-container">
@@ -554,7 +555,7 @@ body{
 }
 
 .upload-button {
-  background-color: var(--p-blue);
+  background-color: var(--p-cadetBlue);
   color: white;
   border: none;
   padding: 0.5rem 1rem;
