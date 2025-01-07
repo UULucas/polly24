@@ -48,7 +48,7 @@
 
 
     <div id="answer-container" style="overflow-wrap: break-word" >
-      <div v-bind:style="{ backgroundColor: text.correct ? '#adf7b6' : '#ffc09f' }"
+      <div v-bind:style="{ backgroundColor: text.correct ? '#adf7b6' : '#fcf5c7' }"
            class="answer text-box"
            v-for="(text, i) in questions[questionNumber].a"
            v-bind:key="'answer' + i">
