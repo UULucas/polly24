@@ -22,7 +22,10 @@
       <div class="name-and-key">
 
         <div class="quiz-name"> <!--  här ska quizens namn stå, som vi får hämta från där man skapar eller nått-->
-          {{pollData.quizName}}
+          <label class="quiz-name-label">
+            {{pollData.quizName}}
+          </label>
+
         </div>
 
         <!--input
@@ -267,6 +270,7 @@ header {
   border:solid;
   border-radius: 8px;
   border-width: 1px;
+  background-color: var(--p-offWhite);
 }
 
 .participants-section{
@@ -301,10 +305,17 @@ header {
   height:6rem;
   width: 38rem;
   font-size: 4rem;
+  border: 1px solid;
 }
 .start-section{
 
 }
 
 
+.quiz-name-label {
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+  margin: 0.4rem;
+}
 </style>
