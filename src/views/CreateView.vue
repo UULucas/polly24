@@ -319,6 +319,7 @@ export default {
 }
 
 
+
 .answer-box{
   display: flex;
   width: 70%;
@@ -461,7 +462,8 @@ input::file-selector-button {
   position: relative;
   padding-left: 1rem;
   gap: 1rem ;
-
+  height: 5rem;
+  margin-top: 1rem;
 }
 
 .header-button {
