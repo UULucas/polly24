@@ -43,12 +43,13 @@
     <input
         class="question-area text-box"
         maxlength="140"
+        contenteditable="true"
         v-model="questions[questionNumber].q"
         :placeholder="uiLabels.questionPlaceholder">
 
 
     <div id="answer-container" style="overflow-wrap: break-word" >
-      <div v-bind:style="{ backgroundColor: text.correct ? '#adf7b6' : '#fcf5c7' }"
+      <div v-bind:style="{ backgroundColor: text.correct ? '#adf7b6' : 'var(--p-offWhite)' }"
            class="answer text-box"
            v-for="(text, i) in questions[questionNumber].a"
            v-bind:key="'answer' + i">
@@ -60,6 +61,7 @@
             maxlength="45"
             @input="questions[questionNumber].a[i]=text"
             style="background-color: transparent; border: none; box-shadow: none; outline: none;">
+
 
         <div class="checkbox-container">
 
@@ -304,21 +306,22 @@ export default {
   justify-content: flex-start;
   width: 60%;
   height: 80vh;
-  gap: 16px;
+  gap: 1rem;
   margin: auto;
-  margin-top: 1rem;
+  overflow-y: scroll;
+  overflow-x:hidden;
+  padding-right: 2rem;
 }
 
 .correct-answer-container{
   display: flex;
   flex-direction: row;
-
-
 }
 .start-quiz {
   margin: 1rem 3rem;
   background-color: var(--p-green);
-  margin-left: 62%;
+  margin-left: auto;
+  white-space: nowrap;
 }
 
 
@@ -345,6 +348,7 @@ export default {
   pointer-events: none;
   text-align: center;
   vertical-align: middle;
+  overflow: hidden;
 }
 
 
@@ -480,6 +484,7 @@ input::file-selector-button {
   gap: 1rem ;
   height: 5rem;
   margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .header-button {
@@ -507,13 +512,12 @@ input::file-selector-button {
 
 body{
   display: flex;
-  overflow-y: scroll;
 }
 
 
 #side-table-wrapper{
   width: 30%;
-  height: 75vh;
+  height: 76.5vh;
   margin-right:1rem;
   border-radius: 1rem;
   padding: 1rem;
@@ -522,7 +526,6 @@ body{
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   overflow-y: scroll;
   position: sticky;
-  top:16px;
 }
 
 
