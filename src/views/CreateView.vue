@@ -31,7 +31,13 @@
     <div id="question-img-wrapper" class="img-button-div">
       <input ref="fileInput" type="file" accept="image/*" @input="pickFile" id="question-img" style="display: none;">
       <button @click="$refs.fileInput.click()" class="upload-button">
-        {{ uiLabels.uploadImage }}
+        <div v-if = "this.questions[this.questionNumber].img">
+          {{ uiLabels.changeImage }}
+        </div>
+        <div v-else>
+          {{ uiLabels.uploadImage }}
+        </div>
+        <img class="home-img" src="https://www.freeiconspng.com/thumbs/upload-icon/upload-icon-22.png" alt="Upload avatar" name="upload">
       </button>
       <div v-if="questions[questionNumber].fileName" class="file-name-display">
         <div class="question-filename">
@@ -60,7 +66,7 @@
              :placeholder="uiLabels.answerPlaceholder"
              maxlength="4500"
              @input="questions[questionNumber].a[i]=text"
-             style="background-color: transparent; border: none; box-shadow: none; outline: none; resize: none;"
+             style=""
          ></textarea>
 
 
@@ -179,11 +185,11 @@ export default {
     return {
       lang: localStorage.getItem("lang") || "en",
       pollId: "",
-      quizName: "",
       questionNumber: 0,
       pollData: {},
       uiLabels: {},
       imageUrl: "",
+      quizName: "",
       imgText: "Lägg till bild",
       questions: [new Question("")],
       previewImage: null,
@@ -218,7 +224,7 @@ export default {
       }
     },
     createPoll: function () {
-      socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, quizName: this.quizName })
+      socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, quizName: this.quizName || "Untitled quiz" })
       socket.emit("joinPoll", this.pollId);
     },
     /**startPoll: function () {
@@ -327,11 +333,6 @@ export default {
 
 
 
-.answer-box{
-  display: flex;
-  width: 70%;
-}
-
 .checkbox-container{
   display:flex;
   align-items: center;
@@ -350,6 +351,22 @@ export default {
   text-align: center;
   vertical-align: middle;
   overflow: hidden;
+}
+
+.answer-box{
+  display: flex;
+  width: 70%;
+  background-color: transparent;
+  border: none;
+  font-family: "Inter", sans-serif;
+  box-shadow: none;
+  outline: none;
+  resize: none;
+  text-align: center;
+  vertical-align: middle;
+  align-items: center;
+  padding-top: 2.7rem;
+  padding-bottom: 1.5rem;
 }
 
 
@@ -556,11 +573,11 @@ body{
 
 .upload-button {
   background-color: var(--p-cadetBlue);
-  color: white;
+  color: black;
   border: none;
-  padding: 0.5rem 1rem;
+  padding: 8px 8px;
   font-size: 16px;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
 }
 

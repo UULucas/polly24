@@ -49,6 +49,6 @@
 	"canvasUndo": "Undo",
 	"canvasClear": "Clear",
 	"photo": "Take a photo!",
-	"submitPhoto": "Submit photo"
-
+	"submitPhoto": "Submit photo",
+	"changeImage": "Change Image"
 }
