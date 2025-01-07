@@ -176,11 +176,11 @@ export default {
     return {
       lang: localStorage.getItem("lang") || "en",
       pollId: "",
-      quizName: "Untitled quiz",
       questionNumber: 0,
       pollData: {},
       uiLabels: {},
       imageUrl: "",
+      quizName: "",
       imgText: "Lägg till bild",
       questions: [new Question("")],
       previewImage: null,
@@ -215,7 +215,7 @@ export default {
       }
     },
     createPoll: function () {
-      socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, quizName: this.quizName })
+      socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, quizName: this.quizName || "Untitled quiz" })
       socket.emit("joinPoll", this.pollId);
     },
     /**startPoll: function () {

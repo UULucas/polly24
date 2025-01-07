@@ -136,7 +136,7 @@ export default {
       timeLeft: 0,
       timeOutID: null, //Kan ta bort
       timerOn: true, //Kan ta bort
-      quizName: "Untitled quiz1111",
+      quizName: "Untitled quiz",
 
     }
   },

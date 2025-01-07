@@ -1,6 +1,6 @@
 <template>
-  <div class="round-time-bar" id="timer-bar">
-            <div>
+  <div class="round-time-bar" id="timer-bar-container">
+            <div id="timer-bar">
             </div>
 
   </div>
@@ -21,7 +21,6 @@
 import { ref } from 'vue';
 import QuestionComponent from '@/components/QuestionComponent.vue';
 import io from 'socket.io-client';
-import {sockets} from "../../server/sockets";
 
 const socket = io("localhost:3000");
 
@@ -54,13 +53,13 @@ export default {
     socket.on( "questionUpdate", q => this.loadQuestion(q))
     socket.on( "submittedAnswersUpdate", answers => this.submittedAnswers = answers );
     socket.on( "uiLabels", labels => this.uiLabels = labels );
-    socket.on("timeUpdated", t => this.timeLeft = t);
+    socket.on("timeUpdated", t => this.updateTimeLeft(t));
     socket.emit( "getUILabels", this.lang );
     socket.emit( "joinPoll", this.pollId );
 
-    socket.on('timeUpdated', t => console.log("test time:",t))
+    //socket.on('timeUpdated', t => console.log("test time:",t))
   },
-  watch: {
+  /**watch: {
     answerTime: {
       handler: function () {
         if(!this.answered){
@@ -70,18 +69,27 @@ export default {
         }
       }
     }
-  },
+  },*/
   methods: {
     loadQuestion: function (data){
       console.log("loaded question")
       this.question = data;
       this.questionComponent.methods.resetButtons(this.question.a);
       this.answered = false;
-      this.startTimer();
-      this.resetAnimation();
+
       //Om tiden är slut när man laddar sidan
-      if(this.question.timeRemaining<=0){
+      /*if(this.question.timeRemaining<=0){
         this.answered = true;
+      }*/
+    },
+    updateTimeLeft: function(timeLeft){
+      console.log("updateTimeLeft");
+      this.timeLeft = timeLeft;
+      this.updateAnimation();
+      if(timeLeft <= 0){
+        this.answered = true; //Gör så att man inte kan svara
+        this.questionComponent.methods.disableButtons(this.question.a); //Stänger av knapparna
+        console.log("out of time")
       }
     },
     submitAnswer: function (answer) {
@@ -98,24 +106,33 @@ export default {
     calculateScore: function (answer) {
       if(answer.correct){
         const maxScore = 1000;
-        console.log("time to answer: "+this.answerTime);
-        const score = -1*maxScore*((this.answerTime-this.question.questionTime) / this.question.questionTime);
+        console.log("time to answer: "+this.timeLeft);
+        const score = maxScore*(this.timeLeft / this.question.questionTime);
         return score||0;
       }
       return 0;
     },
-    setTimeLeft: function () {
-      document.documentElement.style.setProperty('--duration', (this.question.timeRemaining));
+    updateAnimation: function () {
+      let element = document.getElementById("timer-bar");
+      if(this.timeLeft>0) {
+        const percentageWidth = (this.timeLeft / this.question.questionTime) * 100; //Räkna ut bärden
+        element.style.width = `${percentageWidth}%`;
+      }
+      else{
+        element.style.width = `0%`;
+      }
     },
+
     resetAnimation: function () {
-      this.setTimeLeft();
+      console.log("animation time: ",this.timeLeft)
+      document.documentElement.style.setProperty('--duration', (this.timeLeft)); //Återställ tiden på animationen
       let element = document.getElementById('timer-bar');
       element.style.animation = 'none';
-      element.offsetHeight; /* trigger reflow */
+      element.offsetHeight; //Starta om den
       element.style.animation = null;
     },
     startTimer: function (){
-      this.countDownTime();
+      //this.countDownTime();
       clearTimeout(this.timeOutID);
       this.timeLeft = this.question.timeRemaining;
       this.answerTime = this.question.questionTime-this.question.timeRemaining;
@@ -127,7 +144,7 @@ export default {
       this.timeLeft = 0;
       this.answered = true;
       this.questionComponent.methods.disableButtons(this.question.a);
-      console.log("out of time")
+      console.log("out of time");
     },
 }
 }
@@ -137,8 +154,16 @@ export default {
   margin: auto;
   height: 10px;
   background: linear-gradient(to bottom, red, #900);
-  animation: roundtime calc(var(--duration) * 1s) linear forwards;
+  /*animation: roundtime calc(var(--duration) * 1s) linear forwards;*/
   transform-origin: center;
+
+  transition: width 0.2s ease; /* Mjuk animation vid varje steg */;
+}
+#timer-bar-container{
+  width: 100%;
+  height: 10px;
+  position: relative;
+  overflow: hidden;
 }
 @keyframes roundtime {
   to {
