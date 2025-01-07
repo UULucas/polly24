@@ -54,9 +54,9 @@ export default {
     socket.on( "questionUpdate", q => this.loadQuestion(q))
     socket.on( "submittedAnswersUpdate", answers => this.submittedAnswers = answers );
     socket.on( "uiLabels", labels => this.uiLabels = labels );
+    socket.on("timeUpdated", t => this.timeLeft = t);
     socket.emit( "getUILabels", this.lang );
     socket.emit( "joinPoll", this.pollId );
-
 
     socket.on('timeUpdated', t => console.log("test time:",t))
   },

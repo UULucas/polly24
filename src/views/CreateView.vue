@@ -176,7 +176,7 @@ export default {
     return {
       lang: localStorage.getItem("lang") || "en",
       pollId: "",
-      quizName: "",
+      quizName: "Untitled quiz",
       questionNumber: 0,
       pollData: {},
       uiLabels: {},

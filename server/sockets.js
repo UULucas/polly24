@@ -17,6 +17,9 @@ function sockets(io, socket, data) {
 
   socket.on('joinPoll', function(pollId) {
     socket.join(pollId);
+    //console.log("name test",data.polls[pollId].quizName);
+
+    socket.emit('quizName', data.getQuizName(pollId));
     socket.emit('questionUpdate', data.activateQuestion(pollId))
     socket.emit('submittedAnswersUpdate', data.getSubmittedAnswers(pollId));
     socket.emit('currentQuestion', data.getQuestionNumber(pollId));
