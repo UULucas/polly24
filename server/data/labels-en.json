@@ -41,5 +41,6 @@
 	"quizName": "Quiz Name",
 	"addQuestionQuiz": "Add question",
 	"startGame": "Start game",
-	"copiedTextAlert": "Copied the text: "
+	"copiedTextAlert": "Copied the text: ",
+	"newQuiz": "New Quiz"
 }

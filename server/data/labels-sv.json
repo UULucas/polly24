@@ -39,5 +39,6 @@
 	"quizName": "Quiznamn",
 	"addQuestionQuiz": "Lägg till fråga",
 	"startGame": "Starta spel",
-	"copiedTextAlert": "Kopierade texten: "
+	"copiedTextAlert": "Kopierade texten: ",
+	"newQuiz": "Ny Quiz"
 }
