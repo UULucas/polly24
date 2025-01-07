@@ -43,23 +43,26 @@
     <input
         class="question-area text-box"
         maxlength="140"
+        contenteditable="true"
         v-model="questions[questionNumber].q"
         :placeholder="uiLabels.questionPlaceholder">
 
 
     <div id="answer-container" style="overflow-wrap: break-word" >
-      <div v-bind:style="{ backgroundColor: text.correct ? '#adf7b6' : '#fcf5c7' }"
+      <div v-bind:style="{ backgroundColor: text.correct ? '#adf7b6' : 'var(--p-offWhite)' }"
            class="answer text-box"
            v-for="(text, i) in questions[questionNumber].a"
            v-bind:key="'answer' + i">
-        <input
-            v-model="questions[questionNumber].a[i].text"
-            class="text-box answer-box"
-            type="text"
-            :placeholder="uiLabels.answerPlaceholder"
-            maxlength="45"
-            @input="questions[questionNumber].a[i]=text"
-            style="background-color: transparent; border: none; box-shadow: none; outline: none;">
+
+         <textarea
+             v-model="questions[questionNumber].a[i].text"
+             class="text-box answer-box"
+             :placeholder="uiLabels.answerPlaceholder"
+             maxlength="4500"
+             @input="questions[questionNumber].a[i]=text"
+             style=""
+         ></textarea>
+
 
         <div class="checkbox-container">
 
@@ -304,29 +307,25 @@ export default {
   justify-content: flex-start;
   width: 60%;
   height: 80vh;
-  gap: 16px;
+  gap: 1rem;
   margin: auto;
-  margin-top: 1rem;
+  overflow-y: scroll;
+  overflow-x:hidden;
+  padding-right: 2rem;
 }
 
 .correct-answer-container{
   display: flex;
   flex-direction: row;
-
-
 }
 .start-quiz {
   margin: 1rem 3rem;
   background-color: var(--p-green);
-  margin-left: 62%;
+  margin-left: auto;
+  white-space: nowrap;
 }
 
 
-
-.answer-box{
-  display: flex;
-  width: 70%;
-}
 
 .checkbox-container{
   display:flex;
@@ -345,6 +344,23 @@ export default {
   pointer-events: none;
   text-align: center;
   vertical-align: middle;
+  overflow: hidden;
+}
+
+.answer-box{
+  display: flex;
+  width: 70%;
+  background-color: transparent;
+  border: none;
+  font-family: "Inter", sans-serif;
+  box-shadow: none;
+  outline: none;
+  resize: none;
+  text-align: center;
+  vertical-align: middle;
+  align-items: center;
+  padding-top: 2.7rem;
+  padding-bottom: 1.5rem;
 }
 
 
@@ -480,6 +496,7 @@ input::file-selector-button {
   gap: 1rem ;
   height: 5rem;
   margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .header-button {
@@ -507,13 +524,12 @@ input::file-selector-button {
 
 body{
   display: flex;
-  overflow-y: scroll;
 }
 
 
 #side-table-wrapper{
   width: 30%;
-  height: 75vh;
+  height: 76.5vh;
   margin-right:1rem;
   border-radius: 1rem;
   padding: 1rem;
@@ -522,7 +538,6 @@ body{
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   overflow-y: scroll;
   position: sticky;
-  top:16px;
 }
 
 
@@ -551,7 +566,7 @@ body{
 }
 
 .upload-button {
-  background-color: var(--p-blue);
+  background-color: var(--p-cadetBlue);
   color: white;
   border: none;
   padding: 0.5rem 1rem;

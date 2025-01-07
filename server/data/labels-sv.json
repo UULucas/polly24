@@ -6,7 +6,7 @@
 	"changeLanguage": "https://vectorflags.s3.amazonaws.com/flags/uk-square-01.png",
 	"about": "Om oss",
 	"participateInPoll": "Delta i enkäten",
-	"joinQuiz": "Gå med quiz",
+	"joinQuiz": "Gå med i quiz",
 	"createQuiz": "Skapa ny Quiz",
 	"navigateQuiz": "Sök bland Quizar",
 	"createAccount": "Skapa konto",
@@ -40,5 +40,12 @@
 	"addQuestionQuiz": "Lägg till fråga",
 	"startGame": "Starta spel",
 	"copiedTextAlert": "Kopierade texten: ",
-	"newQuiz": "Ny Quiz"
+	"newQuiz": "Ny Quiz",
+	"canvasColor": "Färg",
+	"canvasBackgroundColor": "Backgrundsfärg",
+	"canvasWidth": "Bredd",
+	"canvasUndo": "Ångra",
+	"canvasClear": "Rensa",
+	"photo": "Ta en bild!",
+	"submitPhoto": "Skicka in bild"
 }
