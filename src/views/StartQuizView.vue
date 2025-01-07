@@ -22,8 +22,11 @@
       <div class="name-and-key">
 
         <div class="quiz-name"> <!--  här ska quizens namn stå, som vi får hämta från där man skapar eller nått-->
-          <label class="quiz-name-label">
-            {{pollData.quizName}}
+          <label v-if ="pollData.quizname" class="quiz-name-label">
+            {{pollData.quizname}}
+          </label>
+          <label v-else class="quiz-name-label">
+            Untitled Quiz
           </label>
 
         </div>
