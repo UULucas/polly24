@@ -5,7 +5,8 @@
 
   </div>
   <body style="display: grid; margin-top: 1rem">
-    <div class="pollQuestion">
+    <ResultComponent v-if="displayResultScreen"></ResultComponent>
+    <div v-else class="pollQuestion">
       <QuestionComponent ref="questionComponent"
                          v-bind:question="question"
                          v-bind:timeLeft="timeLeft"
@@ -19,6 +20,7 @@
 // @ is an alias to /src
 import { ref } from 'vue';
 import QuestionComponent from '@/components/QuestionComponent.vue';
+import ResultComponent from "@/components/ResultComponent.vue";
 import io from 'socket.io-client';
 
 const socket = io("localhost:3000");
@@ -26,7 +28,8 @@ const socket = io("localhost:3000");
 export default {
   name: 'PollView',
   components: {
-    QuestionComponent
+    QuestionComponent,
+    ResultComponent,
   },
   data: function () {
     return {
@@ -44,6 +47,7 @@ export default {
       timeLeft: 0,
       answerTime:-1,
       questionComponent: ref(QuestionComponent),
+      displayResultScreen: false,
     }
   },
   created: function () {
@@ -69,6 +73,7 @@ export default {
       if(timeLeft <= 0){
         this.answered = true; //Gör så att man inte kan svara
         this.questionComponent.methods.disableButtons(this.question.a); //Stänger av knapparna
+        this.displayResultScreen = true; //Visa resultatet
         console.log("out of time")
       }
     },
