@@ -58,7 +58,25 @@ html{
 
 }
 
+::-webkit-scrollbar{
+  width:1.5em;
+}
 
+::-webkit-scrollbar-track{
+  background: linear-gradient(-45deg,var(--p-offWhite),var(--p-green));
+  border-radius: 100vw;
+  margin-block: .3em;
+}
+
+::-webkit-scrollbar-thumb{
+  background: var(--p-beige);
+  border-radius: 100vw;
+  border: .25em solid var(--p-green);
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background: var(--p-yellow);
+}
 
 
 .nav-button:hover {
