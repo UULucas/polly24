@@ -14,7 +14,7 @@
       <h3>{{ correctAnswer }}</h3>
       <br>
       <h3>Here is what everyone answered: </h3>
-      <p>staplar brorsan</p>
+      <p>staplar</p>
 
     </div>
 
@@ -24,10 +24,10 @@
     <div class="resultWrapper">
       <h2>Current Leaderboard: </h2>
       <ul>
-        <li>Player 1</li>
-        <li>Player 2</li>
-        <li>Player 3</li>
-        <li>Looooooser</li>
+        <li>Avatar - Player 1</li>
+        <li>Avatar - Player 2</li>
+        <li>Avatar - Player 3</li>
+        <li>Avatar - Looooooser</li>
       </ul>
     </div>
     
@@ -47,16 +47,20 @@
   </div>
 
   <div v-if="nextQuestionNormal">
+    <div class="resultWrapper">
     <h2>Next question starts in:</h2>
-    <p>Insert countdown</p>
+    <p>{{ countdown }}</p>
+    </div>
   </div>
 
   <div v-if="nextQuestionCursed">
+    <div class="resultWrapper">
     <h2>userName has given you have downgrade:</h2>
     <p>downgradeName</p>
     <p>Description of downgradeName</p>
     <h2>Next question starts in: </h2>
-    <p>Insert countdown</p>
+    <p>{{ countdown }}</p>
+    </div>
 
   </div>
 
@@ -91,6 +95,9 @@ export default {
       participants: [],
       showQResultScreen: true,
       uiLabels: {},
+      nextQuestionNormal: false,
+      nextQuestionCursed: false,
+      countdown: 5,
     }
   },
   created: function () {
@@ -120,8 +127,38 @@ export default {
       setTimeout(() => {
         this.showQResultScreen = false;
       }, 10000);
-    }
-  }
+    },
+
+    startCountdown: function() {
+      this.countdown = 5;
+      const interval = setInterval(() => {
+        if (this.countdown > 0) {
+          this.countdown--;
+        } else {
+          clearInterval(interval);
+          this.goToNextQuestion;
+        }
+      }, 1000);
+    },
+
+    goToNextQuestion: function() {
+      this.$router.push()
+    },
+
+
+  },
+  watch: {
+    nextQuestionNormal: function(newVal) {
+      if (newVal) {
+        this.startCountdown();
+      }
+    },
+    nextQuestionCursed: function(newVal) {
+      if (newVal) {
+        this.startCountdown();
+      }
+    },
+  },
 }
 </script>
 <style scoped>
