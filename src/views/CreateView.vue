@@ -147,7 +147,7 @@
 
 <script>
 import io from 'socket.io-client';
-//import imageCompression from 'browser-image-compression';
+import imageCompression from 'browser-image-compression';
 const socket = io("localhost:3000");
 
 
