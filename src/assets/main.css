@@ -58,29 +58,24 @@ html{
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
 }
-
 ::-webkit-scrollbar{
   width:1.5em;
 }
-
 ::-webkit-scrollbar-track{
-  background: linear-gradient(-45deg,var(--p-offWhite),var(--p-green));
+  background: var(--p-offWhite);
   border-radius: 100vw;
   margin-block: .3em;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
 }
-
 ::-webkit-scrollbar-thumb{
-  background: var(--p-beige);
+  background: lightgray;
   border-radius: 100vw;
-  border: .25em solid var(--p-green);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border: .25em solid var(--p-offWhite);
 
 }
-
 ::-webkit-scrollbar-thumb:hover{
-  background: var(--p-yellow);
+  background: #aaa;
 }
 
 
