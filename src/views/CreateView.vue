@@ -491,7 +491,9 @@ input::file-selector-button {
 
 body{
   display: flex;
+  overflow-y: scroll;
 }
+
 
 #side-table-wrapper{
   width: 30%;
@@ -508,11 +510,6 @@ body{
 }
 
 
-
-
-body{
-  overflow-y: scroll;
-}
 #side-table-wrapper input{
   width: 80%;
   height: 2em;
