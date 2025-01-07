@@ -8,7 +8,7 @@ function Data() {
     lang: "en",
     //  constructor(question, answers = [{text:"", correct:false}]) {
     questions: [
-      {q: "How old are you?", 
+      {q: "How old are you?",
        a: [{text:"0-13", correct: false}, {text:"14-18",correct: false} , {text:"19-25", correct: true}, {text:"26-35", correct: false}, {text:"36-45", correct: false},{text: "45-", correct: false}], img: null},
       {q: "How much do you enjoy coding?", a: [{text:"1", correct : false}, {text:"2", correct : false}, {text:"3", correct : false}, {text:"4", correct : false}, {text:"5", correct : false}], img: null}
     ],
@@ -39,12 +39,14 @@ Data.prototype.getUILabels = function (lang) {
 Data.prototype.createPoll = function(pollId, lang="en", quizName) {
   if (!this.pollExists(pollId)) {
     let poll = {};
-    poll.lang = lang;  
+    poll.lang = lang;
     poll.questions = [];
     poll.answers = [];
     poll.participants = [];
     poll.currentQuestion = -1;
     poll.quizName = quizName;
+    poll.timer = null;
+    poll.timeLeft=0;
     this.polls[pollId] = poll;
     console.log("poll created", pollId, poll);
   }
@@ -77,14 +79,13 @@ Data.prototype.getParticipants = function(pollId) {
 Data.prototype.addQuestion = function(pollId, q) {
   if (this.pollExists(pollId)) {
     this.polls[pollId].questions.push(q);
-    console.log("Added question:", q);
+    //console.log("Added question:", q);
   }
 }
 
 Data.prototype.activateQuestion = function(pollId, qId = null) {
   if (this.pollExists(pollId)) {
     const poll = this.polls[pollId];
-    //poll.questions[poll.currentQuestion].timeRemaining = poll.questions[poll.currentQuestion].questionTime;
     if (qId !== null) {
       poll.currentQuestion = qId;
     }
@@ -171,6 +172,37 @@ Data.prototype.getTime = function(pollId) {
     return poll.time;
   }
   return {}
+}
+
+//egengjort, kanske funkar, vi får se
+Data.prototype.nextQuestion = function(pollId) {
+  if (this.pollExists(pollId)) {
+    const poll = this.polls[pollId];
+    //let lastQuestion = true;
+    //console.log("currentQuestion:",poll.currentQuestion);
+    //console.log("questions.length:",poll.questions.length)
+    if(poll.currentQuestion<(poll.questions.length-1)){
+      poll.currentQuestion++;
+      /**if(poll.currentQuestion<(poll.questions.length-2)){
+        lastQuestion = false;
+      }*/
+      //console.log("moving to next question", poll.currentQuestion, poll.questions.length);
+    }
+    //return {q: this.activateQuestion(pollId),number:poll.currentQuestion, lastQuestion: lastQuestion};
+  }
+  return this.getQuestionNumber(pollId);
+}
+
+Data.prototype.getQuestionNumber = function(pollId) {
+  if(this.pollExists(pollId)) {
+    const poll = this.polls[pollId];
+    let lastQuestion = true;
+    if(poll.currentQuestion<(poll.questions.length-1)){
+      lastQuestion = false;
+    }
+    return {number:poll.currentQuestion, lastQuestion: lastQuestion};
+  }
+  return {number: -1, lastQuestion: false};
 }
 
 Data.prototype.generateGameId= function(){

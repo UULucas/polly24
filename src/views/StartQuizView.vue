@@ -49,7 +49,7 @@
 
       <div class="participants"> <!--  Denna diven är till för att ha våra participants i så vi kan
                                           nog bara sätta en array här i med dom som går med spelet-->
-        <div v-for="participant in pollData.participants"
+        <div v-for="participant in participants"
              :key="participant.id"
              class="text-box">
           <div class="participants-name">
@@ -66,7 +66,7 @@
           <div class="participants-name">
             {{"Score: " + participant.score}}
           </div>
-          <img v-if="participant.answers.length===this.pollData.currentQuestion+1&&this.gameStarted"
+          <img v-if="participant.answers.length===this.currentQuestion+1&&this.gameStarted"
                src="../assets/pngegg.png"
                alt="Checkmark"
                style="
@@ -96,7 +96,7 @@
       <br>
     </form!-->
     <label v-if="gameStarted">{{uiLabels.timeLeft}}:{{timeLeft}}</label>
-    <label v-if="gameStarted" class="text-box" style="font-size: 35px">{{uiLabels.currentQuestion}}: {{pollData.currentQuestion+1}}</label>
+    <label v-if="gameStarted" class="text-box" style="font-size: 35px">{{uiLabels.currentQuestion}}: {{question.number+1}}</label>
     <div class="start-section">
       <div v-if="gameStarted">
         <!--button class="start-button nav-button" @click="previousQuestion">{{uiLabels.prevQuestion}}</button!-->
@@ -108,7 +108,6 @@
     </div>
 
   </div>
-
 
   </body>
 </template>
@@ -124,29 +123,35 @@ export default {
     return {
       lang: localStorage.getItem("lang") || "en",
       pollId: "",
-      question: "",
-      answers: ["", ""],
-      pollData: {currentQuestion: 0},
+      //question: "",
+      answers: ["", ""], //Användäns inte
+      participants: [],
+      pollData: {currentQuestion: 0}, //Vill inte spara all pollData, det är onödigt
+      question:{number:-1,lastQuestion:false},
       uiLabels: {},
-      imageUrl: "",
       gameStarted: false,
       timeLeft: 0,
-      timeOutID: null,
-      timerOn: true,
+      timeOutID: null, //Kan ta bort
+      timerOn: true, //Kan ta bort
 
     }
   },
   created: function () {
     this.pollId = this.$route.params.id;
-    socket.removeAllListeners();
+    //Buggen ligger i en av våra sockets, fucking skjut mig eller något sånt
     socket.on( "uiLabels", labels => this.uiLabels = labels );
-    socket.on( "pollData", data => this.loadQuiz(data) );
-    socket.on( "participantsUpdate", p => this.pollData.participants = p );
+    //socket.on( "pollData", data => this.loadQuiz(data)); //Vill ta bort
+    socket.on( "participantsUpdate", p => this.participants = p); //GÖr om så att den inte lagras i pollData
+    socket.on("timeUpdated", t => this.timeLeft = t);
+    socket.on("currentQuestion", q => this.question = q);
     socket.emit( "getUILabels", this.lang );
-    socket.emit("getQuizData", {pollId: this.pollId}); //Hämtar all data redan, problemet är att det är för mycket data, gör en egen funktion som bara skrickar relevant data
+    //socket.emit("getQuizData", {pollId: this.pollId}); //Vill ta bort
     socket.emit( "joinPoll", this.pollId );
+    //this.loadQuiz();
+
+    //socket.emit('runNextQuestion', this.pollId);
   },
-  watch: {
+  /**watch: {
     timeLeft: {
       handler(){
         console.log("updated time: "+this.timeLeft)
@@ -160,49 +165,50 @@ export default {
       },
       immediate: true,
     }
-  },
+  },*/
   methods: {
-    runQuestion: function (questionNumber) {
-      socket.emit("runQuestion", {pollId: this.pollId, questionNumber: questionNumber});
+    runQuestion: function ( ){
+      socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.question.number});
+      //socket.emit("runNextQuestion",this.pollId)
     },
-    previousQuestion: function () {
+    /**previousQuestion: function () {
       if(this.pollData.currentQuestion>0){
         this.pollData.currentQuestion--;
         this.runQuestion(this.pollData.currentQuestion);
         socket.emit("updateTime", {pollId: this.pollId, time: this.pollData.questions[this.pollData.currentQuestion].questionTime});
         this.setGameTime();
       }
-    },
-    nextQuestion: function () {
-      if(this.pollData.currentQuestion<this.pollData.questions.length-1){
-        this.pollData.currentQuestion++;
-        this.runQuestion(this.pollData.currentQuestion);
-        this.setGameTime();
+    },*/
+    nextQuestion: function () { //Typ onödig
+      console.log(this.question.lastQuestion);
+      if(!this.question.lastQuestion){
+        socket.emit("nextQuestion", this.pollId);
+        //this.runQuestion();
       }
     },
     startQuiz: function (){
       this.gameStarted = true;
-      this.pollData.currentQuestion = 0;
+      //this.pollData.currentQuestion = 0; //Kan ta bort
       socket.emit("startPoll", this.pollId);
-      this.runQuestion(this.pollData.currentQuestion);
-      this.setGameTime();
+      //this.runQuestion();
+      this.nextQuestion();
+      //this.setGameTime();
     },
     copyText: function () {
       var copyText = document.getElementById("pollId").innerText;
       navigator.clipboard.writeText(copyText); //kod tagen från W3
       alert(this.uiLabels.copiedTextAlert + copyText);
     },
-    setGameTime: function (){
+    /**setGameTime: function (){
       if(this.timeLeft!==this.pollData.questions[this.pollData.currentQuestion].questionTime){
         clearTimeout(this.timeOutID);
         this.timeLeft = this.pollData.questions[this.pollData.currentQuestion].questionTime;
         this.timerOn = true;
       }
-    },
-    loadQuiz: function (data){
-      this.pollData = data;
-      console.log(this.pollData);
-      this.gameStarted = data.currentQuestion > -1;
+    },*/
+    loadQuiz: function (){
+      console.log(this.question.number)
+      this.gameStarted = this.question.number > -1;
     },
     switchLanguage: function() {
       if (this.lang === "en") {
