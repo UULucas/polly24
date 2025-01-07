@@ -57,6 +57,7 @@ export default {
     socket.emit( "getUILabels", this.lang );
     socket.emit( "joinPoll", this.pollId );
 
+
     socket.on('timeUpdated', t => console.log("test time:",t))
   },
   watch: {

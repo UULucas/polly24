@@ -22,8 +22,11 @@
       <div class="name-and-key">
 
         <div class="quiz-name"> <!--  här ska quizens namn stå, som vi får hämta från där man skapar eller nått-->
-          <label class="quiz-name-label">
-            {{pollData.quizName}}
+          <label v-if ="pollData.quizname" class="quiz-name-label">
+            {{pollData.quizname}}
+          </label>
+          <label v-else class="quiz-name-label">
+            Untitled Quiz
           </label>
 
         </div>
@@ -129,8 +132,8 @@ export default {
       //question: "",
       answers: ["", ""], //Användäns inte
       participants: [],
-      pollData: {currentQuestion: 0}, //Vill inte spara all pollData, det är onödigt
-      question:{number:-1,lastQuestion:false},
+      //pollData: {currentQuestion: 0}, //Vill inte spara all pollData, det är onödigt
+      question:{number:-69,lastQuestion:false},
       uiLabels: {},
       gameStarted: false,
       timeLeft: 0,
@@ -146,7 +149,7 @@ export default {
     //socket.on( "pollData", data => this.loadQuiz(data)); //Vill ta bort
     socket.on( "participantsUpdate", p => this.participants = p); //GÖr om så att den inte lagras i pollData
     socket.on("timeUpdated", t => this.timeLeft = t);
-    socket.on("currentQuestion", q => this.question = q);
+    socket.on("currentQuestion", q => this.loadQuestion(q));
     socket.emit( "getUILabels", this.lang );
     //socket.emit("getQuizData", {pollId: this.pollId}); //Vill ta bort
     socket.emit( "joinPoll", this.pollId );
@@ -186,7 +189,6 @@ export default {
       console.log(this.question.lastQuestion);
       if(!this.question.lastQuestion){
         socket.emit("nextQuestion", this.pollId);
-        //this.runQuestion();
       }
     },
     startQuiz: function (){
@@ -209,8 +211,8 @@ export default {
         this.timerOn = true;
       }
     },*/
-    loadQuiz: function (){
-      console.log(this.question.number)
+    loadQuestion: function (newQuestion){
+      this.question = newQuestion;
       this.gameStarted = this.question.number > -1;
     },
     switchLanguage: function() {
