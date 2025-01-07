@@ -151,27 +151,12 @@ Data.prototype.submitPlayerAnswer = function(pollId, answer, playerId, score) {
   }
 }
 
-Data.prototype.setTime = function(pollId, time) {
+Data.prototype.getTimeLeft = function(pollId) {
   if (this.pollExists(pollId)) {
     const poll = this.polls[pollId];
-    poll.questions[poll.currentQuestion].timeRemaining = time
-    //sjukt om det bara funkar såhär
+    return poll.timeLeft;
   }
-}
-
-Data.prototype.resetTime = function (pollId, qId){
-    if (this.pollExists(pollId)) {
-        const poll = this.polls[pollId];
-        poll.questions[qId].timeRemaining = poll.questions[qId].questionTime;
-    }
-}
-
-Data.prototype.getTime = function(pollId) {
-  if (this.pollExists(pollId)) {
-    const poll = this.polls[pollId];
-    return poll.time;
-  }
-  return {}
+  return 0;
 }
 
 //egengjort, kanske funkar, vi får se
@@ -183,12 +168,7 @@ Data.prototype.nextQuestion = function(pollId) {
     //console.log("questions.length:",poll.questions.length)
     if(poll.currentQuestion<(poll.questions.length-1)){
       poll.currentQuestion++;
-      /**if(poll.currentQuestion<(poll.questions.length-2)){
-        lastQuestion = false;
-      }*/
-      //console.log("moving to next question", poll.currentQuestion, poll.questions.length);
     }
-    //return {q: this.activateQuestion(pollId),number:poll.currentQuestion, lastQuestion: lastQuestion};
   }
   return this.getQuestionNumber(pollId);
 }

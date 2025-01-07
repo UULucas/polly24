@@ -21,19 +21,13 @@
 
       <div class="name-and-key">
 
-        <div class="quiz-name"> <!--  här ska quizens namn stå, som vi får hämta från där man skapar eller nått-->
+        <div class="quiz-name">
           <label class="quiz-name-label">
             {{quizName}}
           </label>
 
         </div>
 
-        <!--input
-            class="quiz-key text-box"
-            :value="text"
-            type="text"
-            placeholder="Quiz key"
-            @input="event => text = event.target.value"!-->
         <label class="quiz-key text-box" id="pollId">
           {{pollId}}
         </label>
@@ -83,26 +77,10 @@
       </div>
     </div>
 
-    <!--form action= "" onsubmit="event.preventDefault();">
-      <p>
-        <label for="Time">Choose time of the question (seconds)</label>
-        <select id="Time" v-model="setTime">
-          <option selected="selected">30</option>
-          <option>20</option>
-          <option>15</option>
-          <option>10</option>
-        </select>
-      </p>
-      <button v-on:click="setGameTime(setTime);" type="submit">
-        <label> Start timer </label>
-      </button>
-      <br>
-    </form!-->
     <label v-if="gameStarted">{{uiLabels.timeLeft}}:{{timeLeft}}</label>
     <label v-if="gameStarted" class="text-box" style="font-size: 35px">{{uiLabels.currentQuestion}}: {{question.number+1}}</label>
     <div class="start-section">
       <div v-if="gameStarted">
-        <!--button class="start-button nav-button" @click="previousQuestion">{{uiLabels.prevQuestion}}</button!-->
         <button class="start-button nav-button" @click="nextQuestion">{{uiLabels.nextQuestion}}</button>
       </div>
 
@@ -126,65 +104,30 @@ export default {
     return {
       lang: localStorage.getItem("lang") || "en",
       pollId: "",
-      //question: "",
       answers: ["", ""], //Användäns inte
       participants: [],
-      //pollData: {currentQuestion: 0}, //Vill inte spara all pollData, det är onödigt
       question:{number:-69,lastQuestion:false},
       uiLabels: {},
       gameStarted: false,
       timeLeft: 0,
-      timeOutID: null, //Kan ta bort
-      timerOn: true, //Kan ta bort
-      quizName: "Untitled quiz1111",
+      quizName: "Untitled quiz",
 
     }
   },
   created: function () {
     this.pollId = this.$route.params.id;
-    //Buggen ligger i en av våra sockets, fucking skjut mig eller något sånt
     socket.on( "uiLabels", labels => this.uiLabels = labels );
-    //socket.on( "pollData", data => this.loadQuiz(data)); //Vill ta bort
-    socket.on( "participantsUpdate", p => this.participants = p); //GÖr om så att den inte lagras i pollData
+    socket.on( "participantsUpdate", p => this.participants = p);
     socket.on("timeUpdated", t => this.timeLeft = t);
     socket.on("currentQuestion", q => this.loadQuestion(q));
     socket.on("quizName", name => this.quizName = name);
     socket.emit( "getUILabels", this.lang );
-    //socket.emit("getQuizData", {pollId: this.pollId}); //Vill ta bort
-
-    socket.emit( "joinPoll", this.pollId );
-    //this.loadQuiz();
-
-    //socket.emit('runNextQuestion', this.pollId);
+    socket.emit( "joinPoll", this.pollId );;
   },
-  /**watch: {
-    timeLeft: {
-      handler(){
-        console.log("updated time: "+this.timeLeft)
-        socket.emit("updateTime", {pollId: this.pollId, time: this.timeLeft});
-        if(this.timeLeft>0&&this.timerOn){
-          this.timeOutID=setTimeout(() => {
-            this.timeLeft--;
-          }, 1000);
-        }
-
-      },
-      immediate: true,
-    }
-  },*/
   methods: {
     runQuestion: function ( ){
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.question.number});
-      //socket.emit("runNextQuestion",this.pollId)
     },
-    /**previousQuestion: function () {
-      if(this.pollData.currentQuestion>0){
-        this.pollData.currentQuestion--;
-        this.runQuestion(this.pollData.currentQuestion);
-        socket.emit("updateTime", {pollId: this.pollId, time: this.pollData.questions[this.pollData.currentQuestion].questionTime});
-        this.setGameTime();
-      }
-    },*/
     nextQuestion: function () { //Typ onödig
       console.log(this.question.lastQuestion);
       if(!this.question.lastQuestion){
@@ -193,24 +136,14 @@ export default {
     },
     startQuiz: function (){
       this.gameStarted = true;
-      //this.pollData.currentQuestion = 0; //Kan ta bort
       socket.emit("startPoll", this.pollId);
-      //this.runQuestion();
       this.nextQuestion();
-      //this.setGameTime();
     },
     copyText: function () {
       var copyText = document.getElementById("pollId").innerText;
       navigator.clipboard.writeText(copyText); //kod tagen från W3
       alert(this.uiLabels.copiedTextAlert + copyText);
     },
-    /**setGameTime: function (){
-      if(this.timeLeft!==this.pollData.questions[this.pollData.currentQuestion].questionTime){
-        clearTimeout(this.timeOutID);
-        this.timeLeft = this.pollData.questions[this.pollData.currentQuestion].questionTime;
-        this.timerOn = true;
-      }
-    },*/
     loadQuestion: function (newQuestion){
       this.question = newQuestion;
       this.gameStarted = this.question.number > -1;
