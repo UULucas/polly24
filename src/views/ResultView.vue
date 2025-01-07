@@ -8,7 +8,7 @@
     </button>
   </header>
 
-  <div id="qResultScreen">
+  <div id="qResultScreen" v-if="showQResultScreen">
     <div class="resultWrapper">
       <h2>The correct answer was:</h2>
       <h3>{{ correctAnswer }}</h3>
@@ -20,7 +20,7 @@
 
   </div>
   
-  <div id="leaderboardScreen">
+  <div id="leaderboardScreen" v-if="!showQResultScreen">
     <div class="resultWrapper">
       <h2>Current Leaderboard: </h2>
       <ul>
@@ -37,6 +37,11 @@
     <div class="powerUpWrapper">
       <h2>You have received a PowerUp!</h2>
       <p>Choose one:</p>
+      <div id="powerupButtonWrapper">
+        <button class="nav-button" @click="selfPowerUp">Powerup yourself</button>
+        <button class="nav-button" @click="oneDowngrade">Fuck the leader/one person</button>
+        <button class="nav-button" @click="manyDowngrade">Fuck everyone</button>
+      </div>
     </div>
 
   </div>
@@ -84,6 +89,8 @@ export default {
       question: "",
       submittedAnswers: {},
       participants: [],
+      showQResultScreen: true,
+      uiLabels: {},
     }
   },
   created: function () {
@@ -95,6 +102,7 @@ export default {
     socket.emit("getUILabels", this.lang);
     socket.emit("joinPoll", this.pollId);
     socket.emit("getParticipants", this.pollId);
+    this.startTimer();
   },
   methods: {
     switchLanguage: function() {
@@ -107,6 +115,12 @@ export default {
       localStorage.setItem( "lang", this.lang );
       socket.emit( "getUILabels", this.lang );
     },
+
+    startTimer: function() {
+      setTimeout(() => {
+        this.showQResultScreen = false;
+      }, 10000);
+    }
   }
 }
 </script>
@@ -138,6 +152,7 @@ header {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
   margin: 20px auto; 
   text-align: center;
+  transition: opacity 0.5s ease-in-out;
 
 }
 
