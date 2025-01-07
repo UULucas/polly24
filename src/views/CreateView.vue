@@ -40,12 +40,14 @@
       </div>
     </div>
 
-    <input
+    <textarea
         class="question-area text-box"
-        maxlength="140"
-        contenteditable="true"
+        maxlength="14000"
         v-model="questions[questionNumber].q"
-        :placeholder="uiLabels.questionPlaceholder">
+        :placeholder="uiLabels.questionPlaceholder"
+
+    ></textarea>
+
 
 
     <div id="answer-container" style="overflow-wrap: break-word" >
@@ -362,7 +364,20 @@ export default {
   padding-top: 2.7rem;
   padding-bottom: 1.5rem;
 }
-
+.question-area {
+  height: 2em;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  resize: none;
+  padding-top: 2em;
+  padding-right: 6rem;
+  padding-left: 6rem;
+  width: 20%;
+  height: 3em;
+  vertical-align: middle;
+  text-align: center;
+}
 
 
 [type="checkbox"]{
@@ -433,10 +448,7 @@ export default {
 
 
 
-.question-area {
-  width: calc(100% - 3px);
-  height: 2em;
-}
+
 
 #answer-container {
   display: flex;
@@ -525,7 +537,6 @@ input::file-selector-button {
 body{
   display: flex;
 }
-
 
 #side-table-wrapper{
   width: 30%;

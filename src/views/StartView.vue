@@ -70,7 +70,6 @@ export default {
 
 
 #container {
-  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
