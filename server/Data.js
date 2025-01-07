@@ -216,6 +216,13 @@ Data.prototype.generateGameId= function(){
   return newId;
 }
 
+Data.prototype.getQuizName= function(pollId){
+  if(this.pollExists(pollId)) {
+    return this.polls[pollId].quizName;
+  }
+  return "Untitled Quiz";
+}
+
 Data.prototype.saveToJson = function (pollId){
 //shout out saveToJson, gotta be one of my favourite functions
 }

@@ -22,11 +22,8 @@
       <div class="name-and-key">
 
         <div class="quiz-name"> <!--  här ska quizens namn stå, som vi får hämta från där man skapar eller nått-->
-          <label v-if ="pollData.quizname" class="quiz-name-label">
-            {{pollData.quizname}}
-          </label>
-          <label v-else class="quiz-name-label">
-            Untitled Quiz
+          <label class="quiz-name-label">
+            {{quizName}}
           </label>
 
         </div>
@@ -139,6 +136,7 @@ export default {
       timeLeft: 0,
       timeOutID: null, //Kan ta bort
       timerOn: true, //Kan ta bort
+      quizName: "Untitled quiz1111",
 
     }
   },
@@ -150,8 +148,10 @@ export default {
     socket.on( "participantsUpdate", p => this.participants = p); //GÖr om så att den inte lagras i pollData
     socket.on("timeUpdated", t => this.timeLeft = t);
     socket.on("currentQuestion", q => this.loadQuestion(q));
+    socket.on("quizName", name => this.quizName = name);
     socket.emit( "getUILabels", this.lang );
     //socket.emit("getQuizData", {pollId: this.pollId}); //Vill ta bort
+
     socket.emit( "joinPoll", this.pollId );
     //this.loadQuiz();
 
