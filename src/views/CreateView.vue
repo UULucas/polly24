@@ -111,6 +111,7 @@
     </div!-->
   </section>
 
+
   <section id="side-table-wrapper">
 
     <div style="display: flex;">
@@ -299,6 +300,7 @@ export default {
   height: 80vh;
   gap: 16px;
   margin: auto;
+  margin-top: 1rem;
 }
 
 .correct-answer-container{
@@ -453,6 +455,7 @@ input::file-selector-button {
   position: relative;
   padding-left: 1rem;
   gap: 1rem ;
+
 }
 
 .header-button {
@@ -484,7 +487,7 @@ body{
 
 #side-table-wrapper{
   width: 30%;
-  height: 78vh;
+  height: 75vh;
   margin-right:1rem;
   border-radius: 1rem;
   padding: 1rem;
@@ -492,8 +495,16 @@ body{
   border: solid black 1px;
   background-color: var(--p-offWhite);
   overflow-y: scroll;
+  position: sticky;
+  top:16px;
 }
 
+
+
+
+body{
+  overflow: auto;
+}
 #side-table-wrapper input{
   width: 80%;
   height: 2em;
