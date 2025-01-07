@@ -377,7 +377,6 @@ export default {
   height: 2rem;
   outline: 2px solid #aaa;
   background: var(--p-offWhite);
-  background-image: url("../assets/gray-cross.png");
   background-size: contain;
   background-size:108%;
   border-radius: 8px;
@@ -519,12 +518,14 @@ body{
   border-radius: 1rem;
   padding: 1rem;
   font-size: 1rem;
-  border: solid black 1px;
   background-color: var(--p-offWhite);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   overflow-y: scroll;
   position: sticky;
   top:16px;
 }
+
+
 
 
 #side-table-wrapper input{
