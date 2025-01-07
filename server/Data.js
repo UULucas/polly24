@@ -151,21 +151,6 @@ Data.prototype.submitPlayerAnswer = function(pollId, answer, playerId, score) {
   }
 }
 
-Data.prototype.setTime = function(pollId, time) {
-  if (this.pollExists(pollId)) {
-    const poll = this.polls[pollId];
-    poll.questions[poll.currentQuestion].timeRemaining = time
-    //sjukt om det bara funkar såhär
-  }
-}
-
-Data.prototype.resetTime = function (pollId, qId){
-    if (this.pollExists(pollId)) {
-        const poll = this.polls[pollId];
-        poll.questions[qId].timeRemaining = poll.questions[qId].questionTime;
-    }
-}
-
 Data.prototype.getTimeLeft = function(pollId) {
   if (this.pollExists(pollId)) {
     const poll = this.polls[pollId];

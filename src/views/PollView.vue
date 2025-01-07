@@ -5,7 +5,6 @@
 
   </div>
   <body style="display: grid; margin-top: 1rem">
-    <!--label style="font-size: 50px; color:red">{{timeLeft}}</label!-->
     <div class="pollQuestion">
       <QuestionComponent ref="questionComponent"
                          v-bind:question="question"
@@ -56,34 +55,15 @@ export default {
     socket.on("timeUpdated", t => this.updateTimeLeft(t));
     socket.emit( "getUILabels", this.lang );
     socket.emit( "joinPoll", this.pollId );
-
-    //socket.on('timeUpdated', t => console.log("test time:",t))
   },
-  /**watch: {
-    answerTime: {
-      handler: function () {
-        if(!this.answered){
-          this.timeOutID=setTimeout(() => {
-            this.answerTime++;
-          }, 1000);
-        }
-      }
-    }
-  },*/
   methods: {
     loadQuestion: function (data){
       console.log("loaded question")
       this.question = data;
       this.questionComponent.methods.resetButtons(this.question.a);
       this.answered = false;
-
-      //Om tiden är slut när man laddar sidan
-      /*if(this.question.timeRemaining<=0){
-        this.answered = true;
-      }*/
     },
     updateTimeLeft: function(timeLeft){
-      console.log("updateTimeLeft");
       this.timeLeft = timeLeft;
       this.updateAnimation();
       if(timeLeft <= 0){
@@ -96,7 +76,6 @@ export default {
       if(!this.answered){
         console.log(this.playerId)
         console.log("testtest")
-        //läg till poäng och sånt skit
         const score = this.calculateScore(answer);
         console.log("answer sent: "+answer.correct+" score: "+score);
         socket.emit("submitPlayerAnswer", {pollId: this.pollId, playerId: this.playerId, answer: answer.text, score:score})
@@ -122,31 +101,7 @@ export default {
         element.style.width = `0%`;
       }
     },
-
-    resetAnimation: function () {
-      console.log("animation time: ",this.timeLeft)
-      document.documentElement.style.setProperty('--duration', (this.timeLeft)); //Återställ tiden på animationen
-      let element = document.getElementById('timer-bar');
-      element.style.animation = 'none';
-      element.offsetHeight; //Starta om den
-      element.style.animation = null;
-    },
-    startTimer: function (){
-      //this.countDownTime();
-      clearTimeout(this.timeOutID);
-      this.timeLeft = this.question.timeRemaining;
-      this.answerTime = this.question.questionTime-this.question.timeRemaining;
-    },
-    countDownTime: function() {
-      setTimeout(this.setZero, this.question.timeRemaining * 1000)
-    },
-    setZero: function() {
-      this.timeLeft = 0;
-      this.answered = true;
-      this.questionComponent.methods.disableButtons(this.question.a);
-      console.log("out of time");
-    },
-}
+  }
 }
 </script>
 <style>
