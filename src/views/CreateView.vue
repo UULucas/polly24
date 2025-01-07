@@ -343,6 +343,8 @@ export default {
   cursor: pointer;
   color: black;
   pointer-events: none;
+  text-align: center;
+  vertical-align: middle;
 }
 
 
