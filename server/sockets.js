@@ -9,10 +9,6 @@ function sockets(io, socket, data) {
     socket.emit('pollData', data.getPoll(d.pollId));
   });
 
-  socket.on('getQuizData', function(d) {
-    socket.emit('pollData', data.getPoll(d.pollId));
-  })
-
   socket.on('addQuestion', function(d) {
     data.addQuestion(d.pollId, d.data);
 
@@ -23,7 +19,7 @@ function sockets(io, socket, data) {
     socket.join(pollId);
     socket.emit('questionUpdate', data.activateQuestion(pollId))
     socket.emit('submittedAnswersUpdate', data.getSubmittedAnswers(pollId));
-    io.to(pollId).emit('currentQuestion', data.getQuestionNumber(pollId));
+    socket.emit('currentQuestion', data.getQuestionNumber(pollId));
 
 
   });
@@ -115,10 +111,8 @@ function sockets(io, socket, data) {
           clearInterval(poll.timer); // Stoppa timern när tiden tar slut
         }
       }, 1000);
-
     }
   });
-
 
 }
 
