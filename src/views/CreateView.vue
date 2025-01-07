@@ -56,6 +56,7 @@
             class="text-box answer-box"
             type="text"
             :placeholder="uiLabels.answerPlaceholder"
+            maxlength="45"
             @input="questions[questionNumber].a[i]=text"
             style="background-color: transparent; border: none; box-shadow: none; outline: none;">
 
@@ -88,10 +89,12 @@
       <p>
         <label class="choose-time-label" for="Time">{{ uiLabels.chooseQuestionTime }}</label>
         <select class="time-selector" id="Time" v-model="questions[questionNumber].questionTime">
+
           <option selected="selected">30</option>
           <option>20</option>
           <option>15</option>
           <option>10</option>
+
         </select>
       </p>
       <!--button v-on:click="setGameTime(setTime);" type="submit">
@@ -111,13 +114,15 @@
     </div!-->
   </section>
 
+
   <section id="side-table-wrapper">
 
     <div style="display: flex;">
       <input
           class="text-box"
           v-model="quizName"
-          :placeholder="uiLabels.quizName">
+          :placeholder="uiLabels.quizName"
+          maxlength="23">
       <button class="text-box" id="save-button">
         <img src="../assets/save_icon.png" alt="test" style="width: 110%" @click="test">
       </button>
@@ -300,6 +305,7 @@ export default {
   height: 80vh;
   gap: 16px;
   margin: auto;
+  margin-top: 1rem;
 }
 
 .correct-answer-container{
@@ -313,6 +319,7 @@ export default {
   background-color: var(--p-green);
   margin-left: 62%;
 }
+
 
 
 .answer-box{
@@ -355,6 +362,9 @@ export default {
   height: 2rem;
   outline: 2px solid #aaa;
   background: var(--p-offWhite);
+  background-image: url("../assets/gray-cross.png");
+  background-size: contain;
+  background-size:108%;
   border-radius: 8px;
   z-index: 1;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -454,6 +464,8 @@ input::file-selector-button {
   position: relative;
   padding-left: 1rem;
   gap: 1rem ;
+  height: 5rem;
+  margin-top: 1rem;
 }
 
 .header-button {
@@ -481,11 +493,13 @@ input::file-selector-button {
 
 body{
   display: flex;
+  overflow-y: scroll;
 }
+
 
 #side-table-wrapper{
   width: 30%;
-  height: 78vh;
+  height: 75vh;
   margin-right:1rem;
   border-radius: 1rem;
   padding: 1rem;
@@ -493,7 +507,10 @@ body{
   border: solid black 1px;
   background-color: var(--p-offWhite);
   overflow-y: scroll;
+  position: sticky;
+  top:16px;
 }
+
 
 #side-table-wrapper input{
   width: 80%;
@@ -547,9 +564,22 @@ body{
 .time-selector {
   margin-left: 1rem;
   margin-right: 1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 0.5em 1.2em;
+  font-size: 1.3rem;
+  background: var(--p-beige);
+  border-radius: 8px;
 }
+.time-selector:hover {
+  background: var(--p-yellow);
+}
+
+
+
 
 .choose-time-label {
   margin-left: 1rem;
+
 }
 </style>
