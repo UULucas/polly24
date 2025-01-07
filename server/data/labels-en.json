@@ -26,5 +26,20 @@
 	"waitMessage": "Waiting for host...",
 	"timeChoiceMessage": "Choose answer time (seconds)",
 	"addQuestion": "Add Question",
-	"enterPlayerName": "Enter player name"
+	"enterPlayerName": "Enter player name",
+	"chooseAvatar": "Choose an avatar:",
+	"namePlaceholder": "Your name here",
+	"gameIdAlert": "Enter your Game ID!",
+	"nameAlert": "You have to choose a name",
+	"fileTooBigAlert": "The selected file is too large. Please choose another file.",
+	"uploadImage": "Upload image",
+	"gameIDPlaceholder": "Game ID",
+	"questionPlaceholder": "Question",
+	"answerPlaceholder": "Answer",
+	"startQuizButton": "Start quiz",
+	"chooseQuestionTime": "Choose time of the question (seconds)",
+	"quizName": "Quiz name",
+	"addQuestionQuiz": "Add question",
+	"startGame": "Start game",
+	"copiedTextAlert": "Copied the text: "
 }

@@ -15,7 +15,7 @@
       </button>
 
     <button class="start-quiz nav-button" @click="startQuiz">
-        Starta quiz
+      {{ uiLabels.startQuizButton }}
     </button>
     </div>
   </header>
@@ -31,7 +31,7 @@
     <div id="question-img-wrapper" class="img-button-div">
       <input ref="fileInput" type="file" accept="image/*" @input="pickFile" id="question-img" style="display: none;">
       <button @click="$refs.fileInput.click()" class="upload-button">
-        Upload Image
+        {{ uiLabels.uploadImage }}
       </button>
       <div v-if="questions[questionNumber].fileName" class="file-name-display">
         <div class="question-filename">
@@ -43,7 +43,7 @@
     <input
         class="question-area text-box"
         v-model="questions[questionNumber].q"
-        placeholder="Question">
+        :placeholder="uiLabels.questionPlaceholder">
 
 
     <div id="answer-container" style="overflow-wrap: break-word" >
@@ -55,7 +55,7 @@
             v-model="questions[questionNumber].a[i].text"
             class="text-box answer-box"
             type="text"
-            placeholder="Svar"
+            :placeholder="uiLabels.answerPlaceholder"
             @input="questions[questionNumber].a[i]=text"
             style="background-color: transparent; border: none; box-shadow: none; outline: none;">
 
@@ -86,7 +86,7 @@
     </div>
     <form action= "" class="text-box">
       <p>
-        <label class="choose-time-label" for="Time">Choose time of the question (seconds)</label>
+        <label class="choose-time-label" for="Time">{{ uiLabels.chooseQuestionTime }}</label>
         <select class="time-selector" id="Time" v-model="questions[questionNumber].questionTime">
           <option selected="selected">30</option>
           <option>20</option>
@@ -118,7 +118,7 @@
       <input
           class="text-box"
           v-model="quizName"
-          placeholder="Quiz Name">
+          :placeholder="uiLabels.quizName">
       <button class="text-box" id="save-button">
         <img src="../assets/save_icon.png" alt="test" style="width: 110%" @click="test">
       </button>
@@ -134,7 +134,7 @@
       </button>
     </div>
     <button class="nav-button" style="font-size: 35px; margin-top: 1rem;" @click="addQuestion">
-      <label>Add question</label>
+      <label>{{ uiLabels.addQuestionQuiz }}</label>
     </button>
   </section>
   </body>
@@ -183,6 +183,7 @@ export default {
     }
   },
   created: function () {
+
     socket.on( "uiLabels", labels => this.uiLabels = labels );
     socket.on( "pollData", data => this.pollData = data );
     socket.on( "participantsUpdate", p => this.pollData.participants = p );
@@ -251,7 +252,7 @@ export default {
       const maxFileSize = 5.8 * 1024 * 1024;
 
       if (file && file.size > maxFileSize) {
-        alert("The selected file is too large. Please choose another file.");
+        alert(this.uiLabels.fileTooBigAlert);
         input.value = "";
         return;
       }

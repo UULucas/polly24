@@ -1,14 +1,59 @@
 <template>
   <header>
     <router-link to="/" class = "nav-button">
-      <a>
         <img class="home-img" src="../assets/home_icon.png" alt="HomeImg">
-      </a>
     </router-link>
     <button class=" nav-button" v-on:click="switchLanguage">
       <img :src="uiLabels.changeLanguage" alt="" class="lang-img">
     </button>
   </header>
+
+  <div id="qResultScreen">
+    <div class="resultWrapper">
+      <h2>The correct answer was:</h2>
+      <h3>{{ correctAnswer }}</h3>
+      <br>
+      <h3>Here is what everyone answered: </h3>
+      <p>staplar brorsan</p>
+
+    </div>
+
+  </div>
+  
+  <div id="leaderboardScreen">
+    <div class="resultWrapper">
+      <h2>Current Leaderboard: </h2>
+      <ul>
+        <li>Player 1</li>
+        <li>Player 2</li>
+        <li>Player 3</li>
+        <li>Looooooser</li>
+      </ul>
+    </div>
+    
+  </div>
+
+  <div v-if="powerUp">
+    <div class="powerUpWrapper">
+      <h2>You have received a PowerUp!</h2>
+      <p>Choose one:</p>
+    </div>
+
+  </div>
+
+  <div v-if="nextQuestionNormal">
+    <h2>Next question starts in:</h2>
+    <p>Insert countdown</p>
+  </div>
+
+  <div v-if="nextQuestionCursed">
+    <h2>userName has given you have downgrade:</h2>
+    <p>downgradeName</p>
+    <p>Description of downgradeName</p>
+    <h2>Next question starts in: </h2>
+    <p>Insert countdown</p>
+
+  </div>
 
   <div>
     lang: {{ lang }}
@@ -81,6 +126,28 @@ header {
   margin-right: auto;
   height: 50px;
   width: 50px;
+}
+
+.resultWrapper {
+  height: 90%;
+  width: 500px;
+  border: none; 
+  border-radius: 10px; 
+  padding: 20px; 
+  background-color: #ffffff; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
+  margin: 20px auto; 
+  text-align: center;
+
+}
+
+#resultScreen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+  height: 100vh;
 }
 
 

@@ -6,8 +6,12 @@ function sockets(io, socket, data) {
 
   socket.on('createPoll', function(d) {
     data.createPoll(d.pollId, d.lang, d.quizName)
-    socket.emit('pollData', data.getPoll(d.pollId));
+    //socket.emit('pollData', data.getPoll(d.pollId));
   });
+
+  socket.on('getQuizData', function(d) {
+    socket.emit('pollData', data.getPoll(d.pollId));
+  })
 
   socket.on('addQuestion', function(d) {
     data.addQuestion(d.pollId, d.data);
