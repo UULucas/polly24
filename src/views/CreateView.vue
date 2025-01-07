@@ -342,6 +342,7 @@ export default {
   font-family: "Inter",sans-serif;
   cursor: pointer;
   color: black;
+  pointer-events: none;
 }
 
 
