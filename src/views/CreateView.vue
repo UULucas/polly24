@@ -318,7 +318,8 @@ export default {
 .start-quiz {
   margin: 1rem 3rem;
   background-color: var(--p-green);
-  margin-left: 62%;
+  margin-left: auto;
+  white-space: nowrap;
 }
 
 

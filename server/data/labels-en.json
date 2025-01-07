@@ -41,5 +41,12 @@
 	"quizName": "Quiz name",
 	"addQuestionQuiz": "Add question",
 	"startGame": "Start game",
-	"copiedTextAlert": "Copied the text: "
+	"copiedTextAlert": "Copied the text: ",
+	"canvasColor": "Color",
+	"canvasBackgroundColor": "Background color",
+	"canvasWidth": "Width",
+	"canvasUndo": "Undo",
+	"canvasClear": "Clear",
+	"photo": "Take a photo!",
+	"submitPhoto": "Submit photo"
 }
