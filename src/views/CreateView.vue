@@ -56,6 +56,7 @@
             class="text-box answer-box"
             type="text"
             :placeholder="uiLabels.answerPlaceholder"
+            maxlength="45"
             @input="questions[questionNumber].a[i]=text"
             style="background-color: transparent; border: none; box-shadow: none; outline: none;">
 
@@ -120,7 +121,8 @@
       <input
           class="text-box"
           v-model="quizName"
-          :placeholder="uiLabels.quizName">
+          :placeholder="uiLabels.quizName"
+          maxlength="23">
       <button class="text-box" id="save-button">
         <img src="../assets/save_icon.png" alt="test" style="width: 110%" @click="test">
       </button>
@@ -491,7 +493,9 @@ input::file-selector-button {
 
 body{
   display: flex;
+  overflow-y: scroll;
 }
+
 
 #side-table-wrapper{
   width: 30%;
@@ -508,11 +512,6 @@ body{
 }
 
 
-
-
-body{
-  overflow-y: scroll;
-}
 #side-table-wrapper input{
   width: 80%;
   height: 2em;
