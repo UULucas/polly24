@@ -261,7 +261,7 @@ header {
 
 
 .share-key-button{
-  height: 96%;
+  height: 96.4%;
   width: 12rem;
 }
 
@@ -306,6 +306,8 @@ header {
   width: 38rem;
   font-size: 4rem;
   border: 1px solid;
+  margin-top: 0.2rem;
+  align-self: flex-end;
 }
 .start-section{
 
