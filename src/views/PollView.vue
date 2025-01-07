@@ -93,8 +93,12 @@ export default {
     },
     updateAnimation: function () {
       let element = document.getElementById("timer-bar");
+      let time = this.timeLeft;
+      if(time !== this.question.questionTime){ //För att den ska gå hela vägen ut till kanten och även in i mitten
+        time--;
+      }
       if(this.timeLeft>0) {
-        const percentageWidth = (this.timeLeft / this.question.questionTime) * 100; //Räkna ut bärden
+        const percentageWidth = ((time) / (this.question.questionTime)) * 100; //Räkna ut bärden
         element.style.width = `${percentageWidth}%`;
       }
       else{
@@ -110,15 +114,15 @@ export default {
   height: 10px;
   background: linear-gradient(to bottom, red, #900);
   /*animation: roundtime calc(var(--duration) * 1s) linear forwards;*/
-  transform-origin: center;
 
-  transition: width 0.2s ease; /* Mjuk animation vid varje steg */;
+  transition: width 1s linear; /* Mjuk animation vid varje steg */;
 }
 #timer-bar-container{
   width: 100%;
   height: 10px;
   position: relative;
   overflow: hidden;
+
 }
 @keyframes roundtime {
   to {
