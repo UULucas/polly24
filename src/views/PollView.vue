@@ -21,6 +21,7 @@
 import { ref } from 'vue';
 import QuestionComponent from '@/components/QuestionComponent.vue';
 import io from 'socket.io-client';
+import {sockets} from "../../server/sockets";
 
 const socket = io("localhost:3000");
 
@@ -55,6 +56,8 @@ export default {
     socket.on( "uiLabels", labels => this.uiLabels = labels );
     socket.emit( "getUILabels", this.lang );
     socket.emit( "joinPoll", this.pollId );
+
+    socket.on('timeUpdated', t => console.log("test time:",t))
   },
   watch: {
     answerTime: {
