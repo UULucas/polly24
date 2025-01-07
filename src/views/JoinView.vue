@@ -52,26 +52,26 @@
             <div id="toolbar">
 
             <div class="toolbar-item">
-              <label for="strokeColor">Color</label>
+              <label for="strokeColor">{{ uiLabels.canvasColor }}</label>
               <input id="strokeColor" name="strokeColor" type="color">
             </div>
 
             <div class="toolbar-item">
-              <label for="bgColor">Background color</label>
+              <label for="bgColor">{{ uiLabels.canvasBackgroundColor }}</label>
               <input id="bgColor" name="bgColor" type="color" value="white">
             </div>
 
             <div class="toolbar-item">
-              <label for="lineWidth">Width</label>
+              <label for="lineWidth">{{ uiLabels.canvasWidth }}</label>
               <input id="lineWidth" name="lineWidth" type="number" value="5">
             </div>
 
             <div class="toolbar-item">
-              <button id="undo" @click="undoLastStroke">Undo</button>
+              <button id="undo" @click="undoLastStroke">{{ uiLabels.canvasUndo }}</button>
             </div>
 
             <div class="toolbar-item">
-              <button id="clear" @click="clearCanvas">Clear</button>
+              <button id="clear" @click="clearCanvas">{{ uiLabels.canvasClear }}</button>
             </div>
 
             </div>
@@ -86,10 +86,10 @@
 
         <div v-if="isCamModalOpen" class="modal" @click.self="closeModal">
           <div class="camModal-content">
-            <h2>Take a photo!</h2>
+            <h2>{{ uiLabels.photo }}</h2>
             <span class="closeModal" @click="closeModal">&times;</span>
             <video ref="camVideo" autoplay playsinline width="400" height="400"></video><br>
-            <button id="submitPhotoButton" @click="submitPhoto">Submit photo</button>
+            <button id="submitPhotoButton" @click="submitPhoto">{{ uiLabels.submitPhoto }}</button>
 
           </div>
         </div>
