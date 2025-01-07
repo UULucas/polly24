@@ -87,7 +87,7 @@ body{
   background-color: var(--p-blue);
   height: 100%;
 }
-
+  
 header {
   background-color: var(--p-blue);
   width: 100%;
