@@ -47,5 +47,6 @@
 	"canvasUndo": "Ångra",
 	"canvasClear": "Rensa",
 	"photo": "Ta en bild!",
-	"submitPhoto": "Skicka in bild"
+	"submitPhoto": "Skicka in bild",
+	"changeImage": "Byt bild"
 }
