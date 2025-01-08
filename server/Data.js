@@ -6,15 +6,17 @@ function Data() {
   this.polls = {};
   this.polls['test'] = {
     lang: "en",
-    //  constructor(question, answers = [{text:"", correct:false}]) {
+
     questions: [
       {q: "How old are you?",
-       a: [{text:"0-13", correct: false}, {text:"14-18",correct: false} , {text:"19-25", correct: true}, {text:"26-35", correct: false}, {text:"36-45", correct: false},{text: "45-", correct: false}], img: null},
-      {q: "How much do you enjoy coding?", a: [{text:"1", correct : false}, {text:"2", correct : false}, {text:"3", correct : false}, {text:"4", correct : false}, {text:"5", correct : false}], img: null}
+       a: [{text:"0-13", correct: false}, {text:"14-18",correct: false} , {text:"19-25", correct: true}, {text:"26-35", correct: false}, {text:"36-45", correct: false},{text: "45-", correct: false}], img: null, questionTime: 20, fileName:""},
     ],
-    answers: [{"0-13": 4}, {name:"fredrik",}],
+    answers: [],
     currentQuestion: -1,
-    participants: [{name: "tester", answers: [], avatar: "avatar"}]
+    participants: [{name: "tester", answers: [], avatar: null, score: 0, id:"test"}],
+    timer: null,
+    timeLeft: 0,
+    quizName: "test quiz",
   }
 }
 

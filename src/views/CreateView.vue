@@ -168,9 +168,8 @@ class Question {
     this.a = answers;
     this.img = img;
     this.questionTime = time;
-    this.timeRemaining = time;
     // nytest
-    this.fileName = fileName;
+    this.fileName = fileName; //Namnet på bilden
   }
   getAnswers(){
     let a = [];
