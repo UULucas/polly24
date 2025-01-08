@@ -45,7 +45,7 @@
         </div>
         <div  v-if="this.questions[this.questionNumber].img">
             <button @click="removeImage(this.questionNumber)">
-              Delete Image
+              {{uiLabels.removeImage}}
             </button>
         </div>
       </div>

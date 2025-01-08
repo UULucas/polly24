@@ -1,12 +1,12 @@
-<template>
+  <template>
   <div id="qResultScreen" v-if="showQResultScreen">
     <div class="resultWrapper">
-      <h2>{{uiLabels.correctAnswer}}</h2>
+      <h2>The correct answer was:</h2>
       <div v-for="answer in question.a.filter(item => item.correct)" v-bind:key="answer">
         {{answer.text}}
       </div>
       <br>
-      <h3>{{ uiLabels.everyonesAnswer }}</h3>
+      <h3>Here is what everyone answered: </h3>
       <BarsComponent v-bind:labels="question.a" v-bind:data="submittedAnswers"/>
 
     </div>
@@ -17,10 +17,8 @@
     <div class="resultWrapper">
       <h2>Leaderboard</h2>
 
-      <div class="container">
-      <div class="name-box nav-label"></div>
-      <div class="score-box nav-label"></div>
-      </div>
+
+
 
       <div class="participant-list">
         <div v-for="participant in participants" :key="participant" class="text-box-participant">
@@ -215,7 +213,9 @@ header {
 }
 
 .participants-name{
-  width: 10rem;
+  box-shadow: inset 0px -5px 0px #e0be36;
+  margin-top: 1rem;
+  height: 0.5rem;
   display:flex;
   align-items: center;
   padding:1rem;
@@ -223,7 +223,9 @@ header {
 }
 
 .participants-score {
-  width: 10rem;
+  box-shadow: inset 0px -5px 0px 0px #e0be36;
+  margin-top: 1rem;
+  height: 0.5rem;
   display:flex;
   align-items: center;
   padding:1rem;
@@ -266,13 +268,14 @@ header {
   display: flex;
   align-items: flex-end;
   padding-bottom: 0.5rem;
+  margin-left: 4rem;
 }
 
 .nav-label {
   text-align: center;
   padding: 5px;
   background-color: e0be36;
-  box-shadow: inset 0px -3px 0px #e0be36;
+  box-shadow: inset 0px -5px 0px #e0be36;
   border-radius: 0px;
   font-size: 20px;
   font-family: "Inter", sans-serif;
