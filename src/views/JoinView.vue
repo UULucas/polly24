@@ -31,7 +31,7 @@
         </button>
 
         <div class="avatarButtonWrapper">
-        <button class="nav-button" @click="openDrawModal">
+        <button class="nav-button" @click="openDrawModal" style="background-color: var(--p-cadetBlue); border:0px;">
           <img class="home-img" src="https://www.freeiconspng.com/uploads/paint-brush-icon-10.png" alt="Draw avatar" name="draw">
         </button>
 
@@ -45,11 +45,6 @@
             <div class="toolbar-item">
               <label for="strokeColor">{{ uiLabels.canvasColor }}</label>
               <input id="strokeColor" name="strokeColor" type="color">
-            </div>
-
-            <div class="toolbar-item">
-              <label for="bgColor">{{ uiLabels.canvasBackgroundColor }}</label>
-              <input id="bgColor" name="bgColor" type="color" value="white">
             </div>
 
             <div class="toolbar-item">
@@ -339,7 +334,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 85vh;
+  height: 100%;
   flex-direction: column;
   width: 80%;
   margin:auto;
@@ -380,13 +375,23 @@
 
 #toolbar input {
   width: 3rem;
-  height: 2rem;
 }
 
 #toolbar button {
   border: none;
   border-radius: 4px;
   color: white;
+  padding: 0.5rem;
+  background-color: var(--p-red);
+  font-weight: 400;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 0.5rem;
+}
+
+#toolbar button:hover {
+  transform: scale(1.03);
+  transition: transform 0.2s;
+  cursor: pointer;
 }
 
 #toolbar label {
@@ -497,11 +502,17 @@ header {
 .delete-button{
   border-radius: 1rem;
   border: none;
-  width: 8rem;
-  height: 3rem;
+  width: 9rem;
+  height: auto;
   background-color: var(--p-red);
-  cursor:pointer;
 }
+
+.delete-button:hover {
+  cursor:pointer;
+  transform: scale(1.03);
+  transition: transform 0.2s;
+}
+
 #firstJoinBox {
   margin: auto;
 }
