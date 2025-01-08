@@ -123,20 +123,20 @@ export default {
     socket.on("currentQuestion", q => this.loadQuestion(q));
     socket.on("quizName", name => this.quizName = name);
     socket.emit( "getUILabels", this.lang );
-    socket.emit( "joinPoll", this.pollId );;
+    socket.emit( "joinPoll", this.pollId );
+    socket.emit("getParticipants", this.pollId);
   },
   methods: {
     restartQuiz : function () {
-      socket.emit("runQuestion", {pollId: this.pollId, questionNumber: -1});
+      socket.emit("restartQuiz", this.pollId);
     },
-    nextQuestion: function () { //Typ onödig
+    nextQuestion: function () {
       console.log(this.question.lastQuestion);
       if(!this.question.lastQuestion){
         socket.emit("nextQuestion", this.pollId);
       }
     },
     startQuiz: function (){
-      this.gameStarted = true;
       socket.emit("startPoll", this.pollId);
       this.nextQuestion();
     },

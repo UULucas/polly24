@@ -218,6 +218,9 @@ Data.prototype.restartQuiz = function (pollId){
     const poll = this.polls[pollId];
     poll.currentQuestion = -1;
     poll.answers = [];
+    poll.timeLeft = 0;
+    clearInterval(poll.timer);
+    poll.timer = null;
     for(let i = 0; i < poll.participants.length; i++){
       poll.participants[i].answers = [];
       poll.participants[i].score = 0;
