@@ -49,7 +49,5 @@
 	"photo": "Ta en bild!",
 	"submitPhoto": "Skicka in bild",
 	"changeImage": "Byt bild",
-	"noExistingQuiz" : "Inget quiz med den Nyckeln finns",
-	"restartQuiz": "Start om Quiz",
-	"showingResult": "Resultatet från frågan visas för spelarna"
+	"noExistingQuiz" : "Inget quiz med den Nyckeln finns"
 }
