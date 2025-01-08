@@ -80,12 +80,13 @@
     <label v-if="gameStarted">{{uiLabels.timeLeft}}:{{timeLeft}}</label>
     <label v-if="gameStarted" class="text-box" style="font-size: 35px">{{uiLabels.currentQuestion}}: {{question.number+1}}</label>
     <div class="start-section">
-      <div v-if="gameStarted">
+      <div v-if="gameStarted&&!question.lastQuestion">
         <button class="start-button nav-button" @click="nextQuestion">{{uiLabels.nextQuestion}}</button>
       </div>
 
       <button v-if="!gameStarted" class="start-button nav-button" @click="startQuiz">
         {{ uiLabels.startGame }}</button>
+      <button v-if="question.lastQuestion" class="start-button nav-button" @click="restartQuiz">Restart</button>
     </div>
 
   </div>
@@ -125,8 +126,8 @@ export default {
     socket.emit( "joinPoll", this.pollId );;
   },
   methods: {
-    runQuestion: function ( ){
-      socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.question.number});
+    restartQuiz : function () {
+      socket.emit("runQuestion", {pollId: this.pollId, questionNumber: -1});
     },
     nextQuestion: function () { //Typ onödig
       console.log(this.question.lastQuestion);

@@ -216,6 +216,18 @@ Data.prototype.getQuizName= function(pollId){
   return "Untitled Quiz";
 }
 
+Data.prototype.restartQuiz = function (pollId){
+  if(this.pollExists(pollId)) {
+    const poll = this.polls[pollId];
+    poll.currentQuestion = -1;
+    poll.answers = [];
+    for(let i = 0; i < poll.participants.length; i++){
+      poll.participants[i].answers = [];
+      poll.participants[i].score = 0;
+    }
+  }
+}
+
 Data.prototype.saveToJson = function (pollId){
 //shout out saveToJson, gotta be one of my favourite functions
 }
