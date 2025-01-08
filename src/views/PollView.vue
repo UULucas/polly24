@@ -12,7 +12,7 @@
                          v-bind:question="question"
                          v-bind:timeLeft="timeLeft"
                          v-on:answer="submitAnswer($event)"/>
-      <hr>
+
     </div>
   </body>
 </template>

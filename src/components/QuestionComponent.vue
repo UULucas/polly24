@@ -101,8 +101,8 @@ background-color: white;
 border: 1px solid #ddd;
 border-radius: 8px;
 box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-width: 500px;
-height: 300px;
+  width:30vw;
+  height:30vw;
 }
 
 .image {
@@ -157,9 +157,13 @@ height: 300px;
   display:inline-block;
   width:30vw;
   height:10vw;
+  padding-bottom: 0.5vw;
+  padding-top: 0.5vw;
 }
 
 .answer-button {
+  padding-bottom: 0.5vw;
+  padding-top: 0.5vw;
   padding-left:0.5rem;
   padding-right: 0.5rem;
   text-align: center;
@@ -169,7 +173,6 @@ height: 300px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   width: 20vw;
   height: 10vw;
-
 }
 
 .answer-button:hover {
