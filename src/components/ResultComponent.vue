@@ -2,7 +2,9 @@
   <div id="qResultScreen" v-if="showQResultScreen">
     <div class="resultWrapper">
       <h2>The correct answer was:</h2>
-      <h3>{{ correctAnswer }}</h3>
+      <div v-for="answer in question.a.filter(item => item.correct)" v-bind:key="answer">
+        {{answer.text}}
+      </div>
       <br>
       <h3>Here is what everyone answered: </h3>
       <BarsComponent v-bind:labels="question.a" v-bind:data="submittedAnswers"/>
@@ -14,9 +16,10 @@
   <div id="leaderboardScreen" v-if="!showQResultScreen">
     <div class="resultWrapper">
       <h2>Current Leaderboard: </h2>
-      <ul>
+      <ol>
         <li v-for="participant in participants" v-bind:key="participant">
           {{participant.name}}
+          {{participant.score}}
           <img :src="participant.avatar"
                alt="avatar"
                style="
@@ -31,7 +34,7 @@
         <li>Avatar - Player 2</li>
         <li>Avatar - Player 3</li>
         <li>Avatar - Looooooser</li!-->
-      </ul>
+      </ol>
     </div>
 
   </div>
@@ -84,15 +87,18 @@ import io from 'socket.io-client';
 const socket = io("localhost:3000");
 
 export default {
-  name: 'ResultView',
+  name: 'ResultComponent',
   components: {
     BarsComponent
+  },
+  props: {
+    question: Object,
   },
   data: function () {
     return {
       lang: localStorage.getItem("lang") || "en",
       pollId: "",
-      question: "",
+      //question: "",
       submittedAnswers: {},
       participants: [],
       showQResultScreen: true,
@@ -106,7 +112,7 @@ export default {
     this.pollId = this.$route.params.id;
     socket.on("uiLabels", labels => this.uiLabels = labels);
     socket.on("submittedAnswersUpdate", update => this.submittedAnswers = update);
-    socket.on("questionUpdate", update => this.question = update);
+    //socket.on("questionUpdate", update => this.question = update);
     socket.on( "participantsUpdate", p => this.participants = p.sort((a, b) => b.score - a.score));
     socket.emit("getUILabels", this.lang);
     socket.emit("joinPoll", this.pollId);
@@ -124,7 +130,6 @@ export default {
       localStorage.setItem( "lang", this.lang );
       socket.emit( "getUILabels", this.lang );
     },
-
     startTimer: function() {
       setTimeout(() => {
         this.showQResultScreen = false;

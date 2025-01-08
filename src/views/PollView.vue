@@ -5,7 +5,7 @@
 
   </div>
   <body style="display: grid; margin-top: 1rem">
-    <ResultComponent v-if="displayResultScreen"></ResultComponent>
+    <ResultComponent v-if="displayResultScreen" v-bind:question="question"></ResultComponent>
     <div v-else class="pollQuestion">
       <QuestionComponent ref="questionComponent"
                          v-bind:question="question"
@@ -39,7 +39,7 @@ export default {
         img : null
       },
       pollId: "inactive poll",
-      submittedAnswers: {},
+      //submittedAnswers: {},
       unstarted: false,
       answered : false,
       playerId: "",
@@ -54,7 +54,7 @@ export default {
     this.pollId = this.$route.params.id;
     this.playerId = this.$route.params.playerId;
     socket.on( "questionUpdate", q => this.loadQuestion(q))
-    socket.on( "submittedAnswersUpdate", answers => this.submittedAnswers = answers );
+    //socket.on( "submittedAnswersUpdate", answers => this.submittedAnswers = answers );
     socket.on( "uiLabels", labels => this.uiLabels = labels );
     socket.on("timeUpdated", t => this.updateTimeLeft(t));
     socket.emit( "getUILabels", this.lang );
@@ -66,6 +66,7 @@ export default {
       this.question = data;
       this.questionComponent.methods.resetButtons(this.question.a);
       this.answered = false;
+      this.displayResultScreen = false;
     },
     updateTimeLeft: function(timeLeft){
       this.timeLeft = timeLeft;
