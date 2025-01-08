@@ -24,6 +24,7 @@ function sockets(io, socket, data) {
     socket.emit('submittedAnswersUpdate', data.getSubmittedAnswers(pollId));
     socket.emit('currentQuestion', data.getQuestionNumber(pollId));
     socket.emit('timeUpdated', data.getTimeLeft(pollId));
+
   });
 
   socket.on('participateInPoll', function(d) {
@@ -40,7 +41,7 @@ function sockets(io, socket, data) {
   });
   socket.on('startPoll', function(pollId) {
     io.to(pollId).emit('startPoll');
-  })
+  });
   socket.on('getParticipants', function(pollId) {
     io.to(pollId).emit('participantsUpdate', data.getParticipants(pollId));
   });
@@ -94,6 +95,11 @@ function sockets(io, socket, data) {
         }
       }, 1000);
     }
+  });
+  socket.on("restartQuiz", function(pollId){
+    data.restartQuiz(pollId);
+    io.to(pollId).emit('toLobby');
+    socket.emit('currentQuestion', data.getQuestionNumber(pollId));
   });
 
 }

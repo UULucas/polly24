@@ -12,7 +12,7 @@
                          v-bind:question="question"
                          v-bind:timeLeft="timeLeft"
                          v-on:answer="submitAnswer($event)"/>
-      <hr>
+
     </div>
   </body>
 </template>
@@ -54,14 +54,24 @@ export default {
   created: function () {
     this.pollId = this.$route.params.id;
     this.playerId = this.$route.params.playerId;
-    socket.on( "questionUpdate", q => this.loadQuestion(q))
-    //socket.on( "submittedAnswersUpdate", answers => this.submittedAnswers = answers );
+    socket.on( "questionUpdate", q => this.loadQuestion(q));
+    //socket.on( "submittedAnswersUpdate", answers => this.submittedAnswers = answers );'
     socket.on( "uiLabels", labels => this.uiLabels = labels );
     socket.on("timeUpdated", t => this.updateTimeLeft(t));
+    socket.on("toLobby", t => this.toLobby(t));
     socket.emit( "getUILabels", this.lang );
     socket.emit( "joinPoll", this.pollId );
   },
   methods: {
+    toLobby () {
+      this.$router.push({
+        name: "LobbyView",
+        params: {
+          id: this.pollId,
+          playerId: this.playerId,
+        },
+      });
+    },
     loadQuestion: function (data){
       console.log("loaded question")
       this.question = data;

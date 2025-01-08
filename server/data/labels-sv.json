@@ -49,5 +49,5 @@
 	"photo": "Ta en bild!",
 	"submitPhoto": "Skicka in bild",
 	"changeImage": "Byt bild",
-	"noExistingQuiz" : "Inget quiz med det ID:t finns"
+	"noExistingQuiz" : "Inget quiz med den Nyckeln finns"
 }
