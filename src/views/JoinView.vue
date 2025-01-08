@@ -10,6 +10,26 @@
     </button>
   </header>
 
+  <section class="sticky">
+  <div class="bubbles">
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+  </div>
+</section>
+
     <div id="joinScreen">
         <div id="nameAvatarWrapper">
           <input
@@ -339,6 +359,7 @@
   width: 80%;
   margin:auto;
   gap:1rem;
+  z-index: 1;
 }
 
 #nameAvatarWrapper {

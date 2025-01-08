@@ -14,6 +14,26 @@
       </button>
   </header>
 
+  <section class="sticky">
+  <div class="bubbles">
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+  </div>
+</section>
+
   <div id="joinScreen">
       <div class="joinWrapper">
       <div class="textbox">
@@ -48,6 +68,7 @@
       
 
     </div>
+    <audio ref="backgroundMusic" src="../assets/music.mp3" loop></audio>
   </div>
 </template>
 
