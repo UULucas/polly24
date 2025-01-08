@@ -10,7 +10,18 @@ function Data() {
     questions: [
       {q: "How old are you?",
        a: [{text:"0-13", correct: false}, {text:"14-18",correct: false} , {text:"19-25", correct: true}, {text:"26-35", correct: false}, {text:"36-45", correct: false},{text: "45-", correct: false}], img: null, questionTime: 20, fileName:""},
+      {q:"LongquestionLongquestionLongquestionLongquestionLongquestionLongquestionLongquestionLongquestionLongquestionLongquestionLongquestionLongquestionLongquestionLongquestionLongquestionLongquestionLongquestionLongquestionLongquestion",
+      a:[{text:"rätt", correct: true}], img: null, questionTime: 30, fileName:""},
+      {q: "Question Picture and boxes",
+        a:[{text:"rätt", correct: true},{text:"A", correct: false},{text:"A", correct: false},{text:"A", correct: false},{text:"A", correct: false}], img:"../assets/pngegg.png", questionTime: 30, fileName:""},
+      {q: "Is the asnwer long?",
+        a:[{text:"LonganswerLonganswerLonganswerLonganswerLonganswerLonganswerLonganswerLonganswerLonganswerLonganswerLonganswer", correct: true}], img: null, questionTime: 30, fileName:""},
+      {q: "",
+        a:[{text:"A", correct: false}], img: null, questionTime: 30, fileName:""},
+      {q: "LongquestionLongquestionLongquestionLongquestionLongquestion",
+        a:[{text:"LonganswerLonganswerLonganswerLonganswerLonganswerLonganswer", correct: false},{text:"LonganswerLonganswerLonganswerLonganswerLonganswerLonganswer", correct: false},{text:"LonganswerLonganswerLonganswerLonganswerLonganswerLonganswer", correct: false},{text:"LonganswerLonganswerLonganswerLonganswerLonganswerLonganswer", correct: false},{text:"LonganswerLonganswerLonganswerLonganswerLonganswerLonganswer", correct: false},{text:"LonganswerLonganswerLonganswerLonganswerLonganswerLonganswer", correct: false}], img: null, questionTime: 100000000, fileName:""}
     ],
+
     answers: [],
     currentQuestion: -1,
     participants: [{name: "tester", answers: [], avatar: null, score: 0, id:"test"}],
@@ -203,6 +214,18 @@ Data.prototype.getQuizName= function(pollId){
     return this.polls[pollId].quizName;
   }
   return "Untitled Quiz";
+}
+
+Data.prototype.restartQuiz = function (pollId){
+  if(this.pollExists(pollId)) {
+    const poll = this.polls[pollId];
+    poll.currentQuestion = -1;
+    poll.answers = [];
+    for(let i = 0; i < poll.participants.length; i++){
+      poll.participants[i].answers = [];
+      poll.participants[i].score = 0;
+    }
+  }
 }
 
 Data.prototype.saveToJson = function (pollId){

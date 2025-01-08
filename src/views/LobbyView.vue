@@ -16,11 +16,12 @@
 
   <div id="joinScreen">
       <div class="joinWrapper">
+
       <h3>{{uiLabels.gameId}}: </h3>{{pollId}}
       <h1>{{uiLabels.welcomeGreeting}}</h1>
-      <p>{{ userName }}</p>
+      <p>{{ getName() }}</p>
       
-      <img :src="avatar" alt="miniavtr" class="mini-avatar">
+      <img :src="getAvater()" alt="miniavtr" class="mini-avatar">
 
         <p>{{uiLabels.waitMessage}}</p>
 
@@ -70,8 +71,8 @@ export default {
   },
   created: function () {
     this.pollId = this.$route.params.id; //Hämtas fårn webbadressen
-    this.userName = this.$route.params.userName || "";  //Hämtar från webbadressen så går inte att hämta
-    this.avatar = this.$route.params.avatar || "";  //Hämtar från webbadressen så kommer inte att funka
+    //this.userName = this.$route.params.userName || "";  //Hämtar från webbadressen så går inte att hämta
+    //this.avatar = this.$route.params.avatar || "";  //Hämtar från webbadressen så kommer inte att funka
     this.playerId = this.$route.params.playerId || "";
     socket.on( "uiLabels", labels => this.uiLabels = labels );
     socket.on( "participantsUpdate", p => this.participants = p );
@@ -81,6 +82,14 @@ export default {
     socket.emit("getParticipants", this.pollId);
   },
   methods: {
+    getName: function (){
+      let player = this.participants.find(obj => obj.id === this.playerId);
+      return player? player.name : "";
+    },
+    getAvater: function (){
+      let player = this.participants.find(obj => obj.id === this.playerId);
+      return player? player.avatar : "";
+    },
     switchLanguage: function() {
       if (this.lang === "en") {
         this.lang = "sv"
@@ -154,7 +163,6 @@ input[type="text"] {
   background-color: var(--p-offWhite);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   text-align: center;
-
 }
 
 .spinner {

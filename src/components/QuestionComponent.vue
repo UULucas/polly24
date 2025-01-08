@@ -5,16 +5,18 @@
 </div>
 <p></p>
 <div class="textbox">
-  <p>{{question.q}}</p>
+ <!-- <p>{{question.q}}</p> -->
+  <textarea disabled class="text-area-question" :value="` ${question.q}`"></textarea>
 </div>
-<div class="answerbox link-wrapper">
+<div class="answerbox">
 <button class="answer-button"
         v-for="(a, index) in question.a"
         :key="index"
         :ref="'a-' + index"
         :id="'a-'+ index"
-        v-on:click="answer(a); changeColor(index, a.correct); disableButtons(question.a)">
-  {{ a.text }}
+        v-on:click="answer(a); changeColor(index, a.correct); disableButtons(question.a)"> <!-- försök att föra in en textarea i knappen, åter igen på samma sätt som i create !-->
+  <!--{{ a.text }} -->
+   <textarea disabled class="text-area-answer" :value="` ${ a.text }`"></textarea>
 </button>
 </div>
 <!--div v-if="timeLeft < 1">
@@ -87,19 +89,8 @@ export default {
 
 </script>
 <style>
-.textbox{
-padding:20px;
-background-color: white;
-border: 1px solid #ddd;
-border-radius: 8px;
-font-size: 30px;
-font-family: "Inter", sans-serif;
-font-weight: 400;
-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-display:inline-block;
-width:auto;
-height:auto;
-}
+
+
 .imgContainer{
 display: flex;
 align-items: center;
@@ -120,25 +111,64 @@ height: 300px;
    height:auto;
 }
 .answerbox {
-  margin-top: 1rem;
+  padding-top: 1rem;
+  justify-content: center;
   display: grid;
   grid-template-areas: "a b" "c d" "e f";
   align-items: center;
   gap: 1rem;
 }
 
-.answer-button {
+.text-area-question{
+  border: none;
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  resize: none;
+  font-family: "Inter",sans-serif;
   text-align: center;
-  padding: 20px;
+  vertical-align: middle;
+  color: black;
+  font-size: 2vw;
+}
+
+.text-area-answer{
+  border: none;
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  resize: none;
+  font-family: "Inter",sans-serif;
+  cursor: pointer;
+  color: black;
+  pointer-events: none;
+  text-align: center;
+  vertical-align: middle;
+  overflow: hidden;
+  font-size: 1.5vw;
+}
+
+.textbox{
+  padding-left:0.5rem;
+  padding-right: 0.5rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display:inline-block;
+  width:30vw;
+  height:10vw;
+}
+
+.answer-button {
+  padding-left:0.5rem;
+  padding-right: 0.5rem;
+  text-align: center;
   background-color: var(--p-beige);
   border: 1px solid #ddd;
   border-radius: 8px;
-  font-size: 50px;
-  font-family: "Inter", sans-serif;
-  font-weight: 400;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  width: 20rem;
-  height: 10rem;
+  width: 20vw;
+  height: 10vw;
 
 }
 

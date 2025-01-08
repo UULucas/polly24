@@ -11,25 +11,13 @@
   </header>
 
     <div id="joinScreen">
-      <div v-if="!joined">
-
-        <input
-            class="idTextBox text-box"
-            id= "firstJoinBox"
-            type="text"
-            inputmode="numeric"
-            maxlength="4"
-            :placeholder= "uiLabels.gameIDPlaceholder"
-            v-model="pollId"><br>
-
-        <button class="idButton nav-button" v-on:click="checkID">
-          {{ uiLabels.joinButton }}
-        </button>
-
-      </div>
-
-      <div v-if="joined">
         <div id="nameAvatarWrapper">
+          <input
+              class="idTextBox text-box"
+              type="text"
+              maxlength="14"
+              :placeholder= "uiLabels.gameIDPlaceholder"
+              v-model="pollId">
           <input
               class="idTextBox text-box"
               type="text"
@@ -104,7 +92,6 @@
         <button class="idButton nav-button" v-on:click="submitNameAndAvatar">
           {{ uiLabels.joinButton }}
         </button>
-      </div>
     </div>
   </div>
   </template>
@@ -120,19 +107,18 @@
         uiLabels:{},
         pollId: "",
         userName: "",
-        joined: false,
         avatar: "https://i.pinimg.com/474x/25/6b/9d/256b9d21d02a82e9d60deded024e4fe9.jpg",
         isDrawModalOpen: false,
         isCamModalOpen: false,
         camStream: null,
         lang: localStorage.getItem("lang") || "en",
+        noExistingQuiz: false,
 
       }
     },
     created: function () {
-    this.pollId = this.$route.params.id;
     socket.on( "uiLabels", labels => this.uiLabels = labels );
-    socket.emit( "joinPoll", this.pollId );
+    socket.on("noExistingQuiz", this.noExistingQuiz = true);
     socket.emit( "getUILabels", this.lang );
   },
   methods: {
@@ -146,15 +132,19 @@
         id:this.playerId,
       } );
 
-      this.$router.push({
-        name: "LobbyView",
-        params: {
-          id: this.pollId,
-          userName: this.userName,
-          avatar: this.avatar,
-          playerId: this.playerId,
-        },
-      });
+      if(!this.noExistingQuiz){
+        this.$router.push({
+          name: "LobbyView",
+          params: {
+            id: this.pollId,
+            playerId: this.playerId,
+          },
+        });
+      }
+      else{
+        alert(this.uiLabels.noExistingQuiz);
+      }
+
     },
     generatePlayerId: function (){
       const now = new Date().getTime(); // Hämta aktuell tid i millisekunder
@@ -162,17 +152,11 @@
       this.playerId = btoa(`${now}-${random}`); // Kombinera tid och slumpsträng och Base64-koda
       console.log(this.playerId);
     },
-    checkID(){
-      console.log("test",this.playerId)
+    submitNameAndAvatar: function() {
       if (!this.pollId) {
         alert(this.uiLabels.gameIdAlert);
         return;
       }
-      else{
-        this.joined = true;
-      }
-    },
-    submitNameAndAvatar: function() {
       if (!this.userName) {
         alert(this.uiLabels.nameAlert);
         return;
@@ -345,7 +329,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 70vh;
+  height: 85vh;
   flex-direction: column;
   width: 80%;
   margin:auto;
@@ -356,7 +340,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 100%;
   flex-direction: column;
   width: 80%;
   margin:auto;

@@ -6,6 +6,7 @@
   </div>
   <body style="display: grid; margin-top: 1rem">
     <ResultComponent v-if="displayResultScreen" v-bind:question="question"></ResultComponent>
+
     <div v-else class="pollQuestion">
       <QuestionComponent ref="questionComponent"
                          v-bind:question="question"

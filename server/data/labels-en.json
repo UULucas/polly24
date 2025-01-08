@@ -50,5 +50,6 @@
 	"canvasClear": "Clear",
 	"photo": "Take a photo!",
 	"submitPhoto": "Submit photo",
-	"changeImage": "Change Image"
+	"changeImage": "Change Image",
+	"noExistingQuiz": "No quiz with that id exists"
 }
