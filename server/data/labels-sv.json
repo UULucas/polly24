@@ -50,5 +50,12 @@
 	"submitPhoto": "Skicka in bild",
 	"changeImage": "Byt bild",
 	"noExistingQuiz" : "Inget quiz med den Nyckeln finns",
-	"removeImage" : "Ta bort bild"
-} 
+	"currentLeaderboard": "Poängställning: ",
+	"everyonesAnswer": "Detta svarade alla andra: ",
+	"resultName": "Namn",
+	"resultScore": "Poäng",
+	"correctAnswer": "Det rätta svaret var: ",
+	"removeImage" : "Ta bort bild",
+	"restartQuiz": "Start om Quiz",
+	"showingResult": "Resultatet från frågan visas för spelarna"
+}

@@ -77,16 +77,18 @@
       </div>
     </div>
 
-    <label v-if="gameStarted">{{uiLabels.timeLeft}}:{{timeLeft}}</label>
-    <label v-if="gameStarted" class="text-box" style="font-size: 35px">{{uiLabels.currentQuestion}}: {{question.number+1}}</label>
+    <div v-if="gameStarted" class="text-box time-display">
+      <label v-if="timeLeft>0">{{uiLabels.timeLeft}}:{{timeLeft}}<br>{{uiLabels.currentQuestion}}: {{question.number+1}}</label>
+      <label v-else>{{uiLabels.showingResult}}</label>
+    </div>
     <div class="start-section">
       <div v-if="gameStarted&&!question.lastQuestion">
         <button class="start-button nav-button" @click="nextQuestion">{{uiLabels.nextQuestion}}</button>
       </div>
 
-      <button v-if="!gameStarted" class="start-button nav-button" @click="startQuiz">
+      <button v-if="!gameStarted&&!question.lastQuestion" class="start-button nav-button" @click="startQuiz">
         {{ uiLabels.startGame }}</button>
-      <button v-if="question.lastQuestion" class="start-button nav-button" @click="restartQuiz">Restart</button>
+      <button v-if="question.lastQuestion" class="start-button nav-button" @click="restartQuiz">{{uiLabels.restartQuiz}}</button>
     </div>
 
   </div>
@@ -128,7 +130,10 @@ export default {
   },
   methods: {
     restartQuiz : function () {
-      socket.emit("restartQuiz", this.pollId);
+      let c = confirm("Are you sure you want to resetar the quis?");
+      if(c){
+        socket.emit("restartQuiz", this.pollId);
+      }
     },
     nextQuestion: function () {
       console.log(this.question.lastQuestion);
@@ -163,6 +168,9 @@ export default {
 }
 </script>
 <style scoped>
+.time-display{
+  font-size: 35px;
+}
 
 header {
   display: flex;

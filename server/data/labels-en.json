@@ -52,5 +52,13 @@
 	"submitPhoto": "Submit photo",
 	"changeImage": "Change Image",
 	"noExistingQuiz": "No quiz with that Key exists",
-	"removeImage" : "Remove Image"
+	"currentLeaderboard": "Current Leaderboard",
+	"everyonesAnswer": "Here is what everyone answered: ",
+	"resultName": "Name",
+	"resultScore": "Score",
+	"correctAnswer": "The correct answer was: ",
+	"removeImage" : "Remove Image",
+	"restartQuiz": "Restart Quiz",
+	"showingResult": "Result is showing for the players"
+
 }
