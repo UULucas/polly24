@@ -51,7 +51,5 @@
 	"photo": "Take a photo!",
 	"submitPhoto": "Submit photo",
 	"changeImage": "Change Image",
-	"noExistingQuiz": "No quiz with that Key exists",
-	"restartQuiz": "Restart Quiz",
-	"showingResult": "Result is showing for the players"
+	"noExistingQuiz": "No quiz with that Key exists"
 }
