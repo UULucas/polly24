@@ -3,7 +3,9 @@
     <div class="resultWrapper">
       <h2>{{ uiLabels.correctAnswer }}</h2>
       <div v-for="answer in question.a.filter(item => item.correct)" v-bind:key="answer">
-        {{answer.text}}
+        <div class="answer-div">
+        <label class="answer-label">{{answer.text}}</label>
+        </div>
       </div>
       <br>
       <h3>{{ uiLabels.everyonesAnswer }}</h3>
@@ -279,5 +281,25 @@ header {
   font-family: "Inter", sans-serif;
   font-weight: 400;
   //box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.answer-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 15rem;
+  height: 3rem;
+  margin: 1rem auto;
+  background-color: var(--p-cadetBlue);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.answer-label{
+  font-size: 1rem;
+  font-family: "Inter", sans-serif;
+  color: black;
 }
 </style>
