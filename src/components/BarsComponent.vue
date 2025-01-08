@@ -29,7 +29,7 @@ span {
 }
 .bar {
   display: inline-block;
-  width: 50px;
+  width: 7rem;
   vertical-align: bottom;
 }
 
