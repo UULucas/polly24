@@ -264,8 +264,11 @@ export default {
       console.log(this.questions);
     },
     removeImage: function (questionNumber) {
-      this.questions[questionNumber].img = "";
+      this.questions[questionNumber].img = null;
       this.questions[questionNumber].fileName = "";
+
+      const input = this.$refs.fileInput;
+      input.value = "";
     },
     /**runQuestion: function () {
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
