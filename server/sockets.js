@@ -29,6 +29,14 @@ function sockets(io, socket, data) {
   socket.on('participateInPoll', function(d) {
     data.participateInPoll(d.pollId, d.name, d.avatar, d.id);
     io.to(d.pollId).emit('participantsUpdate', data.getParticipants(d.pollId));
+    if(data.pollExists(d.pollId)) {
+      console.log("poll exists")
+      socket.emit('pollExists', {doesExist: true});
+    }
+    else{
+      socket.emit('pollExists', {doesExist: false});
+    }
+
   });
   socket.on('startPoll', function(pollId) {
     io.to(pollId).emit('startPoll');

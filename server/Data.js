@@ -165,9 +165,6 @@ Data.prototype.getTimeLeft = function(pollId) {
 Data.prototype.nextQuestion = function(pollId) {
   if (this.pollExists(pollId)) {
     const poll = this.polls[pollId];
-    //let lastQuestion = true;
-    //console.log("currentQuestion:",poll.currentQuestion);
-    //console.log("questions.length:",poll.questions.length)
     if(poll.currentQuestion<(poll.questions.length-1)){
       poll.currentQuestion++;
     }

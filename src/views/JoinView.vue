@@ -15,7 +15,7 @@
           <input
               class="idTextBox text-box"
               type="text"
-              maxlength="14"
+              maxlength="4"
               :placeholder= "uiLabels.gameIDPlaceholder"
               v-model="pollId">
           <input
@@ -112,13 +112,13 @@
         isCamModalOpen: false,
         camStream: null,
         lang: localStorage.getItem("lang") || "en",
-        noExistingQuiz: false,
+        pollExists: false,
 
       }
     },
     created: function () {
     socket.on( "uiLabels", labels => this.uiLabels = labels );
-    socket.on("noExistingQuiz", this.noExistingQuiz = true);
+    socket.on("pollExists", t => this.pollExists = t.doesExist);
     socket.emit( "getUILabels", this.lang );
   },
   methods: {
@@ -132,18 +132,20 @@
         id:this.playerId,
       } );
 
-      if(!this.noExistingQuiz){
-        this.$router.push({
-          name: "LobbyView",
-          params: {
-            id: this.pollId,
-            playerId: this.playerId,
-          },
-        });
-      }
-      else{
-        alert(this.uiLabels.noExistingQuiz);
-      }
+      setTimeout(() => {
+        if(this.pollExists){
+          this.$router.push({
+            name: "LobbyView",
+            params: {
+              id: this.pollId,
+              playerId: this.playerId,
+            },
+          });
+        }
+        else{
+            alert(this.uiLabels.noExistingQuiz);
+          }
+      },100);//Vänta så att den hinner uppdatera pollExists
 
     },
     generatePlayerId: function (){
