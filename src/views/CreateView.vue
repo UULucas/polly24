@@ -32,21 +32,21 @@
       <input ref="fileInput" type="file" accept="image/*" @input="pickFile" id="question-img" style="display: none;">
       <button @click="$refs.fileInput.click()" class="upload-button">
         <div v-if = "this.questions[this.questionNumber].img">
-          {{ uiLabels.changeImage }}
+          <h4>{{ uiLabels.changeImage }}</h4>
         </div>
         <div v-else>
-          {{ uiLabels.uploadImage }}
+          <h4>{{ uiLabels.uploadImage }}</h4>
         </div>
         <img class="home-img" src="https://www.freeiconspng.com/thumbs/upload-icon/upload-icon-22.png" alt="Upload avatar" name="upload">
       </button>
+      <div  v-if="this.questions[this.questionNumber].img">
+            <button @click="removeImage(this.questionNumber)" class="delete-button">
+              <h3> {{uiLabels.removeImage}} </h3>
+            </button>
+        </div>
       <div v-if="questions[questionNumber].fileName" class="file-name-display">
         <div class="question-filename">
         <p>{{ questions[questionNumber].fileName }}</p>
-        </div>
-        <div  v-if="this.questions[this.questionNumber].img">
-            <button @click="removeImage(this.questionNumber)">
-              {{uiLabels.removeImage}}
-            </button>
         </div>
       </div>
     </div>
@@ -598,9 +598,14 @@ body{
 
 .upload-button {
   background-color: var(--p-cadetBlue);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
   color: black;
   border: none;
-  padding: 8px 8px;
+  padding: 2px 6px;
   font-size: 16px;
   border-radius: 8px;
   cursor: pointer;
@@ -612,7 +617,10 @@ body{
 }
 
 .img-button-div {
-  text-align: center;
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   padding: 20px;
   background-color: var(--p-beige);
   border: 1px solid #ddd;
@@ -636,9 +644,16 @@ body{
 .time-selector:hover {
   background: var(--p-yellow);
 }
-
-
-
+.delete-button{
+  border-radius: 8px;
+  padding: 8px 8px;
+  border: none;
+  width: 8rem;
+  height: 67px;
+  margin-bottom: 9px;
+  background-color: var(--p-red);
+  cursor: pointer;
+}
 
 .choose-time-label {
   margin-left: 1rem;
