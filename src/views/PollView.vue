@@ -91,10 +91,7 @@ export default {
     },
     submitAnswer: function (answer) {
       if(!this.answered){
-        console.log(this.playerId)
-        console.log("testtest")
         const score = this.calculateScore(answer);
-        console.log("answer sent: "+answer.correct+" score: "+score);
         socket.emit("submitPlayerAnswer", {pollId: this.pollId, playerId: this.playerId, answer: answer.text, score:score})
         this.answered = true;
       }
