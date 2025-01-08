@@ -145,6 +145,7 @@
       <button class="nav-button" style="font-size: 35px; width: 80% " :style="{ backgroundColor: i===questionNumber ? '#ffee93' : '#fcf5c7' }" @click="questionNumber = i">
         <textarea disabled class="text-area-question" :value="`Q${i + 1}: ${question.q}`"></textarea>
       </button>
+
       <button class="nav-button" @click="removeQuestion(i)" style="width: 5rem; background-color: var(--p-red)">
         <img src="../assets/trash_can.png" alt="test" style="height:70%">
       </button>
