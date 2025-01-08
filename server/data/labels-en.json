@@ -57,6 +57,8 @@
 	"resultName": "Name",
 	"resultScore": "Score",
 	"correctAnswer": "The correct answer was: ",
-	"removeImage" : "Remove Image"
+	"removeImage" : "Remove Image",
+	"restartQuiz": "Restart Quiz",
+	"showingResult": "Result is showing for the players"
 
 }
