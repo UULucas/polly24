@@ -57,5 +57,6 @@
 	"correctAnswer": "Det rätta svaret var: ",
 	"removeImage" : "Ta bort bild",
 	"restartQuiz": "Start om Quiz",
-	"showingResult": "Resultatet från frågan visas för spelarna"
+	"showingResult": "Resultatet från frågan visas för spelarna",
+	"resetAvatar" : "Ta bort Avatar"
 }
