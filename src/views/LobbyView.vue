@@ -16,14 +16,14 @@
 
   <div id="joinScreen">
       <div class="joinWrapper">
-
-      <h3>{{uiLabels.gameId}}: </h3>{{pollId}}
+      <div class="textbox">
       <h1>{{uiLabels.welcomeGreeting}}</h1>
-      <p>{{ getName() }}</p>
-      
+      <h3>{{uiLabels.gameId}}: {{pollId}} </h3>
+      </div>
+      <p></p>
       <img :src="getAvater()" alt="miniavtr" class="mini-avatar">
 
-        <p>{{uiLabels.waitMessage}}</p>
+        <p> <h3>{{uiLabels.waitMessage}}</h3></p>
 
         <div class="spinner">
           <div class="bounce1"></div>
@@ -31,14 +31,14 @@
           <div class="bounce3"></div>
         </div>
 
-        <h4>{{ uiLabels.participants }}: </h4>
-        <div class="participant-list">
-          <div v-for="participant in participants" :key="participant" class="text-box">
-            <div class="participants-name">{{participant.name}}</div>
+        <h2>{{ uiLabels.participants }}: </h2>
+        <div class="participant-list" style="background-color: lightgray;">
+          <div v-for="participant in participants" :key="participant" class="participant-box" style="background-color: var(--p-offWhite);">
+            <h3 class="participants-name">{{participant.name}}</h3>
             <img :src="participant.avatar"
                  style="
-                  height: 4rem;
-                  width: 4rem;"
+                  height: 40px;
+                  width: 40px;"
                  alt="miniavatar"
                  class="mini-avatar">
           </div>
@@ -59,8 +59,6 @@ export default {
   name: 'LobbyView',
   data: function () {
     return {
-      userName: "",
-      avatar: "",
       pollId: "inactive poll",
       playerId: "",
       uiLabels: {},
@@ -238,28 +236,51 @@ header {
 
 .participant-list{
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   list-style: none;
-  padding: 0;
-  height: 15rem;
+  justify-content: left;
+  width: 100%;
+  height: 20rem;
+  padding-top:10px;
   overflow-y: scroll;
   overflow-x: hidden;
-  gap: 1rem;
+  border-radius: 1rem;
+  gap: 5px;
 }
 
+
 .participants-name{
-  width: 10rem;
+  width: 6rem;
   display:flex;
   align-items: center;
   padding:1rem;
   text-overflow: ellipsis;
 }
 
-.text-box {
+.participant-box {
   height: 4rem;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 3px;
+  width: 12rem;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  border: 1px solid #ddd;
+  background-color: var(--p-offWhite);
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-family: "Inter", sans-serif;
+}
+.textbox{
+  padding-left:0.5rem;
+  padding-right: 0.5rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display:inline-block;
+  width:30vw;
+  height:10vw;
 }
 
 </style>
