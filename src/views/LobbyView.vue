@@ -115,7 +115,7 @@ html, body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin: auto;
+  margin-bottom: 8rem;
   height: auto;
 }
 
@@ -238,7 +238,7 @@ header {
   display: flex;
   flex-wrap: wrap;
   list-style: none;
-  justify-content: left;
+  justify-content: center;
   width: 100%;
   height: 20rem;
   padding-top:10px;
