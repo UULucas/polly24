@@ -19,7 +19,7 @@
     </div>
 
   </div>
-  
+
   <div id="leaderboardScreen" v-if="!showQResultScreen">
     <div class="resultWrapper">
       <h2>Current Leaderboard: </h2>
@@ -43,7 +43,6 @@
         <button class="nav-button" @click="manyDowngrade">Fuck everyone</button>
       </div>
     </div>
-
   </div>
 
   <div v-if="nextQuestionNormal">
@@ -68,6 +67,7 @@
     lang: {{ lang }}
     {{ question.q }}
   </div>
+
   <BarsComponent v-bind:labels="question.a" v-bind:data="submittedAnswers"/>
 
   <span>{{ submittedAnswers }}</span>

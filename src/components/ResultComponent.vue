@@ -16,27 +16,19 @@
   <div id="leaderboardScreen" v-if="!showQResultScreen">
     <div class="resultWrapper">
       <h2>Current Leaderboard: </h2>
-      <ol>
-        <li v-for="participant in participants" v-bind:key="participant">
-          {{participant.name}}
-          {{participant.score}}
+      <div class="participant-list">
+        <div v-for="participant in participants" :key="participant" class="text-box-participant">
+          <div class="participants-name">{{participant.name}}</div>
+          <div class="participants-score">{{ participant.score }}</div>
           <img :src="participant.avatar"
-               alt="avatar"
                style="
-                 width: 4rem;
-                 margin-left: 10rem;
-                 height: 4rem;
-                 border: none;
-                 border-radius: 1rem;">
-        </li>
-
-        <!--li>Avatar - Player 1</li>
-        <li>Avatar - Player 2</li>
-        <li>Avatar - Player 3</li>
-        <li>Avatar - Looooooser</li!-->
-      </ol>
+                  height: 4rem;
+                  width: 4rem;"
+               alt="miniavatar"
+               class="mini-avatar">
+        </div>
     </div>
-
+  </div>
   </div>
 
   <div v-if="powerUp">
@@ -75,7 +67,7 @@
     {{ question.q }}
   </div>
 
-  <span>{{ submittedAnswers }}</span>
+
   <span v-for="participant in participant" v-bind:key="participant">{{participant.name}}</span>
 </template>
 
@@ -210,5 +202,48 @@ header {
 }
 
 
+.participant-list{
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 0;
+  height: 15rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  gap: 1rem;
+}
 
+.participants-name{
+  width: 10rem;
+  display:flex;
+  align-items: center;
+  padding:1rem;
+  text-overflow: ellipsis;
+}
+
+.participants-score {
+  width: 10rem;
+  display:flex;
+  align-items: center;
+  padding:1rem;
+  text-overflow: ellipsis;
+}
+
+.mini-avatar{
+  width: 7rem;
+  height: 7rem;
+  border: none;
+  border-radius: 1rem;
+}
+
+.text-box-participant {
+  display: flex;
+  text-align: center;
+  justify-content: space-around;
+  border: 1px solid #ddd;
+  background-color: var(--p-offWhite);
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-family: "Inter", sans-serif;
+}
 </style>
