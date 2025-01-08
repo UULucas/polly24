@@ -1,12 +1,12 @@
   <template>
   <div id="qResultScreen" v-if="showQResultScreen">
     <div class="resultWrapper">
-      <h2>The correct answer was:</h2>
+      <h2>{{ uiLabels.correctAnswer }}</h2>
       <div v-for="answer in question.a.filter(item => item.correct)" v-bind:key="answer">
         {{answer.text}}
       </div>
       <br>
-      <h3>Here is what everyone answered: </h3>
+      <h3>{{ uiLabels.everyonesAnswer }}</h3>
       <BarsComponent v-bind:labels="question.a" v-bind:data="submittedAnswers"/>
 
     </div>
@@ -16,10 +16,6 @@
   <div id="leaderboardScreen" v-if="!showQResultScreen">
     <div class="resultWrapper">
       <h2>Leaderboard</h2>
-
-
-
-
       <div class="participant-list">
         <div v-for="participant in participants" :key="participant" class="text-box-participant">
           <div class="participants-name">{{participant.name}}</div>
