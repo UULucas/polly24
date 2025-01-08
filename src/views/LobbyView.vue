@@ -34,7 +34,7 @@
         <h2>{{ uiLabels.participants }}: </h2>
         <div class="participant-list" style="background-color: lightgray;">
           <div v-for="participant in participants" :key="participant" class="participant-box" style="background-color: var(--p-offWhite);">
-            <h3 class="participants-name">{{participant.name}}</h3>
+            <h4 class="participants-name">{{participant.name}}</h4>
             <img :src="participant.avatar"
                  style="
                   height: 40px;
@@ -252,14 +252,13 @@ header {
 .participants-name{
   width: 6rem;
   display:flex;
-  align-items: center;
-  padding:1rem;
+  align-items: left;
+  padding:8px;
   text-overflow: ellipsis;
 }
 
 .participant-box {
   height: 4rem;
-  display: flex;
   align-items: center;
   gap: 3px;
   width: 12rem;

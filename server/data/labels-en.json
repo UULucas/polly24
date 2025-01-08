@@ -51,5 +51,5 @@
 	"photo": "Take a photo!",
 	"submitPhoto": "Submit photo",
 	"changeImage": "Change Image",
-	"noExistingQuiz": "No quiz with that id exists"
+	"noExistingQuiz": "No quiz with that Key exists"
 }
