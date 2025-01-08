@@ -43,6 +43,11 @@
         <div class="question-filename">
         <p>{{ questions[questionNumber].fileName }}</p>
         </div>
+        <div  v-if="this.questions[this.questionNumber].img">
+            <button @click="removeImage(this.questionNumber)">
+              Delete Image
+            </button>
+        </div>
       </div>
     </div>
 
@@ -257,6 +262,10 @@ export default {
     addAnswer: function () {
       this.questions[this.questionNumber].a.push({text:"", correct: false});
       console.log(this.questions);
+    },
+    removeImage: function (questionNumber) {
+      this.questions[questionNumber].img = "";
+      this.questions[questionNumber].fileName = "";
     },
     /**runQuestion: function () {
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
