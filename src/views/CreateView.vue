@@ -609,6 +609,17 @@ body{
   font-size: 16px;
   border-radius: 8px;
   cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.upload-button:hover{
+  transition: transform 0.2s;
+  transform: scale(1.02);
+}
+
+.delete-button:hover{
+  transition: transform 0.2s;
+  transform: scale(1.02);
 }
 
 .question-filename {
@@ -653,6 +664,7 @@ body{
   margin-bottom: 9px;
   background-color: var(--p-red);
   cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .choose-time-label {
