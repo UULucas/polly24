@@ -49,5 +49,10 @@
 	"photo": "Ta en bild!",
 	"submitPhoto": "Skicka in bild",
 	"changeImage": "Byt bild",
-	"noExistingQuiz" : "Inget quiz med den Nyckeln finns"
+	"noExistingQuiz" : "Inget quiz med den Nyckeln finns",
+	"currentLeaderboard": "Poängställning: ",
+	"everyonesAnswer": "Detta svarade alla andra: ",
+	"resultName": "Namn",
+	"resultScore": "Poäng",
+	"correctAnswer": "Det rätta svaret var: "
 }
