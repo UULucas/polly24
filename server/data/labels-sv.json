@@ -58,5 +58,6 @@
 	"removeImage" : "Ta bort bild",
 	"restartQuiz": "Start om Quiz",
 	"showingResult": "Resultatet från frågan visas för spelarna",
-	"confirmRestart": "Är du säker på att du vill starta om?"
+	"confirmRestart": "Är du säker på att du vill starta om?",
+	"resetAvatar" : "Återställ Avatar"
 }
