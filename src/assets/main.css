@@ -10,7 +10,8 @@ Hex Codes: #ffc09f // #ffee93 // #fcf5c7 // #a0ced9 // #adf7b6
 
 */
 html{
-  background: linear-gradient(180deg,var(--p-blue),var(--p-cadetBlue));
+  background: linear-gradient(180deg,var(--p-blue)70%,var(--p-cadetBlue))50%;
+  min-height: 100%;
 }
 
 

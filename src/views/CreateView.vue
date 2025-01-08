@@ -320,6 +320,7 @@ export default {
   overflow-y: scroll;
   overflow-x:hidden;
   padding-right: 2rem;
+  padding-left: 1rem;
 }
 
 .correct-answer-container{
@@ -377,10 +378,11 @@ export default {
   outline: none;
   resize: none;
   padding-top: 2em;
-  padding-right: 6rem;
-  padding-left: 6rem;
-  width: 20%;
+  padding-right: 10%;
+  padding-left: 10%;
+  width: 80%;
   height: 3em;
+  min-height: 3em;
   vertical-align: middle;
   text-align: center;
 }

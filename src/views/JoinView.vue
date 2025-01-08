@@ -17,7 +17,8 @@
             class="idTextBox text-box"
             id= "firstJoinBox"
             type="text"
-            maxlength="30"
+            inputmode="numeric"
+            maxlength="4"
             :placeholder= "uiLabels.gameIDPlaceholder"
             v-model="pollId"><br>
 
@@ -32,11 +33,11 @@
           <input
               class="idTextBox text-box"
               type="text"
-              maxlength="30"
+              maxlength="14"
               :placeholder= "uiLabels.namePlaceholder"
               v-model="userName"><br>
 
-        <div><label for="avatarChoice">{{ uiLabels.chooseAvatar }}</label></div>
+        <div><label for="avatarChoice">{{}}</label></div>
         <img :src="avatar" alt="avatar" class="avatar-preview"><br>
 
         <div class="avatarButtonWrapper">

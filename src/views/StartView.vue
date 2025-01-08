@@ -83,12 +83,11 @@ export default {
 }
 
 body{
-  background-color: var(--p-blue);
   height: 100%;
 }
 
 header {
-  background-color: var(--p-blue);
+
   width: 100%;
   display: grid;
   grid-template-columns: 2em auto;

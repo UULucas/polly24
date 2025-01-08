@@ -109,7 +109,7 @@ html, body {
   align-items: center;
   text-align: center;
   margin: auto;
-  height: 100vh;
+  height: auto;
 }
 
 
@@ -147,14 +147,12 @@ input[type="text"] {
 }
 
 .joinWrapper {
-  height: 90%;
-  width: 500px;
+  height: 80vh;
+  width: 40em;
   border: none; 
-  border-radius: 10px; 
-  padding: 20px; 
-  background-color: #ffffff; 
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
-  margin: 20px auto; 
+  border-radius: 8px;
+  background-color: var(--p-offWhite);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   text-align: center;
 
 }
