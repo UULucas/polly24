@@ -1,7 +1,7 @@
 <template>
 <div class="wrapper">
   <div class="bar" v-for="(item, index) in labels" v-bind:key="'a' + index">
-    <div v-bind:style="{height: (data?.[item.text]||0) + 'px'}">
+    <div v-bind:style="{height: 1*(data?.[item.text]||0) + 'vw'}">
       <span> {{ data?.[item.text]||0 }} </span>
     </div>
     <div class="label">

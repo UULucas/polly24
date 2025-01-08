@@ -15,7 +15,13 @@
 
   <div id="leaderboardScreen" v-if="!showQResultScreen">
     <div class="resultWrapper">
-      <h2>Current Leaderboard: </h2>
+      <h2>Current Leaderboard</h2>
+
+      <div class="container">
+      <div class="name-box nav-label">name</div>
+      <div class="score-box nav-label">score</div>
+      </div>
+
       <div class="participant-list">
         <div v-for="participant in participants" :key="participant" class="text-box-participant">
           <div class="participants-name">{{participant.name}}</div>
@@ -23,7 +29,8 @@
           <img :src="participant.avatar"
                style="
                   height: 4rem;
-                  width: 4rem;"
+                  width: 4rem;
+                  padding: 0.25rem"
                alt="miniavatar"
                class="mini-avatar">
         </div>
@@ -60,11 +67,6 @@
       <p>{{ countdown }}</p>
     </div>
 
-  </div>
-
-  <div>
-    lang: {{ lang }}
-    {{ question.q }}
   </div>
 
 
@@ -179,12 +181,12 @@ header {
 }
 
 .resultWrapper {
-  height: 90%;
-  width: 500px;
+  height: 80vh;
+  width: 70vh;
   border: none;
   border-radius: 10px;
   padding: 20px;
-  background-color: #ffffff;
+  background-color: #a0ca92;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin: 20px auto;
   text-align: center;
@@ -207,10 +209,9 @@ header {
   flex-direction: column;
   list-style: none;
   padding: 0;
-  height: 15rem;
+  height: 30rem;
   overflow-y: scroll;
   overflow-x: hidden;
-  gap: 1rem;
 }
 
 .participants-name{
@@ -240,10 +241,42 @@ header {
   display: flex;
   text-align: center;
   justify-content: space-around;
-  border: 1px solid #ddd;
-  background-color: var(--p-offWhite);
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: transparent;
+  border-radius: 0;
   font-family: "Inter", sans-serif;
+  margin-right: 1rem;
+  box-shadow: inset 0px 11px 5px -8px #75b09c, inset 0 -11px 5px -8px #75b09c;
+  border-bottom: 1px #d8f793 solid;
+
+}
+
+.score-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 28%;
+}
+
+.name-box {
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 0.5rem;
+}
+
+.nav-label {
+  text-align: center;
+  padding: 5px;
+  background-color: e0be36;
+  box-shadow: inset 0px -3px 0px #e0be36;
+  border-radius: 0px;
+  font-size: 20px;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  //box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 </style>
