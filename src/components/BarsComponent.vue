@@ -29,7 +29,7 @@ span {
 }
 .bar {
   display: inline-block;
-  width: 7rem;
+  width: calc(100% / v-bind('labels.length'));
   vertical-align: bottom;
 }
 

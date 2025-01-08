@@ -209,6 +209,7 @@ header {
 }
 
 .participants-name{
+  width: 9rem;
   box-shadow: inset 0px -5px 0px #e0be36;
   margin-top: 1rem;
   height: 0.5rem;
@@ -219,6 +220,7 @@ header {
 }
 
 .participants-score {
+  width: 8rem;
   box-shadow: inset 0px -5px 0px 0px #e0be36;
   margin-top: 1rem;
   height: 0.5rem;
