@@ -27,6 +27,9 @@
 
         <div><label for="avatarChoice">{{}}</label></div>
         <img :src="avatar" alt="avatar" class="avatar-preview"><br>
+        <button @click="resetAvatar()">
+          Reset Avatar
+        </button>
 
         <div class="avatarButtonWrapper">
         <button class="nav-button" @click="openDrawModal">
@@ -281,6 +284,12 @@
 
     uploadAvatar() {
       this.$refs.fileInput.click();
+    },
+    resetAvatar() {
+      this.avatar = "https://i.pinimg.com/474x/25/6b/9d/256b9d21d02a82e9d60deded024e4fe9.jpg"
+
+      const input = this.$refs.fileInput;
+      input.value = "";
     },
 
     handleFileUpload(event) {
