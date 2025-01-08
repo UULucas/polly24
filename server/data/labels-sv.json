@@ -54,5 +54,6 @@
 	"everyonesAnswer": "Detta svarade alla andra: ",
 	"resultName": "Namn",
 	"resultScore": "Poäng",
-	"correctAnswer": "Det rätta svaret var: "
+	"correctAnswer": "Det rätta svaret var: ",
+	"removeImage" : "Ta bort bild"
 }
