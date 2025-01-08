@@ -130,7 +130,7 @@ export default {
   },
   methods: {
     restartQuiz : function () {
-      let c = confirm("Are you sure you want to resetar the quis?");
+      let c = confirm(this.uiLabels.confirmRestart);
       if(c){
         socket.emit("restartQuiz", this.pollId);
       }

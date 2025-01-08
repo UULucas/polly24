@@ -59,6 +59,7 @@
 	"correctAnswer": "The correct answer was: ",
 	"removeImage" : "Remove Image",
 	"restartQuiz": "Restart Quiz",
-	"showingResult": "Result is showing for the players"
+	"showingResult": "Result is showing for the players",
+	"confirmRestart": "Are you sure you want to resetar the quis?"
 
 }
