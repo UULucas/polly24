@@ -24,11 +24,10 @@
               maxlength="14"
               :placeholder= "uiLabels.namePlaceholder"
               v-model="userName"><br>
-
         <div><label for="avatarChoice">{{}}</label></div>
         <img :src="avatar" alt="avatar" class="avatar-preview"><br>
-        <button @click="resetAvatar()">
-          Reset Avatar
+        <button @click="resetAvatar()" class="delete-button">
+        <h3> {{uiLabels.resetAvatar}} </h3>
         </button>
 
         <div class="avatarButtonWrapper">
@@ -495,7 +494,14 @@ header {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
 }
-
+.delete-button{
+  border-radius: 1rem;
+  border: none;
+  width: 8rem;
+  height: 3rem;
+  background-color: var(--p-red);
+  cursor:pointer;
+}
 #firstJoinBox {
   margin: auto;
 }

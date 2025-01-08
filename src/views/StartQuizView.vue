@@ -48,7 +48,7 @@
                                           nog bara sätta en array här i med dom som går med spelet-->
         <div v-for="participant in participants"
              :key="participant.id"
-             class="text-box">
+             class="text-box-participant">
           <div class="participants-name">
             {{participant.name}}
           </div>
@@ -170,6 +170,12 @@ export default {
 <style scoped>
 .time-display{
   font-size: 35px;
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+.time-display:hover{
+  transform: none;
+  transition: none;
 }
 
 header {
@@ -217,19 +223,19 @@ header {
 
 .quiz-name{
   height:3rem;
-  border:solid;
   border-radius: 8px;
-  border-width: 1px;
   background-color: var(--p-offWhite);
 }
 
 .participants-section{
-  border:solid;
-  border-radius: 8px;
-  border-width: 1px;
-  width:51rem;
-  height: 20rem;
   overflow-y: scroll;
+  border: none;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #a0ca92;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: opacity 0.5s ease-in-out;
 }
 
 .participants{
@@ -241,23 +247,41 @@ header {
   gap: 1rem;
 }
 
+
+.text-box-participant {
+  display: flex;
+  text-align: center;
+  justify-content: space-around;
+  background-color: transparent;
+  border-radius: 0;
+  font-family: "Inter", sans-serif;
+  margin-right: 1rem;
+  box-shadow: inset 0px 11px 5px -8px #75b09c, inset 0 -11px 5px -8px #75b09c;
+  border-bottom: 1px #d8f793 solid;
+}
+
 .participants-name{
-  width: 10rem;
+  box-shadow: inset 0px -5px 0px #e0be36;
+  margin-top: 1rem;
+  height: 0.5rem;
   display:flex;
   align-items: center;
   padding:1rem;
   text-overflow: ellipsis;
 }
-
 .quiz-key{
   display: flex;
   align-items: center;
-  height:6rem;
+  height:6.1rem;
   width: 38rem;
   font-size: 4rem;
-  border: 1px solid;
   margin-top: 0.2rem;
   align-self: flex-end;
+}
+
+.quiz-key:hover{
+  transition: none;
+  transform: none;
 }
 .start-section{
 
@@ -268,6 +292,6 @@ header {
   display: flex;
   justify-content: center;
   font-size: 2rem;
-  margin: 0.4rem;
+  padding-top: 0.3rem;
 }
 </style>
