@@ -122,8 +122,8 @@ html{
 
 .bubble {
   position: absolute;
-  bottom: -10vh; /* Start fully below the screen */
-  background: var(--p-offWhite); /* All bubbles have the same color */
+  bottom: -10vh; 
+  background: var(--p-offWhite); 
   border-radius: 50%;
   opacity: 0.5;
   animation: rise 30s infinite ease-in-out;
@@ -131,7 +131,6 @@ html{
   filter: blur(10px);
 }
 
-/* Randomized sizes between 1.5vw and 3vw with staggered delays */
 .bubble:nth-child(1) {
   width: 2vw;
   height: 2vw;
@@ -235,17 +234,16 @@ html{
   animation-delay: 10s;
 }
 
-/* Keyframes for rising bubbles */
 @keyframes rise {
   0% {
-    bottom: -10vh; /* Start below the viewport */
+    bottom: -10vh; 
     transform: translateX(0);
   }
   50% {
     transform: translateX(5vw);
   }
   100% {
-    bottom: 120vh; /* End fully above the viewport */
+    bottom: 120vh; 
     transform: translateX(-10vw);
   }
 }

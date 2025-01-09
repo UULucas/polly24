@@ -221,40 +221,68 @@
         ctx.lineWidth = widthInput.value;
       };
 
-      const colorInput = document.getElementById('strokeColor');
-      const widthInput = document.getElementById('lineWidth');
+      const getEventPosition = (e) => {
+        const rect = canvas.getBoundingClientRect();
+        if (e.touches && e.touches.length > 0) {
+          return {
+            x: e.touches[0].clientX - rect.left,
+            y: e.touches[0].clientY - rect.top,
+          };
+        } else if (e.changedTouches && e.changedTouches.length > 0) {
+          return {
+            x: e.changedTouches[0].clientX - rect.left,
+            y: e.changedTouches[0].clientY - rect.top,
+          };
+        }
+        return {
+          x: e.offsetX,
+          y: e.offsetY,
+        };
+    };
 
-      colorInput.addEventListener('input', updateBrush);
-      widthInput.addEventListener('input', updateBrush);
-
-      canvas.addEventListener('mousedown', (e) => {
+      const startDrawing = (e) => {
+        e.preventDefault();
         drawing = true;
         updateBrush();
+        const {x, y} = getEventPosition(e);
         this.currentStroke = {
           color: ctx.strokeStyle,
           width: ctx.lineWidth,
-          path: [{ x: e.offsetX, y: e.offsetY }],
-        }
+          path: [{ x, y }],
+        };
         ctx.beginPath();
-        ctx.moveTo(e.offsetX, e.offsetY);
-      });
+        ctx.moveTo(x, y);
+      };
 
-      canvas.addEventListener('mousemove', (e) => {
-        if (drawing) {
-          ctx.lineTo(e.offsetX, e.offsetY);
-          ctx.stroke();
-          this.currentStroke.path.push({ x: e.offsetX, y: e.offsetY });
-        }
-      });
+      const draw = (e) => {
+        if (!drawing) return;
+        e.preventDefault();
+        const {x, y} = getEventPosition(e);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+        this.currentStroke.path.push({x, y});
+      };
 
-      canvas.addEventListener('mouseup', () => {
+      const stopDrawing = () => {
+        if (!drawing) return;
         drawing = false;
         ctx.closePath();
         if (this.currentStroke) {
           this.strokes.push(this.currentStroke);
           this.currentStroke = null;
         }
-      });
+      };
+
+      canvas.addEventListener('mousedown', startDrawing);
+      canvas.addEventListener('mousemove', draw);
+      canvas.addEventListener('mouseup', stopDrawing);
+      canvas.addEventListener('mouseleave', stopDrawing);
+
+      canvas.addEventListener('touchstart', startDrawing);
+      canvas.addEventListener('touchmove', draw);
+      canvas.addEventListener('touchend', stopDrawing);
+      canvas.addEventListener('touchcancel', stopDrawing);
+
     },
 
     undoLastStroke: function() {
@@ -273,9 +301,9 @@
         ctx.beginPath();
         stroke.path.forEach((point, index) => {
         if (index === 0) {
-          ctx.moveTo(point.x, point.y); // Start of the stroke
+          ctx.moveTo(point.x, point.y); 
         } else {
-          ctx.lineTo(point.x, point.y); // Draw each point
+          ctx.lineTo(point.x, point.y); 
         }
       });
       ctx.stroke();
