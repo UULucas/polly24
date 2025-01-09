@@ -131,6 +131,8 @@
         camStream: null,
         lang: localStorage.getItem("lang") || "en",
         pollExists: false,
+        strokes: [],
+        currentStroke: null,
 
       }
     },
@@ -228,6 +230,11 @@
       canvas.addEventListener('mousedown', (e) => {
         drawing = true;
         updateBrush();
+        this.currentStroke = {
+          color: ctx.strokeStyle,
+          width: ctx.lineWidth,
+          path: [{ x: e.offsetX, y: e.offsetY }],
+        }
         ctx.beginPath();
         ctx.moveTo(e.offsetX, e.offsetY);
       });
@@ -236,22 +243,54 @@
         if (drawing) {
           ctx.lineTo(e.offsetX, e.offsetY);
           ctx.stroke();
+          this.currentStroke.path.push({ x: e.offsetX, y: e.offsetY });
         }
       });
 
       canvas.addEventListener('mouseup', () => {
         drawing = false;
         ctx.closePath();
+        if (this.currentStroke) {
+          this.strokes.push(this.currentStroke);
+          this.currentStroke = null;
+        }
       });
-
     },
 
+    undoLastStroke: function() {
+      if (this.strokes.length === 0) return;
+
+      this.strokes.pop();
+
+      const canvas = this.$refs.drawingCanvas;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = "white";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      this.strokes.forEach((stroke) => {
+        ctx.strokeStyle = stroke.color;
+        ctx.lineWidth = stroke.width;
+        ctx.beginPath();
+        stroke.path.forEach((point, index) => {
+        if (index === 0) {
+          ctx.moveTo(point.x, point.y); // Start of the stroke
+        } else {
+          ctx.lineTo(point.x, point.y); // Draw each point
+        }
+      });
+      ctx.stroke();
+      ctx.closePath();
+    });
+
+    },
+    
     clearCanvas: function() {
       const canvas = this.$refs.drawingCanvas;
       const ctx = canvas.getContext('2d');
       ctx.fillStyle = "white";
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.fillRe(0, 0, canvas.width, canvas.height);
+      this.strokes = [];
     },
 
     submitDrawing: function() {
