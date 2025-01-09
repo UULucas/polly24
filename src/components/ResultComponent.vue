@@ -182,7 +182,7 @@ header {
   border: none;
   border-radius: 10px;
   padding: 20px;
-  background-color: #a0ca92;
+  background-color: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin: 20px auto;
   text-align: center;
@@ -280,7 +280,6 @@ header {
   font-size: 20px;
   font-family: "Inter", sans-serif;
   font-weight: 400;
-  //box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .answer-div {

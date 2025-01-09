@@ -110,6 +110,10 @@ html{
   border-radius: 1rem;
 }
 
+.userWhiteBox {
+  
+}
+
 .bubbles{
   position:absolute;
   width:100%;
@@ -222,8 +226,8 @@ html{
 }
 
 .bubble:nth-child(12){
-  width:110px;
-  height:110px;
+  width:70px;
+  height:70px;
   left:80%;
   animation-duration:20s;
   animation-delay:4s;
