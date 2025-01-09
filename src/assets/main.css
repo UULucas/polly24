@@ -110,145 +110,142 @@ html{
   border-radius: 1rem;
 }
 
-.bubbles{
-  position:absolute;
-  width:100%;
+.bubbles {
+  position: absolute;
+  width: 100%;
   height: 100%;
-  z-index:-10;
-  overflow:hidden;
-  top:0;
-  left:0;
+  z-index: -10;
+  overflow: hidden;
+  top: 0;
+  left: 0;
 }
 
-.bubble{
+.bubble {
   position: absolute;
-  bottom:-100px;
-  width:40px;
-  height: 40px;
-  background:#f1f1f1;
-  border-radius:50%;
-  opacity:0.5;
-  animation: rise 25s infinite ease-in;
+  bottom: -10vh; /* Start fully below the screen */
+  background: var(--p-offWhite); /* All bubbles have the same color */
+  border-radius: 50%;
+  opacity: 0.5;
+  animation: rise 30s infinite ease-in-out;
   z-index: -10;
   filter: blur(10px);
 }
-.bubble:nth-child(1){
-  width:40px;
-  height:40px;
-  left:10%;
-  animation-duration:25s;
-  background-color: var(--p-green);
-}
-.bubble:nth-child(2){
-  width:20px;
-  height:20px;
-  left:20%;
-  animation-duration:20s;
-  animation-delay:1s;
-  background-color: var(--p-red);
-}
-.bubble:nth-child(3){
-  width:50px;
-  height:50px;
-  left:35%;
-  animation-duration:18s;
-  animation-delay:2s;
-  background-color: var(--p-yellow);
-}
-.bubble:nth-child(4){
-  width:80px;
-  height:80px;
-  left:50%;
-  animation-duration:15s;
-  animation-delay:10s;
-  background-color: var(--p-red);
-}
-.bubble:nth-child(5){
-  width:35px;
-  height:35px;
-  left:55%;
-  animation-duration:6s;
-  animation-delay:1s;
-  background-color: var(--p-offWhite);
-}
-.bubble:nth-child(6){
-  width:45px;
-  height:45px;
-  left:65%;
-  animation-duration:8s;
-  animation-delay:3s;
-  background-color: var(--p-cadetBlue);
-}
-.bubble:nth-child(7){
-  width:90px;
-  height:90px;
-  left:70%;
-  animation-duration:12s;
-  animation-delay:2s;
-  background-color: purple;
-}
-.bubble:nth-child(8){
-  width:25px;
-  height:25px;
-  left:80%;
-  animation-duration:6s;
-  animation-delay:2s;
-  background-color: var(--p-green);
-}
-.bubble:nth-child(9){
-  width:15px;
-  height:15px;
-  left:70%;
-  animation-duration:5s;
-  animation-delay:1s;
-  background-color: var(--p-beige);
-}
-.bubble:nth-child(10){
-  width:90px;
-  height:90px;
-  left:25%;
-  animation-duration:10s;
-  animation-delay:4s;
-  background-color: var(--p-red);
+
+/* Randomized sizes between 1.5vw and 3vw with staggered delays */
+.bubble:nth-child(1) {
+  width: 2vw;
+  height: 2vw;
+  left: 10%;
+  animation-duration: 30s;
+  animation-delay: 0s;
 }
 
-.bubble:nth-child(11){
-  width:40px;
-  height:40px;
-  left:0%;
-  animation-duration:10s;
-  animation-delay:4s;
-  background-color: var(--p-red);
+.bubble:nth-child(2) {
+  width: 1.5vw;
+  height: 1.5vw;
+  left: 20%;
+  animation-duration: 20s;
+  animation-delay: 5s;
 }
 
-.bubble:nth-child(12){
-  width:70px;
-  height:70px;
-  left:80%;
-  animation-duration:20s;
-  animation-delay:4s;
-  background-color: purple;
+.bubble:nth-child(3) {
+  width: 3vw;
+  height: 3vw;
+  left: 35%;
+  animation-duration: 35s;
+  animation-delay: 10s;
 }
 
-.bubble:nth-child(13){
-  width:90px;
-  height:90px;
-  left:35%;
-  animation-duration:10s;
-  animation-delay:15s;
-  background-color: var(--p-red);
+.bubble:nth-child(4) {
+  width: 2.5vw;
+  height: 2.5vw;
+  left: 50%;
+  animation-duration: 40s;
+  animation-delay: 15s;
 }
 
-@keyframes rise{
-  0%{
-    bottom:-100px;
-    transform:translateX(0);
+.bubble:nth-child(5) {
+  width: 1.8vw;
+  height: 1.8vw;
+  left: 55%;
+  animation-duration: 25s;
+  animation-delay: 7s;
+}
+
+.bubble:nth-child(6) {
+  width: 2vw;
+  height: 2vw;
+  left: 65%;
+  animation-duration: 18s;
+  animation-delay: 3s;
+}
+
+.bubble:nth-child(7) {
+  width: 2.8vw;
+  height: 2.8vw;
+  left: 70%;
+  animation-duration: 50s;
+  animation-delay: 20s;
+}
+
+.bubble:nth-child(8) {
+  width: 1.7vw;
+  height: 1.7vw;
+  left: 80%;
+  animation-duration: 16s;
+  animation-delay: 2s;
+}
+
+.bubble:nth-child(9) {
+  width: 1.5vw;
+  height: 1.5vw;
+  left: 70%;
+  animation-duration: 10s;
+  animation-delay: 1s;
+}
+
+.bubble:nth-child(10) {
+  width: 3vw;
+  height: 3vw;
+  left: 25%;
+  animation-duration: 50s;
+}
+
+.bubble:nth-child(11) {
+  width: 2.2vw;
+  height: 2.2vw;
+  left: 0%;
+  animation-duration: 25s;
+  animation-delay: 8s;
+}
+
+.bubble:nth-child(12) {
+  width: 2.5vw;
+  height: 2.5vw;
+  left: 80%;
+  animation-duration: 32s;
+  animation-delay: 6s;
+}
+
+.bubble:nth-child(13) {
+  width: 2.7vw;
+  height: 2.7vw;
+  left: 0%;
+  animation-duration: 40s;
+  animation-delay: 10s;
+}
+
+/* Keyframes for rising bubbles */
+@keyframes rise {
+  0% {
+    bottom: -10vh; /* Start below the viewport */
+    transform: translateX(0);
   }
-  50%{
-    transform:translate(100px);
+  50% {
+    transform: translateX(5vw);
   }
-  100%{
-    bottom:1080px;
-    transform:translateX(-200px);
+  100% {
+    bottom: 120vh; /* End fully above the viewport */
+    transform: translateX(-10vw);
   }
 }
