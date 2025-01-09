@@ -12,6 +12,7 @@
       <button class= " nav-button" v-on:click="switchLanguage">
         <img :src="uiLabels.changeLanguage" alt="" class="lang-img">
       </button>
+
   </header>
 
   <section class="sticky">
@@ -52,7 +53,7 @@
         </div>
 
         <h2>{{ uiLabels.participants }}: </h2>
-        <div class="participant-list" style="background-color: lightgray;">
+        <div class="participant-list" style="background-color: white;">
           <div v-for="participant in participants" :key="participant" class="participant-box" style="background-color: var(--p-offWhite);">
             <h4 class="participants-name">{{participant.name}}</h4>
             <img :src="participant.avatar"
@@ -68,7 +69,6 @@
       
 
     </div>
-    <audio ref="backgroundMusic" src="../assets/music.mp3" loop></audio>
   </div>
 </template>
 
@@ -85,7 +85,7 @@ export default {
       uiLabels: {},
       joined: false,
       lang: localStorage.getItem("lang") || "en",
-      participants: []
+      participants: [],
     }
   },
   created: function () {
@@ -261,7 +261,7 @@ header {
   list-style: none;
   justify-content: center;
   width: 100%;
-  height: 20rem;
+  height: 10rem;
   padding-top:10px;
   overflow-y: scroll;
   overflow-x: hidden;
