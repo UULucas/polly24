@@ -182,7 +182,7 @@ header {
   border: none;
   border-radius: 10px;
   padding: 20px;
-  background-color: #a0ca92;
+  background-color: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin: 20px auto;
   text-align: center;
@@ -247,8 +247,8 @@ header {
   border-radius: 0;
   font-family: "Inter", sans-serif;
   margin-right: 1rem;
-  box-shadow: inset 0px 11px 5px -8px #75b09c, inset 0 -11px 5px -8px #75b09c;
-  border-bottom: 1px #d8f793 solid;
+  box-shadow: inset 0px 11px 5px -8px var(--p-offWhite), inset 0 -11px 5px -8px var(--p-offWhite);
+  border-bottom: 1px var(--p-offWhite) solid;
 
 }
 
@@ -280,7 +280,6 @@ header {
   font-size: 20px;
   font-family: "Inter", sans-serif;
   font-weight: 400;
-  //box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .answer-div {

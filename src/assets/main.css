@@ -109,3 +109,141 @@ html{
   border: none;
   border-radius: 1rem;
 }
+
+.bubbles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+}
+
+.bubble {
+  position: absolute;
+  bottom: -10vh; 
+  background: var(--p-offWhite); 
+  border-radius: 50%;
+  opacity: 0.5;
+  animation: rise 30s infinite ease-in-out;
+  z-index: -10;
+  filter: blur(10px);
+}
+
+.bubble:nth-child(1) {
+  width: 2vw;
+  height: 2vw;
+  left: 10%;
+  animation-duration: 30s;
+  animation-delay: 0s;
+}
+
+.bubble:nth-child(2) {
+  width: 1.5vw;
+  height: 1.5vw;
+  left: 20%;
+  animation-duration: 20s;
+  animation-delay: 5s;
+}
+
+.bubble:nth-child(3) {
+  width: 3vw;
+  height: 3vw;
+  left: 35%;
+  animation-duration: 35s;
+  animation-delay: 10s;
+}
+
+.bubble:nth-child(4) {
+  width: 2.5vw;
+  height: 2.5vw;
+  left: 50%;
+  animation-duration: 40s;
+  animation-delay: 15s;
+}
+
+.bubble:nth-child(5) {
+  width: 1.8vw;
+  height: 1.8vw;
+  left: 55%;
+  animation-duration: 25s;
+  animation-delay: 7s;
+}
+
+.bubble:nth-child(6) {
+  width: 2vw;
+  height: 2vw;
+  left: 65%;
+  animation-duration: 18s;
+  animation-delay: 3s;
+}
+
+.bubble:nth-child(7) {
+  width: 2.8vw;
+  height: 2.8vw;
+  left: 70%;
+  animation-duration: 50s;
+  animation-delay: 20s;
+}
+
+.bubble:nth-child(8) {
+  width: 1.7vw;
+  height: 1.7vw;
+  left: 80%;
+  animation-duration: 16s;
+  animation-delay: 2s;
+}
+
+.bubble:nth-child(9) {
+  width: 1.5vw;
+  height: 1.5vw;
+  left: 70%;
+  animation-duration: 10s;
+  animation-delay: 1s;
+}
+
+.bubble:nth-child(10) {
+  width: 3vw;
+  height: 3vw;
+  left: 25%;
+  animation-duration: 50s;
+}
+
+.bubble:nth-child(11) {
+  width: 2.2vw;
+  height: 2.2vw;
+  left: 0%;
+  animation-duration: 25s;
+  animation-delay: 8s;
+}
+
+.bubble:nth-child(12) {
+  width: 2.5vw;
+  height: 2.5vw;
+  left: 80%;
+  animation-duration: 32s;
+  animation-delay: 6s;
+}
+
+.bubble:nth-child(13) {
+  width: 2.7vw;
+  height: 2.7vw;
+  left: 0%;
+  animation-duration: 40s;
+  animation-delay: 10s;
+}
+
+@keyframes rise {
+  0% {
+    bottom: -10vh; 
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5vw);
+  }
+  100% {
+    bottom: 120vh; 
+    transform: translateX(-10vw);
+  }
+}

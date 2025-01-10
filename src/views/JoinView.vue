@@ -10,6 +10,26 @@
     </button>
   </header>
 
+  <section>
+  <div class="bubbles">
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+  </div>
+</section>
+
     <div id="joinScreen">
         <div id="nameAvatarWrapper">
           <input
@@ -31,7 +51,7 @@
         </button>
 
         <div class="avatarButtonWrapper">
-        <button class="nav-button" @click="openDrawModal">
+        <button class="nav-button" @click="openDrawModal" style="background-color: var(--p-cadetBlue); border:0px;">
           <img class="home-img" src="https://www.freeiconspng.com/uploads/paint-brush-icon-10.png" alt="Draw avatar" name="draw">
         </button>
 
@@ -45,11 +65,6 @@
             <div class="toolbar-item">
               <label for="strokeColor">{{ uiLabels.canvasColor }}</label>
               <input id="strokeColor" name="strokeColor" type="color">
-            </div>
-
-            <div class="toolbar-item">
-              <label for="bgColor">{{ uiLabels.canvasBackgroundColor }}</label>
-              <input id="bgColor" name="bgColor" type="color" value="white">
             </div>
 
             <div class="toolbar-item">
@@ -100,7 +115,8 @@
 
   <script>
   import io from 'socket.io-client';
-  const socket = io("localhost:3000");
+
+  const socket = io(sessionStorage.getItem("dataServer"));
 
   export default {
     name: 'JoinView',
@@ -115,6 +131,8 @@
         camStream: null,
         lang: localStorage.getItem("lang") || "en",
         pollExists: false,
+        strokes: [],
+        currentStroke: null,
 
       }
     },
@@ -203,39 +221,104 @@
         ctx.lineWidth = widthInput.value;
       };
 
-      const colorInput = document.getElementById('strokeColor');
-      const widthInput = document.getElementById('lineWidth');
+      const getEventPosition = (e) => {
+        const rect = canvas.getBoundingClientRect();
+        if (e.touches && e.touches.length > 0) {
+          return {
+            x: e.touches[0].clientX - rect.left,
+            y: e.touches[0].clientY - rect.top,
+          };
+        } else if (e.changedTouches && e.changedTouches.length > 0) {
+          return {
+            x: e.changedTouches[0].clientX - rect.left,
+            y: e.changedTouches[0].clientY - rect.top,
+          };
+        }
+        return {
+          x: e.offsetX,
+          y: e.offsetY,
+        };
+    };
 
-      colorInput.addEventListener('input', updateBrush);
-      widthInput.addEventListener('input', updateBrush);
-
-      canvas.addEventListener('mousedown', (e) => {
+      const startDrawing = (e) => {
+        e.preventDefault();
         drawing = true;
         updateBrush();
+        const {x, y} = getEventPosition(e);
+        this.currentStroke = {
+          color: ctx.strokeStyle,
+          width: ctx.lineWidth,
+          path: [{ x, y }],
+        };
         ctx.beginPath();
-        ctx.moveTo(e.offsetX, e.offsetY);
-      });
+        ctx.moveTo(x, y);
+      };
 
-      canvas.addEventListener('mousemove', (e) => {
-        if (drawing) {
-          ctx.lineTo(e.offsetX, e.offsetY);
-          ctx.stroke();
-        }
-      });
+      const draw = (e) => {
+        if (!drawing) return;
+        e.preventDefault();
+        const {x, y} = getEventPosition(e);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+        this.currentStroke.path.push({x, y});
+      };
 
-      canvas.addEventListener('mouseup', () => {
+      const stopDrawing = () => {
+        if (!drawing) return;
         drawing = false;
         ctx.closePath();
-      });
+        if (this.currentStroke) {
+          this.strokes.push(this.currentStroke);
+          this.currentStroke = null;
+        }
+      };
+
+      canvas.addEventListener('mousedown', startDrawing);
+      canvas.addEventListener('mousemove', draw);
+      canvas.addEventListener('mouseup', stopDrawing);
+      canvas.addEventListener('mouseleave', stopDrawing);
+
+      canvas.addEventListener('touchstart', startDrawing);
+      canvas.addEventListener('touchmove', draw);
+      canvas.addEventListener('touchend', stopDrawing);
+      canvas.addEventListener('touchcancel', stopDrawing);
 
     },
 
+    undoLastStroke: function() {
+      if (this.strokes.length === 0) return;
+
+      this.strokes.pop();
+
+      const canvas = this.$refs.drawingCanvas;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = "white";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      this.strokes.forEach((stroke) => {
+        ctx.strokeStyle = stroke.color;
+        ctx.lineWidth = stroke.width;
+        ctx.beginPath();
+        stroke.path.forEach((point, index) => {
+        if (index === 0) {
+          ctx.moveTo(point.x, point.y); 
+        } else {
+          ctx.lineTo(point.x, point.y); 
+        }
+      });
+      ctx.stroke();
+      ctx.closePath();
+    });
+
+    },
+    
     clearCanvas: function() {
       const canvas = this.$refs.drawingCanvas;
       const ctx = canvas.getContext('2d');
       ctx.fillStyle = "white";
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.fillRe(0, 0, canvas.width, canvas.height);
+      this.strokes = [];
     },
 
     submitDrawing: function() {
@@ -339,11 +422,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 85vh;
+  height: 100%;
   flex-direction: column;
   width: 80%;
   margin:auto;
   gap:1rem;
+  z-index: 1;
 }
 
 #nameAvatarWrapper {
@@ -380,13 +464,23 @@
 
 #toolbar input {
   width: 3rem;
-  height: 2rem;
 }
 
 #toolbar button {
   border: none;
   border-radius: 4px;
   color: white;
+  padding: 0.5rem;
+  background-color: var(--p-red);
+  font-weight: 400;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 0.5rem;
+}
+
+#toolbar button:hover {
+  transform: scale(1.03);
+  transition: transform 0.2s;
+  cursor: pointer;
 }
 
 #toolbar label {
@@ -497,11 +591,17 @@ header {
 .delete-button{
   border-radius: 1rem;
   border: none;
-  width: 8rem;
-  height: 3rem;
+  width: 9rem;
+  height: auto;
   background-color: var(--p-red);
-  cursor:pointer;
 }
+
+.delete-button:hover {
+  cursor:pointer;
+  transform: scale(1.03);
+  transition: transform 0.2s;
+}
+
 #firstJoinBox {
   margin: auto;
 }

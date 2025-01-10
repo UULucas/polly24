@@ -165,7 +165,7 @@
 <script>
 import io from 'socket.io-client';
 import imageCompression from 'browser-image-compression';
-const socket = io("localhost:3000");
+const socket = io(sessionStorage.getItem("dataServer"));
 
 
 class Question {
