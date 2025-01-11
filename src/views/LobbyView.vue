@@ -304,4 +304,22 @@ header {
   height:10vw;
 }
 
+@media (max-width: 768px) {
+  .textbox {
+    width: 20rem;
+    height: 10rem;
+  }
+
+  .joinWrapper {
+    margin-top: 1rem;
+    width: 95%;
+    height: auto;
+  }
+
+  .participant-box {
+    width: 10rem;
+    margin-left: 1rem;
+  }
+}
+
 </style>

@@ -1,4 +1,24 @@
   <template>
+  <section>
+  <div class="bubbles">
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+  </div>
+</section>
+
   <div id="qResultScreen" v-if="showQResultScreen">
     <div class="resultWrapper">
       <h2>{{ uiLabels.correctAnswer }}</h2>
@@ -31,6 +51,12 @@
                class="mini-avatar">
         </div>
     </div>
+    <p> <h3>{{uiLabels.waitMessage}}</h3></p>
+        <div class="spinner">
+          <div class="bounce1"></div>
+          <div class="bounce2"></div>
+          <div class="bounce3"></div>
+        </div>
   </div>
   </div>
 
@@ -65,6 +91,28 @@
 
   </div>
 
+  <div id="finalResult" v-if="quizDone">
+    <div class="resultWrapper">
+      <h2>The winner is:</h2>
+      <p>WinnerName</p>
+      <p>Congratulations!</p>
+      <h3>Final leaderboard:</h3>
+      <div class="participant-list">
+        <div v-for="participant in participants" :key="participant" class="text-box-participant">
+          <div class="participants-name">{{participant.name}}</div>
+          <div class="participants-score">{{ participant.score }}</div>
+          <img :src="participant.avatar"
+               style="
+                  height: 4rem;
+                  width: 4rem;
+                  padding: 0.25rem"
+               alt="miniavatar"
+               class="mini-avatar">
+        </div>
+    </div>
+  </div>
+</div>
+
 
   <span v-for="participant in participant" v-bind:key="participant">{{participant.name}}</span>
 </template>
@@ -96,6 +144,7 @@ export default {
       nextQuestionNormal: false,
       nextQuestionCursed: false,
       countdown: 5,
+      quizDone: false,
     }
   },
   created: function () {
@@ -207,7 +256,7 @@ header {
   flex-direction: column;
   list-style: none;
   padding: 0;
-  height: 30rem;
+  height: 20rem;
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -302,5 +351,21 @@ header {
   font-size: 1rem;
   font-family: "Inter", sans-serif;
   color: black;
+}
+
+@media (max-width: 768px) {
+  .resultWrapper {
+    width: 22rem;
+    height: auto;
+  }
+
+  .participants-name {
+    font-size: 14px;
+  }
+
+  .participant-list {
+    height: 25rem;
+  }
+
 }
 </style>

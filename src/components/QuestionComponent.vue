@@ -98,7 +98,6 @@ export default {
 
 </script>
 <style>
-button
 
 .imgContainer{
 display: flex;
@@ -110,14 +109,13 @@ background-color: white;
 border: 1px solid #ddd;
 border-radius: 8px;
 box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  width:30vw;
+  width:40vw;
   height:30vw;
 }
 
 .image {
-   max-width: 100%;
-   max-height: 100%;
-   height:auto;
+   width: 90%;
+   height: auto;
 }
 .answerbox {
   padding-top: 1rem;
@@ -155,6 +153,9 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   vertical-align: middle;
   overflow: hidden;
   font-size: 1.5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .textbox{
@@ -164,8 +165,8 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   display:inline-block;
-  width:30vw;
-  height:10vw;
+  width:40vw;
+  height:auto;
   padding-bottom: 0.5vw;
   padding-top: 0.5vw;
 }
@@ -222,6 +223,38 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   80% { transform: translate(-5px, -5px) rotate(2deg); }
   90% { transform: translate(2px, 4px) rotate(3deg); }
   100% { transform: translate(5px, -10px) rotate(2deg); }
+}
+
+@media (max-width: 768px) {
+  .imgContainer {
+    height: auto;
+    width: 24rem;
+  }
+
+  .answerbox {
+    
+  }
+
+  .textbox {
+    width: 24rem;
+    height: auto;
+  }
+
+  .answer-button {
+    width: 12rem;
+    height: auto;
+  }
+
+  .text-area-answer {
+    font-size: 30px;
+    color: black;
+  }
+
+  .text-area-question {
+    font-size: 40px;
+  }
+
+
 }
 
 
