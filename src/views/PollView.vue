@@ -61,6 +61,14 @@ export default {
     socket.on("toLobby", t => this.toLobby(t));
     socket.emit( "getUILabels", this.lang );
     socket.emit( "joinPoll", this.pollId );
+
+    //kicka spelare, inte fått den att funka
+    socket.on("kickedFromGame", () => {
+      alert(this.uiLabels.kickedMessage || "You have been removed from the game.");
+      window.location.href = '/'; // Redirect to home or another designated page
+    });
+    socket.on("participantsUpdate", p => this.participants = p);
+
   },
   methods: {
     toLobby () {

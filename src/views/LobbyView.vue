@@ -100,6 +100,14 @@ export default {
     socket.emit( "joinPoll", this.pollId );
     socket.emit( "getUILabels", this.lang );
     socket.emit("getParticipants", this.pollId);
+
+    //kicka spelare, inte fått den att funka
+    socket.on("kickedFromGame", () => {
+      alert(this.uiLabels.kickedMessage || "You have been removed from the game.");
+      window.location.href = '/'; // Redirect to home or another designated page
+    });
+    socket.on("participantsUpdate", p => this.participants = p);
+
   },
   methods: {
     getName: function (){

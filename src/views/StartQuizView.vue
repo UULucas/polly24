@@ -49,20 +49,24 @@
         <div v-for="participant in participants"
              :key="participant.id"
              class="text-box-participant">
-          <div class="participants-name">
-            {{participant.name}}
-          </div>
-          <img :src="participant.avatar"
+             <img :src="participant.avatar"
                alt="miniavtr"
                style="
-                 width: 4rem;
-                 margin-left: 10rem;
-                 height: 4rem;
+                 width: 3rem;
+                 height: 3rem;
                  border: none;
-                 border-radius: 1rem;">
+                 border-radius: 1rem;
+                 position: relative;
+                 margin-top: 0.25rem;">
+             <div class="participants-name">
+            {{participant.name}}
+          </div>
           <div class="participants-name">
             {{"Score: " + participant.score}}
           </div>
+          <button id="kickButton" @click="kickPlayer(participant.id)">
+            <img id="kickImage" src="https://www.freeiconspng.com/thumbs/x-png/x-png-15.png" alt="kickImg">
+          </button>
           <img v-if="participant.answers.length===this.currentQuestion+1&&this.gameStarted"
                src="../assets/pngegg.png"
                alt="Checkmark"
@@ -164,6 +168,14 @@ export default {
       localStorage.setItem( "lang", this.lang );
       socket.emit( "getUILabels", this.lang );
     },
+    //kicka spelare, inte fått den att funka, blev massa fel när jag ändrade i sockets.js, så tog bort den delen
+    kickPlayer(participantId) {
+      const confirmKick = confirm(this.uiLabels.confirmKick || "Are you sure you want to kick this player?");
+      if (confirmKick) {
+        socket.emit("kickPlayer", { pollId: this.pollId, participantId })
+        this.participants = this.participants.filter(participant => participant.id !== participantId);
+      }
+    }
   }
 }
 </script>
@@ -249,15 +261,15 @@ header {
 
 
 .text-box-participant {
-  display: flex;
-  text-align: center;
-  justify-content: space-around;
-  background-color: transparent;
-  border-radius: 0;
+  display: grid;
+  grid-template-columns: 3rem 1fr auto auto;
+  align-items: center;
+  gap: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   font-family: "Inter", sans-serif;
-  margin-right: 1rem;
-  box-shadow: inset 0px 11px 5px -8px #75b09c, inset 0 -11px 5px -8px #75b09c;
-  border-bottom: 1px #d8f793 solid;
 }
 
 .participants-name{
@@ -296,4 +308,21 @@ header {
   font-size: 2rem;
   padding-top: 0.3rem;
 }
+
+#kickImage {
+  height: 1rem;
+  width: 1rem;
+}
+
+#kickButton {
+  border: none;
+  border-radius: 3px;
+  height: 1.5rem;
+  width: 1.5rem;
+  cursor: pointer;
+  background-color: cadetblue;
+}
+
+
+
 </style>
