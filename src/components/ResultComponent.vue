@@ -201,6 +201,8 @@ header {
 
 
 .participant-list{
+  font-size: large;
+  font-weight: 600;
   display: flex;
   flex-direction: column;
   list-style: none;

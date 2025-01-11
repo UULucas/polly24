@@ -261,6 +261,8 @@ header {
 }
 
 .participants-name{
+  font-size: large;
+  font-weight: 600;
   box-shadow: inset 0px -5px 0px #e0be36;
   margin-top: 1rem;
   height: 0.5rem;
