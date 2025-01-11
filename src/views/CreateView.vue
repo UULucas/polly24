@@ -369,6 +369,8 @@ export default {
 }
 
 .answer-box{
+  font-size: large;
+  font-weight:600;
   display: flex;
   width: 70%;
   background-color: transparent;
@@ -384,6 +386,8 @@ export default {
   padding-bottom: 1.5rem;
 }
 .question-area {
+  font-size: large;
+  font-weight:600;
   height: 2em;
   border: none;
   box-shadow: none;
