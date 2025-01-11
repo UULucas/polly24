@@ -65,7 +65,7 @@ export default {
     //kicka spelare, inte fått den att funka
     socket.on("kickedFromGame", () => {
       alert(this.uiLabels.kickedMessage || "You have been removed from the game.");
-      window.location.href = '/'; // Redirect to home or another designated page
+      window.location.href = '/'; 
     });
     socket.on("participantsUpdate", p => this.participants = p);
 
