@@ -234,6 +234,14 @@ html{
   animation-delay: 10s;
 }
 
+.bubble:nth-child(14) {
+
+}
+
+.bubble:nth-child(15) {
+  
+}
+
 @keyframes rise {
   0% {
     bottom: -10vh; 
@@ -245,5 +253,16 @@ html{
   100% {
     bottom: 120vh; 
     transform: translateX(-10vw);
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-button {
+    padding: 10px;
+  }
+
+  .bubble {
+    opacity: 0.8;
+    filter: blur(5px);
   }
 }

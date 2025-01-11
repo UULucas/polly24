@@ -81,7 +81,7 @@
             </div>
 
             </div>
-            <canvas ref="drawingCanvas" width="500" height="500"></canvas><br>
+            <canvas ref="drawingCanvas" width="400" height="400"></canvas><br>
             <button id="submitDrawingButton" @click="submitDrawing">Submit avatar</button>
           </div>
         </div>
@@ -342,6 +342,7 @@
         });
       } else {
         alert("Camera not supported in this browser")
+        this.isCamModalOpen = false;
       }
     },
 
@@ -438,7 +439,7 @@
   flex-direction: column;
   width: 80%;
   margin:auto;
-  gap:1rem;
+  gap:0.5rem;
 }
 
 .avatarButtonWrapper {
@@ -502,6 +503,7 @@
 
 .idButton {
   width:25rem;
+  margin-bottom: 1rem;
 }
 
 .avatar-preview {
@@ -530,7 +532,6 @@
   text-align: center;
   position: relative;
   display: flex;
-  justify-content: space-between;
   flex-direction: column;
 }
 
@@ -604,5 +605,36 @@ header {
 
 #firstJoinBox {
   margin: auto;
+}
+
+@media (max-width: 768px) {
+  .idTextBox {
+    width: 22rem;
+    font-size: 30px;
+    margin-top: 1rem;
+  }
+
+  .idButton {
+    width: 22rem;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .drawModal-content {
+    width: 90%;
+    height: 75%;
+  }
+
+  #toolbar {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  }
+
+  #nameAvatarWrapper {
+    gap: 0.2rem;
+  }
+
+  .delete-button {
+    margin-bottom: 0.4rem;
+  }
 }
 </style>

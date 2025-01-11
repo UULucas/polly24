@@ -124,4 +124,12 @@ header {
 .fix {
   margin: 1rem;
 }
+
+@media (max-width: 768px) {
+  .start-button {
+    margin-top: 2rem;
+    width: 24rem;
+    height: 10rem;
+}
+}
 </style>
