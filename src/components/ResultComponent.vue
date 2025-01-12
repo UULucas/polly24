@@ -63,8 +63,7 @@
     <div v-else>
       <div class="resultWrapper">
         <h2>The winner is:</h2>
-        <p>{{getWinner()}}</p>
-        <p>Congratulations!</p>
+        <h1>{{getWinner()}}</h1>
         <h3>Final leaderboard:</h3>
         <div class="participant-list">
           <div v-for="participant in participants" :key="participant" class="text-box-participant">
@@ -79,6 +78,11 @@
                  class="mini-avatar">
           </div>
         </div>
+      <div id="home-button-container">
+        <router-link to="/" class="header-button nav-button">
+          <img class="home-img" src="../assets/home_icon.png" alt="HomeImg">
+      </router-link>
+      </div>
       </div>
     </div>
   </div>
@@ -143,6 +147,10 @@ header {
   gap: 1rem ;
 }
 
+.header-button {
+  height: 3rem;
+}
+
 .home-img {
   display: block;
   margin-left: auto;
@@ -152,7 +160,7 @@ header {
 }
 
 .resultWrapper {
-  height: 80vh;
+  height: auto;
   width: 70vh;
   border: none;
   border-radius: 10px;
@@ -182,7 +190,7 @@ header {
   flex-direction: column;
   list-style: none;
   padding: 0;
-  height: 20rem;
+  height: 18rem;
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -279,6 +287,16 @@ header {
   color: black;
 }
 
+h1 {
+  color: gold;
+}
+
+#home-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
 @media (max-width: 768px) {
   .resultWrapper {
     width: 22rem;
@@ -290,7 +308,7 @@ header {
   }
 
   .participant-list {
-    height: 25rem;
+    height: 22rem;
   }
 
 }

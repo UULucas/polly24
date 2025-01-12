@@ -88,6 +88,7 @@ export default {
 </script>
 <style>
 
+
 .imgContainer{
 display: flex;
 align-items: center;
