@@ -81,10 +81,6 @@ export default {
         //add if statement to change to red green depending on right/wrong answer
         //targetDiv.style.backgroundColor = 'var(--p-red)'; 
       }
-      
-      //const element = document.getElementById('answer-buttons');
-      //element.classList.remove("answer-button"); // Remove mystyle class from DIV
-      //element.classList.add("textbox"); // Add newone class to DIV
     }
  } 
   }
@@ -199,24 +195,7 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 .answer-button.green{
   background-color: var(--p-green);
 }
-/*answerbox shake effect for blue shell cope */
-.blueshellAnswerBox:hover{
-  animation: shake 0.4s;
-  animation-iteration-count: infinite;
-}
-@keyframes shake {
-  0% { transform: translate(4px, 4px) rotate(0deg); }
-  10% { transform: translate(-4px, -3px) rotate(-1deg); }
-  20% { transform: translate(-6px, 0px) rotate(-2deg); }
-  30% { transform: translate(9px, 6px) rotate(-3deg); }
-  40% { transform: translate(3px, -3px) rotate(-2deg); }
-  50% { transform: translate(-5px, 10px) rotate(-1deg); }
-  60% { transform: translate(-8px, 4px) rotate(0deg); }
-  70% { transform: translate(9px, 3px) rotate(1deg); }
-  80% { transform: translate(-5px, -5px) rotate(2deg); }
-  90% { transform: translate(2px, 4px) rotate(3deg); }
-  100% { transform: translate(5px, -10px) rotate(2deg); }
-}
+
 
 @media (max-width: 768px) {
   .imgContainer {
