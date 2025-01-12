@@ -120,7 +120,7 @@ export default {
     },
     submitAnswer: function (answer) {
       if(!this.answered){
-        const score = this.calculateScore(answer);
+        const score = Math.round(this.calculateScore(answer));
         socket.emit("submitPlayerAnswer", {pollId: this.pollId, playerId: this.playerId, answer: answer.text, score:score})
         this.answered = true;
       }
