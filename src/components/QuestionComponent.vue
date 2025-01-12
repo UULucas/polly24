@@ -15,16 +15,12 @@
         :ref="'a-' + index"
         :id="'a-'+ index"
         v-on:click="answer(a); changeColor(index, a.correct); disableButtons(question.a)"> <!-- försök att föra in en textarea i knappen, åter igen på samma sätt som i create !-->
-  <!--{{ a.text }}!-->
    <textarea disabled
              class="text-area-answer"
              :value="` ${ a.text }`"
              :id="'a-text-'+index"></textarea>
 </button>
 </div>
-<!--div v-if="timeLeft < 1">
-  {{ resetButtons(question.a) }}
-</div!-->
 
 </template>
 <script>
@@ -39,22 +35,19 @@ export default {
   methods: {
     answer: function (answer) {
       this.$emit("answer", answer);
-      //console.log(answer)
     },
     disableButtons: function (len) {
       console.log("disableButtons");
       for (let i = 0; i < len.length; i++) {
         //const targetDiv = this.$refs['a-' + i][0]; // Access the ref
         const targetDiv = document.getElementById('a-' + i);// Access the ref
+        //targetDiv.setAttribute("disabled", "true");
         targetDiv.disabled = true;
         const targetText = document.getElementById('a-text-'+i)
         targetText.style.color = "darkgray";
 
         targetDiv.setAttribute('disabled', true);
       }
-      /**const button = document.getElementsByClassName("answer-button");
-      // Disable the button
-      button.disabled = true;*/
     },
     resetButtons: function (len) {
       for (let i = 0; i < len.length; i++) {
@@ -253,7 +246,6 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   .text-area-question {
     font-size: 40px;
   }
-
 
 }
 

@@ -35,8 +35,9 @@
 
   </div>
 
-  <div id="leaderboardScreen" v-if="!showQResultScreen">
-    <div class="resultWrapper">
+
+  <div v-if="!showQResultScreen">
+    <div v-if="!currentQuestion.lastQuestion" class="resultWrapper">
       <h2>Leaderboard</h2>
       <div class="participant-list">
         <div v-for="participant in participants" :key="participant" class="text-box-participant">
@@ -51,13 +52,35 @@
                class="mini-avatar">
         </div>
     </div>
-    <p> <h3>{{uiLabels.waitMessage}}</h3></p>
+    <h3>{{uiLabels.waitMessage}}</h3>
         <div class="spinner">
           <div class="bounce1"></div>
           <div class="bounce2"></div>
           <div class="bounce3"></div>
         </div>
-  </div>
+    </div>
+
+    <div v-else>
+      <div class="resultWrapper">
+        <h2>The winner is:</h2>
+        <p>{{getWinner()}}</p>
+        <p>Congratulations!</p>
+        <h3>Final leaderboard:</h3>
+        <div class="participant-list">
+          <div v-for="participant in participants" :key="participant" class="text-box-participant">
+            <div class="participants-name">{{participant.name}}</div>
+            <div class="participants-score">{{ participant.score }}</div>
+            <img :src="participant.avatar"
+                 style="
+                height: 4rem;
+                width: 4rem;
+                padding: 0.25rem"
+                 alt="miniavatar"
+                 class="mini-avatar">
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div v-if="powerUp">
@@ -91,28 +114,6 @@
 
   </div>
 
-  <div id="finalResult" v-if="quizDone">
-    <div class="resultWrapper">
-      <h2>The winner is:</h2>
-      <p>WinnerName</p>
-      <p>Congratulations!</p>
-      <h3>Final leaderboard:</h3>
-      <div class="participant-list">
-        <div v-for="participant in participants" :key="participant" class="text-box-participant">
-          <div class="participants-name">{{participant.name}}</div>
-          <div class="participants-score">{{ participant.score }}</div>
-          <img :src="participant.avatar"
-               style="
-                  height: 4rem;
-                  width: 4rem;
-                  padding: 0.25rem"
-               alt="miniavatar"
-               class="mini-avatar">
-        </div>
-    </div>
-  </div>
-</div>
-
 
   <span v-for="participant in participant" v-bind:key="participant">{{participant.name}}</span>
 </template>
@@ -120,9 +121,6 @@
 <script>
 // @ is an alias to /src
 import BarsComponent from '@/components/BarsComponent.vue';
-import io from 'socket.io-client';
-
-const socket = io(sessionStorage.getItem("dataServer"));
 
 export default {
   name: 'ResultComponent',
@@ -131,43 +129,32 @@ export default {
   },
   props: {
     question: Object,
+    currentQuestion: Object,
+    quizDone: Boolean,
+    uiLabels: Object,
+    submittedAnswers: Object,
+    participants: Object,
   },
   data: function () {
     return {
       lang: localStorage.getItem("lang") || "en",
       pollId: "",
-      //question: "",
-      submittedAnswers: {},
-      participants: [],
       showQResultScreen: true,
-      uiLabels: {},
       nextQuestionNormal: false,
       nextQuestionCursed: false,
       countdown: 5,
-      quizDone: false,
     }
   },
   created: function () {
-    this.pollId = this.$route.params.id;
-    socket.on("uiLabels", labels => this.uiLabels = labels);
-    socket.on("submittedAnswersUpdate", update => this.submittedAnswers = update);
-    //socket.on("questionUpdate", update => this.question = update);
-    socket.on( "participantsUpdate", p => this.participants = p.sort((a, b) => b.score - a.score));
-    socket.emit("getUILabels", this.lang);
-    socket.emit("joinPoll", this.pollId);
-    socket.emit("getParticipants", this.pollId);
     this.startTimer();
   },
   methods: {
-    switchLanguage: function() {
-      if (this.lang === "en") {
-        this.lang = "sv"
+    getWinner: function (){
+      if(this.participants.length > 0){
+        return this.participants[0].name;
       }
-      else {
-        this.lang = "en"
-      }
-      localStorage.setItem( "lang", this.lang );
-      socket.emit( "getUILabels", this.lang );
+      else return "";
+
     },
     startTimer: function() {
       setTimeout(() => {
@@ -325,7 +312,7 @@ header {
 .nav-label {
   text-align: center;
   padding: 5px;
-  background-color: e0be36;
+  background-color: #e0be36;
   box-shadow: inset 0px -5px 0px #e0be36;
   border-radius: 0px;
   font-size: 20px;

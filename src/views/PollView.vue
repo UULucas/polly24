@@ -5,7 +5,13 @@
 
   </div>
   <body style="display: grid; margin-top: 1rem">
-    <ResultComponent v-if="displayResultScreen" v-bind:question="question"></ResultComponent>
+    <ResultComponent v-if="displayResultScreen"
+                     v-bind:gameDone="currentQuestion.lastQuestion"
+                     v-bind:currentQuestion="currentQuestion"
+                     v-bind:participants="participants"
+                     v-bind:submittedAnswers="submittedAnswers"
+                     v-bind:uiLabels="uiLabels"
+                     v-bind:question="question"></ResultComponent>
 
     <div v-else class="pollQuestion">
       <QuestionComponent ref="questionComponent"
@@ -40,34 +46,41 @@ export default {
         img : null
       },
       pollId: "inactive poll",
-      //submittedAnswers: {},
+      submittedAnswers: {},
       unstarted: false,
       answered : false,
       playerId: "",
-
+      uiLabels: {},
       timeLeft: 0,
       answerTime:-1,
       questionComponent: ref(QuestionComponent),
       displayResultScreen: false,
+      currentQuestion: {},
+      participants: [],
     }
   },
   created: function () {
     this.pollId = this.$route.params.id;
     this.playerId = this.$route.params.playerId;
     socket.on( "questionUpdate", q => this.loadQuestion(q));
-    //socket.on( "submittedAnswersUpdate", answers => this.submittedAnswers = answers );'
     socket.on( "uiLabels", labels => this.uiLabels = labels );
     socket.on("timeUpdated", t => this.updateTimeLeft(t));
     socket.on("toLobby", t => this.toLobby(t));
+
+    socket.on("currentQuestion", q => this.currentQuestion = q);
+    socket.on("submittedAnswersUpdate", update => this.submittedAnswers = update);
+    socket.on( "participantsUpdate", p => this.participants = p.sort((a, b) => b.score - a.score));
+    socket.on("playerAnswered", a => this.answered = a);
+
     socket.emit( "getUILabels", this.lang );
     socket.emit( "joinPoll", this.pollId );
+
 
     //kicka spelare, inte fått den att funka
     socket.on("kickedFromGame", () => {
       alert(this.uiLabels.kickedMessage || "You have been removed from the game.");
       window.location.href = '/'; 
     });
-    socket.on("participantsUpdate", p => this.participants = p);
 
   },
   methods: {
@@ -84,14 +97,22 @@ export default {
       console.log("loaded question")
       this.question = data;
       this.questionComponent.methods.resetButtons(this.question.a);
-      this.answered = false;
+      socket.emit("havePlayerAnswered", {pollId: this.pollId, playerId: this.playerId});
       this.displayResultScreen = false;
+      setTimeout(() => {
+        if(this.answered === true){
+          this.questionComponent.methods.disableButtons(this.question.a); //Stänger av knapparna
+        }
+      }, 50);
+
+
     },
     updateTimeLeft: function(timeLeft){
       this.timeLeft = timeLeft;
       this.updateAnimation();
       if(timeLeft <= 0){
         this.answered = true; //Gör så att man inte kan svara
+        this.displayResultScreen = true;
         this.questionComponent.methods.disableButtons(this.question.a); //Stänger av knapparna
         this.displayResultScreen = true; //Visa resultatet
         console.log("out of time")

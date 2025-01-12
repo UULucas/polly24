@@ -218,7 +218,7 @@ export default {
         this.createPoll();
         this.saveQuiz();
         this.$router.push({
-          name: "StartQuizView",
+          name: "HostVue",
           params: {
             id: this.pollId,
           },

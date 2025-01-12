@@ -55,6 +55,7 @@ function sockets(io, socket, data) {
     console.log("Player answer reseved: "+d.answer+" score: "+d.score)
     data.submitAnswer(d.pollId, d.answer); //så att vi kan använda hans taplar för den frågan :)
     data.submitPlayerAnswer(d.pollId, d.answer, d.playerId, d.score);
+    io.to(d.pollId).emit('submittedAnswersUpdate', data.getSubmittedAnswers(d.pollId));
     io.to(d.pollId).emit('participantsUpdate', data.getParticipants(d.pollId));
   });
 
@@ -100,6 +101,9 @@ function sockets(io, socket, data) {
     data.restartQuiz(pollId);
     io.to(pollId).emit('toLobby');
     socket.emit('currentQuestion', data.getQuestionNumber(pollId));
+  });
+  socket.on("havePlayerAnswered", function (d){
+    socket.emit('playerAnswered', data.havePlayerAnswered(d.pollId, d.playerId));
   });
 
 }

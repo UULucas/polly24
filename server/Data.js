@@ -92,7 +92,6 @@ Data.prototype.getParticipants = function(pollId) {
 Data.prototype.addQuestion = function(pollId, q) {
   if (this.pollExists(pollId)) {
     this.polls[pollId].questions.push(q);
-    //console.log("Added question:", q);
   }
 }
 
@@ -140,7 +139,6 @@ Data.prototype.submitAnswer = function(pollId, answer) {
 }
 
 Data.prototype.submitPlayerAnswer = function(pollId, answer, playerId, score) {
-  console.log("testering")
   if (this.pollExists(pollId)) {
     const poll = this.polls[pollId];
     const players = poll.participants;
@@ -160,7 +158,6 @@ Data.prototype.submitPlayerAnswer = function(pollId, answer, playerId, score) {
     else{
       console.log("No player found with name: "+playerId)
     }
-    console.log(inGame);
   }
 }
 
@@ -172,7 +169,6 @@ Data.prototype.getTimeLeft = function(pollId) {
   return 0;
 }
 
-//egengjort, kanske funkar, vi får se
 Data.prototype.nextQuestion = function(pollId) {
   if (this.pollExists(pollId)) {
     const poll = this.polls[pollId];
@@ -225,6 +221,23 @@ Data.prototype.restartQuiz = function (pollId){
       poll.participants[i].answers = [];
       poll.participants[i].score = 0;
     }
+  }
+}
+
+Data.prototype.havePlayerAnswered = function (pollId, playerId){
+  if(this.pollExists(pollId)){
+    const poll = this.polls[pollId];
+    const inGame = poll.participants.find(obj => obj.id === playerId);
+    if(inGame) {
+      //Lägg bara till svaret om man inte har svarat tidigare på den frågan
+      if(inGame.answers[poll.currentQuestion]===undefined){
+        return false;
+      }
+    }
+    else{
+      console.log("No player found with name: "+playerId)
+    }
+    return true;
   }
 }
 

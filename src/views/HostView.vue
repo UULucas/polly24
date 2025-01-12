@@ -82,17 +82,18 @@
     </div>
 
     <div v-if="gameStarted" class="text-box time-display">
-      <label v-if="timeLeft>0">{{uiLabels.timeLeft}}:{{timeLeft}}<br>{{uiLabels.currentQuestion}}: {{question.number+1}}</label>
+      <label v-if="timeLeft>0">{{uiLabels.timeLeft}}:{{timeLeft}}<br>{{ uiLabels.currentQuestion }}:
+        {{ currentQuestion.number + 1 }}</label>
       <label v-else>{{uiLabels.showingResult}}</label>
     </div>
     <div class="start-section">
-      <div v-if="gameStarted&&!question.lastQuestion">
+      <div v-if="gameStarted&&!currentQuestion.lastQuestion">
         <button class="start-button nav-button" @click="nextQuestion">{{uiLabels.nextQuestion}}</button>
       </div>
 
-      <button v-if="!gameStarted&&!question.lastQuestion" class="start-button nav-button" @click="startQuiz">
+      <button v-if="!gameStarted&&!currentQuestion.lastQuestion" class="start-button nav-button" @click="startQuiz">
         {{ uiLabels.startGame }}</button>
-      <button v-if="question.lastQuestion" class="start-button nav-button" @click="restartQuiz">{{uiLabels.restartQuiz}}</button>
+      <button v-if="currentQuestion.lastQuestion" class="start-button nav-button" @click="restartQuiz">{{uiLabels.restartQuiz}}</button>
     </div>
 
   </div>
@@ -105,7 +106,7 @@ import io from 'socket.io-client';
 const socket = io(sessionStorage.getItem("dataServer"));
 
 export default {
-  name: 'StartQuizView',
+  name: 'HostVue',
 
   data: function () {
     return {
@@ -113,7 +114,7 @@ export default {
       pollId: "",
       answers: ["", ""], //Användäns inte
       participants: [],
-      question:{number:-69,lastQuestion:false},
+      currentQuestion:{number:-69,lastQuestion:false},
       uiLabels: {},
       gameStarted: false,
       timeLeft: 0,
@@ -140,8 +141,8 @@ export default {
       }
     },
     nextQuestion: function () {
-      console.log(this.question.lastQuestion);
-      if(!this.question.lastQuestion){
+      console.log(this.currentQuestion.lastQuestion);
+      if(!this.currentQuestion.lastQuestion){
         socket.emit("nextQuestion", this.pollId);
       }
     },
@@ -155,8 +156,8 @@ export default {
       alert(this.uiLabels.copiedTextAlert + copyText);
     },
     loadQuestion: function (newQuestion){
-      this.question = newQuestion;
-      this.gameStarted = this.question.number > -1;
+      this.currentQuestion = newQuestion;
+      this.gameStarted = this.currentQuestion.number > -1;
     },
     switchLanguage: function() {
       if (this.lang === "en") {
