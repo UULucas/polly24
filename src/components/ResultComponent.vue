@@ -84,7 +84,7 @@
   </div>
 
 
-  <span v-for="participant in participant" v-bind:key="participant">{{participant.name}}</span>
+  <span v-for="participant in participants" v-bind:key="participant">{{participant.name}}</span>
 </template>
 
 <script>
@@ -128,7 +128,7 @@ export default {
     startTimer: function() {
       setTimeout(() => {
         this.showQResultScreen = false;
-      }, 10000);
+      }, 7000);
     },
   },
 }

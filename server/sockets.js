@@ -102,8 +102,15 @@ function sockets(io, socket, data) {
     io.to(pollId).emit('toLobby');
     socket.emit('currentQuestion', data.getQuestionNumber(pollId));
   });
-  socket.on("havePlayerAnswered", function (d){
-    socket.emit('playerAnswered', data.havePlayerAnswered(d.pollId, d.playerId));
+
+  socket.on("havePlayerAnswered", (d,callback) => {
+    let haveAnswered= data.havePlayerAnswered(d.pollId, d.playerId);
+    callback(haveAnswered);
+  });
+
+  socket.on('doesQuizExist', (pollId, callback) => {
+    let doesExist = data.pollExists(pollId);
+    callback(doesExist);
   });
 
 }

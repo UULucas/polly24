@@ -130,7 +130,6 @@
         isCamModalOpen: false,
         camStream: null,
         lang: localStorage.getItem("lang") || "en",
-        pollExists: false,
         strokes: [],
         currentStroke: null,
 
@@ -138,22 +137,22 @@
     },
     created: function () {
     socket.on( "uiLabels", labels => this.uiLabels = labels );
-    socket.on("pollExists", t => this.pollExists = t.doesExist);
     socket.emit( "getUILabels", this.lang );
   },
   methods: {
     participateInPoll: function () {
-      this.generatePlayerId();
+      socket.emit('doesQuizExist', this.pollId, (response) => {
 
-      socket.emit( "participateInPoll", {
-        pollId: this.pollId,
-        name: this.userName,
-        avatar: this.avatar,
-        id:this.playerId,
-      } );
+        if(response===true){
+          this.generatePlayerId();
 
-      setTimeout(() => {
-        if(this.pollExists){
+          socket.emit( "participateInPoll", {
+            pollId: this.pollId,
+            name: this.userName,
+            avatar: this.avatar,
+            id:this.playerId,
+          } );
+
           this.$router.push({
             name: "LobbyView",
             params: {
@@ -163,10 +162,9 @@
           });
         }
         else{
-            alert(this.uiLabels.noExistingQuiz);
-          }
-      },100);//Vänta så att den hinner uppdatera pollExists
-
+          alert(this.uiLabels.noExistingQuiz);
+        }
+      });
     },
     generatePlayerId: function (){
       const now = new Date().getTime(); // Hämta aktuell tid i millisekunder

@@ -38,7 +38,9 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
 ***********************************************/
 
 Data.prototype.pollExists = function (pollId) {
+  console.log(this.polls);
   return typeof this.polls[pollId] !== "undefined"
+
 }
 
 Data.prototype.getUILabels = function (lang) {

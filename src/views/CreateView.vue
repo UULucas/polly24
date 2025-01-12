@@ -114,21 +114,8 @@
 
         </select>
       </p>
-      <!--button v-on:click="setGameTime(setTime);" type="submit">
-        <label> Start timer </label>
-      </button!-->
       <br>
     </form>
-
-    <!--label class="text-box" style="width: 100%; height: 3em; place-items: center"> Choose the correct answer(s)</label>
-    <div class="correct-answer-container">
-      <div v-for="answer in questions[questionNumber].a" v-bind:key="answer" class="text-box">
-        <input
-            v-if="answer.text.length>0"
-            type="checkbox"
-            v-model="answer.correct"/>
-      </div>
-    </div!-->
   </section>
 
 
