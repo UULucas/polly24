@@ -83,37 +83,6 @@
     </div>
   </div>
 
-  <div v-if="powerUp">
-    <div class="powerUpWrapper">
-      <h2>You have received a PowerUp!</h2>
-      <p>Choose one:</p>
-      <div id="powerupButtonWrapper">
-        <button class="nav-button" @click="selfPowerUp">Powerup yourself</button>
-        <button class="nav-button" @click="oneDowngrade">Fuck the leader/one person</button>
-        <button class="nav-button" @click="manyDowngrade">Fuck everyone</button>
-      </div>
-    </div>
-
-  </div>
-
-  <div v-if="nextQuestionNormal">
-    <div class="resultWrapper">
-      <h2>Next question starts in:</h2>
-      <p>{{ countdown }}</p>
-    </div>
-  </div>
-
-  <div v-if="nextQuestionCursed">
-    <div class="resultWrapper">
-      <h2>userName has given you have downgrade:</h2>
-      <p>downgradeName</p>
-      <p>Description of downgradeName</p>
-      <h2>Next question starts in: </h2>
-      <p>{{ countdown }}</p>
-    </div>
-
-  </div>
-
 
   <span v-for="participant in participant" v-bind:key="participant">{{participant.name}}</span>
 </template>
@@ -160,36 +129,6 @@ export default {
       setTimeout(() => {
         this.showQResultScreen = false;
       }, 10000);
-    },
-
-    startCountdown: function() {
-      this.countdown = 5;
-      const interval = setInterval(() => {
-        if (this.countdown > 0) {
-          this.countdown--;
-        } else {
-          clearInterval(interval);
-          this.goToNextQuestion;
-        }
-      }, 1000);
-    },
-
-    goToNextQuestion: function() {
-      this.$router.push();
-    },
-
-
-  },
-  watch: {
-    nextQuestionNormal: function(newVal) {
-      if (newVal) {
-        this.startCountdown();
-      }
-    },
-    nextQuestionCursed: function(newVal) {
-      if (newVal) {
-        this.startCountdown();
-      }
     },
   },
 }
