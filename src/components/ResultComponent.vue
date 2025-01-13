@@ -88,7 +88,7 @@
   </div>
 
 
-  <span v-for="participant in participant" v-bind:key="participant">{{participant.name}}</span>
+  <span v-for="participant in participants" v-bind:key="participant">{{participant.name}}</span>
 </template>
 
 <script>
@@ -132,7 +132,7 @@ export default {
     startTimer: function() {
       setTimeout(() => {
         this.showQResultScreen = false;
-      }, 10000);
+      }, 7000);
     },
   },
 }
@@ -272,7 +272,7 @@ header {
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 15rem;
+  max-width: 20rem;
   height: 3rem;
   margin: 1rem auto;
   background-color: var(--p-cadetBlue);
@@ -285,6 +285,8 @@ header {
   font-size: 1rem;
   font-family: "Inter", sans-serif;
   color: black;
+  overflow: hidden;
+  max-width: 100%;
 }
 
 h1 {

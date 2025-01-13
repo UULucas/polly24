@@ -47,8 +47,15 @@
 
 <script>
 import io from 'socket.io-client';
+<<<<<<< HEAD
 sessionStorage.setItem("dataServer", "192.168.1.11:3000");
 //sessionStorage.setItem("dataServer","localhost:3000");
+=======
+import {sockets} from "../../server/sockets";
+
+//sessionStorage.setItem("dataServer","localhost:3000");
+sessionStorage.setItem("dataServer","");
+>>>>>>> deploy
 const socket = io(sessionStorage.getItem("dataServer"));
 
 export default {

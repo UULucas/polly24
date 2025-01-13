@@ -38,7 +38,9 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
 ***********************************************/
 
 Data.prototype.pollExists = function (pollId) {
+  console.log(this.polls);
   return typeof this.polls[pollId] !== "undefined"
+
 }
 
 Data.prototype.getUILabels = function (lang) {
@@ -84,7 +86,7 @@ Data.prototype.getParticipants = function(pollId) {
   const poll = this.polls[pollId];
   console.log("participants requested for", pollId);
   if (this.pollExists(pollId)) {
-    return this.polls[pollId].participants
+    return this.polls[pollId].participants;
   }
   return [];
 }
@@ -241,8 +243,11 @@ Data.prototype.havePlayerAnswered = function (pollId, playerId){
   }
 }
 
-Data.prototype.saveToJson = function (pollId){
-//shout out saveToJson, gotta be one of my favourite functions
+Data.prototype.kickPlayer = function(pollId, playerId){
+  if(this.pollExists(pollId)){
+    const poll = this.polls[pollId];
+    poll.participants = poll.participants.filter(obj => obj.id !== playerId);
+  }
 }
 
 export { Data };

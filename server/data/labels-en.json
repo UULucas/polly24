@@ -61,5 +61,6 @@
 	"restartQuiz": "Restart Quiz",
 	"showingResult": "Results are showing for the players",
 	"confirmRestart": "Are you sure you want to restart the Quiz?",
-	"resetAvatar" : "Reset Avatar"
+	"resetAvatar" : "Reset Avatar",
+	"kickedMessage": "You have been removed from the game and will return to the start menu"
 }

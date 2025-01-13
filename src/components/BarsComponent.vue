@@ -58,6 +58,8 @@ span {
 }
 .bar .label {
   background-color: white;
+  overflow: hidden;
+  max-width: 100%;
 }
 
 .wrapper {
