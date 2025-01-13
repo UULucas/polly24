@@ -68,17 +68,19 @@ export default {
 
     socket.on("currentQuestion", q => this.currentQuestion = q);
     socket.on("submittedAnswersUpdate", update => this.submittedAnswers = update);
-    socket.on( "participantsUpdate", p => this.participants = p.sort((a, b) => b.score - a.score));
-    //socket.on("playerAnswered", a => this.answered = a);
+    socket.on( "participantsUpdate", p => this.updateParticipants(p));
 
     socket.emit( "getUILabels", this.lang );
     socket.emit( "joinPoll", this.pollId );
 
-
-    //kicka spelare, inte fått den att funka
-    socket.on("kickedFromGame", () => {
-      alert(this.uiLabels.kickedMessage || "You have been removed from the game.");
-      window.location.href = '/'; 
+    socket.on("playerKicked", kicked => {
+      if(kicked===this.playerId){
+        alert(this.uiLabels.kickedMessage);
+        setTimeout(() => {
+          window.location.href = '/';
+          this.socket.removeAllListeners();
+        },3000);
+      }
     });
 
   },
@@ -103,8 +105,13 @@ export default {
           this.questionComponent.methods.disableButtons(this.question.a); //Stänger av knapparna
         }
       });
-
-
+    },
+    updateParticipants: function (newParticipants){
+      this.participants = newParticipants.sort((a, b) => b.score - a.score)
+      /*if(!this.participants.some(player => player.id === this.playerId)){
+        alert(this.uiLabels.kickedMessage || "You have been removed from the game.");
+        this.$router.push("/");
+      }*/
     },
     updateTimeLeft: function(timeLeft){
       this.timeLeft = timeLeft;

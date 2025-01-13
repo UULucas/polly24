@@ -9,17 +9,17 @@
   <textarea disabled class="text-area-question" :value="` ${question.q}`"></textarea>
 </div>
 <div class="answerbox">
-<button class="answer-button"
-        v-for="(a, index) in question.a"
-        :key="index"
-        :ref="'a-' + index"
-        :id="'a-'+ index"
-        v-on:click="answer(a); changeColor(index, a.correct); disableButtons(question.a)"> <!-- försök att föra in en textarea i knappen, åter igen på samma sätt som i create !-->
-   <textarea disabled
-             class="text-area-answer"
-             :value="` ${ a.text }`"
-             :id="'a-text-'+index"></textarea>
-</button>
+  <button class="answer-button"
+          v-for="(a, index) in question.a"
+          :key="index"
+          :ref="'a-' + index"
+          :id="'a-'+ index"
+          v-on:click="answer(a); changeColor(index, a.correct); disableButtons(question.a)"> <!-- försök att föra in en textarea i knappen, åter igen på samma sätt som i create !-->
+     <textarea disabled
+               class="text-area-answer"
+               :value="` ${ a.text }`"
+               :id="'a-text-'+index"></textarea>
+  </button>
 </div>
 
 </template>
@@ -105,6 +105,7 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 .image {
    width: 90%;
    height: auto;
+  max-height: 95%;
 }
 .answerbox {
   padding-top: 1rem;
@@ -213,6 +214,7 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
 
   .answer-button {
+    max-width: 100%;
     width: 12rem;
     height: auto;
   }

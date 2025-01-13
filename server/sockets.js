@@ -30,13 +30,6 @@ function sockets(io, socket, data) {
   socket.on('participateInPoll', function(d) {
     data.participateInPoll(d.pollId, d.name, d.avatar, d.id);
     io.to(d.pollId).emit('participantsUpdate', data.getParticipants(d.pollId));
-    if(data.pollExists(d.pollId)) {
-      console.log("poll exists")
-      socket.emit('pollExists', {doesExist: true});
-    }
-    else{
-      socket.emit('pollExists', {doesExist: false});
-    }
 
   });
   socket.on('startPoll', function(pollId) {
@@ -111,6 +104,12 @@ function sockets(io, socket, data) {
   socket.on('doesQuizExist', (pollId, callback) => {
     let doesExist = data.pollExists(pollId);
     callback(doesExist);
+  });
+
+  socket.on('kickPlayer', function (d){
+    data.kickPlayer(d.pollId, d.playerId);
+    io.to(d.pollId).emit('participantsUpdate', data.getParticipants(d.pollId));
+    io.to(d.pollId).emit('playerKicked', d.playerId);
   });
 
 }

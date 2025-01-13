@@ -136,8 +136,8 @@
       }
     },
     created: function () {
-    socket.on( "uiLabels", labels => this.uiLabels = labels );
-    socket.emit( "getUILabels", this.lang );
+      socket.on( "uiLabels", labels => this.uiLabels = labels );
+      socket.emit( "getUILabels", this.lang );
   },
   methods: {
     participateInPoll: function () {

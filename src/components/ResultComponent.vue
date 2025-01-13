@@ -264,7 +264,7 @@ header {
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 15rem;
+  max-width: 20rem;
   height: 3rem;
   margin: 1rem auto;
   background-color: var(--p-cadetBlue);
@@ -277,6 +277,8 @@ header {
   font-size: 1rem;
   font-family: "Inter", sans-serif;
   color: black;
+  overflow: hidden;
+  max-width: 100%;
 }
 
 @media (max-width: 768px) {

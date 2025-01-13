@@ -173,7 +173,7 @@ export default {
     kickPlayer(participantId) {
       const confirmKick = confirm(this.uiLabels.confirmKick || "Are you sure you want to kick this player?");
       if (confirmKick) {
-        socket.emit("kickPlayer", { pollId: this.pollId, participantId })
+        socket.emit("kickPlayer", { pollId: this.pollId, playerId: participantId })
         this.participants = this.participants.filter(participant => participant.id !== participantId);
       }
     }

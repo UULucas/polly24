@@ -44,7 +44,7 @@
       <p></p>
       <img :src="getAvater()" alt="miniavtr" class="mini-avatar">
 
-        <p> <h3>{{uiLabels.waitMessage}}</h3></p>
+        <h3>{{uiLabels.waitMessage}}</h3>
 
         <div class="spinner">
           <div class="bounce1"></div>
@@ -91,8 +91,6 @@ export default {
   },
   created: function () {
     this.pollId = this.$route.params.id; //Hämtas fårn webbadressen
-    //this.userName = this.$route.params.userName || "";  //Hämtar från webbadressen så går inte att hämta
-    //this.avatar = this.$route.params.avatar || "";  //Hämtar från webbadressen så kommer inte att funka
     this.playerId = this.$route.params.playerId || "";
     socket.on( "uiLabels", labels => this.uiLabels = labels );
     socket.on( "participantsUpdate", p => this.participants = p );
@@ -101,19 +99,18 @@ export default {
     socket.emit( "getUILabels", this.lang );
     socket.emit("getParticipants", this.pollId);
 
-    //kicka spelare, inte fått den att funka
-    socket.on("kickedFromGame", () => {
-      alert(this.uiLabels.kickedMessage || "You have been removed from the game.");
-      window.location.href = '/'; 
+    socket.on("playerKicked", kicked => {
+      if(kicked===this.playerId){
+        alert(this.uiLabels.kickedMessage);
+        setTimeout(() => {
+          window.location.href = '/';
+          this.socket.removeAllListeners();
+        },3000);
+      }
     });
-    socket.on("participantsUpdate", p => this.participants = p);
 
   },
   methods: {
-    getName: function (){
-      let player = this.participants.find(obj => obj.id === this.playerId);
-      return player? player.name : "";
-    },
     getAvater: function (){
       let player = this.participants.find(obj => obj.id === this.playerId);
       return player? player.avatar : "";
