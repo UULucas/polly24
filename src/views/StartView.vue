@@ -33,7 +33,7 @@
 
 <script>
 import io from 'socket.io-client';
-sessionStorage.setItem("dataServer", "");
+sessionStorage.setItem("dataServer", "localhost:3000");
 //sessionStorage.setItem("dataServer","localhost:3000");
 const socket = io(sessionStorage.getItem("dataServer"));
 

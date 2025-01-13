@@ -49,7 +49,7 @@
     <div v-else>
       <div class="resultWrapper">
         <h2>{{ uiLabels.winnerMessage }}</h2>
-        <h1>{{getWinner()}}</h1>
+        <h1 style="padding: 1rem;">{{getWinner()}}</h1>
         <h3>{{ uiLabels.finalLeaderboard }}</h3>
         <div class="participant-list">
           <div v-for="participant in participants" :key="participant" class="text-box-participant">
@@ -72,9 +72,6 @@
       </div>
     </div>
   </div>
-
-
-  <span v-for="participant in participants" v-bind:key="participant">{{participant.name}}</span>
 </template>
 
 <script>
@@ -137,8 +134,8 @@ export default {
   border: none;
   border-radius: 10px;
   padding: 20px;
-  background-color: white;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: var(--p-linen);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   margin: 20px auto;
   text-align: center;
   transition: opacity 0.5s ease-in-out;
@@ -165,6 +162,7 @@ export default {
   height: 18rem;
   overflow-y: scroll;
   overflow-x: hidden;
+  gap:8px;
 }
 
 .participants-name{
@@ -200,11 +198,11 @@ export default {
   display: flex;
   text-align: center;
   justify-content: space-around;
-  background-color: transparent;
-  border-radius: 0;
+  background-color: var(--p-offWhite);
+  border-radius: 8px;
   font-family: "Inter", sans-serif;
   margin-right: 1rem;
-  box-shadow: inset 0px 11px 5px -8px var(--p-offWhite), inset 0 -11px 5px -8px var(--p-offWhite);
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
   border-bottom: 1px var(--p-offWhite) solid;
 
 }
@@ -235,7 +233,7 @@ export default {
   max-width: 20rem;
   height: 3rem;
   margin: 1rem auto;
-  background-color: var(--p-cadetBlue);
+  background-color: var(--p-green);
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
@@ -251,6 +249,9 @@ export default {
 
 h1 {
   color: gold;
+  background-color: var(--p-offWhite);
+  border-radius: 8px;
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
 }
 
 #home-button-container {

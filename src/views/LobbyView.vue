@@ -126,11 +126,12 @@ html, body {
 }
 
 .joinWrapper {
+  padding-top: 1rem;
   height: 80vh;
   width: 40em;
   border: none; 
   border-radius: 8px;
-  background-color: var(--p-offWhite);
+  background-color: var(--p-linen);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
@@ -205,11 +206,11 @@ header {
   width: 100%;
   height: 10rem;
   padding-top:10px;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   border-radius: 1rem;
   gap: 5px;
-  background-color: white;
+  background-color: transparent;
 }
 
 

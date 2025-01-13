@@ -152,7 +152,7 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 .textbox{
   padding-left:0.5rem;
   padding-right: 0.5rem;
-  background-color: white;
+  background-color: var(--p-offWhite);
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   display:inline-block;

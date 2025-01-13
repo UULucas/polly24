@@ -243,7 +243,7 @@ header {
   border: none;
   border-radius: 10px;
   padding: 20px;
-  background-color: #a0ca92;
+  background-color: var(--p-linen);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
   transition: opacity 0.5s ease-in-out;
