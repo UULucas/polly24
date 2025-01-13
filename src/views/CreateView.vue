@@ -35,7 +35,7 @@
         <div v-else>
           <h4>{{ uiLabels.uploadImage }}</h4>
         </div>
-        <img class="home-img" src="https://www.freeiconspng.com/thumbs/upload-icon/upload-icon-22.png" alt="Upload avatar" name="upload">
+        <img class="home-img" src="../assets/upload-icon.png" alt="Upload avatar" name="upload">
       </button>
       <div  v-if="this.questions[this.questionNumber].img">
             <button @click="removeImage(this.questionNumber)" class="delete-button">

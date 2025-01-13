@@ -35,7 +35,7 @@
 
         <div class="avatarButtonWrapper">
         <button class="nav-button" @click="openDrawModal" style="background-color: var(--p-cadetBlue); border:0px;">
-          <img class="home-img" src="https://www.freeiconspng.com/uploads/paint-brush-icon-10.png" alt="Draw avatar" name="draw">
+          <img class="home-img" src="../assets/paint-brush-icon.png" alt="Draw avatar" name="draw">
         </button>
 
         <div v-if="isDrawModalOpen" class="modal" @click.self="closeModal">
@@ -70,7 +70,7 @@
         </div>
 
         <button class="nav-button" @click="openCamModal" style="background-color: var(--p-cadetBlue); border:0px;">
-          <img class="home-img" src="https://www.freeiconspng.com/uploads/camera-icon-21.png" alt="Take photo" name="photo">
+          <img class="home-img" src="../assets/camera-icon.png" alt="Take photo" name="photo">
         </button>
 
         <div v-if="isCamModalOpen" class="modal" @click.self="closeModal">
@@ -83,7 +83,7 @@
           </div>
         </div>
         <button class="nav-button" @click="uploadAvatar" style="background-color: var(--p-cadetBlue); border:0px;">
-          <img class="home-img" src="https://www.freeiconspng.com/thumbs/upload-icon/upload-icon-22.png" alt="Upload avatar" name="upload">
+          <img class="home-img" src="../assets/upload-icon.png" alt="Upload avatar" name="upload">
         </button>
         <input type="file" ref="fileInput" accept="image/*" style="display: none;" @change="handleFileUpload">
         <canvas ref="uploadCanvas" style="display:none;"></canvas>
