@@ -63,5 +63,6 @@
 	"submitDrawing": "Skicka in målning",
 	"leaderBoard": "Poängtabell",
 	"winnerMessage": "Och vinnaren är...",
-	"finalLeaderboard": "Slutlig poängtabell:"
+	"finalLeaderboard": "Slutlig poängtabell:",
+	"kickedMessage": "Du har blivit borttagen från spelet och kommer återvända till start menyn"
 }

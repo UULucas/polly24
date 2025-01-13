@@ -65,5 +65,6 @@
 	"submitDrawing": "Submit drawing",
 	"leaderBoard": "Leaderboard",
 	"winnerMessage": "And the winner is...",
-	"finalLeaderboard": "Final leaderboard:"
+	"finalLeaderboard": "Final leaderboard:",
+	"kickedMessage": "You have been removed from the game and will return to the start menu"
 }
