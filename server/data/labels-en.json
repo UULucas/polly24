@@ -62,5 +62,8 @@
 	"showingResult": "Results are showing for the players",
 	"confirmRestart": "Are you sure you want to restart the Quiz?",
 	"resetAvatar" : "Reset Avatar",
-	"kickedMessage": "You have been removed from the game and will return to the start menu"
+	"submitDrawing": "Submit drawing",
+	"leaderBoard": "Leaderboard",
+	"winnerMessage": "And the winner is...",
+	"finalLeaderboard": "Final leaderboard:"
 }

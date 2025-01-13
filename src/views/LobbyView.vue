@@ -5,9 +5,7 @@
 
   <header>
       <router-link to="/" class="header-button nav-button">
-        <a>
           <img class="home-img" src="../assets/home_icon.png" alt="HomeImg">
-        </a>
       </router-link>
       <button class= " nav-button" v-on:click="switchLanguage">
         <img :src="uiLabels.changeLanguage" alt="" class="lang-img">
@@ -17,21 +15,7 @@
 
   <section>
   <div class="bubbles">
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
+    <div class="bubble" v-for="n in 15" :key="n"></div>
   </div>
 </section>
 
@@ -40,8 +24,7 @@
       <div class="textbox">
       <h1>{{uiLabels.welcomeGreeting}}</h1>
       <h3>{{uiLabels.gameId}}: {{pollId}} </h3>
-      </div>
-      <p></p>
+      </div><br>
       <img :src="getAvater()" alt="miniavtr" class="mini-avatar">
 
         <h3>{{uiLabels.waitMessage}}</h3>
@@ -53,8 +36,8 @@
         </div>
 
         <h2>{{ uiLabels.participants }}: </h2>
-        <div class="participant-list" style="background-color: white;">
-          <div v-for="participant in participants" :key="participant" class="participant-box" style="background-color: var(--p-offWhite);">
+        <div class="participant-list">
+          <div v-for="participant in participants" :key="participant" class="participant-box">
             <h4 class="participants-name">{{participant.name}}</h4>
             <img :src="participant.avatar"
                  style="
@@ -64,10 +47,6 @@
                  class="mini-avatar">
           </div>
         </div>
-
-
-      
-
     </div>
   </div>
 </template>
@@ -146,40 +125,6 @@ html, body {
   height: auto;
 }
 
-
-label {
-  font-size: 30px;
-  font-weight: bold;
-  display: block;
-  margin-bottom: 10px;
-
-}
-
-input[type="text"] {
-  height: 40px;
-  width: 300px;
-  padding: 10px;
-  font-size: 40px;
-  text-align: center;
-}
-
-#participateButton {
-  margin: 10px;
-  height: 80px;
-  width: 150px;
-  font-size: 30px;
-  background-color: var(--p-yellow);
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border: none;
-  border-radius: 5px;
-
-}
-
-#participateButton:hover {
-  transform: scale(1.1);
-}
-
 .joinWrapper {
   height: 80vh;
   width: 40em;
@@ -203,31 +148,21 @@ input[type="text"] {
 
   border-radius: 100%;
   display: inline-block;
-  -webkit-animation: sk-bouncedelay 1.8s infinite ease-in-out both;
-  animation: sk-bouncedelay 1.8s infinite ease-in-out both;
+  animation: bouncedelay 1.8s infinite ease-in-out both;
 }
 
 .spinner .bounce1 {
-  -webkit-animation-delay: -0.40s;
   animation-delay: -0.40s;
 }
 
 .spinner .bounce2 {
-  -webkit-animation-delay: -0.20s;
   animation-delay: -0.20s;
 }
 
-@-webkit-keyframes sk-bouncedelay {
-  0%, 80%, 100% { -webkit-transform: scale(0) }
-  40% { -webkit-transform: scale(1.0) }
-}
-
-@keyframes sk-bouncedelay {
+@keyframes bouncedelay {
   0%, 80%, 100% { 
-    -webkit-transform: scale(0);
     transform: scale(0);
   } 40% { 
-    -webkit-transform: scale(1.0);
     transform: scale(1.0);
   }
 }
@@ -259,6 +194,7 @@ header {
   height: 7rem;
   border: none;
   border-radius: 1rem;
+  margin-top: 0.5rem;
 }
 
 .participant-list{
@@ -273,6 +209,7 @@ header {
   overflow-x: hidden;
   border-radius: 1rem;
   gap: 5px;
+  background-color: white;
 }
 
 
@@ -325,6 +262,7 @@ header {
     width: 10rem;
     margin-left: 1rem;
   }
+
 }
 
 </style>

@@ -1,9 +1,7 @@
 <template>
   <header>
     <router-link to="/" class= "nav-button">
-      <a>
         <img class="home-img" src="../assets/home_icon.png" alt="HomeImg">
-      </a>
     </router-link>
     <button class=" nav-button" v-on:click="switchLanguage">
       <img :src="uiLabels.changeLanguage" alt="" class="lang-img">
@@ -12,21 +10,7 @@
 
   <section>
   <div class="bubbles">
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
+    <div class="bubble" v-for="n in 15" :key="n"></div>
   </div>
 </section>
 
@@ -44,7 +28,6 @@
               maxlength="14"
               :placeholder= "uiLabels.namePlaceholder"
               v-model="userName"><br>
-        <div><label for="avatarChoice">{{}}</label></div>
         <img :src="avatar" alt="avatar" class="avatar-preview"><br>
         <button @click="resetAvatar()" class="delete-button">
         <h3> {{uiLabels.resetAvatar}} </h3>
@@ -82,7 +65,7 @@
 
             </div>
             <canvas ref="drawingCanvas" width="400" height="400"></canvas><br>
-            <button id="submitDrawingButton" @click="submitDrawing">Submit avatar</button>
+            <button class="submitButton" @click="submitDrawing">{{ uiLabels.submitDrawing }}</button>
           </div>
         </div>
 
@@ -95,7 +78,7 @@
             <h2>{{ uiLabels.photo }}</h2>
             <span class="closeModal" @click="closeModal">&times;</span>
             <video ref="camVideo" autoplay playsinline width="400" height="400"></video><br>
-            <button id="submitPhotoButton" @click="submitPhoto">{{ uiLabels.submitPhoto }}</button>
+            <button class="submitButton" @click="submitPhoto">{{ uiLabels.submitPhoto }}</button>
 
           </div>
         </div>
@@ -315,7 +298,7 @@
       const ctx = canvas.getContext('2d');
       ctx.fillStyle = "white";
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillRe(0, 0, canvas.width, canvas.height);
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
       this.strokes = [];
     },
 
@@ -468,10 +451,10 @@
 #toolbar button {
   border: none;
   border-radius: 4px;
-  color: white;
+  color: black;
   padding: 0.5rem;
   background-color: var(--p-red);
-  font-weight: 400;
+  font-weight: 600;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   margin-top: 0.5rem;
 }
@@ -533,7 +516,7 @@
   flex-direction: column;
 }
 
-#submitDrawingButton {
+.submitButton {
   align-self: center;
   margin-top: auto;
   padding: 0.5rem 2rem;
@@ -599,10 +582,6 @@ header {
   cursor:pointer;
   transform: scale(1.03);
   transition: transform 0.2s;
-}
-
-#firstJoinBox {
-  margin: auto;
 }
 
 @media (max-width: 768px) {

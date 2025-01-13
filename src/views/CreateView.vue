@@ -6,9 +6,7 @@
   <header>
     <div class="header">
       <router-link to="/" class= "nav-button">
-        <a>
           <img class="home-img" src="../assets/home_icon.png" alt="HomeImg">
-        </a>
       </router-link>
       <button class=" nav-button" v-on:click="switchLanguage">
         <img :src="uiLabels.changeLanguage" alt="" class="lang-img">
@@ -534,14 +532,6 @@ input::file-selector-button {
   margin-right: auto;
   height: 50px;
   width: 50px;
-}
-
-.logo-img {
-  height: 70px;
-  margin: 0 auto;
-  margin-top: 16px;
-  padding-bottom: 1rem;
-  padding-left: 20%;
 }
 
 body{
