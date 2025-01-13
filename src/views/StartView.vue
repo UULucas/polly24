@@ -9,21 +9,7 @@
 
   <section>
   <div class="bubbles">
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
+    <div class="bubble" v-for="n in 15" :key="n"></div>
   </div>
 </section>
 
@@ -47,8 +33,8 @@
 
 <script>
 import io from 'socket.io-client';
-sessionStorage.setItem("dataServer", "192.168.1.11:3000");
-//sessionStorage.setItem("dataServer","localhost:3000");
+//sessionStorage.setItem("dataServer", "192.168.1.11:3000");
+sessionStorage.setItem("dataServer","localhost:3000");
 const socket = io(sessionStorage.getItem("dataServer"));
 
 export default {
@@ -66,10 +52,6 @@ export default {
     socket.emit( "getUILabels", this.lang );
   },
   methods: {
-    changeColor: function(event){
-      var color = 'yellow';
-      event.target.style.backgroundColor = color;
-    },
     switchLanguage: function() {
       if (this.lang === "en") {
         this.lang = "sv"
@@ -109,12 +91,6 @@ header {
   width: 100%;
   display: grid;
   grid-template-columns: 2em auto;
-}
-
-.logo img {
-  height:2.5rem;
-  vertical-align: bottom;
-  margin-right: 0.5rem;
 }
 
 .fix {

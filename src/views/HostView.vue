@@ -5,9 +5,7 @@
 
   <header>
     <router-link to="/" class= "nav-button">
-      <a>
         <img class="home-img" src="../assets/home_icon.png" alt="HomeImg">
-      </a>
     </router-link>
     <button class=" nav-button" v-on:click="switchLanguage">
       <img :src="uiLabels.changeLanguage" alt="" class="lang-img">
@@ -298,10 +296,6 @@ header {
   transition: none;
   transform: none;
 }
-.start-section{
-
-}
-
 
 .quiz-name-label {
   display: flex;

@@ -1,23 +1,9 @@
   <template>
   <section>
-  <div class="bubbles">
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-  </div>
-</section>
+    <div class="bubbles">
+      <div class="bubble" v-for="n in 15" :key="n"></div>
+    </div>
+  </section>
 
   <div id="qResultScreen" v-if="showQResultScreen">
     <div class="resultWrapper">
@@ -38,7 +24,7 @@
 
   <div v-if="!showQResultScreen">
     <div v-if="!currentQuestion.lastQuestion" class="resultWrapper">
-      <h2>Leaderboard</h2>
+      <h2>{{ uiLabels.leaderBoard }}</h2>
       <div class="participant-list">
         <div v-for="participant in participants" :key="participant" class="text-box-participant">
           <div class="participants-name">{{participant.name}}</div>
@@ -62,9 +48,9 @@
 
     <div v-else>
       <div class="resultWrapper">
-        <h2>The winner is:</h2>
+        <h2>{{ uiLabels.winnerMessage }}</h2>
         <h1>{{getWinner()}}</h1>
-        <h3>Final leaderboard:</h3>
+        <h3>{{ uiLabels.finalLeaderboard }}</h3>
         <div class="participant-list">
           <div v-for="participant in participants" :key="participant" class="text-box-participant">
             <div class="participants-name">{{participant.name}}</div>
@@ -113,8 +99,6 @@ export default {
       lang: localStorage.getItem("lang") || "en",
       pollId: "",
       showQResultScreen: true,
-      nextQuestionNormal: false,
-      nextQuestionCursed: false,
       countdown: 5,
     }
   },
@@ -138,18 +122,6 @@ export default {
 }
 </script>
 <style scoped>
-header {
-  display: flex;
-  align-items: center;
-  padding-top: 1rem;
-  position: relative;
-  padding-left: 1rem;
-  gap: 1rem ;
-}
-
-.header-button {
-  height: 3rem;
-}
 
 .home-img {
   display: block;
@@ -235,18 +207,6 @@ header {
   box-shadow: inset 0px 11px 5px -8px var(--p-offWhite), inset 0 -11px 5px -8px var(--p-offWhite);
   border-bottom: 1px var(--p-offWhite) solid;
 
-}
-
-.score-box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 28%;
-}
-
-.name-box {
-  display: flex;
-  align-items: center;
 }
 
 .container {

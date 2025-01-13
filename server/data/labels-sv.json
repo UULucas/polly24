@@ -59,5 +59,9 @@
 	"restartQuiz": "Starta om Quiz",
 	"showingResult": "Resultatet från frågan visas för spelarna",
 	"confirmRestart": "Är du säker på att du vill starta om?",
-	"resetAvatar" : "Återställ Avatar"
+	"resetAvatar" : "Återställ Avatar",
+	"submitDrawing": "Skicka in målning",
+	"leaderBoard": "Poängtabell",
+	"winnerMessage": "Och vinnaren är...",
+	"finalLeaderboard": "Slutlig poängtabell:"
 }

@@ -168,7 +168,7 @@ html{
   height: 1.8vw;
   left: 55%;
   animation-duration: 25s;
-  animation-delay: 7s;
+  animation-delay: -5s;
 }
 
 .bubble:nth-child(6) {
@@ -176,7 +176,7 @@ html{
   height: 2vw;
   left: 65%;
   animation-duration: 18s;
-  animation-delay: 3s;
+  animation-delay: -6s;
 }
 
 .bubble:nth-child(7) {
@@ -184,7 +184,7 @@ html{
   height: 2.8vw;
   left: 70%;
   animation-duration: 50s;
-  animation-delay: 20s;
+  animation-delay: -4s;
 }
 
 .bubble:nth-child(8) {
@@ -235,10 +235,19 @@ html{
 }
 
 .bubble:nth-child(14) {
-
+  width: 2.7vw;
+  height: 2.7vw;
+  left: 5%;
+  animation-duration: 40s;
+  animation-delay: -10s;
 }
 
 .bubble:nth-child(15) {
+  width: 2.7vw;
+  height: 2.7vw;
+  left: 70%;
+  animation-duration: 45s;
+  animation-delay: -20s;
   
 }
 
